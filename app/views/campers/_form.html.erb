@@ -226,8 +226,11 @@
 		<!--please fill me in-->
 		
 		Pack Assignment: <%= collection_select('camper', 'pack_id' , @packs, 'id', 'name', {:include_blank=>"None"}) %>
+		
+		<!--
 		or create one:
 		<%= text_field :camper, :new_pack_name %>
+	-->
 	</div>
 	<% end %>
 	
