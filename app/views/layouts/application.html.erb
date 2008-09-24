@@ -151,7 +151,11 @@ function DoNav(theUrl)
 			<ul class="stats">
 				<% @courses = Course.find_standard_courses %>
 				<% @courses.each do |c| %>
-				<li class="stat_item"><%= c.name %>: <%= c.campers.length || 0 %>
+					<% if c.name.length > 8 %>
+						<li class="stat_item"><%= c.name.slice(0..7) %>...: <%= c.campers.length || 0 %>
+					<% else %>
+						<li class="stat_item"><%= c.name %>: <%= c.campers.length || 0 %>
+					<% end %>
 				<% end %>
 			</ul>
 							<hr />
