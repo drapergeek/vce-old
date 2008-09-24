@@ -90,6 +90,7 @@ class ReceiptsController < ApplicationController
     prev = 0
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
+    @camp_price = CAMP_PRICE
     unless @receipt.refund.blank? || @receipt.refund.nil? || @receipt.refund==0
       prev = 1
     end

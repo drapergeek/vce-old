@@ -141,12 +141,14 @@
 
 
 <div id="camper_link_1" class="add_camper_link" > 	
-<%=
+<%=u
 	link_to_function "Add another camper", nil, :id => "camper_link_1_link"  do |page|
     page[:camper_2].visual_effect :blind_down
     page.show :camper_link_2
     page.remove :camper_link_1
+	unless @camp_price.blank?
     page[:receipt_amount].value = (@camp_price*2)
+end
 	page[:receipt_amount].visual_effect :pulsate
 	page[:receipt_amount].visual_effect :highlight
   	end
