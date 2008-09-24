@@ -133,6 +133,7 @@ class CampersController < ApplicationController
       flash[:notice] = 'Camper was successfully updated.'
       redirect_to :action => 'show', :id => @camper
     else
+      @states = State.find(:all)
       @schools = get_schools
       @buses = Bus.find_standard_buses
       @packs = Pack.find_standard_packs
