@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   before_update :encrypt_password
 
   def admin?
-    login=="gdraper" || login=="ddraper" || login=="bhairston" || login=="lnelson" || login=="quentin" || login=="draper" 
+    login=="gdraper" || login=="ddraper" || login=="bhairston" || login=="lnelson" || login=="user" || login=="draper" 
   end
   # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
