@@ -1,0 +1,35 @@
+<h2>Camper Statistics</h2>
+<ul>
+	<li>
+		<%= link_to 'Inactive Campers', {:action=>'list_camper_type', :type=>'Inactive' } %>: 
+		<%= @inactive_number %>
+	</li>
+	<li>
+		<%= link_to 'Female Campers', {:action=>'list_camper_type', :type=>'Girls' } %>: 
+		<%= @girls_number %>
+	</li>
+	<li>
+		<%= link_to 'Male Campers', {:action=>'list_camper_type', :type=>'Boys' } %>: 
+		<%= @boys_number %>
+	</li>
+	<li>
+		<%= link_to 'Total Active Campers', {:action=>'list_camper_type', :type=>'Campers' } %>: 
+		<%= @campers_number %>
+	</li>
+	<li>
+		<%= link_to 'Teens', {:action=>'list_camper_type', :type=>'Teens' } %>: 
+		<%= @teens_number %>
+	</li>
+	<li>
+		<%= link_to 'Adults', {:action=>'list_camper_type', :type=>'Adults' } %>: 
+		<%= @adults_number %>
+	</li>
+	<li>
+		<%= link_to 'Total Active Attendees', {:action=>'list_camper_type', :type=>'Active' } %>: 
+		<%= @attendees_number %>
+	</li>
+	
+	
+	
+	
+</ul>

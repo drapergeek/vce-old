@@ -1,0 +1,38 @@
+<h1>Bus <%= @bus.name %></h1>
+<h2>Capacity: <%= @bus.capacity %></h2>
+<label for="bus_info">
+	<p id="bus_info">
+		<%= @bus.info %>
+	</p>
+</label>
+<% unless @bus.campers.count==0 %>
+	<h2>There are <%= @bus.campers.count %> Campers Currently Assigned to this bus</h2>
+	<ul>
+	<% @bus.campers.each do |c| %>
+		<li>
+			<%= c.full_name %><%= link_to '(x)', {:controller=>'buses', :action=>'remove_camper', :id=>c.id} %>
+		</li>
+	<% end %>
+	</ul>
+<% else %>
+	<h2>There are no campers currently assigned to this bus</h2>
+<% end %>
+<h2>Click the checkbox beside any camper below to add them to the bus.</h2>
+<ul>
+	<% form_tag :action=>'add_camper_to_bus'  do %>
+	<input type="hidden" name = "bus" value="<%= @bus.id %>" />
+		<% @campers.each do |c| %>
+		   <% if c.bus_id.blank? %>
+				<div id="add_camper_checkbox">
+					<input type="checkbox" name="campers[]" value="<%= c.id %>" />
+					<%= c.full_name %>
+				</div>
+			<% end %>
+		<% end %>
+		<%= submit_tag "Add to Bus" %>
+	<% end %>
+	
+</ul>
+
+<%= link_to 'Edit', :action => 'edit', :id => @bus %> |
+<%= link_to 'Back', :action => 'list' %>

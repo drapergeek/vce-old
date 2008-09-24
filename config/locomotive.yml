@@ -1,0 +1,6 @@
+---
+mode: development
+port: 3002
+bundle: /Applications/Locomotive2/Bundles/standardRailsMar2007.locobundle
+runs_at_launch: 1
+identifier: vce

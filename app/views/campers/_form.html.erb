@@ -1,0 +1,393 @@
+<%= error_messages_for 'camper' %>
+
+
+<div id="inactive_checkbox">
+	<%= check_box 'camper', 'inactive',:onclick => "Element.show('remove_camper')" %> <label for="refund">Click here to make this camper inactive</label>
+</div>
+
+<div id="remove_camper" <% unless @camper.inactive==true %>style="display:none" <% end %> >
+	<label for="inactive_info">Reason for not attending: </label> <br />
+	<%= text_area 'camper', 'inactive_info' , {:rows=>5}%>
+			
+</div>
+
+
+
+<!--Ajaxy stuff for choosing camper type-->
+<div id="type_of_camper">
+	<span id="camper_type">Standard Camper</span><br />
+	Click here to change the camper type:
+	<div id="standard_camper_link" style="display:none" class="attendee_type_link">
+		<%= link_to_remote 'Camper', :url => { :action => 'update_camper_fields', :id => 0 } %> |
+	</div> 
+	<div id="teen_camper_link" class="attendee_type_link">
+		<%= link_to_remote 'Teen', :url => { :action => 'update_camper_fields', :id => 1 } %> |
+	</div> 
+	<div id="adult_camper_link"  class="attendee_type_link">
+		<%= link_to_remote 'Adult', :url => { :action => 'update_camper_fields', :id => 3 } %> 
+	</div> 
+<!--end of camper type stuff-->
+
+</div>
+
+
+<!--Random Camp info-->
+<div class="camper_section_new">
+	<div id="camper_number_new">
+		Camper ID Number: <%= text_field 'camper', 'number', :size=>5 %><small> **Camper ID must start with A,B,G,S,P or T**</small>
+	</div>
+	<br />
+	<div id="camper_payment_number_new">
+		Payment Number(if applicable): <%= text_field 'camper', 'payment_number', :size=>5 %>
+	</div>
+</div>
+
+<!--End of random camp info-->
+<!--Beginning of General Info-->
+<div id="general_info_new" class="camper_section_new">
+	<h3>General Information</h3>	
+	<%  if current_user.unit.name == 'State Level' %>
+	<div id="camper_unit_form">
+		<!--This is only shown if the user making the camper is statewide-->
+		<%= collection_select('camper', 'unit_id' , @units, 'id', 'name') %>
+	</div>
+	<% else %>
+		
+	<% end %>
+	
+	<div id="name_new">
+		<label for="camper_fname">First:</label>
+		<%= text_field 'camper', 'fname' , :size=>10%>
+
+		<label for="camper_mname">Middle:</label>
+		<%= text_field 'camper', 'mname', :size=>10 %>
+	
+		<label for="camper_lname">Last:</label>
+		<%= text_field 'camper', 'lname', :size=>10  %>
+	</div>
+
+	<div id="pref_name">
+		<label for="camper_pref_name">Preferred Name:</label>
+		<%= text_field 'camper', 'pref_name', :size=>10  %>
+	</div>
+	<br />
+	
+
+	<div id="dob_new" >
+			<label for="camper_dob">Birth Date: </label>
+			<%=  date_text_field :camper, :dob,:blank=>true, :order => [:month, :day, :year] %>
+	</div>
+
+
+	<br />
+	
+	
+	
+	<div id="address">
+		<label for="camper_address">Address:  </label>
+		<%= text_field 'camper', 'address'  %>
+	</div>
+
+	<div id="city_state_zip">
+		<label for="camper_city">City:  </label>
+		<%= text_field 'camper', 'city'  %>
+	
+		<label for="camper_state">State: </label>
+		<%= collection_select('camper', 'state' , @states, 'name', 'name') %>
+	
+		<label for="camper_zip">Zip: </label>
+		<%= text_field 'camper', 'zip' , :size=>7 %>
+	</div>
+	
+	<div id="phone">
+		<label for="camper_phone1">Phone Number:  </label>
+		<%= text_field 'camper', 'phone1'  %>
+	</div>
+	
+	
+	<div id="gender_select_new">
+		<label for="camper_gender">Gender:</label>
+		
+		<%= select('camper', 'gender', [ ['Male', 0], 
+										['Female', 1]] ) %>
+										
+										
+	</div>
+	
+	
+	
+	<div id="race_new">
+		<label for="camper_race">Race: </label>
+		<%= select('camper', 'race', [ ['Black'], 
+										['White'], 
+										['Hispanic'], 
+										['American Indian'], 
+										['Asian'], 
+										['Multicutural']], {:include_blank=>true}) %>
+	</div>
+
+
+	<div id="shirt_size_new">
+		<label for="camper_shirt_size">Shirt size: </label>
+		<%= select('camper', 'shirt_size', [ ['S', 0], 
+											['M', 1], 
+											['L', 2], 
+											['XL', 3], 
+											['XXL', 4], 
+											['XXXl', 5]], {:include_blank=>true}) %>
+	</div>
+
+	<div id="email_new">
+		<label for="camper_email">E-mail Address:  </label>
+		<%= text_field 'camper', 'email'  %>
+	</div>
+	
+	<div id="teen_reference_new" <% unless @camper.position==1 %>style="display:none" <% end %>>
+		<label for="camper[reference]">Do we have this teens references?</label>
+		<%= check_box 'camper', 'reference' %>
+	</div>
+	
+	<div id="teen_counselor_years_new" <% unless @camper.position==1 %>style="display:none" <% end %>>
+		<label for="camper[counselor_years]">Number of years as camp counselor?</label>
+		<%= text_field 'camper', 'counselor_years' %>
+	</div>
+
+
+
+	
+</div><!--End of General Information-->	
+
+
+
+
+<!--Beginning of Parent Information-->
+<div id="parent_info_new" class="camper_section_new">
+	<h3>Parental Information</h3>
+	<div id="parent_name_new">
+		<label for="camper_parent_fname">First:  </label>
+		<%= text_field 'camper', 'parent_fname'  %>
+	
+		<label for="camper_parent_lname">Last:  </label>
+		<%= text_field 'camper', 'parent_lname'  %>
+	</div>
+	<div id="parent_phone_new">
+
+
+		<label for="camper_phone2">Alternate Phone Number:  </label>
+		<%= text_field 'camper', 'phone2'  %>
+	</div>
+</div><!--End of Parent Info-->
+
+
+<!--Begin School Info-->
+<div id="school_info_new" class="camper_section_new">
+	<h3>School Information</h3>
+	<div ="camper_grade_new" class="school_info_new">
+		<label for="camper_grade">Grade</label>
+		<%= select('camper', 'grade', [ ['3', 3], ['4', 4], ['5', 5],['6', 6],
+										['7', 7], ['8', 8],], {:include_blank=>true}) %>
+	</div>
+	
+	<div id="camper_school_new" class="school_info_new">
+		<label for="camper_school">School:  </label>
+		<%= select('camper', 'school' , @schools, {:include_blank=>true}) %>
+	</div>
+
+	<div id="camper_teacher_new" class="school_info_new">
+		<label for="camper_teacher">Teacher:  </label>
+		<%= text_field 'camper', 'teacher'  %>
+	</div>
+</div><!--End School Info-->
+	
+
+<!--Beginning of Camp Info-->
+<div id="camp_info_new" class="camper_section_new">
+	<h3>Camp Information</h3>
+	
+	<div ="position_new" >
+		<label for="camper_position_select">Position: </label>
+		<%= select('camper', 'position', [ ['Camper', 0], 
+										['Teen', 1], 
+										['CIT', 2], 
+										['Adult', 3]],
+						{:onchange=>''}) %>
+	</div>
+	
+	
+	<div id="roomate_choice_new">
+		Roommate Choice: <%= text_field 'camper', 'roomate_choice'  %>
+	</div>
+	<div id="room_assignment_new">
+		Room assignment <%= text_field 'camper', 'room_number' %>
+	</div>
+	
+	<% unless @packs.empty? %>
+	<div id="pack_assignment_new">
+		<!--please fill me in-->
+		
+		Pack Assignment: <%= collection_select('camper', 'pack_id' , @packs, 'id', 'name', {:include_blank=>"None"}) %>
+		or create one:
+		<%= text_field :camper, :new_pack_name %>
+	</div>
+	<% end %>
+	
+	<% unless @buses.empty? %>
+	<div id="bus_assignment_new">
+		<!--please fill me in-->
+	
+		Bus Assignment: <%= collection_select('camper', 'bus_id' , @buses, 'id', 'name', {:include_blank=>"None"}) %>
+	</div>
+	<% end %>
+	
+	
+
+	
+	
+	<!--This is hidden unless the camper is a teen-->
+	<div id="rec_zone_new" <% unless @camper.position == 1  %>style="display:none;" <% end %>>
+
+		<label for="rec_zone">Rec Zone: </label>
+		<%= select('camper', 'rec_zone', [1,2,3,4,5,6,7,8,9,10], {:include_blank=>true}) %>
+	</div>
+	
+	<div id="pool_spotting_new" <% unless @camper.position == 1  %>style="display:none;" <% end %>>
+
+		<label for="pool_spotting">Pool Spotting: </label>
+		<%= select('camper', 'pool_spotting',  [ ['Rec 1 - Tue', 0], 
+										['Rec 1 - Wed', 1], 
+										['Rec 1 - Thur', 2], 
+										['Rec 2 - Tue', 3], 
+										['Rec 2 - Wed', 4], 
+										['Rec 2 - Thur', 5]], {:include_blank=>true}) %>
+	</div>
+	
+
+	
+	
+</div><!--End of Camp Info-->
+
+<!--MOVED ALL THE FOLLOWING TO A HEALTH FORM-->
+
+
+<!--Beginning of Emergency Info-->
+<div id="emergency_info_new" class="camper_section_new">
+	<h3>Emergency Contact</h3>
+	<label for="camper_emergency_name">Name:  </label>
+	<%= text_field 'camper', 'emergency_name'  %>
+
+	<label for="camper_emergency_phone">Phone:  </label>
+	<%= text_field 'camper', 'emergency_phone'  %>
+	
+</div><!--End of Emergency Info-->
+
+
+
+
+<!--Begin Health Info-->
+<div id="health_info_new" class="camper_section_new">
+	<h3>Health Information</h3>
+	
+	<div id="camper_physician_insurance_info_new">
+		
+		<label for="physician_insurance_info">Physician/Insurance Information?</label>
+		<%= check_box 'camper', 'physician_insurance_info' %>
+		
+	</div>
+	
+	<div id="camper_emergency_info_new">
+		
+		<label for="emergency_info">Emergency Info?</label>
+		<%= check_box 'camper', 'emergency_info' %>
+		
+	</div>
+	
+	<div id="camper_immunizations_current_new">
+		
+		<label for="immunizations_current">Immunizations current?</label>
+		<%= check_box 'camper', 'immunizations_current' %>
+		
+	</div>
+	
+	<div id="camper_last_tetnus_shot_new">
+		<p>
+			<small>If this info is not available or not releveant please enter 01/01/1900</small><br />
+			<small>You are only required to collect the month and year, enter 01 for the day.</small><br />
+			<label for="camper_last_tetnus_shot">Date of last tetnus shot: </label>
+			<%= date_text_field :camper, :last_tetnus_shot,:blank=>true, :order =>[:month, :day, :year] %>
+
+		</p>
+	</div>
+
+	<div id="camper_health_concerns_new">
+		<div id="camper_health_info">
+			Please list any health concerns that we may need to be aware of, including but not limited to : medications the child may need to take.
+		</div>
+		<%= text_area 'camper', 'health_concerns', {:rows=>5, :cols=>50} %>
+		
+		
+	</div>
+
+	
+
+
+  	
+	
+	
+</div><!--End of Health Information-->
+
+
+
+
+
+<!--Begin Other Info-->
+<div id="other_info_new" class="camper_section_new">
+	<h3>Other Info</h3>
+	<div id="code_of_conduct_new">
+		
+		<label for="code_conduct">Code of Conduct?</label>
+		<%= check_box 'camper', 'code_of_conduct' %>
+		
+	</div>
+	<div id="media_release_new">
+		<label for="camper_media_release">Media Release:</label>
+		<%= select('camper', 'media_release', [ ['No', 0], ['Yes', 1], ['Parent Denied Permission', 2], ]) %>
+		
+	</div>
+	<div id="equine_release_new">
+		
+		<label for="camper_equine_release">Equine Release?</label>
+		<%= check_box 'camper', 'equine_release' %>
+		
+	</div>
+	
+
+	<div id="release_authorization_new">
+		
+		<label for="release_authorization">Pickup release authorization?</label>
+		<%= check_box 'camper', 'release_authorization' %>
+		
+	</div>
+	
+	<div id="parental_signatures_new">
+		
+		<label for="parental_signatures">Parental signauture?</label>
+		<%= check_box 'camper', 'parental_signatures' %>
+		
+	</div>
+
+</div><!--End Other Info-->
+
+
+
+<!--END OF ALL MOVE ALL TO ANOTHER PAGE-->
+
+
+
+
+
+
+
+
+
+<!--[eoform:camper]-->
+

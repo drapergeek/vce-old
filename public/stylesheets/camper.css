@@ -1,0 +1,91 @@
+
+
+.school_info_new{
+	display: inline;
+}
+
+li.course{
+	list-style-type: decimal;
+}
+
+div.camper_section_new{
+	border-style: solid;
+	border-color: #00b859;
+	width: 670px;
+	margin-bottom: 7px;
+	padding: 0 -30px 3px 5px;
+
+}
+
+
+/*Registration info*/
+
+#camper_payment_number_new{
+	display:inline;
+}
+
+#camper_number_new
+
+/*End reg info */
+/*General Info */
+#name_new{
+	display:inline;
+}
+#pref_name{
+	display:inline;
+}
+
+
+#camper_number_new{
+	display:inline;
+}
+#dob_new{
+	display:inline;
+	
+}
+
+.gender_select{
+	border-color:green;
+	border-width:1px;
+	border-style:solid;
+	display:inline;
+	margin:2px;
+	padding:2px;
+}
+
+
+#race_new{
+	display:inline;
+}
+
+#gender_select_new{
+	display:inline;
+	padding: 5px 5px 5px 0;
+}
+#shirt_size_new{
+	display:inline;
+}
+
+
+/*End General Info*/
+
+
+/*Camper Type Links*/
+
+
+#teen_camper_link{
+	display:inline;
+}
+#cit_camper_link{
+	display:inline;
+}
+#standard_camper_link{
+	display:inline;
+}
+#adult_camper_link{
+	display:inline;
+}
+#camper_type{
+
+}
+/*End Camper Type Links*/

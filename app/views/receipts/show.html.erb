@@ -1,0 +1,132 @@
+<!--Navigation-->
+<div id="navigation">
+	<% if current_user.admin? %>
+		<%= link_to 'Edit', :action => 'edit', :id => @receipt %> |
+		<%= link_to 'Delete', { :action => 'destroy', :id => @receipt }, :confirm => 'Are you sure?', :method => :post %> |
+	<% end %>
+	<%= link_to 'Back', home_path %> |
+	<%= link_to 'Next Receipt', {:action=>'new'},:id=>'next_receipt' %>
+</div>
+
+<!--End of Navigation-->
+<br />
+<div>
+<form action="">
+	<input type="button" value="Print This Page" message="" onClick="printpage()" />
+</form>
+</div>
+
+<h2> Receipt #<%=@receipt.id  %> </h2>
+
+<p>Date: <%= @receipt.date.strftime("%m/%d/%y") %></p>
+
+<p>Received From: <%= @receipt.full_name %></p>
+<p>Phone: <%= number_to_phone(@receipt.phone, :area_code=>true) %></p>
+
+<% unless @receipt.address_blank?%>
+<p>Address: <%= @receipt.full_address  %></p>
+<% end %>
+
+<p>Amount Paid : <%= number_to_currency(@receipt.amount) %></p>
+
+<p>Payment Method : <%= payment_method_to_string(@receipt.payment_method) %>
+	<%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %></p>
+	
+<p>
+	Camper Paid for:  
+	<%= @receipt.camper1.titleize%>
+	<%= link_to @receipt.camper1_id.titleize,
+	 	:controller=>'campers',
+	 	:action=>'find',
+	 	:number=>@receipt.camper1_id,
+	 	:name=>@receipt.camper1,
+		:payment=>@receipt.payment_extra.to_s
+	%>
+</p>
+
+<% unless @receipt.camper2.blank? %>
+<p>
+	2nd Camper paid for: 
+	<%= @receipt.camper2.titleize%>
+	<%= link_to @receipt.camper2_id.titleize,
+	 	:controller=>'campers',
+	 	:action=>'find',
+	 	:number=>@receipt.camper2_id,
+	 	:name=>@receipt.camper2,
+		:payment=>@receipt.payment_extra.to_s
+	%>
+</p>
+
+<% unless @receipt.camper3.blank? %>
+<p>
+	3nd Camper paid for: 
+	<%= @receipt.camper3.titleize%>
+	<%= link_to @receipt.camper3_id.titleize,
+	 	:controller=>'campers',
+	 	:action=>'find',
+	 	:number=>@receipt.camper3_id,
+	 	:name=>@receipt.camper3,
+		:payment=>@receipt.payment_extra.to_s
+	%>
+</p>
+<% end %>
+<% end %>
+
+<% if @receipt.refund %>
+<div id="refund">
+	
+	**A refund of <%= number_to_currency(@receipt.refund_amount) %> was disbursed on 
+	<%= @receipt.refund_date.strftime("%B %d, %Y") %> 
+	with check #<%= @receipt.refund_check_number %>.**
+	<br />
+	Refund Info:
+	<div>
+		<%= @receipt.refund_info %>
+	</di>
+	
+</div>
+<% end %>
+
+<!--Created by information-->
+<div id="created_by_info">
+	<% unless @receipt.user.nil? %>
+		<p>
+			Created By: <%= @receipt.user.fname %> <%= @receipt.user.lname %>
+			<% unless @receipt.user.title.nil? %> - <%= @receipt.user.title %><% end %>
+		</p>
+		<% unless @receipt.user.picture.blank? %> 
+			<%= image_tag(url_for(:controller=>'account',
+									:action => 'image', 
+									:id => @receipt.user.id), 
+									:size=>'200x50') %> 
+		<% end %> 
+	<% end %>
+</div>
+<!--end of created by information-->
+
+<!--Notice of Date for Refunds-->
+
+<h3>Please note that there are absolutely NO REFUNDS AFTER May 30, 2008</h3>
+
+<!--CONTACT INFORMATION-->
+
+<div id="contact_info_for_vce" class="centered_div">
+	<h4 id="office_name">
+		Virginia Cooperative Extension
+	</h4>
+	<p>
+		3300 Kings Mountain Rd <br />
+		P.O Box 7 <br />
+		Collinsville, VA 24078-0007 <br />
+		(276)-634-4650
+	</p>
+
+	
+	
+</div>
+
+
+<!--end of contact info-->
+
+
+

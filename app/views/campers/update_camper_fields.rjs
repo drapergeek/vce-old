@@ -1,0 +1,99 @@
+#this is my hacked together way of fixing the drop down for camper position
+camper = '<option value = \'0\'>Camper</option>'
+camper_selected = '<option value = \'0\' selected>Camper</option>'
+teen = '<option value = \'1\'>Teen</option>'
+teen_selected = '<option value = \'1\' selected>Teen</option>'
+cit = '<option value = \'2\'>CIT</option>'
+cit_selected = '<option value = \'2\' selected>CIT</option>'
+adult = '<option value = \'3\'>Adult</option>'
+adult_selected = '<option value = \'3\' selected>Adult</option>'
+
+
+if @type=='0'
+  #normal camper
+  #setup links @ top
+  page.show 'teen_camper_link'
+  page.show 'adult_camper_link'
+  page.hide 'standard_camper_link'
+  
+  #change the type of camper
+  page.replace_html 'camper_type', 'Standard Camper'
+  page[:camper_type].visual_effect 'highlight'
+  page.replace_html 'camper_position', camper_selected+teen+cit+adult
+  
+  page.hide 'teen_reference_new'
+  page.hide 'pool_spotting_new'
+  page.hide 'rec_zone_new'
+  page.show 'roomate_choice_new'
+  
+  page.visual_effect :blind_up, 'teen_counselor_years_new'
+  page.visual_effect :blind_up,  'teen_reference_new'
+  
+  
+  #from adult
+  page.visual_effect :blind_down, 'parent_info_new'
+  page.visual_effect :blind_down, 'health_info_new'  
+  page.visual_effect :blind_down, 'school_info_new'
+  page.visual_effect :blind_down, 'other_info_new'
+  
+  
+elsif @type=='1'
+  #teen
+  
+  #setup links @ top
+  page.show 'standard_camper_link'
+  page.show 'adult_camper_link'
+  page.hide 'teen_camper_link'
+  
+  #change the type of camper
+  page.replace_html 'camper_type', 'Teen'
+  page[:camper_type].visual_effect 'highlight'
+  page.replace_html 'camper_position', camper+teen_selected+cit+adult
+
+  #things to add
+  page.visual_effect :blind_down,  'teen_reference_new'
+  page.visual_effect :blind_down, 'pool_spotting_new'
+  page.visual_effect :blind_down, 'rec_zone_new'
+  page.visual_effect :blind_up, 'roomate_choice_new'
+  page.visual_effect :blind_down, 'teen_counselor_years_new'
+  
+  #from adult
+  #remove the parent information
+  page.visual_effect :blind_down, 'parent_info_new'
+  #probably don't need health info
+  page.visual_effect :blind_down, 'health_info_new'  
+  #won't need school info
+  page.visual_effect :blind_down, 'school_info_new'
+  #don't need other info
+  page.visual_effect :blind_down, 'other_info_new'
+  
+else
+  #adult
+  page.show 'standard_camper_link'
+  page.show 'teen_camper_link'
+  page.hide 'adult_camper_link'
+  
+  #change the type of camper
+  page.replace_html 'camper_type' ,'Adult'
+  page[:camper_type].visual_effect 'highlight'
+  page.replace_html 'camper_position', camper+teen+cit+adult_selected  
+  
+  #remove unneccesary fields
+    #remove the parent information
+    page.visual_effect :blind_up, 'parent_info_new'
+    #probably don't need health info
+    page.visual_effect :blind_up, 'health_info_new'  
+    #won't need school info
+    page.visual_effect :blind_up, 'school_info_new'
+    #don't need other info
+    page.visual_effect :blind_up, 'other_info_new'
+    page.visual_effect :blind_up, 'teen_counselor_years_new'
+  
+    page.visual_effect :blind_up, 'teen_reference_new'
+    page.visual_effect :blind_up, 'pool_spotting_new'
+    page.visual_effect :blind_up, 'rec_zone_new'
+    page.visual_effect :blind_up, 'roomate_choice_new'
+    
+
+
+end

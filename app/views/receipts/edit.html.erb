@@ -1,0 +1,9 @@
+<h1>Editing receipt</h1>
+
+<% form_tag :action => 'update', :id => @receipt do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Update' %>
+<% end %>
+
+<%= link_to 'Show', :action => 'show', :id => @receipt %> |
+<%= link_to 'Back', home_path %>

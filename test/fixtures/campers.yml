@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  id: 1
+  number: B001
+  fname: bob
+  lname: camper
+  mname: steven
+  pref_name: steve
+  gender: 0
+  position: 0
+  zip: 24141
+  phone1: 1114445555
+two:
+    id: 2
+    number: G001
+    fname: Jane
+    lname: Doe
+    mname: Lynn
+    pref_name: Lynn
+    gender: 1
+    position: 1
+    zip: 44442
+    phone1: 2221114444

@@ -1,0 +1,340 @@
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	color: black;
+	background-color: #007233;
+	font: 10pt verdana, arial, helvetica, sans-serif;
+}
+
+.ahem {
+	display: none;
+}
+
+img {
+	border: 0;
+	}
+.nowrap {
+	white-space: nowrap;
+	font-size: 8px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+/* must be combined with nobr in html for ie5win */
+	}
+
+
+/* @group images */
+.logo{
+	height: 35px;
+	width: 35px;
+	
+}
+
+
+/* @end */
+
+
+/* @group Links */
+
+a {
+	text-decoration: none;
+	font-weight: bold;
+	color: #007c35;
+	}
+a:active, a:visited {
+	color:  #007c35;
+	}
+a:hover {
+	color: #ccc;
+	background-color: #2ea2ff;
+}
+
+/* @end */
+
+/* @group Text */
+
+strong, b {
+	font-weight: bold;
+	}
+
+h1 {
+	font-size: 20px;
+	line-height: 44px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	}
+h2 {
+	font-size: 18px;
+	line-height: 40px;
+	font-weight: bold;
+	margin-top: -10px;
+	margin-bottom: -10px;
+}
+h3 {
+	font-size: 16px;
+	line-height: 22px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	}
+h4 {
+	font-size: 14px;
+	line-height: 26px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	}
+h5 {
+	font-size: 12px;
+	line-height: 22px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	}
+h6 {
+	font-size: 10px;
+	line-height: 18px;
+	font-weight: bold;
+	margin-top: 0;
+	margin-bottom: 0;
+	}
+
+p {
+	font-size: 10px;
+	line-height: 22px;
+	margin-top: 20px;
+	margin-bottom: 10px; 
+	}
+
+.tiny {
+	font-size: 9px;
+	line-height: 16px;
+	margin-top: 15px;
+	margin-bottom: 5px; 
+	}
+
+pre {
+	font-size: 12px;
+	line-height: 22px;
+	margin-top: 20px;
+	margin-bottom: 10px; 
+	}
+
+/* @end */
+
+/* @group Layout */
+
+#top {
+	margin: 20px 20px 0px 20px;
+	padding: 10px;
+	border: 5px solid #ccc;
+	height: 30px;
+	background-color: #d3ffee;
+}
+#welcome{
+	display: inline;
+	
+}
+div#user_control{
+	display: inline;
+	position: absolute;
+	right: 40px;
+	
+	
+}
+#left {
+	position: absolute;
+	top: 80px;
+	left: 0px;
+	margin: 10px 20px;
+	padding: 10px;
+	border: 5px solid #ccc;
+	background: #d3ffee;
+	width: 75px;
+}
+
+ul#menu{
+	display: inline;
+
+}
+li.menu_item{
+
+	list-style-type: none;
+}
+#middle {
+	padding: 10px;
+	border: 5px solid #ccc;
+	background: #d3ffee;
+	margin: 10px 185px 10px 140px;
+	min-height: 300px;
+}
+
+/* @group right column */
+
+
+#right {
+	position: absolute;
+	top: 80px;
+	right: 0px; /* Opera5.02 will show a space at right when there is no scroll bar */
+	margin: 10px 20px;
+	padding: 10px;
+	border: 5px solid #ccc;
+	background: #d3ffee;
+	width: 120px;
+}
+h3#stats_header{
+	margin-bottom: -2px;
+}
+h4.stats_sub{
+	margin-top: -4px;
+	margin-bottom: -2px;
+}
+ul.stats{
+	display:inline;
+}
+li.stat_item{
+	list-style-type: none;
+}
+
+/* @end */
+	
+
+
+
+/* @group bottom */
+
+#bottom {
+	margin: 10px 20px 0px;
+	border: 5px solid #ccc;
+	background: #d3ffee;
+	height: 30px;
+	text-align: center;
+	padding: 3px 5px 5px;
+}
+#copyright{
+	position: relative;
+	bottom: 5px;
+	
+}
+
+/* @end */
+
+/* @end */
+
+/* @group table */
+
+tr.odd{
+	background-color: white;
+
+}
+tr.even{
+	background-color: #93b2ff;
+}
+td{
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+a.list_link{
+	font-size: 11px;
+}
+
+
+
+/* @end */
+
+/* @group Receipt */
+
+
+div.camper_input{
+	margin: -8px;
+}
+div.add_camper_link{
+	
+	margin: 2px;
+}
+
+div#payment_number_divs{
+	display: inline;
+	padding-left: 40px;
+}
+div.payment_number_label{
+	display:inline;
+	
+}
+
+
+
+/* @end */
+
+
+
+/* @group Campers */
+
+/* @group general_info */
+
+/* @end */
+
+/* @group form */
+
+
+
+div#inactive_checkbox{
+	margin-bottom: 3px;
+	margin-top: 3px;
+}
+div.attendee_type_link{
+	display:inline;
+}
+
+div.camper_section_new{
+	padding-left: 5px;
+	padding-right: 3px;
+	border: 2px solid #007233;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+
+
+
+
+/* @end */
+
+
+
+/* @end */
+
+/* @group flashes */
+
+#notice{
+	
+	border: 3px solid #1cff60;
+	background-color: white;
+	padding: 2px;
+	margin: 1px;
+}
+#error, #warning, #errorExplanation{
+	border: 4px solid #fe0000;
+	background-color: white;
+	margin: 1px;
+	font-weight: bold;
+	padding: 5px 3px 3px 5px;
+}
+
+
+
+/* @end */
+
+/* @group errors */
+
+.fieldWithErrors {
+	background-color: red;
+	display:inline;
+	border: 4px solid #fe0000;
+}
+
+
+/* @end */

@@ -1,0 +1,13 @@
+<h2>Current Users</h2>
+<ul>
+	<% @users.each do |u| %>
+		<li class="user_list">
+			<%= u.lname  + ", " + u.fname %> 
+			<%= link_to 'Edit', {:action=>'edit',:id=>u} %>
+			<%= link_to 'Remove', {:action=>'destroy',:id=>u},
+								:confirm=>"Are you SURE you want to remove this user?" %>
+		</li>
+	<% end %>
+</ul>
+<%= link_to 'Add a New User', {:action=>'signup'}%>
+<hr />

@@ -1,0 +1,23 @@
+<h2>Bus <%= @bus.name.capitalize %></h2>
+<h3>Capacity: <%= @bus.capacity %></h3>
+<label for="bus_info">
+	<p id="bus_info">
+		<%= @bus.info %>
+	</p>
+</label>
+<% unless @bus.campers.count==0 %>
+	<strong>Campers Currently Assigned to this bus</strong>
+	<ul>
+	<% @bus.campers.each do |c| %>
+		<li>
+			<%= c.full_name %><%= link_to '(x)', {:controller=>'buses', :action=>'remove_camper', :id=>c.id} %>
+		</li>
+	<% end %>
+	</ul>
+<% else %>
+	<div><strong>There are no campers currently assigned to this bus</strong></div>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @bus %> |
+<%= link_to 'Add Campers', :action => 'add_campers', :id => @bus %> |
+<%= link_to 'Back', :action => 'list' %>

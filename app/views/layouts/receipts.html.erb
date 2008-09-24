@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>4 - H Camp Control Center</title>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+<!-- add your meta tags here -->
+
+<%= stylesheet_link_tag 'standard' %>
+<%= javascript_include_tag :defaults %>
+<!--[if lte IE 7]>
+<link href="css/patches/patch_my_layout.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+
+
+<script type="text/javascript">
+  function ChangeColor(tableRow, highLight)
+  {
+  if (highLight)
+  {
+    tableRow.style.backgroundColor = '#38ff99';
+  }
+  else
+  {
+	
+	if(tableRow.className == 'odd')
+    	{tableRow.style.backgroundColor = 'white';}
+	else
+		{tableRow.style.backgroundColor = '#93b2ff';}
+  }
+}
+
+function DoNav(theUrl)
+{
+	document.location.href = theUrl;
+}
+</script>
+
+
+
+
+</head>
+<body>
+  <div id="page_margins">
+	
+    <div id="border-top">
+      <div id="edge-tl"></div>
+      <div id="edge-tr"></div>
+    </div>
+    <div id="page">
+      <div id="header">
+	
+		
+        <div id="topnav">
+          <!-- start: skip link navigation -->
+          <a class="skip" title="skip link" href="#navigation">Skip to the navigation</a><span class="hideme">.</span>
+          <a class="skip" title="skip link" href="#content">Skip to the content</a><span class="hideme">.</span>
+          <!-- end: skip link navigation -->
+
+		<!--normal links for header-->
+		<% if logged_in? %>
+			<!--search form-->
+			<form action="/vce/receipts/search?method=get" method="post" style="display:inline">
+				<input id="search" name="search" type="text" />
+				<input type="submit" value="Search" />
+
+			</form>&nbsp
+			<!--End Search form-->
+			
+			Welcome <%= current_user.login %>! | 
+			<%= link_to 'Profile', {:controller=>'account', :action=>'edit', :id=>current_user} %> |
+			<%= link_to 'Logout', {:controller=>'account', :action=>'logout'} %> 
+		<% end %>
+		<!--End the normal links-->
+        </div>
+	
+		<%= image_tag 'banner.gif', :alt=>'The VCE banner featuring the VT logo' %>
+      </div>
+      <div id="nav">
+        <!-- skiplink anchor: navigation -->
+        <a id="navigation" name="navigation"></a>
+        <div id="nav_main">
+		<% if logged_in? %>
+          <!-- main navigation: #nav_main -->
+          <ul>
+			<% if controller.params[:controller]== "receipts" %><li id ="current"><% else %> <li><% end %>
+				<%= link_to 'Receipts', :controller=>'receipts' %>
+			</li>
+            <% if controller.params[:controller]== "campers" %><li id ="current"><% else %> <li><% end %>
+				<%= link_to 'Enrollment', :controller=>'campers'%>
+			</li>
+			<% if controller.params[:controller]== "account" && controller.action_name == 'super' %>
+			<li id ="current"><% else %> <li><% end %>
+				<%= link_to 'Reports', :controller=>'account', :action=>'super' %>
+			</li>
+						
+			<% if current_user.admin? %>
+				<% if controller.params[:controller]== "courses" %><li id ="current"><% else %> <li><% end %>
+					<%= link_to 'Courses', :controller=>'courses', :action=>'list' %>
+				</li>
+				<% if controller.params[:controller]== "packs" %><li id ="current"><% else %> <li><% end %>
+					<%= link_to 'Packs', :controller=>'packs' %>
+				</li>
+				<% if controller.params[:controller]== "buses" %><li id ="current"><% else %> <li><% end %>
+					<%= link_to 'Buses', :controller=>'buses', :action=>'list' %>
+				</li>
+				<% if controller.params[:controller]== "account" && controller.action_name !='super' %>
+				<li id ="current"><% else %> <li><% end %>
+					<%= link_to 'Users', :controller=>'account' %>
+				</li>
+			<% end %>
+          </ul>
+		  <% end #end of checking for logged_in?%>
+        </div>
+      </div>
+      <div id="main">
+        <div id="col1">
+          <div id="col1_content" class="clearfix">
+            
+<!--This is the beginning of the crap-->
+<% flash.each do |key, msg| %>
+	<%= content_tag :div, msg, :id=>key %>
+<% end %>
+
+
+<%= yield %>
+<!--This is the end of the crap-->
+          </div>
+        </div>
+        <div id="col3">
+          <div id="col3_content" class="clearfix">
+			<h3 id="stats_header">Stats</h3>
+					<hr />
+			<h4 class="stats_sub">Receipts</h4>
+			<ul class="stats">
+				<li class="stat_item">Total: <%= Receipt.find(:all).length %></li>
+				<li class="stat_item">Girls 67</li>
+				<li class="stat_item">Boys 99</li>			
+			</ul>
+			<hr />
+			<h4 class="stats_sub">Campers</h4>
+			<ul class="stats">
+
+				<li class="stat_item">Girls:<%= Camper.find_all_girls.length %></li>
+				<li class="stat_item">Boys: <%= Camper.find_all_boys.length %></li>
+				<li class="stat_item">Teens: <%= Camper.find_all_teens.length %></li>
+				<li class="stat_item">Adults: <%= Camper.find_all_adults.length %></li>
+				<li class="stat_item">Campers: <%= Camper.find_all_campers.length %>
+				<li class="stat_item">Total: <%= Camper.find_all_attendees.length %></li>
+
+			</ul>
+							<hr />
+
+			<div style="background:red">
+			<h4 class="stats_sub">Incomplete</h4>
+
+			<ul class="stats">
+				<li class="stat_item">Forms: 132</li>
+				<li class="stat_item">Bus: 12</li>
+				<li class="stat_item">Courses: 12</li>			
+			</ul>
+			</div>
+			
+          </div>
+          <!-- IE Column Clearing -->
+          <div id="ie_clearing"> &#160; </div>
+        </div>
+      </div>
+      <!-- begin: #footer -->
+      <div id="footer">
+	
+	© Copyright 2008 Virginia Cooperative Extension Office.  All Rights Reserved. Lead Developer: Jason Draper
+      </div>
+    </div>
+    <div id="border-bottom">
+      <div id="edge-bl"></div>
+      <div id="edge-br"></div>
+    </div>
+  </div>
+</body>
+</html>

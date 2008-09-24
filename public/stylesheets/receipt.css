@@ -1,0 +1,43 @@
+#payment_cost_notification{
+	font-size: x-small;
+	font-weight: bold;
+}
+.list_link{
+	text-decoration: none;
+}
+a.list_link{
+	color: black;
+}
+a.list_link:hover{
+	color: white;
+	background-color:green;
+	
+}
+h2.receipt_section_header{
+	padding-top: 1px;
+	font-size: medium;
+	margin: 0 0 4px;
+}
+a#next_receipt{
+	font-size: large;
+	font-weight: bold;
+}
+
+td.list_receipts{
+	padding-right: 10px;
+	padding-bottom: 2px;
+	padding-top: 3px;
+}
+div.receipt_info_form{
+	border-style: solid;
+	border-color: #00b859;
+	width: 650px;
+	margin-bottom: 7px;
+	padding: 0 -30px 3px 5px;
+}
+div#payer_info_form{
+
+}
+div#payment_info_form{
+
+}

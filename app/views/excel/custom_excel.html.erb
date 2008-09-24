@@ -1,0 +1,14 @@
+<!--search form-->
+<% form_tag :action=>'create_excel'  do %>
+
+	<% for column in Receipt.columns %>
+		<div id="column_checkbox_receipt">
+			<input type="checkbox" name="columns[]" value="<%= column.name %>" />
+			<%= column.human_name %>
+		</div>
+	<% end %>
+	<%= submit_tag "Create Sheet" %>
+<% end %>
+<!--End Search form-->
+
+

@@ -1,0 +1,42 @@
+<%= error_messages_for :user %>
+
+<% form_for :user, @user, :url=>{:action => 'update', :id=>@user.id}, :html=> {:multipart => true} do |u| %> 
+
+
+<p><label for ="fname">First Name: </label>
+	<%= u.text_field  'fname' %>
+</p>
+<p><label for ="lname">Last Name: </label>
+	<%= u.text_field 'lname' %>
+</p>
+
+<p><label for ="title">Title: </label>
+	<%= u.text_field 'title' %>
+</p>
+
+
+
+<p><label for="user_picture">Picture:</label><br /> 
+	<% unless @user.picture.blank? %>
+		<%= image_tag(url_for({:controller=>'account',:action => 'image', :id => @user.id})) -%>
+  	<% end %>
+	<br />
+<%= u.file_field 'pictureimg' %></p>
+
+<p><label for="login">Unit: </label><br/>
+<%= u.collection_select  'unit_id', @units, 'id' , 'name'%></p>
+
+<p><label for="login">Login</label><br/>
+<%= u.text_field  'login' %></p>
+
+<p><label for="email">Email</label><br/>
+<%= u.text_field  'email'  %></p>
+
+<p><label for="password">Password</label><br/>
+<%= u.password_field 'password' %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= u.password_field 'password_confirmation' %></p>
+
+<p><%= submit_tag 'Update' %></p>
+<% end %>

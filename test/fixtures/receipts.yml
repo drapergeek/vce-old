@@ -1,0 +1,20 @@
+one:
+  id: 1
+  lname: Bob
+  fname: Static
+  payment_method: 1
+  camper1: StevenStatic
+  camper1_id: B001
+  phone: '2222222222'
+  amount: 185.00
+  date: <%= Date.today %>
+two:
+  id: 2
+  lname:  Doe
+  fname: Jane
+  payment_method: 1
+  camper1: SuseDoe 
+  camper1_id: G001
+  phone: '222-111-4444'
+  amount: 234.00
+  date: <%= Date.today %>

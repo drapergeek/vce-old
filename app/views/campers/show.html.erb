@@ -1,0 +1,268 @@
+<% if current_user.admin? %>
+	<%= link_to 'New Camper', :action=>'new' %> | 
+<% end %>
+<%= link_to 'Edit', :action => 'edit', :id => @camper %> |
+<%= link_to 'Back', :action => 'list' %>
+
+
+<h1><%= @camper.full_name %> <%= @camper.number %></h1>
+
+
+<% if @camper.inactive==true %>
+	<div id="camper_inactive_show">
+		<h3>**Please note this camper will not be attending camp due to the following reason:**</h3>
+		<p>
+			<%= @camper.inactive_info %>
+		</p>
+	</div>
+
+<% end %>
+
+<div id="registration_info" class="camper_section">
+	<div id="camper_proper_name">
+		Proper Name: <%= @camper.proper_name %>
+	</div>
+	<div id="camper_number_show">
+		Camper id: <%= @camper.number %>
+	</div>
+	<% unless @camper.payment_number.blank? %>
+	<div id="camper_payment_number_new">
+		Check/Money order #: <%= @camper.payment_number %>
+	</div>
+	<% end %>
+	<% if current_user.unit.name == 'State Level' %>
+	<div id ="camper_unit_show">
+		Unit: <%= @camper.unit.name %>
+	</div>
+	<% end %>
+	
+	
+</div>
+<div id="personal_info">
+	<h3>Personal Information</h3>
+	
+	<% unless @camper.dob.blank? %>
+		<div id="age">Age: <%= @camper.age %></div>
+		<div id="dob">Dob: <%= @camper.dob.strftime("%B %d, %Y") %></div>
+	<% end %>
+	
+	
+	<% unless @camper.shirt_size.blank? %>
+		<div id="shirt_size">Shirt Size: <%= @camper.shirt_size_text %></div>
+	<% end %>
+
+	<div id="gender">
+		Gender: <% if @camper.gender==0 %> Male <% else %> Female <% end %>
+	</div>
+	
+	<% unless @camper.race.blank? %>
+	<div id="camper_race_show">
+		Race: <%= @camper.race %>
+	</div>
+	<% end %>
+	
+	<% unless @camper.email.blank? %>
+	<div id="camper_e-mail_show">
+		E-mail: <%= mail_to @camper.email %>
+	</div>
+	<% end %>
+	
+	<% unless @camper.address.blank? %>
+		<div id="address">
+			<%= @camper.address %> <br />
+		</div>
+	<% end %>
+	<% unless @camper.city.blank? || @camper.state.blank? || @camper.zip.blank? %>
+	<div id="location_line">
+		<%= @camper.city %>, <%= @camper.state %> <%= @camper.zip %>
+	</div>
+	<% else %>
+		<div id="location line">
+			We do not have any address information for this camper
+		</div>
+	<% end %>
+	<div id="phone_show_camper">
+		Phone: <%= number_to_phone(@camper.phone1, :area_code=>true) %>
+	</div>
+	
+	<% if @camper.position==1 %>
+	<div id"camper_reference_show">
+		<% if @camper.reference? %>
+			Yes, we have references for this camper
+		<% else %>
+			We do not have reference information for this teen yet.
+		<% end %>
+	</div>
+	
+	<div id"camper_counselor_years_show">
+		Previous Years Counseling: 
+		<% if @camper.counselor_years.blank? %>
+			N/A
+		<% else %>
+			<%= @camper.counselor_years %>
+		<% end %>
+	</div>
+	<% end %>
+	
+</div>
+<div id="camp_info">
+	<h3>Camp Information</h3>
+	<% unless @camper.position.blank? %>
+		<div id="postion">Position: <%= @camper.position_text%></div>
+	<% end %>
+	<% unless @camper.roomate_choice.blank? %>
+ 		Preferred Roomate: <%= @camper.roomate_choice %><br />
+	<% end %>
+	<% unless @camper.bus.blank? %>
+		Bus Assignment: <%= @camper.bus.name %>
+	<% end %>
+	<div id="room_assignment">
+		<% if @camper.room_number.blank? %>
+			This camper has not been assigned to a room
+		<% else %>
+			Room Number: <%= @camper.room_number %>
+			<% unless @camper.pack.blank? %>
+				 - <%= @camper.pack.name %>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<% if @camper.position==1 %>
+	<div id="rec_zone">
+		<% if @camper.rec_zone.blank? %>
+			This camper has not been assigned to a rec zone
+		<% else %>
+			Rec zone assignment: <%= @camper.rec_zone %>
+		<% end %>
+	</div>
+	
+	<div id="pool_spotting">
+		<% if @camper.pool_spotting.blank? %>
+			This camper has not been assigned to pool spotting.
+		<% else %>
+			Pool spotting assignment: <%= @camper.pool_spotting_text %>
+		<% end %>
+	</div>
+	<% end %>
+	
+</div>
+<% unless @camper.parent_lname.blank? || @camper.parent_fname.blank?  || @camper.phone1.blank?%>
+<div id="parent_information">
+	<h3>Parent/Guardian Information</h3>
+	<div id="parent_name"><%= @camper.parent_fname + " " + @camper.parent_lname%></div>
+	<div id="parent_phone">
+		<% unless @camper.phone2.blank? %>
+			 Alternate phone: <%= number_to_phone(@camper.phone2, :area_code=>true) %>
+		<% end %>
+	</div>
+</div>
+<% end %>
+<% unless @camper.emergency_name.blank? %>
+<div id="emergency_info">
+	<h3>Emergency Contact</h3>
+	<%= @camper.emergency_name + " " + number_to_phone(@camper.emergency_phone, :area_code=>true)%>
+</div>
+<% end %>
+
+<div id="camper_school_info_show">
+	<h3>School Information</h3>
+	<% unless @camper.school.blank? %>
+		<div id="school">
+			School: <%= @camper.school %>
+		</div>
+	<% end %>
+	<% unless @camper.grade.blank? %>
+		<div id="grade">
+			<% if @camper.grade==1 %>
+				Grade:  N/A
+			<% else %>
+				Grade: <%= @camper.grade %>
+			<% end %>
+		</div>
+	<% end %>
+	<% unless @camper.teacher.blank? %>
+		<div id="teacher">
+			Teacher:  <%= @camper.teacher %>
+		</div>
+	<% end %>
+</div>
+
+<div id="health_info">
+	<h3>Health Concerns</h3>
+  	<ul id ="health_info_itmes">
+  		<li>Physician insurance info?  <% if @camper.physician_insurance_info? %> Yes <% else %> No <% end %></li>
+		<li>Emergency Contact Info?  <% if @camper.emergency_info? %> Yes <% else %> No <% end %></li>
+		<li>Immunizations current?  <% if @camper.immunizations_current? %> Yes <% else %> No <% end %></li>
+  	</ul>
+	
+	
+	
+		<div id="last_tetnus_shot">
+			<% unless @camper.last_tetnus_shot.blank? %>
+				Date of last tetnus shot: <%= @camper.last_tetnus_shot.strftime("%B %d, %Y") %>
+			<% else %>
+				We do not have the date of the last tetnus shot for this camper
+			<% end %>
+		</div>
+	
+	
+<p id ="health_info_text_area">
+	<% if @camper.health_concerns.blank? %>
+		The camper has no listed health concerns.
+	<% else %>
+		<%= @camper.health_concerns %>
+	<% end %>
+</p>
+</div>
+
+<!--Course Selection List-->
+<div id="course_selection_list">
+	<h2>Courses</h2>
+	<% if @camper.courses.empty? %>
+	Please add the campers choice of courses below
+	<ol id="course_list">
+	<% else %>
+	<% @camper.courses.each do |c| %>
+		<li class="course" id = "course_<%=c.id %>">
+			<%= c.name %>
+			<%= link_to_remote '(x)', :confirm=>"Are you SURE you want to delete this course?",
+			:url => {:action => 'remove_course', :camper =>@camper.id, :course=>c.id} -%>
+		</li>
+	<% end %>
+	</ol>
+	<% end %>
+	
+</div>
+<div id ="course_select_add">
+
+	<% form_tag :action=>'add_course' , :id=>@camper do  %>
+		<select id="course_selection" name="course_selection">
+			<% @courses.each do |c| %>
+				<option value='<%= c.id %>'><%= c.name %></option>
+			<% end %>
+		</select>
+		<%= submit_tag 'Add Course' %>
+	<% end %>
+	
+	
+</div>
+
+<div id="other_info">
+	<h3>Other Information</h3>
+	<ul id="other_info">
+		<li> Code of Conduct? <% if @camper.code_of_conduct? %> Yes <% else %> No <% end %></li>
+		<li> Media Release? <%=	@camper.media_release_text %></li>
+		<li> Equine Release? <% if @camper.equine_release? %> Yes <% else %> No <% end %></li>
+		<li> Pickup release authorization? <% if @camper.release_authorization? %> Yes <% else %> No <% end %></li>
+		<li> Parental Signatures? <% if @camper.parental_signatures? %> Yes <% else %> No <% end %></li>
+	</ul>
+	
+
+
+</div>
+
+
+
+<!--End of Course Selection List-->
+
+

@@ -1,0 +1,15 @@
+<h2>Pack name: <%= @pack.name.titleize %></h3>
+<h3>Current Camper Count: <%= @pack.campers.count %></h3>
+<% unless @pack.campers.empty? %>
+ <div>
+<h3>Campers:</h3>
+<ul>
+<% @pack.campers.each do|c| %>
+<li><%= c.full_name %></li>
+ </div>
+</ul>
+<% end %>
+
+<% end %>
+<%= link_to 'Edit', :action => 'edit', :id => @pack %> |
+<%= link_to 'Back', :action => 'list' %>

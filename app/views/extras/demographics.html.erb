@@ -1,0 +1,72 @@
+
+<% unless @campers_grades.empty? %>
+<h3>Grades</h3>
+<div class="campers_grades_list">
+	<ul>
+		<% @campers_grades.keys.sort.each do |grade, campers| %>
+			<li><%= grade.ordinalize %> - <%= @campers_grades[grade].length %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+
+<% unless @campers_races.empty? %>
+<h3> Ethnicities</h3>
+<div class="campers_ethnicities_list">
+	<ul>
+		<% @campers_races.keys.sort.each do |race, campers| %>
+			<li><%= race.capitalize %> -  <%= @campers_races[race].length %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+
+<% unless @campers_cities.empty? %>
+<h3> Cities</h3>
+<div class="campers_cities_list">
+	<ul>
+		<% @campers_cities.keys.sort.each do |city, campers| %>
+			<li><%= city.capitalize %> -  <%= @campers_cities[city].length %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+
+<% unless @campers_ages.empty? %>
+<h3> Ages</h3>
+<div class="campers_ages_list">
+	<ul>
+		<% @campers_ages.keys.sort.each do |age, campers| %>
+			<li><%= age %> -  <%= @campers_ages[age].length %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<% unless @campers_schools.empty? %>
+<h3> Schools</h3>
+<div class="campers_schools_list">
+	<ul>
+		<% @campers_schools.keys.sort.each do |school, campers| %>
+			<li><%= school %> -  <%= @campers_schools[school].length %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<% unless @campers_teachers.empty? %>
+<h3>Teachers</h3>
+<div class="campers_teachers_list">
+	<ul>
+		<% @campers_teachers.keys.sort.each do |teacher, campers| %>
+			<li><%= teacher %> -  <%= @campers_teachers[teacher].length %></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+
+

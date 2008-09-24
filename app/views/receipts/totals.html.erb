@@ -1,0 +1,22 @@
+<h1>Totals</12>
+<hr />
+
+<h2>Totals Grouped By Day</h2>
+<% @receipts_dates.keys.sort.each do |date, receipts| %>
+<div class="receipt_date_amount">
+
+	<% if date.beginning_of_day == Time.today.beginning_of_day %>
+		<span id="todays_total">Today:</span>
+	<% else %>
+		<%= date.strftime("%m/%d/%Y")%>:
+	<% end %> 
+	<%= sum_amount(@receipts_dates[date])%> 
+	<%= link_to "List", {:action=>'list_by_date', :date=>date.strftime("%Y-%m-%d")} %>
+	<%= link_to "Print All", {:action=>'show_by_date', :date=>date.strftime("%Y-%m-%d")} %>
+</div>
+
+	
+<% end %>
+<hr />
+<h2>Overall Total</h2>
+<%= sum_amount(@receipts)%>

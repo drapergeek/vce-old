@@ -1,0 +1,85 @@
+<%  if @receipts.blank? %>
+<h3>There are no receipts that matched your criteria</h3>
+<%= link_to 'New receipt', :action => 'new' %>
+<% else %>
+<h2>All Receipts</h2>
+<!--search form-->
+<% form_tag :controller=>'receipts', :action=>'search' , :method => 'get' do %>
+<p>
+	<%= text_field_tag :search , params[:search]%>
+	<%= submit_tag "Search", :name=>nil %>
+	<% if params[:search] %>
+		<%= link_to 'Show All', home_path %>
+	<% end %>
+</p>
+<% end %>
+<!--End Search form-->
+
+<%= link_to 'New receipt', :action => 'new' %>
+
+<br />
+
+<table id = "list_receipts">
+  <tr>
+	<%= sort_header_tag('date', :text => 'Date') %>
+	<%= sort_header_tag('lname', :text => 'Last') %>
+	<%= sort_header_tag('fname', :text => 'First') %>
+	<%= sort_header_tag('camper1', :text => 'Camper 1') %>
+	<%= sort_header_tag('camper1_id', :text => 'ID') %>
+	<%= sort_header_tag('camper2', :text => 'Camper 2') %>
+    <%= sort_header_tag('camper2_id', :text => 'ID') %>
+	<%= sort_header_tag('camper3', :text => 'Camper 3') %>
+    <%= sort_header_tag('camper3_id', :text => 'ID') %>
+  </tr>
+  
+<% for receipt in @receipts %>
+
+  <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
+	              onmouseout="ChangeColor(this, false);" 
+	              onclick="DoNav('receipts/show/<%= receipt.id %>');">
+	<td class="standard_table">
+		<%= receipt.date.strftime("%m/%d/%y") %>
+	</td>
+	<td class="standard_table">
+		<%= receipt.lname.capitalize %>
+	</td>
+	<td class="standard_table">
+		<%= receipt.fname.capitalize %>
+	</td>
+	<td class="standard_table">
+		<%= receipt.camper1 %>
+	</td>
+	<td class="standard_table">
+		<%= receipt.camper1_id %>
+	</td>
+	<td class="standard_table">
+		<% unless receipt.camper2.blank? %>
+			<%= receipt.camper2 %>
+		<% end %>
+	</td>
+	<td class="standard_table">
+		<% unless receipt.camper2.blank? %>
+			<%= receipt.camper2_id %>
+		<% end %>
+	</td>
+	<td class="standard_table">
+		<% unless receipt.camper3.blank? %>
+			<%= receipt.camper3 %>
+		<% end %>
+	</td>
+	<td class="standard_table">
+		<% unless receipt.camper3.blank? %>
+		<%=  receipt.camper3_id %>
+		<% end %>
+	</td>
+
+<% end %>
+</table>
+
+<%= will_paginate @reciepts  %>
+<% end %>
+
+
+<br />
+
+

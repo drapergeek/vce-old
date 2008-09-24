@@ -1,0 +1,105 @@
+
+<% if @receipts.empty? %>
+<h3>There are no receipts that matched your criteria</h3>
+<% else %>
+<h2>All Receipts</h2>
+<!--search form-->
+<% form_tag :controller=>'receipts', :action=>'search' , :method => 'get' do %>
+<p>
+	<%= text_field_tag :search , params[:search]%>
+	<%= submit_tag "Search", :name=>nil %>
+		<%= link_to 'Show All', home_path %>
+</p>
+<% end %>
+<!--End Search form-->
+<table id = "list_receipts">
+  <tr>
+	<th>Date</th>
+	<th>Last</th>
+	<th>First</th>
+	<th>Camper 1</th>
+	<th>ID</th>
+	<th>Camper 2</th>
+	<th>ID</th>
+	<th>Camper 3</th>
+	<th>ID</th>
+	<th>Phone</th>
+  </tr>
+  
+<% for receipt in @receipts %>
+
+  <tr>
+	<td class="list_receipts">
+		<%= link_to receipt.date.strftime("%m/%d/%y"), 
+			{:action=>'show', :id=>receipt}, 
+			{:class=>'list_link'} %>
+	</td>
+	<td class="list_receipts">
+		<%= link_to receipt.lname.capitalize, 
+		{:action=>'show', :id=>receipt,},
+		{:class=>'list_link'} %>
+	</td>
+	<td class="list_receipts">
+		<%= link_to receipt.fname.capitalize, 
+			{:action=>'show', :id=>receipt},
+			{:class=>'list_link'} %>
+	</td>
+	<td class="list_receipts">
+		<%= link_to receipt.camper1, 
+			{:action=>'show', :id=>receipt},
+			{:class=>'list_link'} %>
+	</td>
+	<td class="list_receipts">
+		<%= link_to receipt.camper1_id, 
+			{:action=>'show', :id=>receipt} ,
+			{:class=>'list_link'} %>
+	</td>
+	<td class="list_receipts">
+		<% unless receipt.camper2.blank? %>
+		<%= link_to receipt.camper2, 
+			{:action=>'show', :id=>receipt},
+			{:class=>'list_link'} %>
+		<% end %>
+	</td>
+	<td class="list_receipts">
+		<% unless receipt.camper2.blank? %>
+		<%= link_to receipt.camper2_id, 
+			{:action=>'show', :id=>receipt} ,
+			{:class=>'list_link'} %>
+		<% end %>
+	</td>
+	<td class="list_receipts">
+		<% unless receipt.camper3.blank? %>
+		<%= link_to receipt.camper3, 
+			{:action=>'show', :id=>receipt},
+			{:class=>'list_link'} %>
+		<% end %>
+	</td>
+	<td class="list_receipts">
+		<% unless receipt.camper3.blank? %>
+		<%= link_to receipt.camper3_id, 
+			{:action=>'show', :id=>receipt} ,
+			{:class=>'list_link'} %>
+		<% end %>
+	</td>
+
+	<td class="list_receipts">
+		<%= link_to number_to_phone(receipt.phone, :area_code=>'true', :delimiter=>"-"),
+		 	{:action=>'show', :id=>receipt},
+			{:class=>'list_link'} %>
+	</td>
+
+<% end %>
+</table>
+<% end %>
+
+
+<br />
+
+<%= link_to 'New receipt', :action => 'new' %>
+
+<br />
+
+
+
+

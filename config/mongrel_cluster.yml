@@ -1,0 +1,8 @@
+--- 
+cwd: /home/draper/vce_test/current/
+log_file: /home/draper/vce_test/current/log/mongrel.log
+port: "3000"
+environment: production
+#address: 127.0.0.1
+pid_file: /home/draper/vce_test/current/tmp/pids/mongrel.pid
+servers: 3

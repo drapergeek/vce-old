@@ -1,0 +1,6 @@
+<h2>New 4-H Camp Receipt</h2>
+<% form_tag :action => 'create' do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Create" %>
+<% end %>
+<%= link_to 'Back', :action => 'list' %>
