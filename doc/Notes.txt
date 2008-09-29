@@ -1,23 +1,4 @@
 To-Do:
-	-Setup an admin flag on all users...define who is admin and not
-	-For campers under "Other Info" add the following:
-		-Equine Release - Yes/No
-		-Health Form - Yes/No
-	-Move Health Info Above School Information
-	-Tetanus shot remove day, required field - nope
-	-Optional fields that are only for teens:
-		-Ask about pool spotting for teens
-	-Find a way to easily add control school from one place...
-	-Add schools...
-	-Possibly research a way to call the rjs from a drop down instead of the hacked together CRAP I have right now
-
-
-
-	
-	-in the bus list show the position and sort by it
-
-	
-	-hide parental information - for adults
 		
 	
 	

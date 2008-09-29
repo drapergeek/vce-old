@@ -93,19 +93,16 @@ class Camper < ActiveRecord::Base
  	    phone1 = @number.compact.join
  	    write_attribute(:phone1, phone1)
  	  end
- 	  
  	  unless phone2.blank?
  	    @number2 = phone2.split('-')
  	    phone2 = @number2.compact.join
  	    write_attribute(:phone2, phone2)
  	  end
- 	  
  	  unless emergency_phone.blank?
  	    @number3 = emergency_phone.split('-')
  	    emergency_phone = @number3.compact.join
  	    write_attribute(:emergency_phone, emergency_phone)
  	  end
- 	  
   end
   
   

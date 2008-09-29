@@ -149,16 +149,6 @@ class CampersController < ApplicationController
   end
   
   
-  def report
-    @inactive_number = Camper.find_all_inactive.length
-    @girls_number =  Camper.find_all_girls.length 
-		@boys_number = Camper.find_all_boys.length 
-		@teens_number = Camper.find_all_teens.length 
-		@adults_number = Camper.find_all_adults.length
-		@campers_number = Camper.find_all_campers.length 
-		@attendees_number = Camper.find_all_attendees.length 
-  end
-  
   def list_inactive
     @campers = Camper.find_all_inactive
     @header_text = "Inactive Campers"

@@ -1,16 +1,11 @@
 <h1>Editing unit</h1>
 
-<% form_for(@unit) do |f| %>
-  <%= f.error_messages %>
+<% form_tag :controller=>'units', :action=>'update', :id => @unit do %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Update' %>
+
 <% end %>
 
 <%= link_to 'Show', @unit %> |
-<%= link_to 'Back', units_path %>
+<%= link_to 'Back', :controller=>'units' %>

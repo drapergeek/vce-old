@@ -126,9 +126,7 @@ end
   end#end of validate class 
   
   def validate_on_create
-    
     #check for camper_ids being unique
-     
     @camper_ids = find_camper_ids()
     camper1_id_used = 0
     camper2_id_used = 0

@@ -7,10 +7,9 @@ class UserTest < Test::Unit::TestCase
   fixtures :users
 
   def test_should_create_user
-    assert_difference User, :count do
-      user = create_user
-      assert !user.new_record?, "#{user.errors.full_messages.to_sentence}"
-    end
+      user_count = User.count
+      user =  User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }
+      assert_equal(user_count, User.count+1)
   end
 
   def test_should_require_login

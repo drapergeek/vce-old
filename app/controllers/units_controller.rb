@@ -13,7 +13,6 @@ class UnitsController < ApplicationController
   # GET /units/1.xml
   def show
     @unit = Unit.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @unit }
@@ -40,7 +39,6 @@ class UnitsController < ApplicationController
   # POST /units.xml
   def create
     @unit = Unit.new(params[:unit])
-
     respond_to do |format|
       if @unit.save
         flash[:notice] = 'Unit was successfully created.'
@@ -57,8 +55,8 @@ class UnitsController < ApplicationController
   # PUT /units/1.xml
   def update
     @unit = Unit.find(params[:id])
-
     respond_to do |format|
+      logger.debug("Testing")
       if @unit.update_attributes(params[:unit])
         flash[:notice] = 'Unit was successfully updated.'
         format.html { redirect_to(@unit) }

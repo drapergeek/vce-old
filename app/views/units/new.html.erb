@@ -1,15 +1,11 @@
-<h1>New unit</h1>
+<h1>Create New Unit</h1>
 
-<% form_for(@unit) do |f| %>
-  <%= f.error_messages %>
+<% form_tag :action => 'create', :id => @unit do %>
 
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Create' %>
+
 <% end %>
-
+<%= link_to 'Show', @unit %> |
 <%= link_to 'Back', units_path %>
+

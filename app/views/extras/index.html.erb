@@ -8,20 +8,27 @@
 	</ul>
 	<h4>Campers</h4>
 	<ul id="campers_excel_sheets" class="excel_sheets">
-		<li><%= link_to 'All Camper Information',
-		 {:controller=>'excel', :action=>'all_camper_info'} %></li>
-		<li><%= link_to 'All Campers with Bus, Pack, Classes and Room Assignments',
-		 {:controller=>'excel', :action=>'campers_classes'} %>
-		<small>This will ONLY print actual campers, not adults/volunteers</small>
+		<li>
+			<%= link_to 'All Camper Information',
+		 	{:controller=>'excel', :action=>'all_camper_info'} %>
 		</li>
-	
-		<li><%= link_to 'Health Concerns',
-		 {:controller=>'excel', :action=>'health_concerns'} %></li>
-		
+		<li>
+			<%= link_to 'All Campers with Bus, Pack, Classes and Room Assignments',
+			{:controller=>'excel', :action=>'campers_classes'} %>
+			<small>This will ONLY print actual campers, not adults/volunteers</small>
+		</li>
+		<li>
+			<%= link_to 'Health Concerns',{:controller=>'excel', :action=>'health_concerns'} %>
+		</li>
+		<li>
+			<%= link_to 'Demographics', {:controller=>'excel', :action=>'demographic_report' }%>
+		</li>
 	</ul>
 	<h4>Buses</h4>
 	<ul id ="bus_excel_sheets" class="excel_sheets">
-		<li><%= link_to 'Bus List', {:controller=>'excel', :action=>'bus_list'} %></li>
+		<li>
+			<%= link_to 'Bus List', {:controller=>'excel', :action=>'bus_list'} %>
+		</li>
 	</ul>
 	
 </div>
@@ -30,9 +37,8 @@
 <div id="reports">
 	<ul>
 		<li><%= link_to 'Receipt Report', {:controller=>'receipts', :action=>'totals'} %></li>
-<!--		<li><%= link_to 'Attendees Report', {:controller=>'campers', :action=>'report'} %></li>
 		<li><%= link_to 'Demographics', {:controller=>'extras', :action=>'demographics'} %></li>
--->	</ul>
+	</ul>
 </div>
 <hr />
 <h3>View Previous Years</h3>

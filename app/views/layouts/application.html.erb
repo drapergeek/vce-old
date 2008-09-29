@@ -117,12 +117,12 @@ function DoNav(theUrl)
           <div id="col1_content" class="clearfix">
             
 
-<!--This is the beginning of the crap-->
+<!--This is the beginning of the content-->
 <% flash.each do |key, msg| %>
 	<%= content_tag :div, msg, :id=>key %>
 <% end %>
 <%= yield %>
-<!--This is the end of the crap-->
+<!--This is the end of the content-->
           </div>
         </div>
         <div id="col3">
