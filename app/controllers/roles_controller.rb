@@ -43,8 +43,7 @@ class RolesController < ApplicationController
   # POST /roles
   # POST /Role.xml
   def create
-    @role = Role.new(params[:roles])
-
+    @role = Role.new(params[:role])
     respond_to do |format|
       if @role.save
         flash[:notice] = 'Roles was successfully created.'
@@ -63,9 +62,9 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
 
     respond_to do |format|
-      if @Role.update_attributes(params[:roles])
+      if @Role.update_attributes(params[:role])
         flash[:notice] = 'Roles was successfully updated.'
-        format.html { redirect_to(@roles) }
+        format.html { redirect_to( :action=>'show', :id=>@role) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
