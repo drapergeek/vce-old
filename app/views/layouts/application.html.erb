@@ -132,18 +132,23 @@ function DoNav(theUrl)
 					<hr />
 			<h3 class="stats_sub">Receipts</h3>
 			<ul class="stats">
-				<li class="stat_item">Total: <%= Receipt.find_standard_receipts.length %></li>	
+				<% @receipts = Receipt.find_standard_receipts %>
+				<% unless @receipts.blank? %>
+				<li class="stat_item">Total: <%= @receipts.length %></li>
+				<% end %>
 			</ul>
 			<hr />
 			<h3 class="stats_sub">Campers</h3>
 			<ul class="stats">
 
-				<li class="stat_item">Girls:<%= Camper.find_all_by_gender("female").length %></li>
+				<li class="stat_item">Girls:<%= Camper.find_all_by_gender("female").length %></li>				
 				<li class="stat_item">Boys: <%= Camper.find_all_by_gender("male").length %></li>
 				<li class="stat_item">Teens: <%= Camper.find_all_teens.length %></li>
 				<li class="stat_item">Adults: <%= Camper.find_all_adults.length %></li>
 				<li class="stat_item">Campers: <%= Camper.find_standard_campers.length %>
 				<li class="stat_item">Total: <%= Camper.find_by_type("Active").length %></li>
+				
+			
 
 			</ul>
 							<hr />

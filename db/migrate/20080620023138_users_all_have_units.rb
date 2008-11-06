@@ -1,9 +1,10 @@
 class UsersAllHaveUnits < ActiveRecord::Migration
   def self.up
     add_column :users, :unit_id, :integer
-    User.find(:all).each do |c| 
-      c.update_attribute(:unit_id, 1) 
-    end 
+    User.reset_column_information
+    User.find(:all).each do |u|
+      u.update_attribute(:unit_id, Unit.find(:first).id)
+    end
  
   end
 

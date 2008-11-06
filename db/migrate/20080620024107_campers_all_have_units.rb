@@ -1,6 +1,7 @@
 class CampersAllHaveUnits < ActiveRecord::Migration
   def self.up
     add_column :campers, :unit_id, :integer
+    Camper.reset_column_information
     Camper.find(:all).each do |c| 
       c.update_attribute(:unit_id, 1) 
     end

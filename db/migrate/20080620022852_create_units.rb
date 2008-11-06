@@ -3,10 +3,11 @@ class CreateUnits < ActiveRecord::Migration
     create_table :units do |t|
       t.string :name
       t.timestamps
+      t.float    :camp_price
     end
-    Unit.create :name => "Henry County" 
-    Unit.create :name => "Franklin County"
-    Unit.create :name =>"State Level"
+    Unit.create :name => "Henry County", :camp_price=>185.00
+    Unit.create :name => "Franklin County", :camp_price=>185.00
+    Unit.create :name =>"State Level", :camp_price=>185.00
   end
 
   def self.down

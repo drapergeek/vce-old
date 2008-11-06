@@ -21,6 +21,7 @@ class CreateReceipts < ActiveRecord::Migration
       t.column :user_id, :integer
     end
   end
+  
 
   def self.down
     drop_table :receipts

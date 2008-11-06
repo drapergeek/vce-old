@@ -3,6 +3,9 @@ class PacksCoursesBusesHaveUnitsToo < ActiveRecord::Migration
      add_column :packs, :unit_id, :integer
      add_column :buses, :unit_id, :integer
      add_column :courses, :unit_id, :integer
+     Pack.reset_column_information
+     Bus.reset_column_information
+     Course.reset_column_information
       Pack.find(:all).each do |c| 
         c.update_attribute(:unit_id, 1) 
       end 
