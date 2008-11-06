@@ -132,10 +132,7 @@ function DoNav(theUrl)
 					<hr />
 			<h3 class="stats_sub">Receipts</h3>
 			<ul class="stats">
-				<% @receipts = Receipt.find_standard_receipts %>
-				<% unless @receipts.blank? %>
-				<li class="stat_item">Total: <%= @receipts.length %></li>
-				<% end %>
+				<li class="stat_item">Total: <%= Receipt.find_standard_receipts.length %></li>
 			</ul>
 			<hr />
 			<h3 class="stats_sub">Campers</h3>
