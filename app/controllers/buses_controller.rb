@@ -39,7 +39,6 @@ class BusesController < ApplicationController
       flash[:notice] = "You must select campers to be added before updating!"
     else
       @checked.each do |c|
-        logger.info("this what is listed" + c)
         @camper = Camper.find(c)
         @camper.bus_id = id
         @camper.save

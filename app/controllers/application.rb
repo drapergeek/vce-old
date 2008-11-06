@@ -7,17 +7,44 @@ class ApplicationController < ActionController::Base
  # Pick a unique cookie name to distinguish our session data from others'
   session :session_key => '_vce_session_id'
   before_filter :set_thread_user, :set_thread_unit
+  before_filter :check_authentication, :check_authorization
   
-    def set_thread_user
-      if logged_in?
-        Thread.current["user"] = current_user  #current_user is part of Restful_Authentication
+  
+  def check_authentication 
+    unless session[:user] 
+      session[:intended_action] = action_name 
+      redirect_to :controller => "account", :action => "index" 
+      return false 
+    end 
+  end 
+  
+  def check_authorization 
+  user = User.find(session[:user]) 
+  logger.debug user.login
+    unless user.roles.detect{|role| role.rights.detect{|right| right.action.downcase == action_name.downcase && right.controller.downcase == controller_name.downcase } } 
+      user.roles.each do |r|
+        r.rights.each do |rr|
+          logger.debug rr.controller.to_s
+          logger.debug rr.action.to_s
+        end
       end
+      flash[:notice] = "You are not authorized to view the page you requested " + controller_name + " - " + action_name 
+      request.env["HTTP_REFERER"] ? (redirect_to :back) : (redirect_to home_url) 
+      return false 
+    end 
+  end
+  
+  def set_thread_user
+    if logged_in?
+      Thread.current["user"] = current_user  #current_user is part of Restful_Authentication
     end
-    def set_thread_unit
-      if logged_in?
-        Thread.current["unit"] = current_user.unit  #current_user is part of Restful_Authentication
-      end
+  end
+  
+  def set_thread_unit
+    if logged_in?
+      Thread.current["unit"] = current_user.unit  #current_user is part of Restful_Authentication
     end
+  end
   
   ExceptionNotifier.exception_recipients = %w(aethiolas@gmail.com)  
   

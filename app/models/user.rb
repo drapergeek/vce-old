@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for the unencrypted password
   attr_accessor :password
   has_many :receipts
+  has_and_belongs_to_many :roles
   belongs_to :unit
 
   validates_presence_of     :login, :email

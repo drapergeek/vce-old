@@ -1,4 +1,6 @@
 <h2>Current Users</h2>
+<%= link_to 'View Roles', {:controller=>'roles'} %> | 
+<%= link_to 'View Permissions', {:controller=>'rights'} %>
 <ul>
 	<% @users.each do |u| %>
 		<li class="user_list">

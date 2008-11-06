@@ -5,6 +5,7 @@ class AccountController < ApplicationController
   before_filter :login_from_cookie
   before_filter :login_required , :except=>[:login, :index]
   before_filter :authorize, :only=>[:signup, :super, :destroy, :index]
+  skip_before_filter :check_authentication, :check_authorization , :only=>[:login, :index]
 
 
   
