@@ -1,0 +1,21 @@
+<p>Name: <%= @role.name %></p>
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Controller</th>
+		<th>Action</th>
+	</tr>
+	<% @role.rights.each do |r| %>
+	<tr>
+		<td><%= link_to r.name, :action=>'show', :id=>r %></td>
+		<td><%= r.controller %></td>
+		<td><%= r.action %></td>
+	</tr>
+	<% end %>
+	
+	
+</table>
+
+<%= link_to 'Edit', :action=>'edit', :id=>@roles %> |
+<%= link_to 'Back', :action=>'index' %>

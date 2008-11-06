@@ -1,0 +1,21 @@
+<%= error_messages_for 'role' %>
+
+<!--[form:course]-->
+<p><label for="role_name">Name:</label><br/>
+<%= text_field 'role', 'name'  %></p>
+
+<% controller_name = "blank" %>
+<% for right in Right.find(:all, :order=>"controller") %>
+<% if right.controller.to_s != controller_name %>
+	<% controller_name = right.controller %>
+	
+	<strong><%= controller_name.capitalize %></strong><br />
+<% end %>
+	<div>
+		<%= check_box_tag "role[right_ids][]", right.id,  @role.rights.include?(right)%>
+		<%= right.name %>  Controller - <%= right.controller %> Action - <%= right.action %>
+	</div>
+<% end %>
+
+<!--[eoform:course]-->
+
