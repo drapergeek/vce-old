@@ -1,12 +1,10 @@
 <h1>Editing rights</h1>
 
-<% form_for(@right) do |f| %>
-  <%= f.error_messages %>
+<% form_for  @right, :url => { :action => "update" } do |f| %>
+      <%= render :partial => f, :locals => { :f => f } %>
+      <%= f.submit 'update' %>
+ <% end %>
 
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
 
 <%= link_to 'Show', @right %> |
 <%= link_to 'Back', {:action=>'index'} %>
