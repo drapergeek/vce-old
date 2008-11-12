@@ -10,10 +10,11 @@ class CreateBasicRolesRightsForCurrentUsers < ActiveRecord::Migration
     receipt_rights.push(Right.create :name=>'List Receipt Totals By Date', :controller=>'receipts', :action=>'list_by_date')
     receipt_rights.push(Right.create :name=>'Show Receipts By Date', :controller=>'receipts', :action=>'show_by_date')
     receipt_rights.push(Right.create :name=>'Show Form For Creating New Receipts', :controller=>'receipts', :action=>'new')
-    receipt_rights.push(Right.create :name=>'Create New Receipts', :controller=>'receipts', :action=>'new')
+    receipt_rights.push(Right.create :name=>'Create New Receipts', :controller=>'receipts', :action=>'create')
     receipt_rights.push(Right.create :name=>'Edit Receipts', :controller=>'receipts', :action=>'edit')
     receipt_rights.push(Right.create :name=>'Update Receipts', :controller=>'receipts', :action=>'update')
     receipt_rights.push(Right.create :name=>'Delete Receipts', :controller=>'receipts', :action=>'destroy')
+    
     
     receipt_rights.each do |r|
       role.rights<<r

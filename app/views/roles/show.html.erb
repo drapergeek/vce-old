@@ -1,17 +1,31 @@
 <p>Name: <%= @role.name %></p>
 
-<table>
-	<tr>
-		<th>Name</th>
-		<th>Controller</th>
-		<th>Action</th>
-	</tr>
-	<% @role.rights.each do |r| %>
-	<tr>
-		<td><%= link_to r.name, :action=>'show', :id=>r %></td>
-		<td><%= r.controller %></td>
-		<td><%= r.action %></td>
-	</tr>
+	<% controller_name  = "blank" %>
+	<% first_run = true %>
+	<% rights = @role.rights(:order=>'controller') %>
+	<% rights.each do |r| %>
+		<% if controller_name != r.controller.capitalize %>
+			<% controller_name = r.controller.capitalize %>
+			<% unless first_run == true %>
+				</table>
+			<% end %>
+			<h3><%= controller_name %></h3>
+			<table width=>
+				<tr>
+					<th>Name</th>
+					<th>Action</th>
+				</tr>
+				<tr>
+					<td><%= link_to r.name, :controller=>'rights',:action=>'show', :id=>r %></td>
+					<td><%= r.action %></td>
+				</tr>
+		<% else %>
+			<tr>
+				<td><%= link_to r.name,:controller=>'rights', :action=>'show', :id=>r %></td>
+				<td><%= r.action %></td>
+			</tr>
+		<% end %>
+	<% first_run = false %>
 	<% end %>
 	
 	

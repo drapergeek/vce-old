@@ -9,6 +9,9 @@ class Receipt < ActiveRecord::Base
   validates_format_of :camper2_id, :with => /^[BGSPAT]{1}\d{3}$/, :on => :create, :if=> :camper2_filled
   validates_format_of :camper3_id, :with => /^[BGSPAT]{1}\d{3}$/, :on => :create, :if=> :camper3_filled
   validates_format_of :phone, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :on=>:create
+  named_scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
+  named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
+  
   CAMP_PRICE = 185.00
    
   HUMANIZED_ATTRIBUTES = {
@@ -25,7 +28,7 @@ class Receipt < ActiveRecord::Base
   def self.find_standard_receipts(options={})
       with_scope :find => options do 
         year = Date.today.year
-        find(:all, :conditions=>['unit_id like ? and created_at like ?', Thread.current["unit"].id, "%#{year}%"])
+        self.current_unit(Thread.current["unit"].id).current_year("%#{year}%")
       end
   end
   

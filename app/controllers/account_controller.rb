@@ -22,14 +22,6 @@ class AccountController < ApplicationController
     redirect_to :action => 'super'
   end
   
-  
-  #this is going to be an ajax based way of adding/editing users
-  def adminstration
-    @users = User.find(:all)
-  end
-
-  
-
 
   def image 
     @image = User.find(params[:id]) 
@@ -67,12 +59,16 @@ class AccountController < ApplicationController
   
   def edit
     @units = Unit.find(:all)
-    if current_user.id.to_s == params[:id] || current_user.admin?
+    if current_user.id.to_s == params[:id]
       @user = User.find(params[:id]) 
     else
-      flash[:notice] = "naughty! NAUGHTY! STAY OUT!" + params[:id]
-      redirect_to :controller=> 'receipts', :action=>'index'
+      edit_another_user(params[:id])
     end
+  end
+  
+  def edit_another_user(id)
+    @units = Unit.find(:all)
+    @user = User.find_by_id(id)
   end
   
   

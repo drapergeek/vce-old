@@ -1,0 +1,15 @@
+<% #passed variables = controller, controller_action, link_name, link_action %>
+
+<% if can_view_item(controller, controller_action) %>
+	<% if is_current_view controller %>
+		<li id ="current">
+	<% else %> 
+		<li>
+	<% end %>
+	<% if link_action.blank? %>
+		<%= link_to link_name, :controller=>controller %>
+	<% else %>
+		<%= link_to link_name, :controller=>controller, :action=>link_action %>
+	<% end %>
+	</li>
+<% end %>

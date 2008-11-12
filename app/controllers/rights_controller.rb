@@ -3,7 +3,7 @@ class RightsController < ApplicationController
   # GET /rights
   # GET /Right.xml
   def index
-    @rights = Right.find(:all)
+    @rights = Right.find(:all, :order=>'controller')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,12 +41,11 @@ class RightsController < ApplicationController
   # POST /rights
   # POST /Right.xml
   def create
-    @right = Right.new(params[:rights])
-
+    @right = Right.new(params[:right])
     respond_to do |format|
-      if @Right.save
-        flash[:notice] = 'Rights was successfully created.'
-        format.html { redirect_to(@right) }
+      if @right.save
+        flash[:notice] = 'Right was successfully created.'
+        format.html { redirect_to :action=>'index' }
         format.xml  { render :xml => @right, :status => :created, :location => @right }
       else
         format.html { render :action => "new" }
@@ -59,15 +58,14 @@ class RightsController < ApplicationController
   # PUT /rights/1.xml
   def update
     @right = Right.find(params[:id])
-
     respond_to do |format|
-      if @Right.update_attributes(params[:rights])
-        flash[:notice] = 'Rights was successfully updated.'
-        format.html { redirect_to(@right) }
+      if @right.update_attributes(params[:right])
+        flash[:notice] = 'Right was successfully updated.'
+        format.html { redirect_to :action=>'show', :id=>@right }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @Right.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => @right.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,7 +77,7 @@ class RightsController < ApplicationController
     @right.destroy
 
     respond_to do |format|
-      format.html { redirect_to(rights_url) }
+      format.html { redirect_to :action=>'index' }
       format.xml  { head :ok }
     end
   end

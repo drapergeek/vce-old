@@ -18,7 +18,7 @@ class RolesController < ApplicationController
   # GET /roles/1.xml
   def show
     @role = Role.find(params[:id])
-    @rights = Right.find(:all)
+    @rights = Right.find(:all, :order=>'controller')
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @role }
@@ -62,7 +62,7 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
 
     respond_to do |format|
-      if @Role.update_attributes(params[:role])
+      if @role.update_attributes(params[:role])
         flash[:notice] = 'Roles was successfully updated.'
         format.html { redirect_to( :action=>'show', :id=>@role) }
         format.xml  { head :ok }

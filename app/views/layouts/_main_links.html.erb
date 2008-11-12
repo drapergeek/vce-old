@@ -1,0 +1,51 @@
+ <ul>	
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "receipts",
+				:controller_action => "show_receipts_button",
+				:link_name=>"Receipts",
+				:link_action=>""
+		} -%>
+		
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "campers",
+				:controller_action => 'show_campers_button',
+				:link_name=>"Enrollment",
+				:link_action=>""
+		} -%>
+		
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "courses",
+				:controller_action => "show_courses_button",
+				:link_name=>"Courses",
+				:link_action=>"list"
+		} -%>
+		
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "packs",
+				:controller_action => "show_packs_button",
+				:link_name=>"Packs",
+				:link_action=>""
+		} -%>
+		
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "buses",
+				:controller_action => "show_buses_button",
+				:link_name=>"Buses",
+				:link_action=>"list"
+		} -%>
+		
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "account",
+				:controller_action => "show_users_button",
+				:link_name=>"Users",
+				:link_action=>""
+		} -%>
+		
+		<%= render :partial => 'layouts/navigation_link',
+		:locals => {:controller => "extras",
+				:controller_action => "show_extras_button",
+				:link_name=>"Extras",
+				:link_action=>""
+		} -%>
+				
+ </ul>

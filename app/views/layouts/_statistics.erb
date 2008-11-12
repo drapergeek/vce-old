@@ -1,0 +1,52 @@
+	<h2 id="stats_header">Stats</h2>
+	<% if can_view_statistics "receipts" %>
+	<hr />
+	<h3 class="stats_sub">Receipts</h3>
+	<ul class="stats">
+		<li class="stat_item">Total: <%= Receipt.find_standard_receipts.length %></li>
+	</ul>
+	<% end %>
+	
+	<% if can_view_statistics "campers" %>
+		<hr />
+		<h3 class="stats_sub">Campers</h3>
+		<ul class="stats">
+			<li class="stat_item">Girls:<%= Camper.find_all_by_gender("female").length %></li>				
+			<li class="stat_item">Boys: <%= Camper.find_all_by_gender("male").length %></li>
+			<li class="stat_item">Teens: <%= Camper.find_all_teens.length %></li>
+			<li class="stat_item">Adults: <%= Camper.find_all_adults.length %></li>
+			<li class="stat_item">Campers: <%= Camper.find_standard_campers.length %>
+			<li class="stat_item">Total: <%= Camper.find_by_type("Active").length %></li>
+		</ul>
+	<% end %>
+	
+	<% if can_view_statistics "courses" %>
+	<hr />
+	<h3 class="stats_sub">Courses</h3>
+	<ul class="stats">
+		<% @courses = Course.find_standard_courses %>
+		<% if @courses.empty? %>
+			<li>No courses listed</li>
+		<% end %>
+		<% @courses.each do |c| %>
+			<% if c.name.length > 7 %>
+				<li class="stat_item"><%= c.name.slice(0..6) %>...: <%= c.campers.length || 0 %>
+			<% else %>
+				<li class="stat_item"><%= c.name %>: <%= c.campers.length || 0 %>
+			<% end %>
+		<% end %>
+	</ul>
+	<% end %>
+	<!--
+		<hr />
+	
+	<div style="background:red">
+	<h3 class="stats_sub">Incomplete</h3>
+
+	<ul class="stats">
+		<li class="stat_item">Forms: 132</li>
+		<li class="stat_item">Bus: 12</li>
+		<li class="stat_item">Courses: 12</li>			
+	</ul>
+	</div>
+-->

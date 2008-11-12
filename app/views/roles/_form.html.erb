@@ -8,7 +8,6 @@
 <% for right in Right.find(:all, :order=>"controller") %>
 <% if right.controller.to_s != controller_name %>
 	<% controller_name = right.controller %>
-	
 	<strong><%= controller_name.capitalize %></strong><br />
 <% end %>
 	<div>
