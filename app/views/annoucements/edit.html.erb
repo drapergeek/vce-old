@@ -1,0 +1,32 @@
+<h1>Editing annoucement</h1>
+
+<% form_for(@annoucement) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :created_at %><br />
+    <%= f.datetime_select :created_at %>
+  </p>
+  <p>
+    <%= f.label :updated_at %><br />
+    <%= f.datetime_select :updated_at %>
+  </p>
+  <p>
+    <%= f.label :message %><br />
+    <%= f.text_area :message %>
+  </p>
+  <p>
+    <%= f.label :starts_at %><br />
+    <%= f.datetime_select :starts_at %>
+  </p>
+  <p>
+    <%= f.label :ends_at %><br />
+    <%= f.datetime_select :ends_at %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @annoucement %> |
+<%= link_to 'Back', annoucements_path %>

@@ -1,0 +1,28 @@
+<h1>Listing annoucements</h1>
+
+<table>
+  <tr>
+    <th>Created at</th>
+    <th>Updated at</th>
+    <th>Message</th>
+    <th>Starts at</th>
+    <th>Ends at</th>
+  </tr>
+
+<% for annoucement in @annoucements %>
+  <tr>
+    <td><%=h annoucement.created_at %></td>
+    <td><%=h annoucement.updated_at %></td>
+    <td><%=h annoucement.message %></td>
+    <td><%=h annoucement.starts_at %></td>
+    <td><%=h annoucement.ends_at %></td>
+    <td><%= link_to 'Show', annoucement %></td>
+    <td><%= link_to 'Edit', edit_annoucement_path(annoucement) %></td>
+    <td><%= link_to 'Destroy', annoucement, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New annoucement', new_annoucement_path %>

@@ -1,0 +1,28 @@
+<p>
+  <b>Created at:</b>
+  <%=h @annoucement.created_at %>
+</p>
+
+<p>
+  <b>Updated at:</b>
+  <%=h @annoucement.updated_at %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @annoucement.message %>
+</p>
+
+<p>
+  <b>Starts at:</b>
+  <%=h @annoucement.starts_at %>
+</p>
+
+<p>
+  <b>Ends at:</b>
+  <%=h @annoucement.ends_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_annoucement_path(@annoucement) %> |
+<%= link_to 'Back', annoucements_path %>

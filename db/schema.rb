@@ -9,7 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081108192111) do
+ActiveRecord::Schema.define(:version => 20081119032051) do
+
+  create_table "annoucements", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "message"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+  end
 
   create_table "buses", :force => true do |t|
     t.string  "name"

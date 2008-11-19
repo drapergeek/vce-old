@@ -15,6 +15,6 @@
 @import url(/stylesheets/yaml/navigation/nav_shinybuttons.css);
 @import url(/stylesheets/screen/basemod.css);
 @import url(/stylesheets/screen/content.css);
-
+@import url(/stylesheets/screen/custom_added.css);
 /* import print layout | Druck-Layout einbinden */
 /* @import url(../yaml/print/print_003_draft.css); */

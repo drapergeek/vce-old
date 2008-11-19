@@ -7,6 +7,8 @@ class Camper < ActiveRecord::Base
   has_many :courses, :through=>:course_selections 
   before_create :compact_phone
   before_save :create_pack_from_name
+  named_scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
+  named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
   
   validates_uniqueness_of :number
   validates_format_of :number, :with => /^[BGSAPT]{1}\d{3}$/
