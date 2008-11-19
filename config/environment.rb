@@ -59,7 +59,6 @@ require 'will_paginate'
 # Mime::Type.register "application/x-mobile", :mobile
 
 # Include your application configuration below
-config.action_view.debug_rjs                         = true
 
 class AuditLogger < Logger
   def format_message(severity, timestamp, progname, msg)
