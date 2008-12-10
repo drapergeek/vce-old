@@ -31,7 +31,7 @@ class Receipt < ActiveRecord::Base
   def self.find_standard_receipts(options={})
       with_scope :find => options do 
         year = Date.today.year
-        self.current_unit(Thread.current["unit"].id).current_year("%#{year}%")
+        find(:all, :conditions=>['unit_id like ? and created_at like ?', Thread.current["unit"].id, "%#{year}%"])
       end
   end
   
