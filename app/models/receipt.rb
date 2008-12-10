@@ -4,7 +4,7 @@ class Receipt < ActiveRecord::Base
   has_many :campers
   before_create :compact_phone
   #attr_accessor :phone
-  validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id
+  validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id, :amount
   validates_format_of :camper1_id, :with => /^[BGSPAT]{1}\d{3}$/, :on => :create
   validates_format_of :camper2_id, :with => /^[BGSPAT]{1}\d{3}$/, :on => :create, :if=> :camper2_filled
   validates_format_of :camper3_id, :with => /^[BGSPAT]{1}\d{3}$/, :on => :create, :if=> :camper3_filled
@@ -20,10 +20,13 @@ class Receipt < ActiveRecord::Base
       :lname => "Payer Last Name",
       :address => "Address"
     }
+    
 
   def self.human_attribute_name(attr)
       HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
+  
+
   
   def self.find_standard_receipts(options={})
       with_scope :find => options do 
@@ -77,6 +80,7 @@ end
     !camper3.blank?
   end
   
+
   def payment_type
     if payment_method==1
       return 'Cash'
