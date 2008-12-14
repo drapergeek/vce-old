@@ -46,12 +46,15 @@ class AccountController < ApplicationController
 
   def signup
     @user = User.new(params[:user])
+    @user.roles << Role.find_by_name("default")
     @units = Unit.find(:all)
     return unless request.post?
+    unless @user.roles.detect{|role| role.name.downcase == "default"}
+      @user.roles << Role.find_by_name("default")
+    end
     @user.save!
-    self.current_user = @user
     redirect_back_or_default(:controller => '/account', :action => 'index')
-    flash[:notice] = "Thanks for signing up!"
+    flash[:notice] = "User #{@user.fname} #{@user.lname} successfully created!"
   rescue ActiveRecord::RecordInvalid
     render :action => 'signup'
   end

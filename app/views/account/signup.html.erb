@@ -33,5 +33,22 @@
 <p><label for="password_confirmation">Confirm Password</label><br/>
 <%= u.password_field 'password_confirmation' %></p>
 
+
+<% if current_user.roles.detect {|role| role.rights.detect {|right|  right.controller.downcase == "roles" } }  %>
+<hr />
+<h3>Roles</h3>
+<p>
+
+	<% Role.find(:all).each do |r| %>
+		<div>
+			<%= check_box_tag "user[role_ids][]", r.id,  @user.roles.include?(r)%>
+			<%= r.name %>
+		</div>
+	<% end %>
+
+	
+</p>
+<% end %>
+
 <p><%= submit_tag 'Sign up' %></p>
 <% end %>

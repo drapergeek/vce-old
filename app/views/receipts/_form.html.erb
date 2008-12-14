@@ -11,27 +11,26 @@
 
 <div id="payer_info_form" class="receipt_info_form">
 	<h3 class="receipt_section_header">Payer Information</h3>
-		<label for="receipt_received_from">First</label>
-		<%= text_field 'receipt', 'fname'  %>
-		<label for="receipt_received_from">Last</label>
-		<%= text_field 'receipt', 'lname'  %>
-	<br/>
-		<label for="receipt_address">Address </label>
-		<%= text_field 'receipt', 'address'  %>
-	<br/>
-		<label for="receipt_city">City</label>
-		<%= text_field 'receipt', 'city'  %>
-		<label for="receipt_state">State</label>
+ 		<%= f.text_field :fname  %>
+		<%= f.text_field  :lname  %>
+		<br />
+		<%= f.text_field :address  %>
+		<br />
+		
+		<%= f.label :city %>
+		<%= text_field "receipt", 'city'  %>
+		
+		<%= f.label :state %>
 		<%= collection_select('receipt', 'state' , @states, 'name', 'name') %>
-		<label for="receipt_zip">Zip</label>
+		
+		<%= f.label :zip %>
 		<%= text_field 'receipt', 'zip', {:size=>7}  %>
-	<br/>
-		<label for="receipt_phone">Telephone: </label>
-		<%= text_field 'receipt', 'phone', {:size=>14} %>
+	<br />
+	<br />
+		<%= f.text_field  'phone', {:size=>14} %>
 		<small id="receipt_phone_example">Ex: 276-555-1234 or 2765551234</small>
 	<br/>
 </div><!--End of payer info-->
-
 
 <!--Payment Information Section-->
 <div id="payment_info_form" class="receipt_info_form">
@@ -41,15 +40,13 @@
 		**The price for two campers is $370.00  and the price for 3 campers is $555.00**
 	</div>
 	<div>
-	<label for="receipt_amount">Amount</label>
 	<% if @receipt.amount.blank? %>
 		<% value = @camp_price %>
 	<% end %>
-	<%= text_field 'receipt', 'amount' , :value=>value %></div>
+	<%= f.text_field :amount, :value=>value %></div>
 	
 	<!--Payment Method Stuff-->
-	<label for="receipt_payment_method">Payment method: </label>
-
+	<%= f.label "Payment Method:" %>
 
 	<%= radio_button('receipt', 'payment_method', '2',
 	{:onchange=>"Element.show(receipt_payment_extra); 
