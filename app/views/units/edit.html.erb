@@ -1,11 +1,11 @@
 <h1>Editing unit</h1>
 
-<% form_tag  :action=>'update', :id => @unit do%>
 
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Update' %>
+<% form_for  @unit, :url => { :action => 'update' } do |f| %>
+      <%= render :partial => f, :locals => { :f => f } %>
+      <%= f.submit 'update' %>
+ <% end %>
 
-<% end %>
 
 <%= link_to 'Show', @unit %> |
 <%= link_to 'Back', :controller=>'units' %>
