@@ -56,7 +56,7 @@ class UnitsController < ApplicationController
   def update
     @unit = Unit.find(params[:id])
     respond_to do |format|
-      if @right.update_attributes(params[:unit])
+      if @unit.update_attributes(params[:unit])
         flash[:notice] = 'Unit was successfully updated.'
         format.html { redirect_to :action=>'show', :id=>@unit }
         format.xml  { head :ok }
