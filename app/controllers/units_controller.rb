@@ -55,18 +55,17 @@ class UnitsController < ApplicationController
   # PUT /units/1.xml
   def update
     @unit = Unit.find(params[:id])
-    respond_to do |format|
       logger.debug("Testing")
       if @unit.update_attributes(params[:unit])
         flash[:notice] = 'Unit was successfully updated.'
-        format.html { redirect_to(@unit) }
-        format.xml  { head :ok }
+        redirect_to :action=>'show', :id=>@pack
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @unit.errors, :status => :unprocessable_entity }
+        render action=>'edit'
       end
-    end
   end
+  
+  
+
 
   # DELETE /units/1
   # DELETE /units/1.xml
