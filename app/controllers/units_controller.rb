@@ -63,9 +63,6 @@ class UnitsController < ApplicationController
         render action=>'edit'
       end
   end
-  
-  
-
 
   # DELETE /units/1
   # DELETE /units/1.xml
