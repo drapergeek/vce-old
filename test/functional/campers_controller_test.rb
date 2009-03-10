@@ -7,6 +7,8 @@ class CampersController; def rescue_action(e) raise e end; end
 class CampersControllerTest < Test::Unit::TestCase
   fixtures :campers, :users, :courses
 
+=begin
+
   def setup
     @controller = CampersController.new
     @request    = ActionController::TestRequest.new
@@ -141,4 +143,6 @@ class CampersControllerTest < Test::Unit::TestCase
       Camper.find(@first_id)
     }
   end
+  
+=end
 end

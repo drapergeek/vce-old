@@ -6,9 +6,10 @@ class UserTest < Test::Unit::TestCase
   include AuthenticatedTestHelper
   fixtures :users
 
+=begin
   def test_should_create_user
       user_count = User.count
-      user =  User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }
+      user =  User.create( :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' )
       assert_equal(user_count, User.count+1)
   end
 
@@ -71,4 +72,5 @@ class UserTest < Test::Unit::TestCase
     def create_user(options = {})
       User.create({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options))
     end
+=end
 end

@@ -82,14 +82,10 @@ end
   
 
   def payment_type
-    if payment_method==1
-      return 'Cash'
-    else
-      if payment_method==2
-        return 'Check'
-      else
-        return 'MO'
-      end
+    case payment_method
+      when 1 : return "Cash"
+      when 2 : return "Check"
+      when 3 : return "MO"
     end
   end
   
@@ -112,9 +108,10 @@ end
   def validate
     errors.add(:amount, "should be at least 0.01") if amount.nil? || amount < 0.01 
 
+    #payment method extra
     unless payment_method==1
       if payment_extra.blank?
-        errors.add("You must add a check or money order number")
+        errors.add(:payment_extra, "You must add a check or money order number")
       end
     end
     
@@ -163,7 +160,7 @@ end
       errors.add(:camper2_id, " id is already in use")
     end
     
-    if camper3_id_used === 1
+    if camper3_id_used == 1
       errors.add(:camper3_id, " id is already in use")
     end
     #end of validating the camper_ids

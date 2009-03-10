@@ -1,5 +1,6 @@
 one:
   id: 1
+  unit_id: 1
   lname: Bob
   fname: Static
   payment_method: 1
@@ -8,8 +9,11 @@ one:
   phone: '2222222222'
   amount: 185.00
   date: <%= Date.today %>
+  
+  
 two:
   id: 2
+  unit_id: 1
   lname:  Doe
   fname: Jane
   payment_method: 1

@@ -6,7 +6,7 @@ class PacksController; def rescue_action(e) raise e end; end
 
 class PacksControllerTest < Test::Unit::TestCase
   fixtures :packs, :users
-
+=begin
   def setup
     @controller = PacksController.new
     @request    = ActionController::TestRequest.new
@@ -88,4 +88,7 @@ class PacksControllerTest < Test::Unit::TestCase
       Pack.find(@first_id)
     }
   end
+=end
+
+
 end

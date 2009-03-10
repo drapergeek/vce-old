@@ -8,6 +8,8 @@ class CoursesController; def rescue_action(e) raise e end; end
 class CoursesControllerTest < Test::Unit::TestCase
   fixtures :courses, :users
 
+
+=begin
   def setup
     @controller = CoursesController.new
     @request    = ActionController::TestRequest.new
@@ -91,4 +93,6 @@ class CoursesControllerTest < Test::Unit::TestCase
       Course.find(@first_id)
     }
   end
+=end
+
 end

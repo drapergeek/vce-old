@@ -21,14 +21,21 @@ class ApplicationController < ActionController::Base
   def check_authorization 
   user = User.find(session[:user]) 
   logger.debug user.login
-    unless user.roles.detect{|role| role.rights.detect{|right| right.action.downcase == action_name.downcase && right.controller.downcase == controller_name.downcase } } 
+  #need to check for the new type of "rights"
+  if (action_name.downcase=~/\d/) == nil
+    action = action_name.downcase
+  else
+    #need to find out what it is...
+    action= 'update'
+  end
+    unless user.roles.detect{|role| role.rights.detect{|right| right.action.downcase == action.downcase && right.controller.downcase == controller_name.downcase } } 
       user.roles.each do |r|
         r.rights.each do |rr|
           logger.debug rr.controller.to_s
           logger.debug rr.action.to_s
         end
       end
-      flash[:notice] = "You are not authorized to view the page you requested " + controller_name + " - " + action_name 
+      flash[:notice] = "You are not authorized to view the page you requested " + controller_name + " - " + action
       request.env["HTTP_REFERER"] ? (redirect_to :back) : (redirect_to home_url) 
       return false 
     end 

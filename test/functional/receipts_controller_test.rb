@@ -6,24 +6,32 @@ class ReceiptsController; def rescue_action(e) raise e end; end
 
 class ReceiptsControllerTest < Test::Unit::TestCase
   fixtures :receipts, :users
-
+=begin
   def setup
     @controller = ReceiptsController.new
     @request    = ActionController::TestRequest.new
     @response   = ActionController::TestResponse.new
 
     @first_id = receipts(:one).id
-    login_as :quentin
+   # login_as :quentin
   end
-
+  
+  def test_index_without_user_should_redirect
+    get :index
+    assert_redirected_to :action => "index" 
+  end
+  
+  
+begin
   def test_index
+    setup
     get :index
     assert_response :success
     assert_template 'index'
-    
     assert_not_nil assigns(:receipts)
   end
   
+
   def test_totals
     get :totals
     assert_response :success
@@ -119,17 +127,20 @@ class ReceiptsControllerTest < Test::Unit::TestCase
       Receipt.find(@first_id)
     }
   end
-  #
-  #def test_list_by_date
-   # post :list_by_date :date=>
-    #date = params[:date]
-    #@receipts = Receipt.find(:all, :conditions => [ "date LIKE ?", "%#{date}%"])
-    #render :action=>'search'
-  #end
   
- # def test_show_by_date
-  #  @date = params[:date]
-  #  @receipts = Receipt.find(:all, :conditions => [ "date LIKE ?", "%#{params[:date]}%"])
-  #end
+  
+  def test_list_by_date
+    post :list_by_date :date=>
+    date = params[:date]
+    @receipts = Receipt.find(:all, :conditions => [ "date LIKE ?", "%#{date}%"])
+    render :action=>'search'
+  end
+  
+  def test_show_by_date
+    @date = params[:date]
+    @receipts = Receipt.find(:all, :conditions => [ "date LIKE ?", "%#{params[:date]}%"])
+  end
+=end
+
   
 end

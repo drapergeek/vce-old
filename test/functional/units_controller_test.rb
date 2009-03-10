@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class UnitsControllerTest < ActionController::TestCase
+  
+=begin
   test "should get index" do
     get :index
     assert_response :success
@@ -42,4 +44,6 @@ class UnitsControllerTest < ActionController::TestCase
 
     assert_redirected_to units_path
   end
+=end
+
 end

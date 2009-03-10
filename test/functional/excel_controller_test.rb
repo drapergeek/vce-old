@@ -5,6 +5,7 @@ require 'excel_controller'
 class ExcelController; def rescue_action(e) raise e end; end
 
 class ExcelControllerTest < Test::Unit::TestCase
+=begin
   def setup
     @controller = ExcelController.new
     @request    = ActionController::TestRequest.new
@@ -19,4 +20,7 @@ class ExcelControllerTest < Test::Unit::TestCase
   def test_correct_receipt_with_1_camper
     
   end
+=end
+
+
 end

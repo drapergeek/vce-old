@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class RolesControllerTest < ActionController::TestCase
+  
+=begin
   test "should get index" do
     get :index
     assert_response :success
@@ -42,4 +44,8 @@ class RolesControllerTest < ActionController::TestCase
 
     assert_redirected_to roles_path
   end
+  
+=end
+
+
 end
