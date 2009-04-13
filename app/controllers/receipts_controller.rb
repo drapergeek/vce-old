@@ -10,7 +10,7 @@ class ReceiptsController < ApplicationController
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :index }
-  CAMP_PRICE = 185.00
+  CAMP_PRICE = 200.00
          
  #This is a method for showing a report of totals...
  #mainly its a sum screen
