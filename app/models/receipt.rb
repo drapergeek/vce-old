@@ -5,9 +5,9 @@ class Receipt < ActiveRecord::Base
   before_create :compact_phone
   #attr_accessor :phone
   validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id, :amount
-  validates_format_of :camper1_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A)\d{3}$/, :on => :create
-  validates_format_of :camper2_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A)\d{3}$/, :on => :create, :if=> :camper2_filled
-  validates_format_of :camper3_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A)\d{3}$/, :on => :create, :if=> :camper3_filled
+  validates_format_of :camper1_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create
+  validates_format_of :camper2_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create, :if=> :camper2_filled
+  validates_format_of :camper3_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create, :if=> :camper3_filled
   validates_format_of :phone, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :on=>:create
   named_scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
   named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}

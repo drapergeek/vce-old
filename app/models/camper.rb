@@ -11,7 +11,7 @@ class Camper < ActiveRecord::Base
   named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
   
   validates_uniqueness_of :number
-  validates_format_of :number, :with => /^[BGSAPT]{1}\d{3}$/
+  validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/
   validates_presence_of :fname, :mname, :lname, :pref_name, :gender
   validates_presence_of :position, :number
   validates_format_of :phone1, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :if=>Proc.new { |u| !u.phone1.blank? } 
