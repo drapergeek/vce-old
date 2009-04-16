@@ -145,6 +145,7 @@ class CampersController < ApplicationController
 
   def destroy
     Camper.find(params[:id]).destroy
+    flash[:notice] = 'The camper was deleted successfully.'
     redirect_to :action => 'list'
   end
   
