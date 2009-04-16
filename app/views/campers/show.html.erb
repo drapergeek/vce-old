@@ -14,6 +14,9 @@
 		<p>
 			<%= @camper.inactive_info %>
 		</p>
+		
+		
+		
 	</div>
 
 <% end %>
@@ -256,13 +259,19 @@
 		<li> Pickup release authorization? <% if @camper.release_authorization? %> Yes <% else %> No <% end %></li>
 		<li> Parental Signatures? <% if @camper.parental_signatures? %> Yes <% else %> No <% end %></li>
 	</ul>
-	
-
 
 </div>
 
 
-
 <!--End of Course Selection List-->
-
+<% if can_view_item('campers', 'destroy')  %>
+<div id="delete camper">
+	<%= link_to "Click Here to Delete this camper", {
+	:action=>'destroy', :id=>@camper},
+	:confirm=>"ARE YOU SURE?  YOU CANNOT UNDONE THIS ACTION!",
+	:method=>'post' %>
+	
+<% end %>
+	
+</div>
 
