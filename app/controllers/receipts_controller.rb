@@ -102,6 +102,7 @@ class ReceiptsController < ApplicationController
       flash[:notice] = 'Receipt was successfully updated.'
       redirect_to :action => 'show', :id => @receipt
     else
+      flash[:notice] = 'There was an error updating the receipt'
       render :action => 'edit'
     end
   end
