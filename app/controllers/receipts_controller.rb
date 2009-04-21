@@ -89,7 +89,7 @@ class ReceiptsController < ApplicationController
   def update
     logger.error "got into update"
     prev = 0
-    @receipt = Receipt.find(@receipt)
+    @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
     @camp_price = CAMP_PRICE
     unless @receipt.refund.blank? || @receipt.refund.nil? || @receipt.refund==0
