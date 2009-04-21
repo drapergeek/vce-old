@@ -87,6 +87,7 @@ class ReceiptsController < ApplicationController
   end
 
   def update
+    logger.error "got into update"
     prev = 0
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
