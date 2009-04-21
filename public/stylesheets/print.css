@@ -1,0 +1,7 @@
+body {visibility:hidden;}
+.show_on_print {
+	visibility:visible;
+	font-size: small;
+	margin: 0;
+	padding: 0;
+}
