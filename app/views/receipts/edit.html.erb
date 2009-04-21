@@ -1,10 +1,8 @@
 <h1>Editing receipt</h1>
 
-<% form_tag :action => 'update', :id => @receipt do %>
-
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Update' %>
-
+<% form_for(@receipt, :builder => FormBuilder, :url=>{:action => 'edit'}) do  |f| %>
+  <%= render :partial => f, :locals=>{:f=>f} %>
+  <%= submit_tag "Create" %>
 <% end %>
 
 <%= link_to 'Show', :action => 'show', :id => @receipt %> |
