@@ -1,6 +1,6 @@
 <h1>Editing receipt</h1>
 
-<% form_for(@receipt, :builder => FormBuilder, :url=>{:action => 'update'}) do  |f| %>
+<% form_for(@receipt, :url=>{:action => 'update'}) do  |f| %>
   <%= render :partial => f, :locals=>{:f=>f} %>
   <%= submit_tag "Update" %>
 <% end %>
