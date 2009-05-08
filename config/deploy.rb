@@ -51,7 +51,7 @@ default_run_options[:pty] = true
   # If you aren't deploying to /u/apps/#{application} on the target
   # servers (which is the default), you can specify the actual location
   # via the :deploy_to variable:
-  set :deploy_to, "/home/draper/vce_test"
+  set :deploy_to, "/home/draper/vce_deploy"
  
   
   # If you aren't using Subversion to manage your source code, specify
@@ -82,14 +82,16 @@ default_run_options[:pty] = true
   role :web, domain
   role :db,  domain, :primary => true
   
-  deploy.task :symlinks do
-    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  
+  
+  task :after_update_code, :roles => [:web, :db, :app] do
+    run "ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml"
   end
-
-  after :deploy, 'deploy:symlinks'
   
 
   namespace :deploy do
+
+    
     desc "Restarting mod_rails with restart.txt"
     task :restart, :roles => :app, :except => { :no_release => true } do
       run "touch #{current_path}/tmp/restart.txt"

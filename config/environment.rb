@@ -69,3 +69,6 @@ end
 logfile = File.open("#{RAILS_ROOT}/log/mine.log", 'a')    
 audit_log = AuditLogger.new(logfile)
 
+
+#This is for deployment to a suburi
+config.action_controller.relative_url_root = "/vce"
