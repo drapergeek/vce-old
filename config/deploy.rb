@@ -44,33 +44,50 @@ set :sudo, "sudo -p Password:"
 
 =end
 
-
 default_run_options[:pty] = true
-set :use_sudo, true
+
   set :application, "vce"
 
   # If you aren't deploying to /u/apps/#{application} on the target
   # servers (which is the default), you can specify the actual location
   # via the :deploy_to variable:
   set :deploy_to, "/home/draper/vce_test"
+ 
   
   # If you aren't using Subversion to manage your source code, specify
   # your SCM below:
   set :scm, :git
   set :repository, "draper@draper.homelinux.com:/home/draper/git/vce.git"
+  set :domain, "draper.homelinux.com"
   set :branch, "master"
   set :deploy_via, :remote_cache
+  
+  
+  set :ssh_options, { :paranoid=>false}
+  ssh_options[:forward_agent] = true
+  
+  #ssh_options[:forward_agent] = true
+  
+  
   set :runner, "draper"
-  
-  
-  
-
   set :user, 'draper'
-  set :ssh_options, { :forward_agent => true }
+  set :scm_password, "mjisseXee2me"
+  set :password, "mjisseXee2me"
+  
+  set :use_sudo, false
+  
+  
+  
+  role :app, domain
+  role :web, domain
+  role :db,  domain, :primary => true
+  
+  deploy.task :symlinks do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
 
-  role :app, "draper.homelinux.com"
-  role :web, "draper.homelinux.com"
-  role :db,  "draper.homelinux.com", :primary => true
+  after :deploy, 'deploy:symlinks'
+  
 
   namespace :deploy do
     desc "Restarting mod_rails with restart.txt"
