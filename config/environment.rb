@@ -71,4 +71,4 @@ audit_log = AuditLogger.new(logfile)
 
 
 #This is for deployment to a suburi
-config.action_controller.relative_url_root = "/vce"
+#config.action_controller.relative_url_root = "/vce"
