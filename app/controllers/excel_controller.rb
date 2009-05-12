@@ -87,7 +87,7 @@ class ExcelController < ApplicationController
   def all_camper_info
     @campers = Camper.find_standard_campers
       stream_csv do |csv|
-        @header = ["First Name","Middle Name", "Last Name"]
+        @header = ["First Name","Middle Name", "Last Name", "Preferred Name"]
         @header.push("Camper ID")
         @header.push("Position")
         @header.push("Address")
@@ -139,7 +139,7 @@ class ExcelController < ApplicationController
         csv << @header
         @campers.each do |u|
           logger.info 'I got into the @campers.each do'
-          @outs = [u.fname,u.mname, u.lname]
+          @outs = [u.fname,u.mname, u.lname, u.pref_name]
           @outs.push(u.number)
           @outs.push(u.position_text)
           @outs.push(u.address)
