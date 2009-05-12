@@ -125,6 +125,7 @@ class ExcelController < ApplicationController
         @header.push("Room Number")
         @header.push("Inactive Info")
         
+        
         #classes
         @header.push('Class 1')
         @header.push('Class 2')
