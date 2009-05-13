@@ -207,7 +207,7 @@ class ExcelController < ApplicationController
   def campers_classes
      @campers = Camper.find_standard_campers
       stream_csv do |csv|
-        @header = ["First Name","Last Name"]
+        @header = ["First Name","Last Name", "Preferred Name"]
         @header.push("Pack")
         @header.push("Room")
         @header.push("Bus")
@@ -218,7 +218,7 @@ class ExcelController < ApplicationController
 
         csv << @header
         @campers.each do |u|
-          @outs = [u.fname, u.lname]
+          @outs = [u.fname, u.lname, u.pref_name]
           if u.pack.blank?
             @outs.push("Empty")
           else
