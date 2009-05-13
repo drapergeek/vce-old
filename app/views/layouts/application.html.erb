@@ -58,7 +58,7 @@ function DoNav(theUrl)
 		<!--normal links for header-->
 		<% if logged_in? %>
 			<!--search form-->
-			<form action="/vce/receipts/search?method=get" method="post" style="display:inline">
+			<form action="receipts/search?method=get" method="post" style="display:inline">
 				<input id="search" name="search" type="text"  />
 				<input type="submit" value="Search" />
 			</form>
@@ -97,7 +97,7 @@ function DoNav(theUrl)
 					<p><%= annoucement.message %></p>
 					
 				<% end %>	
-				<%= link_to_remote "Hide This Message", :url=> "/vce/javascripts/hide_announcement" %>			
+				<%= link_to_remote "Hide This Message", :url=> "javascripts/hide_announcement" %>			
 			</div>
 			<!--Announcement End-->
 			<% end %>
