@@ -137,7 +137,7 @@ class ReceiptsController < ApplicationController
           end
       else
         message='The camper id format is not correct'
-        color='red'
+        color='redd'
       end
     end
     @message = "<b style='color:#{color}; display:inline' >#{message}</b>"
