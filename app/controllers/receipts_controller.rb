@@ -121,6 +121,30 @@ class ReceiptsController < ApplicationController
    
   end
   
+  
+  
+  def validate
+    color = 'red'
+    id = params[:camper_id]
+    message =''
+    if id.length > 3
+      if id =~ /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/
+         if Receipt.find_camper_ids.include?(id)
+            message = 'This camper id is already in use'
+          else
+            message = 'This camper id is not in use'
+            color='green'
+          end
+      else
+        message='The camper id format is not correct'
+        color='red'
+      end
+    end
+    @message = "<b style='color:#{color}; display:inline' >#{message}</b>"
+    render :partial=>'message'
+   
+  end
+  
 
 
   

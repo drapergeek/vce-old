@@ -21,6 +21,9 @@ class Receipt < ActiveRecord::Base
       :address => "Address"
     }
     
+ 
+  
+    
 
   def self.human_attribute_name(attr)
       HUMANIZED_ATTRIBUTES[attr.to_sym] || super
@@ -34,6 +37,7 @@ class Receipt < ActiveRecord::Base
         find(:all, :conditions=>['unit_id like ? and created_at like ?', Thread.current["unit"].id, "%#{year}%"])
       end
   end
+  
   
  
  def compact_phone
@@ -61,7 +65,7 @@ class Receipt < ActiveRecord::Base
 end
   
   #This finds all the camper ids only...I don't know where this is used
-  def find_camper_ids()
+  def self.find_camper_ids()
     @ids = Array.new
     @receipts = Receipt.find(:all)
     @receipts.each do |r|
