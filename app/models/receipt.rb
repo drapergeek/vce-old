@@ -76,6 +76,17 @@ end
     @ids
   end
   
+  def find_camper_ids()
+    @ids = Array.new
+    @receipts = Receipt.find(:all)
+    @receipts.each do |r|
+      @ids.push(r.camper1_id)
+      @ids.push(r.camper2_id) unless r.camper2_id.blank?
+      @ids.push(r.camper3_id) unless r.camper3_id.blank?
+    end
+    @ids
+  end
+  
   def camper2_filled
      !camper2.blank?
   end
