@@ -22,9 +22,12 @@ module ApplicationHelper
     can_view_item("statistics", type)
   end
   
+
+  
   
   def current_announcements
    @current_announcements ||= Annoucement.current_announcements(session[:announcement_hide_time])
   end
   
+
 end

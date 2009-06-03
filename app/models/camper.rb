@@ -7,8 +7,18 @@ class Camper < ActiveRecord::Base
   has_many :courses, :through=>:course_selections 
   before_create :compact_phone
   before_save :create_pack_from_name
-  named_scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
-  named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
+  #named_scopes
+  named_scope :current_unit, lambda {{:conditions=>["unit_id like ?", Thread.current["unit"].id]}}
+  named_scope :current_year, lambda {{:conditions=>["created_at like ?", "%#{Date.today.year}%"]}}
+  named_scope :active, :conditions=>["inactive not like ?", 1]
+  named_scope :inactive, :conditions=>["inactive like ?", 1]
+  named_scope :male, :conditions=>["gender like ?", 0]
+  named_scope :female, :conditions=>["gender like ?", 1]
+  named_scope :campers, :conditions=>["position like ?", 0]
+  named_scope :teen, :conditions=>["position like ?", 1]
+  named_scope :adult, :conditions=>["position like ?", 3]
+  named_scope :cit, :conditions=>["position like ?", 2]
+  
   
   validates_uniqueness_of :number
   validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/

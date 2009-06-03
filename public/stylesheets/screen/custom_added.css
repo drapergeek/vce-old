@@ -4,3 +4,15 @@
 	border: 7px solid #2125b5;
 	padding: 4px;
 }
+.stats{
+	right: 20px;
+	position: relative;
+}
+.stat_item{
+	right: 3px;
+	list-style-type: none;
+}
+.stat_sub_category{
+	text-decoration: underline;
+
+}

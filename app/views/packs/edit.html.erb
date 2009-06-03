@@ -1,9 +1,10 @@
 <h1>Editing pack</h1>
 
-<% form_tag :action => 'update', :id => @pack do %>
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Edit' %>
+<% form_for(@pack, :url=>{:action => 'update', :id=>@pack}) do  |f| %>
+  <%= render :partial => f, :locals=>{:f=>f} %>
+  <%= submit_tag "Update" %>
 <% end %>
+
 
 <%= link_to 'Show', :action => 'show', :id => @pack %> |
 <%= link_to 'Back', :action => 'list' %>

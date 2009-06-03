@@ -9,14 +9,52 @@
 	
 	<% if can_view_statistics "campers" %>
 		<hr />
-		<h3 class="stats_sub">Campers</h3>
+		<h3 class="stats_sub">Enrollment</h3>
 		<ul class="stats">
-			<li class="stat_item">Girls:<%= Camper.find_all_by_gender("female").length %></li>				
-			<li class="stat_item">Boys: <%= Camper.find_all_by_gender("male").length %></li>
-			<li class="stat_item">Teens: <%= Camper.find_all_teens.length %></li>
-			<li class="stat_item">Adults: <%= Camper.find_all_adults.length %></li>
-			<li class="stat_item">Campers: <%= Camper.find_standard_campers.length %>
-			<li class="stat_item">Total: <%= Camper.find_by_type("Active").length %></li>
+			<li class="stat_item"><strong class="stat_sub_category">Campers</strong></li>
+				<li class="stat_item">
+					Female:<%= camper_female = Camper.active.current_unit.female.campers.count %>
+				</li>				
+				<li class="stat_item">
+					Male: <%= camper_male = Camper.active.current_unit.male.campers.count %>
+				</li>
+				<li class="stat_item">
+					Total: <%= total_camper = camper_male + camper_female  %>
+				</li>
+			<li class="stat_item"><strong class="stat_sub_category">CITs</strong></li>
+				<li class="stat_item">
+					Female:<%= cit_female = Camper.active.current_unit.female.cit.count %>
+				</li>				
+				<li class="stat_item">
+					Male: <%= cit_male = Camper.active.current_unit.male.cit.count %>
+				</li>
+				<li class="stat_item">
+					Total: <%= total_cit = cit_male + cit_female  %>
+				</li>
+			<li class="stat_item"><strong class="stat_sub_category">Teens</strong></li>
+				<li class="stat_item">
+					Female:<%= teen_female = Camper.active.current_unit.female.teen.count %>
+				</li>				
+				<li class="stat_item">
+					Male: <%= teen_male = Camper.active.current_unit.male.teen.count %>
+				</li>
+				<li class="stat_item">
+					Total: <%= total_teen = teen_male + teen_female  %>
+				</li>
+			<li class="stat_item"><strong class="stat_sub_category">Adults</strong></li>
+				<li class="stat_item">
+					Female:<%= adult_female = Camper.active.current_unit.female.adult.count %>
+				</li>				
+				<li class="stat_item">
+					Male: <%= adult_male = Camper.active.current_unit.male.adult.count %>
+				</li>
+				<li class="stat_item">
+					Total: <%= total_adult = adult_male + adult_female  %>
+				</li>
+			<li class="stat_item">
+				<strong>Grand Total: <%= total_adult + total_cit + total_camper + total_teen %></strong>
+			</li>
+
 		</ul>
 	<% end %>
 	
