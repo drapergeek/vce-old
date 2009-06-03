@@ -19,7 +19,7 @@ class CampersController < ApplicationController
   def list
       sort_init 'created_at'
       sort_update
-      @campers = Camper.paginate_standard_campers :page=>params[:page], :per_page=>20, :order=>sort_clause
+      @campers = Camper.standard.paginate :page=>params[:page], :per_page=>20, :order=>sort_clause
   end
   
   
@@ -169,7 +169,7 @@ class CampersController < ApplicationController
   
   
   private
-  #This is a method that just returns an array of schools
+  #This is a method that just returns an array of schools 
   #The method REALLY needs to replaced with a db call
   def get_schools
     ['RAE','LPM', 'FCM', 'CES','AES','DME','FCM','Carlisle','PHE','MMS','SE','STE','MTO','JRS','CES','CCE','IE','MVH','BH','Other'].sort

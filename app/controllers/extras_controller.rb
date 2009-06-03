@@ -13,7 +13,7 @@ class ExtrasController < ApplicationController
   
   def demographics
     #this is a list enrolled camper demographics
-    @campers = Camper.find_standard_campers 
+    @campers = Camper.standard 
     @campers_grades = Array.new
     @campers_races = Array.new
     @campers_cities = Array.new

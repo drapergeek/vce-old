@@ -85,7 +85,7 @@ class ExcelController < ApplicationController
   
   
   def all_camper_info
-    @campers = Camper.find_standard_campers
+    @campers = Camper.standard
       stream_csv do |csv|
         @header = ["First Name","Middle Name", "Last Name", "Preferred Name"]
         @header.push("Camper ID")
@@ -205,7 +205,7 @@ class ExcelController < ApplicationController
 
 
   def campers_classes
-     @campers = Camper.find_standard_campers
+     @campers = Camper.standard
       stream_csv do |csv|
         @header = ["First Name","Last Name", "Preferred Name"]
         @header.push("Pack")
@@ -248,7 +248,7 @@ class ExcelController < ApplicationController
   
 
   def health_concerns
-    @campers = Camper.find_standard_campers
+    @campers = Camper.standard
     stream_csv do |csv|
       @header = ['Camper Name', 'Issue']
       csv<<@header
@@ -264,7 +264,7 @@ class ExcelController < ApplicationController
   
   def demographic_report
     #this is a list enrolled camper demographics
-    @campers = Camper.find_standard_campers 
+    @campers = Camper.standard 
     @campers_grades = Array.new
     @campers_races = Array.new
     @campers_cities = Array.new

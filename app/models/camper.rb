@@ -18,6 +18,7 @@ class Camper < ActiveRecord::Base
   named_scope :teen, :conditions=>["position like ?", 1]
   named_scope :adult, :conditions=>["position like ?", 3]
   named_scope :cit, :conditions=>["position like ?", 2]
+  named_scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
   
   
   validates_uniqueness_of :number
@@ -35,18 +36,13 @@ class Camper < ActiveRecord::Base
   attr_accessor :status
   attr_accessor :new_pack_name
   
-  def self.find_standard_campers(options = {})
-    with_scope :find => options do 
-      year = Date.today.year
-      find(:all, :conditions=>['inactive not like ? and unit_id like ? and created_at like ?', 1, Thread.current["unit"].id, "%#{year}%"])
-    end
-  end
+
   
   def self.find_all_by_year(year)
       find(:all, :conditions=>['created_at like ?', "%#{year}%"])
   end
   
-  
+
   def create_pack_from_name
     create_pack(:name=>new_pack_name) unless new_pack_name.blank?
   end
@@ -63,7 +59,7 @@ class Camper < ActiveRecord::Base
     elsif type ==  'Teens'
       return find_all_teens
     elsif type == 'Campers'
-      return find_standard_campers
+      return standard
     elsif type == 'Active'
       return find_all_attendees
     else

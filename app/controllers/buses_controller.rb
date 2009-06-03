@@ -24,7 +24,7 @@ class BusesController < ApplicationController
   
   def add_campers
     @bus = Bus.find(params[:id])
-    @campers = Camper.find_standard_campers
+    @campers = Camper.standard
   end
   
   def add_camper_to_bus
