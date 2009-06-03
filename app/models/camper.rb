@@ -37,7 +37,6 @@ class Camper < ActiveRecord::Base
   attr_accessor :new_pack_name
   
 
-  
   def self.find_all_by_year(year)
       find(:all, :conditions=>['created_at like ?', "%#{year}%"])
   end
@@ -45,30 +44,6 @@ class Camper < ActiveRecord::Base
 
   def create_pack_from_name
     create_pack(:name=>new_pack_name) unless new_pack_name.blank?
-  end
-  
-  def self.find_by_type(type)
-    if type == 'Inactive'
-      return find_all_inactive
-    elsif type == 'Boys'
-      return find_all_boys
-    elsif type== 'Girls'
-      return find_all_girls
-    elsif type ==  'Adults'
-      return find_all_adults
-    elsif type ==  'Teens'
-      return find_all_teens
-    elsif type == 'Campers'
-      return standard
-    elsif type == 'Active'
-      return find_all_attendees
-    else
-      return find(:all)
-    end
-  end
-  
-  def self.find_all_inactive
-    @group = find(:all, :conditions=> ['inactive like ? and created_at like ?', 1, "%#{Date.today.year}%"])
   end
   
   def self.find_all_by_gender(gender)

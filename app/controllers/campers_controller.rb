@@ -150,21 +150,6 @@ class CampersController < ApplicationController
   end
   
   
-  def list_inactive
-    @campers = Camper.find_all_inactive
-    @header_text = "Inactive Campers"
-    @link_text = "Back to Reports"
-    @link_action = 'report'
-    render :action=>'search'
-  end
-  
-  def list_camper_type
-    @campers = Camper.find_by_type(params[:type])
-    @header_text = "#{params[:type]} Attendees"
-    @link_text = 'Back to Reports'
-    @link_action = 'report'
-    render :action=>'search'
-  end
 
   
   
