@@ -20,7 +20,6 @@ class Camper < ActiveRecord::Base
   named_scope :cit, :conditions=>["position like ?", 2]
   named_scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
   
-  
   validates_uniqueness_of :number
   validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/
   validates_presence_of :fname, :mname, :lname, :pref_name, :gender
@@ -36,7 +35,6 @@ class Camper < ActiveRecord::Base
   attr_accessor :status
   attr_accessor :new_pack_name
   
-
   def self.find_all_by_year(year)
       find(:all, :conditions=>['created_at like ?', "%#{year}%"])
   end
@@ -44,30 +42,6 @@ class Camper < ActiveRecord::Base
 
   def create_pack_from_name
     create_pack(:name=>new_pack_name) unless new_pack_name.blank?
-  end
-  
-  def self.find_all_by_gender(gender)
-    if gender == 'male'
-      gender = 0
-    else
-      gender = 1
-    end
-    @group = find(:all, :conditions=> ['position like ? and gender like ? and inactive not like ? and created_at like ? and unit_id like ?', 0, gender, 1, "%#{Date.today.year}%", Thread.current["unit"].id])
-  end
-  
-  
-  def self.find_all_adults
-    @group = find_all_by_position(3, :conditions=> ['inactive not like ? and unit_id like ?', 1, Thread.current["unit"].id])
-  end
-  
-  def self.find_all_teens
-    logger.info "teens"
-    @group = find_all_by_position(1, :conditions=> ['inactive not like ? and unit_id like ?', 1, Thread.current["unit"].id])
-  end
-  
-  
-  def self.find_all_attendees
-     @group = find(:all, :conditions=> ['inactive not like ? and unit_id like ?', 1, Thread.current["unit"].id])
   end
   
   def compact_phone
@@ -117,28 +91,6 @@ class Camper < ActiveRecord::Base
     if media_release==1 || media_release==2
       return true
     end
-  end
-
-  def is_camper
-    position==0
-  end
-  
-  def is_teen
-    position==1
-  end
-  
-  def is_cit
-    position==2
-  end
-  
-  def is_adult
-    position==3
-  end
-  
-  
-  def self.find_all_campers
-     @group = find(:all, :conditions=> ['position like ? and inactive not like ?', 0, 1])
-     @group += find(:all, :conditions=> ['position like ? and inactive not like ?', 2, 1])
   end
   
   def parent_info_needed
@@ -190,8 +142,6 @@ class Camper < ActiveRecord::Base
     end
   end
   
-
-  
   def position_text
     case position
     when 0
@@ -242,9 +192,6 @@ class Camper < ActiveRecord::Base
       return ' '
     end   
   end
-  
-
-  
   
   def self.search(search)
      if search
