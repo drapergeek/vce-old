@@ -80,7 +80,7 @@ class AccountController < ApplicationController
     @user = User.find(params[:id])
      if @user.update_attributes(params[:user])
        flash[:notice] = 'Your account was successfully updated'
-       redirect_to :controller=>'receipts', :action => 'index'
+       redirect_to :action=>'edit', :id=>@user
      else
        flash[:notice] = 'There was an error updating your user'
        render :action => 'edit'

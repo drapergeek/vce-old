@@ -17,5 +17,13 @@
 }
 .stat_sub_category{
 	text-decoration: underline;
-
+	
+}
+#notice{
+	border: 2px solid #009f61;
+	background-color: #abff9d;
+	color: #4761ff;
+	font-size: large;
+	margin-bottom: 5px;
+	padding: 3px;
 }
