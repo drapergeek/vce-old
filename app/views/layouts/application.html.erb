@@ -56,7 +56,7 @@ function DoNav(theUrl)
           <!-- end: skip link navigation -->
 
 		<!--normal links for header-->
-		<% if logged_in? %>
+		<% if current_user %>
 			<!--search form-->
 			<form action="receipts/search?method=get" method="post" style="display:inline">
 				<input id="search" name="search" type="text"  />
@@ -65,9 +65,11 @@ function DoNav(theUrl)
 
 			<!--End Search form-->
 			
-			Welcome <%= current_user.login %>! | 
-			<%= link_to 'Profile', {:controller=>'account', :action=>'edit', :id=>current_user} %> |
-			<%= link_to 'Logout', {:controller=>'account', :action=>'logout'} %> 
+			Welcome <%= current_user.username %>! | 
+			<%= link_to 'Edit Profile',edit_user_path(:current) %> |
+			<%= link_to 'Logout', logout_path %> 
+		<% else %>
+			<%= link_to 'Login', login_path%>
 		<% end %>
 		<!--End the normal links-->
         </div>

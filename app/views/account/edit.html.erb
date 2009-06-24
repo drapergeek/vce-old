@@ -17,9 +17,7 @@
 
 
 <p><label for="user_picture">Picture:</label><br /> 
-	<% unless @user.picture.blank? %>
-		<%= image_tag(url_for({:controller=>'account',:action => 'image', :id => @user.id})) -%>
-  	<% end %>
+	TODO
 	<br />
 <%= u.file_field 'pictureimg' %></p>
 

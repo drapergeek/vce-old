@@ -2,18 +2,22 @@ class AccountController < ApplicationController
   # Be sure to include AuthenticationSystem in Application Controller instead
   include AuthenticatedSystem
   # If you want "remember me" functionality, add this before_filter to Application Controller
-  before_filter :login_from_cookie
-  before_filter :login_required , :except=>[:login, :index]
-  before_filter :authorize, :only=>[:signup, :super, :destroy, :index]
+  #before_filter :login_from_cookie
+  #before_filter :login_required , :except=>[:login, :index]
+  #before_filter :authorize, :only=>[:signup, :super, :destroy, :index]
   skip_before_filter :check_authentication, :check_authorization , :only=>[:login, :index]
 
 
   
   def index
-    if  !logged_in?
-      redirect_to :action => 'login'
-    else
+    logger.info 'got to index'
+    if current_user
+      logger.info 'showing current user'
       @users = User.find(:all)
+    else
+      logger.info 'no current user'
+      flash[:notice] = "You must be logged in to view this page"
+      redirect_to login_path
     end
   end
   

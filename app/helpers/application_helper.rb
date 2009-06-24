@@ -3,11 +3,16 @@ module ApplicationHelper
   
   
   def can_view_item(controller, action)
-    if current_user.roles.detect {|role| role.rights.detect {|right| right.action.downcase == action && right.controller.downcase == controller } } 
-      return true
+    if current_user
+        if current_user.roles.detect {|role| role.rights.detect {|right| right.action.downcase == action && right.controller.downcase == controller } } 
+          return true
+        else
+          return false
+        end
     else
       return false
     end
+  
   end
   
   def is_current_view(button)
@@ -20,6 +25,9 @@ module ApplicationHelper
   
   def can_view_statistics(type)
     can_view_item("statistics", type)
+  end
+  def title(page_title)
+    content_for(:title) { page_title }
   end
   
 

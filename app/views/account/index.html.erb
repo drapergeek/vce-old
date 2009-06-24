@@ -4,7 +4,7 @@
 <ul>
 	<% @users.each do |u| %>
 		<li class="user_list">
-			<%= u.lname  + ", " + u.fname %> 
+			<%= u.username %>
 			<%= link_to 'Edit', {:action=>'edit',:id=>u} %>
 			<%= link_to 'Remove', {:action=>'destroy',:id=>u},
 								:confirm=>"Are you SURE you want to remove this user?" %>
