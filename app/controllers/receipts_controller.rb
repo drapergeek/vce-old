@@ -10,7 +10,7 @@ class ReceiptsController < ApplicationController
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
   verify :method => :post, :only => [ :destroy, :create ],
          :redirect_to => { :action => :index }
-  CAMP_PRICE = 200.00
+
          
  #This is a method for showing a report of totals...
  #mainly its a sum screen
@@ -28,19 +28,22 @@ class ReceiptsController < ApplicationController
   
   #This is the search paramater and passes to the search.rhtml file
   def search
+    sort_init 'date' 
+    sort_update
     @receipts = Receipt.search(params[:search])
     logger.info("Here it is: " + @receipts.to_s)
     if @receipts.blank? || @receipts.empty?
       flash[:notice] = "There were no receipts matching the search term \"#{params[:search]}\""
       redirect_to :action=>'index'
-    end
+    else
+      @receipts = Receipt.search(params[:search]).paginate
       @header_text = "Search Results for \"#{params[:search]}\""
       @link_text = 'Back to all receipts'
       @link_action = 'index'
+      render :action=>'index'
+    end
   end
     
-
-  
   def list_by_date
     date = params[:date]
     @receipts = Receipt.find_standard_receipts( :conditions => [ "date LIKE ?", "%#{date}%"])
@@ -61,11 +64,11 @@ class ReceiptsController < ApplicationController
   def new
     @receipt = Receipt.new
     @states = State.find(:all)
-    @camp_price = CAMP_PRICE
+    @camp_price = current_user.unit.camp_price
   end
 
   def create
-     @camp_price = CAMP_PRICE
+    @camp_price = current_user.unit.camp_price
     @receipt = Receipt.new(params[:receipt])
      unless current_user.unit == 'State Wide'
         @receipt.unit = current_user.unit
@@ -83,7 +86,7 @@ class ReceiptsController < ApplicationController
   def edit
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
-    @camp_price = CAMP_PRICE
+    @camp_price = current_user.unit.camp_price
   end
 
   def update
@@ -91,7 +94,7 @@ class ReceiptsController < ApplicationController
     prev = 0
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
-    @camp_price = CAMP_PRICE
+    @camp_price = current_user.unit.camp_price
     unless @receipt.refund.blank? || @receipt.refund.nil? || @receipt.refund==0
       prev = 1
     end

@@ -2,7 +2,7 @@
 <h3>There are no receipts that matched your criteria</h3>
 <%= link_to 'New receipt', :action => 'new' %>
 <% else %>
-<h2>All Receipts</h2>
+<h2><%= @header_text || "All Receipts" %></h2>
 <!--search form-->
 <% form_tag :controller=>'receipts', :action=>'search' , :method => 'get' do %>
 <p>

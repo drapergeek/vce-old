@@ -3,6 +3,7 @@ class Receipt < ActiveRecord::Base
   belongs_to :unit
   has_many :campers
   before_create :compact_phone
+
   #attr_accessor :phone
   validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id, :amount
   validates_format_of :camper1_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create
@@ -12,7 +13,7 @@ class Receipt < ActiveRecord::Base
   named_scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
   named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
   
-  CAMP_PRICE = 200.00
+
    
   HUMANIZED_ATTRIBUTES = {
       :date => "Date Created",
@@ -22,8 +23,7 @@ class Receipt < ActiveRecord::Base
     }
     
  
-  
-    
+
 
   def self.human_attribute_name(attr)
       HUMANIZED_ATTRIBUTES[attr.to_sym] || super

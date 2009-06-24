@@ -28,7 +28,7 @@
 <div class="campers_cities_list">
 	<ul>
 		<% @campers_cities.keys.sort.each do |city, campers| %>
-			<li><%= city.capitalize %> -  <%= @campers_cities[city].length %></li>
+			<li><%= link_to "#{city} -#{@campers_cities[city].length}", :controller=>'campers', :action=>'list_by_input', :params=>{:find_by=>"city",:item=>city}%></li>
 		<% end %>
 	</ul>
 </div>

@@ -21,17 +21,36 @@ class CampersController < ApplicationController
       sort_update
       @campers = Camper.standard.paginate :page=>params[:page], :per_page=>20, :order=>sort_clause
   end
-  
+  def list_by_input
+    sort_init 'created_at'
+    sort_update
+    logger.info "before the call"
+    @campers = Camper.find(:all, :conditions=>["#{params[:find_by]} like ?", params[:item]])
+    logger.info"after the call"
+    if @campers.blank? || @campers.empty?
+      flash[:notice] = "No campers with #{params[:find_by]} like #{params[:item]}"
+      redirect_to :action => 'index'
+    else
+      @campers = Camper.find(:all, :conditions=>["#{params[:find_by]} like ?", params[:item]]).paginate
+      render :action=>'list'
+    end
+  end
   
   def search
+    sort_init 'created_at'
+    sort_update
     @campers = Camper.search(params[:search])
     if @campers.blank? || @campers.empty?
       flash[:notice] = "There were no campers matching the search term \"#{params[:search]}\""
       redirect_to :action=>'index'
+    else
+      @campers = Camper.search(params[:search]).paginate
+      @header_text = "Search Results for \"#{params[:search]}\""
+      @link_text = 'Back to all active Campers'
+      @link_action = 'list'
+      render :action=>'list'
     end
-    @header_text = "Search Results for \"#{params[:search]}\""
-    @link_text = 'Back to all active Campers'
-    @link_action = 'list'
+  
   end
   
   #This is mainly to pass to an rjs action
@@ -139,7 +158,6 @@ class CampersController < ApplicationController
       @packs = Pack.find_standard_packs
       @units = Unit.find(:all)
       render :action => 'edit'
-      
     end
   end
 
@@ -148,10 +166,6 @@ class CampersController < ApplicationController
     flash[:notice] = 'The camper was deleted successfully.'
     redirect_to :action => 'list'
   end
-  
-  
-
-  
   
   private
   #This is a method that just returns an array of schools 
