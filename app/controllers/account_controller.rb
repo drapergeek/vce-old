@@ -11,7 +11,7 @@ class AccountController < ApplicationController
   
   def index
     logger.info 'got to index'
-    if current_user
+    if logged_in?
       logger.info 'showing current user'
       @users = User.find(:all)
     else

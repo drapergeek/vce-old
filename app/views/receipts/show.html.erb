@@ -1,8 +1,10 @@
 <!--Navigation-->
 <div id="navigation">
+	<% if logged_in? %>
 	<% if current_user.admin? %>
 		<%= link_to 'Edit', :action => 'edit', :id => @receipt %> |
 		<%= link_to 'Delete', { :action => 'destroy', :id => @receipt }, :confirm => 'Are you sure?', :method => :post %> |
+	<% end %>
 	<% end %>
 	<%= link_to 'Back', home_path %> |
 	<%= link_to 'Next Receipt', {:action=>'new'},:id=>'next_receipt' %>
