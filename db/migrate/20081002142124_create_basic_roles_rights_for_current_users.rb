@@ -1,6 +1,6 @@
 class CreateBasicRolesRightsForCurrentUsers < ActiveRecord::Migration
   def self.up
-    role = Role.create :name=>'Root'
+    role = Role.create :name=>'root'
     #Create all the rights
     receipt_rights = Array.new
     receipt_rights.push(Right.create :name=>'Show Individual Receipts', :controller=>'receipts', :action=>'show')
