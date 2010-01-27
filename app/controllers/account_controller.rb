@@ -11,7 +11,7 @@ class AccountController < ApplicationController
   
   def index
     logger.info 'got to index'
-    if logged_in?
+    if current_user
       logger.info 'showing current user'
       @users = User.find(:all)
     else
@@ -84,7 +84,7 @@ class AccountController < ApplicationController
     @user = User.find(params[:id])
      if @user.update_attributes(params[:user])
        flash[:notice] = 'Your account was successfully updated'
-       redirect_to :controller=>'receipts', :action => 'index'
+       redirect_to :action=>'edit', :id=>@user
      else
        flash[:notice] = 'There was an error updating your user'
        render :action => 'edit'
