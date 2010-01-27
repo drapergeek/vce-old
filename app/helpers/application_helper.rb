@@ -9,6 +9,7 @@ module ApplicationHelper
         else
           return false
         end
+    end
     if current_user.roles.detect {|role| role.rights.detect {|right| right.action.downcase == action && right.controller.downcase == controller } } 
       return true
     else
