@@ -56,7 +56,7 @@ function DoNav(theUrl)
           <!-- end: skip link navigation -->
 
 		<!--normal links for header-->
-		<% if current_user %>
+		<% if logged_in? %>
 			<!--search form-->
 			<form action="receipts/search?method=get" method="post" style="display:inline">
 				<input id="search" name="search" type="text"  />
