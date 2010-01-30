@@ -27,7 +27,7 @@
 	<% for camper in @campers %>
 	  <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
 		              onmouseout="ChangeColor(this, false);" 
-		              onclick="DoNav('campers/show/<%= camper.id %>');">
+		              onclick="DoNav('/campers/show/<%= camper.id %>');">
 		<td class="standard_table"><%= camper.number %></td>
 		<td class="standard_table"><%= camper.lname %></td>
 		<td class="standard_table"><%= camper.fname %></td>

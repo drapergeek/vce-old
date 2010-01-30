@@ -36,7 +36,7 @@
 
   <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
 	              onmouseout="ChangeColor(this, false);" 
-	              onclick="DoNav('receipts/show/<%= receipt.id %>');">
+	              onclick="DoNav('/receipts/show/<%= receipt.id %>');">
 	<td class="standard_table">
 		<%= receipt.date.strftime("%m/%d/%y") %>
 	</td>
