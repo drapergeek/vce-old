@@ -30,7 +30,9 @@ module ApplicationHelper
   end
   
 
-  
+  def title(page_title)
+    content_for(:title) { page_title }
+  end
   
   def current_announcements
    @current_announcements ||= Annoucement.current_announcements(session[:announcement_hide_time])

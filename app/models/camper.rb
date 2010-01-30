@@ -36,6 +36,12 @@ class Camper < ActiveRecord::Base
   attr_accessor :status
   attr_accessor :new_pack_name
   
+  
+  def self.find_by_full_name(first_name, last_name)
+    unit = Thread.current["unit"].id
+    current_year = Date.today.year
+  end
+
   def self.find_all_by_year(year)
       find(:all, :conditions=>['created_at like ?', "%#{year}%"])
   end

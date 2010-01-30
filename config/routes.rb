@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :possible_issues, :collection=>{:check=>:get}
+
+  map.resources :issues
   map.resources :annoucements
   map.resources :roles
   map.resources :rights

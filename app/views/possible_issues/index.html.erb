@@ -1,0 +1,21 @@
+<% title "Possible Issues" %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Ignore</th>
+  </tr>
+  <% for possible_issue in @possible_issues %>
+    <tr>
+      <td><%=h possible_issue.name %></td>
+      <td><%=h possible_issue.description %></td>
+      <td><%=h possible_issue.ignore %></td>
+      <td><%= link_to "Show", possible_issue %></td>
+      <td><%= link_to "Edit", edit_possible_issue_path(possible_issue) %></td>
+      <td><%= link_to "Destroy", possible_issue, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Possible Issue", new_possible_issue_path %></p>

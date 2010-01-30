@@ -1,4 +1,17 @@
 	<h2 id="stats_header">Stats</h2>
+	<% if can_view_item("issues", "index") %>
+	<% @issues = Issue.standard.active %>
+	<% unless @issues.empty? %>
+		<hr />
+		<h3 class="stats_sub">Issues</h3>
+		<ul class="stats">
+			<% @issues.each do |i| %>
+			<li class="issue stat_item"><%= link_to i.name, i %></li>
+			<% end %>
+		</ul>
+	<% end %>
+	<% end %>
+	
 	<% if can_view_statistics "receipts" %>
 	<hr />
 	<h3 class="stats_sub">Receipts</h3>
