@@ -37,11 +37,11 @@
 	<h3 class="receipt_section_header">Payment Information</h3>
 
 	<div id="payment_cost_notification">
-		**The price for two campers is $400.00  and the price for 3 campers is $600.00**
+		**The price for two campers is <%= number_to_currency(@camp_price  * 2) %>  and the price for 3 campers is <%= number_to_currency(@camp_price *3) %>**
 	</div>
 	<div>
 	<% if @receipt.amount.blank? %>
-		<% value = @camp_price %>
+		<% value = number_to_currency(@camp_price, :format=>"%n") %>
 	<% end %>
 	<%= f.text_field :amount, :value=>value %></div>
 	
