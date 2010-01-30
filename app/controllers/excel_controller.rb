@@ -260,11 +260,20 @@ class ExcelController < ApplicationController
   def health_concerns
     @campers = Camper.standard
     stream_csv do |csv|
-      @header = ['Camper Name', 'Issue']
+      @header = ['Camper Name', 'Issue', 'Room Number']
+       @header.push('Class 1')
+        @header.push('Class 2')
+        @header.push('Class 3')
+        @header.push('Class 4')
       csv<<@header
       @campers.each do |c|
         unless c.health_concerns.blank?
-          @writer =[c.full_name, c.health_concerns]
+          @writer =[c.full_name, c.health_concerns, c.room_number]
+           unless c.courses.empty?
+              c.courses.each do |c|
+                @writer.push(c.name)
+              end
+            end
           csv<<@writer
         end
         
