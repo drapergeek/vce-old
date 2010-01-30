@@ -13,17 +13,6 @@ class AddUnitActionsToRoot < ActiveRecord::Migration
     units_rights.each do |r|
       role.rights<<r
     end
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   end
 
   def self.down

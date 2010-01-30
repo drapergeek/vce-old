@@ -19,6 +19,7 @@ class Camper < ActiveRecord::Base
   named_scope :adult, :conditions=>["position like ?", 3]
   named_scope :cit, :conditions=>["position like ?", 2]
   named_scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
+  named_scope :unpaid, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ? and payment_number like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1, '']}}
   
   validates_uniqueness_of :number
   validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/

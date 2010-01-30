@@ -59,15 +59,31 @@ class ExcelController < ApplicationController
       end
     end
   end
-  
-  
-  
+    
+    
+    
   #this will give a basic listing of all campers
   def camper_list
     
     
   end
 
+
+  def unpaid_campers
+    @campers = Camper.unpaid
+      stream_csv do |csv|
+        @header = ["First Name","Middle Name", "Last Name", "Preferred Name"]
+        @header.push("Camper ID")
+        csv << @header
+        @campers.each do |u|
+          logger.info 'I got into the @campers.each do'
+          @outs = [u.fname,u.mname, u.lname, u.pref_name]
+          @outs.push(u.number)
+          csv << @outs
+        end
+      end
+  
+  end
   def bus_list
     @buses = Bus.find(:all)
     stream_csv do |csv|
@@ -81,8 +97,6 @@ class ExcelController < ApplicationController
       end
     end
   end
-  
-  
   
   def all_camper_info
     @campers = Camper.standard
@@ -188,7 +202,6 @@ class ExcelController < ApplicationController
   
   end
 
-
   def bus_list
     @buses = Bus.find(:all)
     stream_csv do |csv|
@@ -202,7 +215,6 @@ class ExcelController < ApplicationController
       end
     end
   end
-
 
   def campers_classes
      @campers = Camper.standard
@@ -243,8 +255,6 @@ class ExcelController < ApplicationController
         end
       end
   end
-  
-  
   
 
   def health_concerns
@@ -318,7 +328,6 @@ class ExcelController < ApplicationController
     
   end
   
-
   #the following methods are for creating custom excel sheets
   #they are not currently being used
   def custom_excel
@@ -344,7 +353,6 @@ class ExcelController < ApplicationController
         end#end of Receipts.each 
     end
   end
-  
   
   private
      def stream_csv
