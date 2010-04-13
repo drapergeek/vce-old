@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090603153440) do
+ActiveRecord::Schema.define(:version => 20100413180843) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(:version => 20090603153440) do
 
   create_table "packs", :force => true do |t|
     t.string  "name"
-    t.integer "unit_id",               :limit => 11
+    t.integer "unit_id", :limit => 11
   end
 
   create_table "receipts", :force => true do |t|
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(:version => 20090603153440) do
     t.text     "refund_info"
     t.datetime "created_at"
     t.integer  "unit_id",             :limit => 11
+    t.string   "email"
   end
 
   create_table "rights", :force => true do |t|

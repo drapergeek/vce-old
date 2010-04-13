@@ -1,3 +1,4 @@
+
 # Settings specified here will take precedence over those in config/environment.rb
 
 # In the development environment your application's code is reloaded on
@@ -14,8 +15,37 @@ config.whiny_nils = true
 # Show full error reports and disable caching
 config.action_controller.consider_all_requests_local = true
 config.action_controller.perform_caching             = false
-config.action_view.cache_template_extensions         = false
+#config.action_view.cache_template_extensions         = false
 config.action_view.debug_rjs                         = true
 
 # Don't care if the mailer can't send
-config.action_mailer.raise_delivery_errors = false
+config.action_mailer.raise_delivery_errors = true
+
+#config.action_mailer.delivery_method = :smtp
+#config.action_mailer.smtp_settings = {
+#:address => "auth.smtp.vt.edu",
+#:port => 465,
+#:authentication => :login,
+#:domain=>"vt.edu",
+#:user_name => "gdraper",
+#:password => "mjisseXee2me@vt",
+#:tls=>true
+#}
+#config.action_mailer.smtp_settings = {
+#    :enable_starttls_auto => true,
+#    :address => "smtp.gmail.com",
+#    :port => "587",
+#    :domain => "google.com",
+#    :authentication => :plain,
+#    :user_name => "drapersjunk",
+#    :password => "lx8143xpmac"
+#}
+ActionMailer::Base.smtp_settings = {
+  :enable_starttls_auto => true,
+  :address => 'smtp.gmail.com',
+  :port => 587,
+  :domain => 'gmail.com',
+  :authentication => :plain,
+  :user_name => '4hprogrammer',
+  :password => 'simple4hpassword'
+}

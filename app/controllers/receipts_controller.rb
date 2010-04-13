@@ -75,6 +75,7 @@ class ReceiptsController < ApplicationController
       end
     @receipt.user = current_user
     if @receipt.save
+      ReceiptMailer.deliver_receipt_confirmation(@receipt)
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else
