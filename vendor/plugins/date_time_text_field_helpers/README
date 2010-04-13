@@ -9,7 +9,7 @@ multi-parameter field handling.
 Something I like about this plugin (coz I wanted the feature) is that it always 
 returns the user entered values when a form is redisplayed. This means that if
 the user enters garbage or an invalid date (requires date validation with 
-something like validates_date_time plugin), when form is redisplayed the values
+the validates_timeliness plugin), when form is redisplayed the values
 are as the user entered. This is so they can understand what they stuffed up 
 rather than just blank or a shifted date value which you get when you enter 30th
 February and have a date in March returned when using date_select. The shifted 
@@ -30,25 +30,6 @@ pay attention.
 
 * Harnesses the power of Ruby on Rails to maximize your potential to be the
   person you really want to be.
-
-
-== Install
-
-Unix
-
-  ./script/plugin install http://date-time-text-field-helpers.googlecode.com/svn/trunk/
-  
-  mv vendor/plugins/svn vendor/plugins/date_time_text_field_helpers
-
-Windows
-
-  ruby script\plugin install http://date-time-text-field-helpers.googlecode.com/svn/trunk/ 
-
-  move vendor\plugins\svn vendor\plugins\date_time_text_field_helpers
-
-Piston (http://piston.rubyforge.org/)
-
-  piston import http://date-time-text-field-helpers.googlecode.com/svn/trunk/ vendor/plugins/date_time_text_field_helpers
 
 
 == Usage
@@ -121,7 +102,7 @@ A few new options are:
 == Info
 
 Site for the plugin is just the googlecode site
-  http://code.google.com/p/date-time-text-field-helpers/
+  http://github.com/adzap/date_time_text_field_helpers/
 
 
 == Test/Specs
@@ -134,7 +115,7 @@ Only Rspec specs are included and can be run standalone outside a rails app
 == Credits
 
 * It is mostly adapted from the Rails source so props to DHH et al.
-* Adam Meehan (adam.meehan@gmail.com)
+* Adam Meehan (adam.meehan at gmail.com)
   
 == Copyright/License
 

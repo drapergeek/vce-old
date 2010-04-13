@@ -75,7 +75,7 @@
 
 	<div id="dob_new" >
 			<label for="camper_dob">Birth Date: </label>
-			<%=  date_text_field :camper, :dob,:blank=>true, :order => [:month, :day, :year] %>
+			<%=  date_select :camper, :dob, :order => [:month, :day, :year], :include_blank=>true %>
 	</div>
 
 
@@ -326,7 +326,7 @@
 			<small>If this info is not available or not releveant please enter 01/01/1900</small><br />
 			<small>You are only required to collect the month and year, enter 01 for the day.</small><br />
 			<label for="camper_last_tetnus_shot">Date of last tetnus shot: </label>
-			<%= date_text_field :camper, :last_tetnus_shot,:blank=>true, :order =>[:month, :day, :year] %>
+			<%= date_select :camper, :last_tetnus_shot, :order=>[:month, :day, :year], :include_blank=>true %>
 
 		</p>
 	</div>

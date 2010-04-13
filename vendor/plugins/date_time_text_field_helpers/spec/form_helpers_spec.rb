@@ -1,39 +1,12 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe DateTimeTextFieldHelpers do
-  
+describe DateTimeTextFieldHelpers::FormHelpers do
+  include DateTimeTextFieldHelpers::FormHelpers
+
   before do
     self.stub!(:params).and_return({})
   end
-  
-  describe "ActionView helpers" do
-    it "should include date_text_field method" do
-      ActionView::Base.instance_methods.should include('date_text_field')
-    end
-      
-    it "should include time_text_field method" do
-      ActionView::Base.instance_methods.should include('time_text_field')
-    end
-    
-    it "should include datetime_text_field method" do
-      ActionView::Base.instance_methods.should include('datetime_text_field')
-    end    
-  end
-  
-  describe "ActionView FormBuilder helpers" do
-    it "should include date_text_field method" do
-      ActionView::Base.instance_methods.should include('date_text_field')
-    end
-      
-    it "should include time_text_field method" do
-      ActionView::Base.instance_methods.should include('time_text_field')
-    end
-    
-    it "should include datetime_text_field method" do
-      ActionView::Base.instance_methods.should include('datetime_text_field')
-    end    
-  end  
-  
+
   describe "date_text_field helper" do
     before do
       @person = mock('Person', :date_of_birth => nil) 

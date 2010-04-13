@@ -46,8 +46,12 @@ class ReceiptsController < ApplicationController
     
   def list_by_date
     date = params[:date]
-    @receipts = Receipt.find_standard_receipts( :conditions => [ "date LIKE ?", "%#{date}%"])
-    render :action=>'search'
+    sort_init 'date'
+    sort_update
+    @receipts = Receipt.paginate_standard_receipts :conditions => [ "date LIKE ?", "%#{date}%"],  :page=>params[:page], :per_page=>20, :order=>sort_clause
+
+
+    render :action=>'index'
   end
   
   def show_by_date
