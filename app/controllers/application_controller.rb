@@ -4,8 +4,9 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   include ExceptionNotifiable 
+
  # Pick a unique cookie name to distinguish our session data from others'
-  session :session_key => '_vce_session_id'
+  #session :session_key => '_vce_session_id'
   before_filter :set_thread_user, :set_thread_unit
   before_filter :check_authentication, :check_authorization
   
