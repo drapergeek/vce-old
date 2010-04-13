@@ -136,7 +136,6 @@ end
       errors.add(:refund_amount, "You must enter a refund amount") if refund_amount.nil? || amount < 0.01
       errors.add(:refund_check_number, "You must enter a refund check number") if refund_check_number.blank?
       errors.add(:refund_info, "You must add why the amount was refunded") if refund_info.blank?
-      
     end
     
     unless self.zip.to_s.size == 5 || self.zip.blank?
