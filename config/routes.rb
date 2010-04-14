@@ -7,11 +7,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rights
   map.resources :units
 
-  map.resources :users
+  map.resources :users 
    map.resources  :session
   
    map.signup '/signup', :controller => 'users', :action => 'new'
-   map.login  '/login', :controller => 'account', :action => 'new'
+   map.login  '/login', :controller => 'account', :action => 'login'
    map.logout '/logout', :controller => 'account', :action => 'logout'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -69,7 +69,7 @@ function DoNav(theUrl)
 			<!--End Search form-->
 			
 			Welcome <%= current_user.login %>! | 
-			<%= link_to 'Edit Profile',edit_user_path(:current) %> |
+			<%= link_to 'Edit Profile',:controller=>'account', :action=>'edit', :id=>current_user %> |
 			<%= link_to 'Logout', logout_path %> 
 		<% else %>
 			<%= link_to 'Login', login_path%>
