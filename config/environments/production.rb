@@ -13,7 +13,7 @@ config.action_controller.perform_caching             = true
 config.action_view.debug_rjs                         = true
 
 #This is for action mailer
-config.action_mailer.delivery_method = :smtp
+
 ActionMailer::Base.smtp_settings = {
   :enable_starttls_auto => true,
   :address => 'smtp.gmail.com',
