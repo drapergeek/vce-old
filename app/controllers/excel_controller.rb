@@ -6,6 +6,8 @@ class ExcelController < ApplicationController
 
   def receipts_all
     @receipts = Receipt.find_standard_receipts
+    logger.info "the receipt count"
+    logger.info @receipts.count
     stream_csv do |csv|
       @header = ["Receipt Number","Date Taken"]
       @header.push("Payer First Name")
@@ -28,6 +30,7 @@ class ExcelController < ApplicationController
       @header.push("Refund Date")
       @header.push("Refund Check #")
       csv << @header
+      logger.info @header
       @receipts.each do |u|
         @outs = [u.id, u.date]
         @outs.push(u.fname)
@@ -84,6 +87,7 @@ class ExcelController < ApplicationController
       end
   
   end
+  
   def bus_list
     @buses = Bus.find(:all)
     stream_csv do |csv|
@@ -365,6 +369,7 @@ class ExcelController < ApplicationController
   
   private
      def stream_csv
+       logger.info "streamming"
         filename = params[:action] + ".csv"    
         #this is required if you want this to work with IE        
         if request.env['HTTP_USER_AGENT'] =~ /msie/i
@@ -374,12 +379,24 @@ class ExcelController < ApplicationController
           headers['Content-Disposition'] = "attachment; filename=\"#{filename}\"" 
           headers['Expires'] = "0" 
         else
+          logger.info "got into the else"
           headers["Content-Type"] ||= 'text/csv'
           headers["Content-Disposition"] = "attachment; filename=\"#{filename}\"" 
         end
-       render :text => Proc.new { |response, output|
-         csv = FasterCSV.new(output, :row_sep => "\r\n") 
-         yield csv
-       }
+        
+        content = FasterCSV.generate( :row_sep => "\r\n" ) do |csv|
+             yield csv
+        end
+
+           send_data content, :filename => filename
+       #render :text => Proc.new { |response, output|
+        # logger.info "got into the render text thingy..."
+        ## logger.info "Response is"
+        # logger.info response
+        ## logger.info "output is "
+        # logger.info output
+        # csv = FasterCSV.new(output, :row_sep => "\r\n") 
+        # yield csv
+       #}
      end
 end
