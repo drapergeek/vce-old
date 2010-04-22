@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
 
   create_table "buses", :force => true do |t|
     t.string  "name"
-    t.integer "capacity", :limit => 11
+    t.integer "capacity"
     t.text    "info"
-    t.integer "unit_id",  :limit => 11
+    t.integer "unit_id"
   end
 
   create_table "campers", :force => true do |t|
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
     t.string   "mname"
     t.string   "pref_name"
     t.date     "dob"
-    t.integer  "gender",                   :limit => 11
+    t.integer  "gender"
     t.string   "address"
     t.string   "city"
     t.string   "state"
-    t.integer  "zip",                      :limit => 11
+    t.integer  "zip"
     t.string   "roomate_choice"
     t.string   "parent_lname"
     t.string   "parent_fname"
@@ -48,21 +48,21 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
     t.string   "emergency_phone"
     t.string   "school"
     t.string   "teacher"
-    t.integer  "grade",                    :limit => 11
-    t.integer  "shirt_size",               :limit => 11
+    t.integer  "grade"
+    t.integer  "shirt_size"
     t.string   "number"
-    t.integer  "position",                 :limit => 11
+    t.integer  "position"
     t.text     "health_concerns"
-    t.integer  "bus_id",                   :limit => 11
+    t.integer  "bus_id"
     t.boolean  "inactive"
     t.text     "inactive_info"
     t.string   "email"
     t.string   "race"
     t.date     "last_tetnus_shot"
     t.boolean  "code_of_conduct"
-    t.integer  "media_release",            :limit => 11
+    t.integer  "media_release"
     t.boolean  "equine_release"
-    t.integer  "rec_zone",                 :limit => 11
+    t.integer  "rec_zone"
     t.string   "payment_number"
     t.boolean  "reference"
     t.boolean  "physician_insurance_info"
@@ -70,29 +70,29 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
     t.boolean  "immunizations_current"
     t.boolean  "release_authorization"
     t.boolean  "parental_signatures"
-    t.integer  "pool_spotting",            :limit => 11
+    t.integer  "pool_spotting"
     t.string   "room_number"
-    t.integer  "counselor_years",          :limit => 11
-    t.integer  "pack_id",                  :limit => 11
-    t.integer  "unit_id",                  :limit => 11
+    t.integer  "counselor_years"
+    t.integer  "pack_id"
+    t.integer  "unit_id"
   end
 
   create_table "course_selections", :force => true do |t|
-    t.integer "camper_id",  :limit => 11
-    t.integer "course_id",  :limit => 11
-    t.integer "preference", :limit => 11
+    t.integer "camper_id"
+    t.integer "course_id"
+    t.integer "preference"
   end
 
   create_table "courses", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "unit_id",     :limit => 11
+    t.integer  "unit_id"
     t.datetime "created_at"
   end
 
   create_table "packs", :force => true do |t|
     t.string  "name"
-    t.integer "unit_id", :limit => 11
+    t.integer "unit_id"
   end
 
   create_table "receipts", :force => true do |t|
@@ -101,10 +101,10 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
     t.string   "lname"
     t.string   "address"
     t.string   "state"
-    t.integer  "zip",                 :limit => 11
+    t.integer  "zip"
     t.string   "city"
     t.float    "amount"
-    t.integer  "payment_method",      :limit => 11
+    t.integer  "payment_method"
     t.string   "payment_extra"
     t.string   "camper1"
     t.string   "camper1_id"
@@ -112,16 +112,16 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
     t.string   "camper2_id"
     t.string   "camper3"
     t.string   "camper3_id"
-    t.integer  "account_id",          :limit => 11
-    t.integer  "user_id",             :limit => 11
+    t.integer  "account_id"
+    t.integer  "user_id"
     t.string   "phone"
     t.boolean  "refund"
     t.datetime "refund_date"
-    t.integer  "refund_check_number", :limit => 11
+    t.integer  "refund_check_number"
     t.float    "refund_amount"
     t.text     "refund_info"
     t.datetime "created_at"
-    t.integer  "unit_id",             :limit => 11
+    t.integer  "unit_id"
     t.string   "email"
   end
 
@@ -132,8 +132,8 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
   end
 
   create_table "rights_roles", :id => false, :force => true do |t|
-    t.integer "right_id", :limit => 11
-    t.integer "role_id",  :limit => 11
+    t.integer "right_id"
+    t.integer "role_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -141,8 +141,8 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
   end
 
   create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id", :limit => 11
-    t.integer "user_id", :limit => 11
+    t.integer "role_id"
+    t.integer "user_id"
   end
 
   create_table "sessions", :force => true do |t|
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(:version => 20100413180843) do
     t.string   "content_type",                                    :default => "image/png"
     t.binary   "picture",                   :limit => 2147483647
     t.string   "title"
-    t.integer  "unit_id",                   :limit => 11
+    t.integer  "unit_id"
   end
 
 end
