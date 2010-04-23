@@ -75,7 +75,7 @@
 
 	<div id="dob_new" >
 			<label for="camper_dob">Birth Date: </label>
-			<%=  date_select :camper, :dob, :order => [:month, :day, :year], :include_blank=>true %>
+			<%=  date_select :camper, :dob, :order => [:month, :day, :year], :include_blank=>true, :start_year=>1920 %>
 	</div>
 
 

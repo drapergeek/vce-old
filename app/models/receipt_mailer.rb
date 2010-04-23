@@ -4,5 +4,6 @@ class ReceiptMailer < ActionMailer::Base
     from        "4hprogrammer@gmail.com"
     subject     "Thank you signing up for 4H Camp"
     body        :receipt=>receipt
+    content_type "text/html"
   end
 end
