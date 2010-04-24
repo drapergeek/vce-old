@@ -104,13 +104,6 @@
 
 
 
-<%= observe_field   :receipt_camper1_id,                         # The field to observe 
-                    :with       => "camper_id",              # The input to validate
-                    :frequency  => 0.10,                    # The frequency in seconds to watch for changes
-                    :url        => {:action => :validate }, # The action to call when changes occur
-                    :update     => :id1_correct                 # The DOM ID to update
-                  %>
-
  <span id="id1_correct" style="display:inline"></span>
 </p>
 
@@ -129,12 +122,6 @@
 <label for="receipt_camper2_id">id: </label>
 <%= text_field 'receipt', 'camper2_id', {:size=>'5'}  %>
 
-<%= observe_field   :receipt_camper2_id,                         # The field to observe 
-                    :with       => "camper_id",              # The input to validate
-                    :frequency  => 0.10,                    # The frequency in seconds to watch for changes
-                    :url        => {:action => :validate }, # The action to call when changes occur
-                    :update     => :id2_correct                 # The DOM ID to update
-                  %>
 
  <span id="id2_correct" style="display:inline"></span>
 </p>
@@ -153,12 +140,7 @@
 <label for="receipt_camper3_id">id: </label>
 <%= text_field 'receipt', 'camper3_id',{:size=>'5'} %>
 
-<%= observe_field   :receipt_camper3_id,                         # The field to observe 
-                    :with       => "camper_id",              # The input to validate
-                    :frequency  => 0.10,                    # The frequency in seconds to watch for changes
-                    :url        => {:action => :validate }, # The action to call when changes occur
-                    :update     => :id3_correct                 # The DOM ID to update
-                  %>
+
 
  <span id="id3_correct" style="display:inline"></span>
 </p>
