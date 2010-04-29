@@ -171,7 +171,7 @@ class CampersController < ApplicationController
   #This is a method that just returns an array of schools 
   #The method REALLY needs to replaced with a db call
   def get_schools
-    ['RAE','LPM', 'FCM', 'CES','AES','DME','FCM','Carlisle','PHE','MMS','SE','STE','MTO','JRS','CES','CCE','IE','MVH','BH','Other'].sort
+    ['RAE','LPM', 'FCM', 'CES','AES','DME','Carlisle','PHE','MMS','SE','STE','MTO','JRS','CES','CCE','IE','MVH','BH','AHE','Other'].sort
    end
   
 

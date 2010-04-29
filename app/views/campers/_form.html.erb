@@ -326,7 +326,7 @@
 			<small>If this info is not available or not releveant please enter 01/01/1900</small><br />
 			<small>You are only required to collect the month and year, enter 01 for the day.</small><br />
 			<label for="camper_last_tetnus_shot">Date of last tetnus shot: </label>
-			<%= date_select :camper, :last_tetnus_shot, :order=>[:month, :day, :year], :include_blank=>true %>
+			<%= date_select :camper, :last_tetnus_shot, :order=>[:month, :day, :year], :include_blank=>true,  :start_year=>1985 %>
 
 		</p>
 	</div>
