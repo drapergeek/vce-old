@@ -56,7 +56,8 @@ function DoNav(theUrl)
           <!-- end: skip link navigation -->
 
 		<!--normal links for header-->
-		<% if logged_in? %>
+		<!--normal links for header-->
+		<% if current_user %>
 			<!--search form-->
 			<% form_tag( {:controller=>"campers", :action=>'search'}, :method => 'get', :style=>"display:inline")	 do %>
 				<%= text_field_tag :search , params[:search]%>
@@ -68,13 +69,11 @@ function DoNav(theUrl)
 
 			<!--End Search form-->
 			
-			Welcome <%= current_user.login %>! | 
-			<%= link_to 'Edit Profile',:controller=>'account', :action=>'edit', :id=>current_user %> |
+			Welcome <%= current_user.login %>!
 			<%= link_to 'Logout', logout_path %> 
 		<% else %>
 			<%= link_to 'Login', login_path%>
 		<% end %>
-		<!--End the normal links-->
         </div>
 		
 			<%= image_tag 'banner.gif', :alt=>'The VCE banner featuring the VT logo' , :class=>"show_on_print"%>
@@ -83,10 +82,10 @@ function DoNav(theUrl)
         <!-- skiplink anchor: navigation -->
         <a id="navigation" name="navigation"></a>
         <div id="nav_main">
-		<% if logged_in? %>
+
           <!-- main navigation: #nav_main -->
 			<%= render :partial=>'layouts/main_links' %>
-		<% end %>
+
         </div>
       </div>
       <div id="main">
@@ -120,9 +119,7 @@ function DoNav(theUrl)
         </div>
         <div id="col3">
           <div id="col3_content" class="clearfix">
-			<% if logged_in? %>
-				<%= render :partial=>'layouts/statistics' %>
-			<% end %>
+	
           </div>
           <!-- IE Column Clearing -->
           <div id="ie_clearing"> &#160; </div>

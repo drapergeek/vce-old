@@ -7,7 +7,9 @@ gem 'rails', '3.0.3'
 
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'will_paginate'
-
+gem 'omniauth'
+gem "nifty-generators", :group => :development
+gem 'mocha'
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -30,3 +32,4 @@ gem 'will_paginate'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem "mocha", :group => :test

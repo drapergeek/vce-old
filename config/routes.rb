@@ -1,4 +1,7 @@
 Vce::Application.routes.draw do
+  match '/auth/:provider/callback' => 'sessions#create'
+  
+
   resources :possible_issues do 
     collection do 
       get 'check'
@@ -12,9 +15,8 @@ Vce::Application.routes.draw do
   resources :users
   resources  :session
   match "signup", :to=>"users#new"
-  match "login", :to=>"account#login"
-  match "logout", :to=>"account#logout"
-
+  match "login", :to=>"sessions#index", :as=>:login
+  match "logout", :to=>"sessions#destroy", :as=>:logout
 
    root :to=>"account#login"
 
