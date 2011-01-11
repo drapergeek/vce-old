@@ -1,5 +1,5 @@
 <h3>Welcome to the Virginia Cooperative Extension Receipt Service</h3>
-<% unless logged_in? %>
+<% unless current_user %>
 <h4>In order to be able to access the system you must be authenticated.</h4>
 <p>If you require access to this system and do not currently have it please contact <a href="mailto:ddraper@vt.edu">Donna Draper</a></p>
 <% form_tag do -%>

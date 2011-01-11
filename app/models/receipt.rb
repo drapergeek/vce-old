@@ -33,6 +33,7 @@ class Receipt < ActiveRecord::Base
 
   
   def self.find_standard_receipts(options={})
+    #can we get the current unit _id?
       with_scope :find => options do 
         year = Date.today.year
         find(:all, :conditions=>['unit_id like ? and created_at like ?', Thread.current["unit"].id, "%#{year}%"])

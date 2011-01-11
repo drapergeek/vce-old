@@ -13,18 +13,18 @@
 
 
 
-<!--Ajaxy stuff for choosing camper type-->
+<!--Ajax stuff for choosing camper type-->
 <div id="type_of_camper">
 	<span id="camper_type">Standard Camper</span><br />
 	Click here to change the camper type:
 	<div id="standard_camper_link" style="display:none" class="attendee_type_link">
-		<%= link_to_remote 'Camper', :url => { :action => 'update_camper_fields', :id => 0 } %> |
+		<%= link_to 'Camper',{ :action => 'update_camper_fields', :id => 0 }, :remote=>true %> |
 	</div> 
 	<div id="teen_camper_link" class="attendee_type_link">
-		<%= link_to_remote 'Teen', :url => { :action => 'update_camper_fields', :id => 1 } %> |
+		<%= link_to 'Teen', { :action => 'update_camper_fields', :id => 1 }, :remote=>true %> |
 	</div> 
 	<div id="adult_camper_link"  class="attendee_type_link">
-		<%= link_to_remote 'Adult', :url => { :action => 'update_camper_fields', :id => 3 } %> 
+		<%= link_to 'Adult',{ :action => 'update_camper_fields', :id => 3 }, :remote=>true %> 
 	</div> 
 <!--end of camper type stuff-->
 

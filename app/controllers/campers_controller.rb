@@ -1,8 +1,8 @@
 class CampersController < ApplicationController
   layout 'application', :except=>'export_excel_classes'
   helper :sort
-  before_filter :login_required 
-  before_filter :authorize, :only=>:destroy
+  before_filter :login_required
+
   include SortHelper
   
   
@@ -13,8 +13,8 @@ class CampersController < ApplicationController
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
+#  verify :method => :post, :only => [ :destroy, :create, :update ],
+#         :redirect_to => { :action => :list }
 
   def list
       sort_init 'created_at'

@@ -1,6 +1,6 @@
 class PossibleIssuesController < ApplicationController
   skip_before_filter :check_authentication, :check_authorization , :only=>[:check]
-  
+  before_filter :login_required
   def index
     @possible_issues = PossibleIssue.all
   end

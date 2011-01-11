@@ -8,18 +8,18 @@ class Camper < ActiveRecord::Base
   before_create :compact_phone
   before_save :create_pack_from_name
   #named_scopes
-  named_scope :current_unit, lambda {{:conditions=>["unit_id like ?", Thread.current["unit"].id]}}
-  named_scope :current_year, lambda {{:conditions=>["created_at like ?", "%#{Date.today.year}%"]}}
-  named_scope :active, :conditions=>["inactive not like ?", 1]
-  named_scope :inactive, :conditions=>["inactive like ?", 1]
-  named_scope :male, :conditions=>["gender like ?", 0]
-  named_scope :female, :conditions=>["gender like ?", 1]
-  named_scope :campers, :conditions=>["position like ?", 0]
-  named_scope :teen, :conditions=>["position like ?", 1]
-  named_scope :adult, :conditions=>["position like ?", 3]
-  named_scope :cit, :conditions=>["position like ?", 2]
-  named_scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
-  named_scope :unpaid, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ? and payment_number like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1, '']}}
+  scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
+  scope :current_year, lambda {{:conditions=>["created_at like ?", "%#{Date.today.year}%"]}}
+  scope :active, :conditions=>["inactive not like ?", 1]
+  scope :inactive, :conditions=>["inactive like ?", 1]
+  scope :male, :conditions=>["gender like ?", 0]
+  scope :female, :conditions=>["gender like ?", 1]
+  scope :campers, :conditions=>["position like ?", 0]
+  scope :teen, :conditions=>["position like ?", 1]
+  scope :adult, :conditions=>["position like ?", 3]
+  scope :cit, :conditions=>["position like ?", 2]
+  scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
+  scope :unpaid, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ? and payment_number like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1, '']}}
   
   validates_uniqueness_of :number
   validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/

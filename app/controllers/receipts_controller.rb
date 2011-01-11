@@ -1,10 +1,8 @@
 class ReceiptsController < ApplicationController
   helper :sort
-  
+  before_filter :login_required
   include SortHelper
   
-  before_filter :login_required 
-  before_filter :authorize, :only=>{:edit, :destroy}
   layout "application" ,  :except => {:export_excel, :create_excel}
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)

@@ -1,4 +1,5 @@
 class RightsController < ApplicationController
+    before_filter :login_required
   layout "application"
   # GET /rights
   # GET /Right.xml

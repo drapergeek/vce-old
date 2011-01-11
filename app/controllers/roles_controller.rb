@@ -1,6 +1,6 @@
 class RolesController < ApplicationController
   layout "application"
-  
+    before_filter :login_required
   
   
   # GET /roles

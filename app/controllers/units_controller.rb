@@ -1,4 +1,5 @@
 class UnitsController < ApplicationController
+    before_filter :login_required
   # GET /units
   # GET /units.xml
   def index

@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+    before_filter :login_required
   def index
     @issues = Issue.all
   end

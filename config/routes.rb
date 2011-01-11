@@ -18,7 +18,7 @@ Vce::Application.routes.draw do
   match "login", :to=>"sessions#index", :as=>:login
   match "logout", :to=>"sessions#destroy", :as=>:logout
 
-   root :to=>"account#login"
+   root :to=>"sessions#index"
 
    match ':controller(/:action(/:id(.:format)))'
 end
