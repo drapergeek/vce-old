@@ -81,6 +81,7 @@ class AccountController < ApplicationController
   
   #this action updates the users information, everything works the save as the other basically
   def update
+    @units = Unit.all
     @user = User.find(params[:id])
      if @user.update_attributes(params[:user])
        flash[:notice] = 'Your account was successfully updated'

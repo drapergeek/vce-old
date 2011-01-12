@@ -1,5 +1,5 @@
 class ExtrasController < ApplicationController
-  before_filter :login_required , :except=>[:login, :index]  
+  before_filter :login_required
   def index
     #this is for the reports and such
     #no info needed tho...
