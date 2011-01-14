@@ -6,10 +6,14 @@ class SessionsController < ApplicationController
   end
   def create
     auth = request.env["omniauth.auth"]
-    user = User.find_by_provider_and_uid(auth['provider'], auth['uid'])
+    user = User.find_by_provider_and_uid(auth['provider'], auth['uid'])  || User.create_with_omniauth(auth)
     if user
-      flash[:notice] = "You have successfully logged in."
-      session[:user_id] = user.id
+      if user.authorized
+        flash[:notice] = "You have successfully logged in."
+        session[:user_id] = user.id
+      else
+        flash[:notice] = "Your credentials have been saved, you are not yet authorized to use the system, please wait for an administrator to approve you."
+      end
     else
       flash[:error] = "You are not authorized to use this system."
     end

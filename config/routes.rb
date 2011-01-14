@@ -14,6 +14,7 @@ Vce::Application.routes.draw do
   resources :units
   resources :users
   resources  :session
+  resources :receipts
   match "signup", :to=>"users#new"
   match "login", :to=>"sessions#index", :as=>:login
   match "logout", :to=>"sessions#destroy", :as=>:logout

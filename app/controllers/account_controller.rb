@@ -13,7 +13,8 @@ class AccountController < ApplicationController
     logger.info 'got to index'
     if current_user
       logger.info 'showing current user'
-      @users = User.find(:all)
+      @unauthorized_users = User.unauthorized
+      @authorized_users = User.authorized
     else
       logger.info 'no current user'
       flash[:notice] = "You must be logged in to view this page"
@@ -21,9 +22,19 @@ class AccountController < ApplicationController
     end
   end
   
+  def authorize
+    @user = User.find(params[:id])
+    @user.authorize!
+    @user.unit_id = current_user.id
+    @user.save!
+    flash[:notice] = "The user #{@user.fname} #{@user.lname} has been authorized!"
+    redirect_to :action=>:index
+  end
+  
   def destroy
     User.find(params[:id]).destroy
-    redirect_to :action => 'super'
+    flash[:notice] = "The user was successfully destroyed."
+    redirect_to :action => 'index'
   end
   
 

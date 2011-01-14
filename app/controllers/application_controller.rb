@@ -11,7 +11,13 @@ class ApplicationController < ActionController::Base
     if defined?(@current_user)
        return @current_user
     else
-       @current_user = User.find(session[:user_id]) if session[:user_id]
+      begin
+         @current_user = User.find(session[:user_id]) if session[:user_id]
+      rescue ActiveRecord::RecordNotFound => e
+        reset_session
+        flash[:warning] = "Your user record could not be located!"
+        redirect_to root_url   
+      end
        if @current_user
          set_thread_user
          set_thread_unit
@@ -35,7 +41,6 @@ class ApplicationController < ActionController::Base
   end
   
   def set_thread_unit
-
       Thread.current["unit"] = current_user.unit  #current_user is part of Restful_Authentication
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107203508) do
+ActiveRecord::Schema.define(:version => 20110112150156) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(:version => 20110107203508) do
     t.integer  "unit_id"
     t.string   "provider"
     t.string   "uid"
+    t.boolean  "authorized",                              :default => false,       :null => false
   end
 
 end

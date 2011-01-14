@@ -38,7 +38,7 @@
 	              onmouseout="ChangeColor(this, false);" 
 	              onclick="DoNav('/receipts/show/<%= receipt.id %>');">
 	<td class="standard_table">
-		<%= receipt.date.strftime("%m/%d/%y") %>
+		<%= receipt.date.strftime("%m/%d/%y") unless receipt.date.blank? %>
 	</td>
 	<td class="standard_table">
 		<%= receipt.lname.capitalize %>

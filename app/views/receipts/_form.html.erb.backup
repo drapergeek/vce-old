@@ -1,0 +1,212 @@
+<%= error_messages_for 'receipt' %>
+
+<!--[form:receipt]-->
+<%= link_to_function("Click here to modify date","Element.show('date_time')") %>
+<div id="date_time" style="display:none">
+	<label for="receipt_date">Date</label>
+	<%= datetime_select 'receipt', 'date'  %>
+</div>
+
+
+
+<div id="payer_info_form" class="receipt_info_form">
+	<h3 class="receipt_section_header">Payer Information</h3>
+ 		<%= f.text_field :fname  %>
+		<%= f.text_field  :lname  %>
+		<br />
+		<%= f.text_field :address  %>
+		<br />
+		
+		<%= f.label :city %>
+		<%= text_field "receipt", 'city'  %>
+		
+		<%= f.label :state %>
+		<%= collection_select('receipt', 'state' , @states, 'name', 'name') %>
+		
+		<%= f.label :zip %>
+		<%= text_field 'receipt', 'zip', {:size=>7}  %>
+	<br />
+	<br />
+		<%= f.text_field  'phone', {:size=>14} %>
+		<small id="receipt_phone_example">Ex: 276-555-1234 or 2765551234</small>
+	<br/>
+</div><!--End of payer info-->
+
+<!--Payment Information Section-->
+<div id="payment_info_form" class="receipt_info_form">
+	<h3 class="receipt_section_header">Payment Information</h3>
+
+	<div id="payment_cost_notification">
+		**The price for two campers is <%= number_to_currency(@camp_price  * 2) %>  and the price for 3 campers is <%= number_to_currency(@camp_price *3) %>**
+	</div>
+	<div>
+	<% if @receipt.amount.blank? %>
+		<% value = number_to_currency(@camp_price, :format=>"%n") %>
+	<% end %>
+	<%= f.text_field :amount, :value=>value %></div>
+	
+	<!--Payment Method Stuff-->
+	<%= f.label "Payment Method:" %>
+
+	<%= radio_button('receipt', 'payment_method', '2',
+	{:onchange=>"Element.show(receipt_payment_extra); 
+				Element.show(\'check_number\');
+				Element.hide(\'money_number\');",:checked=>'checked'
+	})%>
+	<label for="receipt_payment_method_2">Check </label>
+
+	<%= radio_button('receipt', 'payment_method', '1',
+	{:onchange=>"Element.hide(receipt_payment_extra); 
+				Element.hide(\'check_number\');
+				Element.hide(\'money_number\');"
+			
+	})%>
+	<label for="receipt_payment_method_1">Cash </label>
+	
+	<%= radio_button('receipt', 'payment_method', '3',
+	{:onchange=>"Element.show(receipt_payment_extra); 
+				Element.hide(\'check_number\');
+				Element.show(\'money_number\');"
+	})%>
+	<label for="receipt_payment_method_3">Money Order </label>
+
+
+	<div id="payment_number_divs">
+		<div id="check_number" class = "payment_number_label">
+			<label for="receipt_payment_extra">Check Number: </label>  
+		</div>
+
+		<div id="money_number" style="display:none" class = "payment_number_label">
+			<label for="receipt_payment_extra">Money Order Number: </label> 
+		</div>
+		
+	
+		<%= text_field 'receipt', 'payment_extra', {:size=>6} %>
+	</div>
+	
+	<!--End Payment Method Stuff-->
+
+</div><!--End of payment info-->
+
+
+
+
+<div id="camper_info_form" class="receipt_info_form">
+
+<h3 class="receipt_section_header">Camper Information</h3>
+<small>**Camper id must start with A,B,G,S,P or T**</small>
+<div id="camper1" class = "camper_input">
+<p><label for="receipt_camper1">Camper 1: </label>
+<%= text_field 'receipt', 'camper1',  {:size=>'25'} %>
+
+<label for="receipt_camper1_id">id: </label>
+<%= text_field 'receipt', 'camper1_id' , {:size=>'5'} %>
+
+
+
+ <span id="id1_correct" style="display:inline"></span>
+</p>
+
+</div>
+
+
+<div id="camper_2" class = "camper_input"
+ 	<% if @receipt.camper2.blank? %>
+		style="display:none"
+	<% end %>
+><!--End of the camper2 div tag opening-->
+<p>
+<label for="receipt_camper2">Camper 2: </label>
+<%= text_field 'receipt', 'camper2' , {:size=>'25'} %>
+
+<label for="receipt_camper2_id">id: </label>
+<%= text_field 'receipt', 'camper2_id', {:size=>'5'}  %>
+
+
+ <span id="id2_correct" style="display:inline"></span>
+</p>
+
+
+</div>
+
+<div id="camper_3" class = "camper_input"
+	<% if @receipt.camper3.blank? %>
+		style="display:none"
+	<% end %>
+><!--End of the camper3 div tag opening-->
+<p><label for="receipt_camper3">Camper 3: </label>
+<%= text_field 'receipt', 'camper3' , {:size=>'25'} %>
+
+<label for="receipt_camper3_id">id: </label>
+<%= text_field 'receipt', 'camper3_id',{:size=>'5'} %>
+
+
+
+ <span id="id3_correct" style="display:inline"></span>
+</p>
+</div>
+
+
+
+<div id="camper_link_1" class="add_camper_link" > 	
+<%=
+	link_to_function "Add another camper", nil, :id => "camper_link_1_link"  do |page|
+    page[:camper_2].visual_effect :blind_down
+    page.show :camper_link_2
+    page.remove :camper_link_1
+	unless @camp_price.blank?
+    page[:receipt_amount].value = (@camp_price*2)
+end
+	page[:receipt_amount].visual_effect :pulsate
+	page[:receipt_amount].visual_effect :highlight
+  	end
+%>
+
+</div>
+
+<div id="camper_link_2" class="add_camper_link" 
+		<% if @receipt.camper2.blank? %>
+			style="display:none"
+		<% end %>
+>
+<%=
+	link_to_function("Add another camper", nil, :id => "camper_link_1_link") do |page|
+		page[:camper_3].visual_effect :blind_down
+		page.remove :camper_link_2
+		page[:receipt_amount].value = (@camp_price*3)
+		page[:receipt_amount].visual_effect :pulsate
+		page[:receipt_amount].visual_effect :highlight
+		
+	end
+	%>
+</div>
+
+
+</div><!--end of camper info-->
+
+<% unless @receipt.date.nil?  || @receipt.nil? %>
+	<p>
+		<%= check_box 'receipt', 'refund',:onclick => "Element.show('refund_extra')" %> <label for="refund">Click here to refund this receipt</label>
+	</p>
+	<div id="refund_extra" <% unless @receipt.refund==true %>style="display:none" <% end %> >
+		<label for="refund_check_number">Check number: </label>
+		<%= text_field 'receipt', 'refund_check_number' %>
+		<label for="receipt_refund_amount">Refund Amount: </label>
+		<%= text_field 'receipt', 'refund_amount' %>
+		<div id="refund_info">
+			<label for="receipt_refund_info">Refund Information:</label><br />
+			<%= text_area 'receipt', 'refund_info' %>
+		</div>
+				
+	</div>
+<% end %>
+
+
+<div id="email">
+	<h3>Would you prefer to have your receipt e-mailed to you instead of printed?</h3>
+ 	<%= f.text_field 'email' %>
+	
+</div>
+
+<!--[eoform:receipt]-->
+

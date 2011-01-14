@@ -10,6 +10,7 @@ gem 'will_paginate'
 gem 'omniauth'
 gem "nifty-generators", :group => :development
 gem 'mocha'
+gem 'formtastic', '~> 1.1.0'
 # Use unicorn as the web server
 # gem 'unicorn'
 

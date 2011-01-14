@@ -1,6 +1,3 @@
 <h2>New 4-H Camp Receipt</h2>
-<% form_for(@receipt, :builder => FormBuilder, :url=>{:action => 'create'}) do  |f| %>
-  <%= render :partial => f, :locals=>{:f=>f} %>
-  <%= submit_tag "Create" %>
-<% end %>
+	<%= render 'form' %>
 <%= link_to 'Back', :action => 'list' %>
