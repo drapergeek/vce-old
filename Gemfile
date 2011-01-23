@@ -11,6 +11,7 @@ gem 'omniauth'
 gem "nifty-generators", :group => :development
 gem 'mocha'
 gem 'formtastic', '~> 1.1.0'
+gem 'fastercsv'
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -33,4 +34,9 @@ gem 'formtastic', '~> 1.1.0'
 # group :development, :test do
 #   gem 'webrat'
 # end
+group :development, :test do
+  gem "factory_girl"
+  gem "annotate"
+end
+
 gem "mocha", :group => :test
