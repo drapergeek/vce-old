@@ -7,7 +7,9 @@ class ReceiptsControllerTest < ActionController::TestCase
   end
   
   test "can load index with a login" do
-    
+    login
+    get :index
+    assert_template :index
   end
   
 end

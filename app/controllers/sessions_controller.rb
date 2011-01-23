@@ -5,8 +5,13 @@ class SessionsController < ApplicationController
     
   end
   def create
-    auth = request.env["omniauth.auth"]
-    user = User.find_by_provider_and_uid(auth['provider'], auth['uid'])  || User.create_with_omniauth(auth)
+    if Rails.env=="testing"
+      user = User.find_by_login(params[:login])
+    else
+      auth = request.env["omniauth.auth"]
+      user = User.find_by_provider_and_uid(auth['provider'], auth['uid'])  || User.create_with_omniauth(auth)
+    end
+
     if user
       if user.authorized
         flash[:notice] = "You have successfully logged in."

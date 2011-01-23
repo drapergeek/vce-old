@@ -3,3 +3,12 @@ one:
   id: 1
 two:
   id: 2
+
+# == Schema Information
+#
+# Table name: states
+#
+#  id   :integer         not null, primary key
+#  name :string(255)
+#
+

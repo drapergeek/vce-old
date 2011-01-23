@@ -10,3 +10,15 @@ class Unit < ActiveRecord::Base
   validates_numericality_of :camp_price
   
 end
+
+# == Schema Information
+#
+# Table name: units
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  camp_price :float
+#
+

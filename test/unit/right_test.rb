@@ -6,3 +6,14 @@ class RightTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: rights
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)
+#  controller :string(255)
+#  action     :string(255)
+#
+

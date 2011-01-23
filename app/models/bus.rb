@@ -9,3 +9,15 @@ class Bus < ActiveRecord::Base
    end
    
 end
+
+# == Schema Information
+#
+# Table name: buses
+#
+#  id       :integer         not null, primary key
+#  name     :string(255)
+#  capacity :integer
+#  info     :text
+#  unit_id  :integer
+#
+

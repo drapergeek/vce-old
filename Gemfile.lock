@@ -29,6 +29,7 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     addressable (2.2.2)
+    annotate (2.4.0)
     arel (2.0.4)
     builder (2.1.2)
     erubis (2.6.6)
@@ -131,6 +132,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   factory_girl
   fastercsv
   formtastic (~> 1.1.0)

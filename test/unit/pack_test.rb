@@ -5,3 +5,13 @@ class PackTest < Test::Unit::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: packs
+#
+#  id      :integer         not null, primary key
+#  name    :string(255)
+#  unit_id :integer
+#
+

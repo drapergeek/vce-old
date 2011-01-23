@@ -13,3 +13,16 @@ two:
   message: MyText
   starts_at: 2008-11-18 21:55:12
   ends_at: 2008-11-18 21:55:12
+
+# == Schema Information
+#
+# Table name: annoucements
+#
+#  id         :integer         not null, primary key
+#  created_at :datetime
+#  updated_at :datetime
+#  message    :text
+#  starts_at  :datetime
+#  ends_at    :datetime
+#
+
