@@ -1,6 +1,11 @@
 class PossibleIssuesController < ApplicationController
   skip_before_filter :check_authentication, :check_authorization , :only=>[:check]
-  before_filter :login_required
+  if Rails.env == "production"
+    before_filter :login_required
+  else
+    before_filter :set_dev_user
+  end
+  
   def index
     @possible_issues = PossibleIssue.all
   end

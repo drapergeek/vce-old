@@ -1,7 +1,11 @@
 class CampersController < ApplicationController
   layout 'application', :except=>'export_excel_classes'
   helper :sort
-  before_filter :login_required
+  if Rails.env == "production"
+    before_filter :login_required
+  else
+    before_filter :set_dev_user
+  end
 
   include SortHelper
   

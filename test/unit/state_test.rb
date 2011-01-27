@@ -1,6 +1,6 @@
 
 
-class StateTest < Test::Unit::TestCase
+class StateTest < ActiveSupport::TestCase
   test "the truth" do
     assert true
   end

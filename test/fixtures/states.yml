@@ -1,8 +1,10 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
+  camp_price: 200.00
 two:
   id: 2
+  camp_price: 215.00
 
 # == Schema Information
 #

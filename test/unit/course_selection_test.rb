@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require "test_helper"
 
-class CourseSelectionTest < Test::Unit::TestCase
-  test "the truth" do
-    assert true
-  end
+class CourseSelectionTest < ActiveSupport::TestCase
+  
+
+  
 end
 
 # == Schema Information

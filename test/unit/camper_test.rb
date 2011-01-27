@@ -1,4 +1,10 @@
+require 'test_helper'
 
+class CamperTest < ActiveSupport::TestCase
+  test "can save a valid camper from the default factory" do
+    assert Factory.build(:camper).valid?
+  end
+end
 # == Schema Information
 #
 # Table name: campers

@@ -1,9 +1,10 @@
 require 'test_helper'
 
-class ReceiptTest < Test::Unit::TestCase
-  test "the truth" do
+class ReceiptTest < ActiveSupport::TestCase
+  test "fake test" do
     assert true
   end
+
 end
 
 # == Schema Information

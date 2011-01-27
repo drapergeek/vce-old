@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CourseTest < Test::Unit::TestCase
+class CourseTest < ActiveSupport::TestCase
 
   # Replace this with your real tests.
   def test_truth

@@ -16,4 +16,9 @@ class ActiveSupport::TestCase
     u.authorize!
     session[:user_id] = u.id
   end
+  
+  def setup
+   # load "#{Rails.root}/db/seeds.rb"
+    
+  end
 end

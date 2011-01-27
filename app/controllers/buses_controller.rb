@@ -1,5 +1,10 @@
 class BusesController < ApplicationController
+  if Rails.env == "production"
     before_filter :login_required
+  else
+    before_filter :set_dev_user
+  end
+    
   def index
     list
     render :action => 'list'

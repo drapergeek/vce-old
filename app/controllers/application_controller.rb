@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
   
   
   
+  def set_dev_user
+    u = User.first
+    session[:user_id] = u.id
+    #just need to call this to set the current user
+    current_user
+  end
+  
   def current_user
     if defined?(@current_user)
        return @current_user
