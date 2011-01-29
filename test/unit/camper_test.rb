@@ -66,6 +66,30 @@ class CamperTest < ActiveSupport::TestCase
     assert c.valid?
   end
   
+  test "zip must be a number 5 digits long and not blank" do
+    c = Factory.build(:camper)
+    assert c.valid?, "Errors are #{c.errors}"
+    c.zip = nil
+    assert !c.valid?, "zip can't be blank"
+    c.zip = "12313"
+    assert c.valid?, "5 digit number is correct"
+    c.zip = "123456"
+    assert !c.valid?, "6 digit number fails"
+    c.zip = "1234"
+    assert !c.valid?, '4 digit number fails'
+    c.zip = "blue1"
+    assert !c.valid?, "ttext files"  
+  end
+  
+  test "counselor years can be blank but must be a number if filled" do
+    c = Factory.build(:camper, :counselor_years=>nil)
+    assert c.valid? , "valid without counselor years"
+    c.counselor_years = "this is all test"
+    assert !c.valid?, "not valid with text"
+    c.counselor_years = 2
+    assert c.valid?, "valid with a number!"
+  end
+  
 end
 # == Schema Information
 #

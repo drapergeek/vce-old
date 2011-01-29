@@ -4,32 +4,32 @@
 <% else %>
 <h2><%= @header_text || "All Receipts" %></h2>
 <!--search form-->
-<%= form_tag :controller=>'receipts', :action=>'search' , :method => 'get' do %>
+<%= form_tag receipts_path , :method => 'get' do %>
 <p>
 	<%= text_field_tag :search , params[:search]%>
 	<%= submit_tag "Search", :name=>nil %>
 	<% if params[:search] %>
-		<%= link_to 'Show All', home_path %>
+		<%= link_to 'Show All', receipts_path %>
 	<% end %>
 </p>
-<% end %>
+<% end %>  
 <!--End Search form-->
 
 <%= link_to 'New receipt', :action => 'new' %>
 
 <br />
 
-<table id = "list_receipts">
+<table id = "list_receipts" class="pretty">
   <tr>
-	<%= sort_header_tag('date', :text => 'Date') %>
-	<%= sort_header_tag('lname', :text => 'Last') %>
-	<%= sort_header_tag('fname', :text => 'First') %>
-	<%= sort_header_tag('camper1', :text => 'Camper 1') %>
-	<%= sort_header_tag('camper1_id', :text => 'ID') %>
-	<%= sort_header_tag('camper2', :text => 'Camper 2') %>
-    <%= sort_header_tag('camper2_id', :text => 'ID') %>
-	<%= sort_header_tag('camper3', :text => 'Camper 3') %>
-    <%= sort_header_tag('camper3_id', :text => 'ID') %>
+	<th><%= sortable('date','Date') %></th>
+	<th><%= sortable('lname','Last') %></th>
+	<th><%= sortable('fname','First') %></th>
+	<th><%= sortable('camper1',  'Camper 1') %></th>
+	<th><%= sortable('camper1_id','ID') %></th>
+	<th><%= sortable('camper2', 'Camper 2') %></th>
+    <th><%= sortable('camper2_id','ID') %></th>
+    <th><%= sortable('camper3','Camper 3') %></th>
+    <th><%= sortable('camper3_id', 'ID') %></th>
   </tr>
   
 <% for receipt in @receipts %>
@@ -76,9 +76,8 @@
 <% end %>
 </table>
 
-<%= will_paginate @reciepts  %>
 <% end %>
-
+<%= will_paginate @receipts %>
 
 <br />
 

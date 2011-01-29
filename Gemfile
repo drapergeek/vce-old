@@ -12,7 +12,8 @@ gem "nifty-generators", :group => :development
 gem 'mocha'
 gem 'formtastic', '~> 1.1.0'
 gem 'fastercsv'
-gem 'validates_date_time'
+gem 'validates_timeliness', '~> 3.0.2'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

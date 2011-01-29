@@ -29,3 +29,19 @@ label{
 	padding-right:8px;
 	
 }
+
+
+
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/sort_asc.png);
+}
+
+.pretty th .desc {
+  background-image: url(/images/sort_desc.png);
+}

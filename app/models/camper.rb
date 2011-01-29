@@ -11,6 +11,10 @@ class Camper < ActiveRecord::Base
   before_save :create_pack_from_name
   
   
+  #accessors
+  attr_accessor :status
+  attr_accessor :new_pack_name
+  
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
   scope :current_year, lambda {{:conditions=>["created_at like ?", "%#{Date.today.year}%"]}}
@@ -37,20 +41,24 @@ class Camper < ActiveRecord::Base
     end
   end
   
-  validates_uniqueness_of :number
-  validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/
-  validates_presence_of :fname, :mname, :lname, :pref_name, :gender
-  validates_presence_of :position, :number
-  validates_format_of :phone1, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :if=>Proc.new { |u| !u.phone1.blank? } 
-  validates_format_of :phone2, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :if=>Proc.new { |u| !u.phone2.blank? } 
-  validates_format_of :emergency_phone, :with=>/^\d{3}-?\d{3}-?\d{4}$/ , :if=>Proc.new { |u| !u.emergency_phone.blank? } 
-  validates_numericality_of :zip
-  validates_numericality_of :counselor_years,  :if=>Proc.new {|u| !u.counselor_years.blank?}
-  validates_date :dob, :if=>Proc.new { |u| !u.dob.blank? } 
-  validates_date :last_tetnus_shot, :if=>Proc.new { |u| !u.last_tetnus_shot.blank? } 
+  #normal validations
+  validates :number, :uniqueness=>true, :format=>{:with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/}, :presence=>true
+  validates :fname, :presence=>true
+  validates :lname, :presence=>true
+  validates :mname, :presence=>true
+  validates :pref_name, :presence=>true
+  validates :gender, :presence=>true
+  validates :position, :presence=>true
+  validates :phone1, :format=>{:with=>/^\d{3}-?\d{3}-?\d{4}$/}, :allow_blank=>true
+  validates :phone2, :format=>{:with=>/^\d{3}-?\d{3}-?\d{4}$/}, :allow_blank=>true
+  validates :emergency_phone, :format=>{:with=>/^\d{3}-?\d{3}-?\d{4}$/}, :allow_blank=>true
+  
+  validates :zip, :inclusion=>{:in=>10000...99999}, :numericality=>true, :presence=>true
+  validates :counselor_years, :numericality=>true, :allow_nil=>true
+  validates_date :dob, :allow_nil=>true
+  validates_date :last_tetnus_shot, :allow_nil=>true
   validates :inactive_info, :must_explain=>true
-  attr_accessor :status
-  attr_accessor :new_pack_name
+
 
 
 
@@ -220,27 +228,31 @@ class Camper < ActiveRecord::Base
     end   
   end
   
-  def self.search(search)
-     if search
-       #need to find a way to combine arrays
-       @group = find(:all, :conditions=> ['lname like ?', "%#{search}%"])
-       @group += find(:all, :conditions=> ['fname like ?', "%#{search}%"])
-       @group += find(:all, :conditions=> ['mname like ?', "%#{search}%"])
-       @group += find(:all, :conditions=> ['pref_name like ?', "%#{search}%"])
-       @group += find(:all, :conditions=> ['phone1 like ?', "%#{search}%"])
-       @group += find(:all, :conditions=> ['phone2 like ?', "%#{search}%"])
-       @group += find(:all, :conditions=> ['number like ?', "%#{search}%"])
-       if @group.empty?
-         return nil
-       elsif @group.uniq! == nil
-        return @group
-       else
-        return @group
+
+   def self.search(search)
+      if search
+        #need to find a way to combine arrays
+         @group = where('lname like ?', "%#{search}%")
+         @group += where('fname like ?', "%#{search}%")
+         @group += where('mname like ?', "%#{search}%")
+         @group += where('pref_name like ?', "%#{search}%")
+         @group += where('phone1 like ?', "%#{search}%")
+         @group += where('phone2 like ?', "%#{search}%")
+         @group += where('number like ?', "%#{search}%")
+         if @group.empty?
+           return scoped
+         else
+           if @group.count > 1
+             return @group.uniq
+           else
+             return @group
+           end
+        end
+      else
+        scoped
       end
-     else
-       return nil
-     end
-   end
+
+    end
   
   
   

@@ -72,10 +72,6 @@ class Receipt < ActiveRecord::Base
       :lname => "Payer Last Name",
       :address => "Address"
     }
-    
- 
-
-
   def self.human_attribute_name(attr)
       HUMANIZED_ATTRIBUTES[attr.to_sym] || super
   end
@@ -103,18 +99,29 @@ class Receipt < ActiveRecord::Base
   def self.search(search)
     if search
       #need to find a way to combine arrays
-      @group = find(:all, :conditions=> ['lname like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['fname like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['camper1 like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['camper1_id like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['camper2 like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['camper2_id like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['camper3 like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['camper3_id like ?', "%#{search}%"])
-      @group += find(:all, :conditions=> ['phone like ?', "%#{search}%"])
-      return @group
+       @group = where('lname like ?', "%#{search}%")
+       @group += where('fname like ?', "%#{search}%")
+       @group += where('camper1 like ?', "%#{search}%")
+       @group += where('camper1_id like ?', "%#{search}%")
+       @group += where('camper2 like ?', "%#{search}%")
+       @group += where('camper2_id like ?', "%#{search}%")
+       @group += where('camper3 like ?', "%#{search}%")
+       @group += where('camper3_id like ?', "%#{search}%")
+       if @group.empty?
+         return scoped
+       else
+         if @group.count > 1
+           return @group.uniq
+         else
+           return @group
+         end
+      end
+    else
+      scoped
+    end
+      
   end
-end
+
   
   #This finds all the camper ids only...I don't know where this is used
   def self.find_camper_ids()

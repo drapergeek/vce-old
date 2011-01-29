@@ -1,30 +1,29 @@
 class CampersController < ApplicationController
   layout 'application', :except=>'export_excel_classes'
-  helper :sort
+  helper_method :sort_column, :sort_direction
   if Rails.env == "production"
     before_filter :login_required
   else
     before_filter :set_dev_user
   end
 
-  include SortHelper
   
   
+
 
   def index
-    list
-    render :action => 'list'
+    if params[:search]
+      logger.info @campers
+      @campers = Camper.search(params[:search]).paginate(:per_page=>25, :page=>params[:page])
+      if @campers.count > 5
+        flash[:notice] = "Your search for \"#{params[:search]}\" did not return any results"
+        params[:search] = nil
+      end
+    else
+      @campers = Camper.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
+    end
   end
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-#  verify :method => :post, :only => [ :destroy, :create, :update ],
-#         :redirect_to => { :action => :list }
-
-  def list
-      sort_init 'created_at'
-      sort_update
-      @campers = Camper.standard.paginate :page=>params[:page], :per_page=>20, :order=>sort_clause
-  end
+  
   def list_by_input
     sort_init 'created_at'
     sort_update
@@ -38,23 +37,6 @@ class CampersController < ApplicationController
       @campers = Camper.find(:all, :conditions=>["#{params[:find_by]} like ?", params[:item]]).paginate
       render :action=>'list'
     end
-  end
-  
-  def search
-    sort_init 'created_at'
-    sort_update
-    @campers = Camper.search(params[:search])
-    if @campers.blank? || @campers.empty?
-      flash[:notice] = "There were no campers matching the search term \"#{params[:search]}\""
-      redirect_to :action=>'index'
-    else
-      @campers = Camper.search(params[:search]).paginate
-      @header_text = "Search Results for \"#{params[:search]}\""
-      @link_text = 'Back to all active Campers'
-      @link_action = 'list'
-      render :action=>'list'
-    end
-  
   end
   
   #This is mainly to pass to an rjs action
@@ -177,6 +159,19 @@ class CampersController < ApplicationController
   def get_schools
     ['RAE','LPM', 'FCM', 'CES','AES','DME','Carlisle','PHE','MMS','SE','STE','MTO','JRS','CES','CCE','IE','MVH','BH','AHE','Other'].sort
    end
+  
+
+
+  
+  
+  
+  def sort_column
+     Camper.column_names.include?(params[:sort]) ? params[:sort] : "number"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
   
 
 

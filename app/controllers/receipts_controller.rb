@@ -1,11 +1,14 @@
 class ReceiptsController < ApplicationController
-  helper :sort
+
   if Rails.env == "production"
     before_filter :login_required
   else
     before_filter :set_dev_user
   end
-  include SortHelper  
+  
+  helper_method :sort_column, :sort_direction
+  
+  
   layout "application" ,  :except => {:export_excel, :create_excel}
 
     
@@ -18,28 +21,37 @@ class ReceiptsController < ApplicationController
   
   #This method returns just a list of sortable columns
   def index
-      sort_init 'date' 
-      sort_update
-      @receipts = Receipt.paginate_standard_receipts :page=>params[:page], :per_page=>20, :order=>sort_clause
+    if params[:search]
+      @receipts = Receipt.search(params[:search]).paginate(:per_page=>25, :page=>params[:page])
+      if @receipts.count > 3
+        flash[:notice] = "Your search for "#{params[:search]}" did not return any results"
+        params[:search] = nil
+      end
+    else
+      @receipts = Receipt.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
+    end
+      
+    
+      
   end
   
   #This is the search paramater and passes to the search.rhtml file
-  def search
-    sort_init 'date' 
-    sort_update
-    @receipts = Receipt.search(params[:search])
-    logger.info("Here it is: " + @receipts.to_s)
-    if @receipts.blank? || @receipts.empty?
-      flash[:notice] = "There were no receipts matching the search term \"#{params[:search]}\""
-      redirect_to :action=>'index'
-    else
-      @receipts = Receipt.search(params[:search]).paginate
-      @header_text = "Search Results for \"#{params[:search]}\""
-      @link_text = 'Back to all receipts'
-      @link_action = 'index'
-      render :action=>'index'
-    end
-  end
+#  def search
+#    sort_init 'date' 
+#    sort_update
+#    @receipts = Receipt.search(params[:search])
+##    logger.info("Here it is: " + @receipts.to_s)
+#    if @receipts.blank? || @receipts.empty?
+##      flash[:notice] = "There were no receipts matching the search term \"#{params[:search]}\""
+#      redirect_to :action=>'index'
+#    else
+#      @receipts = Receipt.search(params[:search]).paginate
+#      @header_text = "Search Results for \"#{params[:search]}\""
+#      @link_text = 'Back to all receipts'
+#      @link_action = 'index'
+#      render :action=>'index'
+#    end
+#  end
     
   def list_by_date
     date = params[:date]
@@ -148,6 +160,18 @@ class ReceiptsController < ApplicationController
     @message = "<b style='color:#{color}; display:inline' >#{message}</b>"
     render :partial=>'message'
    
+  end
+  
+  
+  private
+  
+  
+  def sort_column
+     Receipt.column_names.include?(params[:sort]) ? params[:sort] : "id"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
   
 

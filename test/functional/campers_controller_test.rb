@@ -4,7 +4,7 @@ class CampersControllerTest < ActionController::TestCase
 
   test "can load the index page" do
     get :index
-    assert_template "campers/list"
+    assert_template "index"
   end
   
   test "new page" do
