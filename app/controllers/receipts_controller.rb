@@ -5,16 +5,10 @@ class ReceiptsController < ApplicationController
   else
     before_filter :set_dev_user
   end
-  
-  include SortHelper
-  
+  include SortHelper  
   layout "application" ,  :except => {:export_excel, :create_excel}
 
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create ],
-         :redirect_to => { :action => :index }
-
-         
+    
  #This is a method for showing a report of totals...
  #mainly its a sum screen
  def totals

@@ -19,9 +19,10 @@ class CampersControllerTest < ActionController::TestCase
   end
   
   test "can create a camper" do
-    post :create, :camper=>Factory.attributes_for(:camper)
-    assert_template :show
-    
+    assert_difference 'Camper.all.count' do
+      post :create, :camper=>Factory.attributes_for(:camper)
+    end
+    assert_redirected_to :action=>"show", :id=>assigns(:camper).id
   end
 
 end

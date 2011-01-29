@@ -62,7 +62,7 @@ function DoNav(theUrl)
 		<!--normal links for header-->
 		<% if current_user %>
 			<!--search form-->
-			<% form_tag( {:controller=>"campers", :action=>'search'}, :method => 'get', :style=>"display:inline")	 do %>
+			<%= form_tag( {:controller=>"campers", :action=>'search'}, :method => 'get', :style=>"display:inline")	 do %>
 				<%= text_field_tag :search , params[:search]%>
 				<%= submit_tag "Search", :name=>nil %>
 				<% if params[:search] %>

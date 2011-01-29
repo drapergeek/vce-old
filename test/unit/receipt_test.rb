@@ -1,10 +1,59 @@
 require 'test_helper'
 
 class ReceiptTest < ActiveSupport::TestCase
-  test "fake test" do
-    assert true
+  
+  test "can create a receipt from factory" do
+    r = Factory.build(:receipt)
+    assert r.valid?
   end
 
+  
+  
+  test "receipt amount can't be negative or nil" do
+    r = Factory.build(:receipt, :amount=>nil)
+    assert !r.valid?
+    assert r.errors[:amount]
+    r.amount = "0.01"
+    assert r.valid?
+    r.amount = "0.00"
+    assert !r.valid?
+  end
+  
+  
+  test "refunds require extra fields" do
+    r = Factory.build(:receipt)
+    assert r.valid?
+    r.refund = true
+    assert !r.valid?
+    r.refund_amount =  2.00
+    assert !r.valid?
+    r.refund_check_number = "1231"
+    assert !r.valid?
+    r.refund_info = "I felt like it, deal with it"
+    assert r.valid?
+  end
+  
+  test "cant reuse camper ids" do
+    r = Factory.build(:receipt)
+    assert r.valid?
+    r.save!
+    
+    r2 = Factory.build(:receipt)
+    assert !r2.valid?
+    r2.camper1_id = "G123"
+    assert r2.valid?
+    r2.camper2_id = r.camper1_id
+    assert !r2.valid? , "Camper is still valid after changing camper2_id"
+    r2.camper2_id = "G444"
+    assert r2.valid?
+    r2.camper3_id = r.camper1_id
+    assert !r2.valid?
+    
+    
+    
+    
+  end
+  
 end
 
 # == Schema Information

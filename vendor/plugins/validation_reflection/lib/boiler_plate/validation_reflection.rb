@@ -30,7 +30,7 @@ require 'ostruct'
 module BoilerPlate # :nodoc:
   module ActiveRecordExtensions # :nodoc:
     module ValidationReflection # :nodoc:
-      CONFIG_PATH = File.join(RAILS_ROOT, 'config', 'plugins', 'validation_reflection.rb')
+      CONFIG_PATH = File.join(Rails.root.to_s, 'config', 'plugins', 'validation_reflection.rb')
       
       mattr_accessor :reflected_validations
       BoilerPlate::ActiveRecordExtensions::ValidationReflection.reflected_validations = %w(

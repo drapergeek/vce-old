@@ -2,8 +2,70 @@ require 'test_helper'
 
 class CamperTest < ActiveSupport::TestCase
   test "can save a valid camper from the default factory" do
-    assert Factory.build(:camper).valid?
+    c = Factory.build(:camper)
+    assert c.valid?
+    assert c.save  
   end
+  
+  
+  test "test the gender stuff" do
+    Factory.create(:camper)
+    Factory.create(:camper,:number=>"G234", :gender=>1)
+    assert_equal 1, Camper.male.count
+    assert_equal 1, Camper.female.count
+    assert_difference "Camper.male.count" do 
+      Factory.create(:camper, :number=>"B342")
+    end
+    assert_difference "Camper.female.count" do 
+      Factory.create(:camper,:number=>"G244", :gender=>1)
+    end
+    assert_equal 2, Camper.male.count
+    assert_equal 2, Camper.female.count
+  end
+  
+  test "inactive and active" do
+    Factory.create(:camper, :inactive=>true, :inactive_info=>"Nope", :number=>"B231")
+    assert_difference "Camper.inactive.count" do 
+      Factory.create(:camper, :inactive=>true, :inactive_info=>"Blah")
+    end
+    assert_difference "Camper.active.count" do 
+      Factory.create(:camper, :number=>"B421")
+    end
+  end
+  
+  test "camper scope" do
+    assert_difference "Camper.campers.count" do
+      Factory.create(:camper, :position=>0)
+    end
+  end
+  
+  test "teen scope" do
+    assert_difference "Camper.teen.count" do
+      Factory.create(:camper, :position=>1)
+    end
+  end
+  
+  test "cit scope" do
+    assert_difference "Camper.cit.count" do
+      Factory.create(:camper, :position=>2)
+    end
+  end
+  
+  test "adult scope" do
+    assert_difference "Camper.adult.count" do
+      Factory.create(:camper, :position=>3)
+    end
+  end
+  
+  test "must have inactive_info if a camper is" do
+    c = Factory.build(:camper, :inactive=>true)
+    assert !c.valid?
+    c = Factory.build(:camper, :inactive=>true, :inactive_info=>"")
+    assert !c.valid?
+    c.inactive_info = "Blah"
+    assert c.valid?
+  end
+  
 end
 # == Schema Information
 #

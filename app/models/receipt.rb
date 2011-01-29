@@ -4,15 +4,65 @@ class Receipt < ActiveRecord::Base
   has_many :campers
   before_create :compact_phone
 
-  #attr_accessor :phone
+
+  #validations
+  include ActiveModel::Validations
+  
+  #custom validations
+  class PostivePriceValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      if value.nil? || value < 0.01 
+        record.errors[attribute] << "should be at least 0.01"
+      end
+    end
+  end
+
+  class RequiresExplanationValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+       if value
+         if record.refund_amount.nil? || record.refund_amount <  0.01
+           record.errors[:refund_amount] << "you must enter a refund amount"
+         end
+         if record.refund_check_number.blank?
+           record.errors[:refund_check_number] << "you must enter a refund check number"
+         end
+         if record.refund_info.blank?
+           record.errors[:refund_info] << "you must explain why the amount was refunded"
+         end
+       end
+     end
+  end
+  
+  
+  class CamperIdMustBeUniqueValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      Receipt.all.each do |r|
+        if r.camper1_id == value || r.camper2_id == value || r.camper3_id == value
+          unless value.blank?  || value == ""
+            record.errors[attribute] << "must be unique" 
+          end
+        end
+      end
+    end
+  end
+
+  #end custom validations
+  
+
   validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id, :amount
   validates_format_of :camper1_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create
   validates_format_of :camper2_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create, :if=> :camper2_filled
   validates_format_of :camper3_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create, :if=> :camper3_filled
   validates_format_of :phone, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :on=>:create
   validates_format_of  :email, :with       => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :allow_blank=>true, :message => 'email must be valid'
-  named_scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
-  named_scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
+  validates :amount, :postive_price=>true
+  validates :refund, :requires_explanation=>true
+  validates :zip, :presence=>true, :length=>{:minimum=>5}
+  validates :camper1_id, :camper_id_must_be_unique=>true, :on=>:create
+  validates :camper2_id, :camper_id_must_be_unique=>true, :on=>:create
+  validates :camper3_id, :camper_id_must_be_unique=>true, :on=>:create
+#  scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
+#  scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
   
 
    
@@ -119,64 +169,6 @@ end
     address.blank? || state.blank? || zip.blank? || city.blank?
   end
  
-  protected 
-  
-  
-  def validate
-    errors.add(:amount, "should be at least 0.01") if amount.nil? || amount < 0.01 
-
-
-    #check for refund stuff
-    if refund==true
-      errors.add(:refund_amount, "You must enter a refund amount") if refund_amount.nil? || amount < 0.01
-      errors.add(:refund_check_number, "You must enter a refund check number") if refund_check_number.blank?
-      errors.add(:refund_info, "You must add why the amount was refunded") if refund_info.blank?
-    end
-    
-    unless self.zip.to_s.size == 5 || self.zip.blank?
-        errors.add("zip", "should be 5 digits")
-      end
-  
-  end#end of validate class 
-  
-  def validate_on_create
-    #check for camper_ids being unique
-    @camper_ids = find_camper_ids()
-    camper1_id_used = 0
-    camper2_id_used = 0
-    camper3_id_used = 0
-    @camper_ids.each do |i|
-      if i == camper1_id
-        camper1_id_used = 1
-      end
-      if :camper2_filled
-        if i == camper2_id
-          camper2_id_used =  1
-        end 
-      end
-      if :camper3_filled
-         if i == camper3_id
-            camper3_id_used =  1
-          end
-      end
-      
-    end# end of the camper_ids loop
-    
-    if camper1_id_used == 1
-      errors.add(:camper1_id, " id is already in use")
-    end
-    
-    if camper2_id_used == 1
-      errors.add(:camper2_id, " id is already in use")
-    end
-    
-    if camper3_id_used == 1
-      errors.add(:camper3_id, " id is already in use")
-    end
-    #end of validating the camper_ids
-    
-  end
-
 end
 
 # == Schema Information

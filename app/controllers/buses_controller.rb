@@ -10,14 +10,6 @@ class BusesController < ApplicationController
     render :action => 'list'
   end
 
-  
-  def error
-   raise RuntimeError, "Generating an error"
-  end 
-
-  # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
-         :redirect_to => { :action => :list }
 
   def list
     @buses = Bus.paginate_standard_buses :per_page=>10, :page=>params[:page]

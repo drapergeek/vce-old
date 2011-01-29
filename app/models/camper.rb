@@ -1,4 +1,6 @@
 class Camper < ActiveRecord::Base
+
+  #associations
   belongs_to :receipt
   belongs_to :bus
   belongs_to :pack
@@ -7,19 +9,33 @@ class Camper < ActiveRecord::Base
   has_many :courses, :through=>:course_selections 
   before_create :compact_phone
   before_save :create_pack_from_name
+  
+  
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
   scope :current_year, lambda {{:conditions=>["created_at like ?", "%#{Date.today.year}%"]}}
-  scope :active, :conditions=>["inactive not like ?", 1]
-  scope :inactive, :conditions=>["inactive like ?", 1]
-  scope :male, :conditions=>["gender like ?", 0]
-  scope :female, :conditions=>["gender like ?", 1]
-  scope :campers, :conditions=>["position like ?", 0]
-  scope :teen, :conditions=>["position like ?", 1]
-  scope :adult, :conditions=>["position like ?", 3]
-  scope :cit, :conditions=>["position like ?", 2]
+  scope :active, where("inactive is null OR inactive = ?", 0)#tested
+  scope :inactive, where(:inactive=>true)#tested
+  scope :male, where(:gender => 0)#tested
+  scope :female, where(:gender=>1)#tested
+  scope :campers, where(:position=>0)#tested
+  scope :teen, where(:position=>1)#tested
+  scope :adult, where(:position=>3)#tested
+  scope :cit, where(:position=>2)#tested
   scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
   scope :unpaid, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ? and payment_number like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1, '']}}
+
+  #validations  
+  #custom validators
+  class MustExplainValidator < ActiveModel::EachValidator
+    def validate_each(record, attribute, value)
+      if value=="" || value.blank? || value.empty? 
+        if record.inactive==true
+          record.errors[attribute] << " must explain why the camper is inactive'" 
+        end
+      end
+    end
+  end
   
   validates_uniqueness_of :number
   validates_format_of :number, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/
@@ -32,10 +48,14 @@ class Camper < ActiveRecord::Base
   validates_numericality_of :counselor_years,  :if=>Proc.new {|u| !u.counselor_years.blank?}
   validates_date :dob, :if=>Proc.new { |u| !u.dob.blank? } 
   validates_date :last_tetnus_shot, :if=>Proc.new { |u| !u.last_tetnus_shot.blank? } 
-  
+  validates :inactive_info, :must_explain=>true
   attr_accessor :status
   attr_accessor :new_pack_name
-  
+
+
+
+
+    
   
   def self.find_by_full_name(first_name, last_name)
     unit = Thread.current["unit"].id
@@ -222,12 +242,10 @@ class Camper < ActiveRecord::Base
      end
    end
   
-  def validate
-    if inactive==true
-      errors.add(:inactive_info, "you must enter a reason for making the camper inactive") if inactive_info.blank?
-    end
-  end
   
+  
+
+
 end
 
 # == Schema Information
