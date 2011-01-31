@@ -5,10 +5,7 @@ class ReceiptsController < ApplicationController
   else
     before_filter :set_dev_user
   end
-  
   helper_method :sort_column, :sort_direction
-  
-  
   layout "application" ,  :except => {:export_excel, :create_excel}
 
     
@@ -30,46 +27,22 @@ class ReceiptsController < ApplicationController
     else
       @receipts = Receipt.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
     end
-      
-    
-      
   end
-  
-  #This is the search paramater and passes to the search.rhtml file
-#  def search
-#    sort_init 'date' 
-#    sort_update
-#    @receipts = Receipt.search(params[:search])
-##    logger.info("Here it is: " + @receipts.to_s)
-#    if @receipts.blank? || @receipts.empty?
-##      flash[:notice] = "There were no receipts matching the search term \"#{params[:search]}\""
-#      redirect_to :action=>'index'
-#    else
-#      @receipts = Receipt.search(params[:search]).paginate
-#      @header_text = "Search Results for \"#{params[:search]}\""
-#      @link_text = 'Back to all receipts'
-#      @link_action = 'index'
-#      render :action=>'index'
-#    end
-#  end
-    
+
   def list_by_date
     date = params[:date]
     sort_init 'date'
     sort_update
     @receipts = Receipt.paginate_standard_receipts :conditions => [ "date LIKE ?", "%#{date}%"],  :page=>params[:page], :per_page=>20, :order=>sort_clause
-
-
     render :action=>'index'
   end
+  
   
   def show_by_date
     @date = params[:date]
     @receipts = Receipt.find_standard_receipts( :conditions => [ "date LIKE ?", "%#{params[:date]}%"])
   end
 
-
-  #Do you really need documentation for a show method?
   def show
     @receipt = Receipt.find(params[:id])
   end
@@ -88,7 +61,7 @@ class ReceiptsController < ApplicationController
       end
     @receipt.user = current_user
     if @receipt.save
-      ReceiptMailer.deliver_receipt_confirmation(@receipt) unless @receipt.email.blank?
+      #ReceiptMailer.deliver_receipt_confirmation(@receipt) unless @receipt.email.blank?
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else
@@ -104,7 +77,6 @@ class ReceiptsController < ApplicationController
   end
 
   def update
-    logger.error "got into update"
     prev = 0
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
@@ -129,7 +101,7 @@ class ReceiptsController < ApplicationController
    receipt =  Receipt.find(params[:id])
    if receipt.unit =  Thread.current["unit"]
       receipt.destroy
-      flash[:notice] = "Your receipt has been successfull deleted."
+      flash[:notice] = "Your receipt has been successfully deleted."
       redirect_to :action => 'index'
   else
      flash[:notice]= "You cannot delete a receipt that is not in your unit"
