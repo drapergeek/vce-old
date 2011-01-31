@@ -7,7 +7,6 @@ class Bus < ActiveRecord::Base
          find(:all, :conditions=>['unit_id like ?', Thread.current["unit"].id])
      end
    end
-   
 end
 
 # == Schema Information

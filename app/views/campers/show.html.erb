@@ -85,7 +85,7 @@
 		</div>
 	<% end %>
 	<div id="phone_show_camper">
-		Phone: <%= number_to_phone(@camper.phone1, :area_code=>true) %>
+		Phone: <%= number_to_phone(@camper.phone1, :area_code=>true) unless @camper.phone1.blank? %>
 	</div>
 	
 	<% if @camper.position==1 %>
@@ -266,10 +266,7 @@
 <!--End of Course Selection List-->
 <% if can_view_item('campers', 'destroy')  %>
 <div id="delete camper">
-	<%= link_to "Click Here to Delete this camper", {
-	:action=>'destroy', :id=>@camper},
-	:confirm=>"ARE YOU SURE YOU WANT TO DELETE THIS CAMPER?  YOU CANNOT UNDO THIS ACTION!",
-	:method=>'post' %>
+	<%= link_to "Delete this camper", @receipt, :confirm => 'Are you sure?', :method => :delete %>
 	
 <% end %>
 	

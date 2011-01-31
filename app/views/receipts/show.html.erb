@@ -41,7 +41,7 @@
 	<%= @receipt.camper1.titleize%>
 	<%= link_to @receipt.camper1_id.titleize,
 	 	:controller=>'campers',
-	 	:action=>'find',
+	 	:action=>'show',
 	 	:number=>@receipt.camper1_id,
 	 	:name=>@receipt.camper1,
 		:payment=>@receipt.payment_extra.to_s
@@ -54,7 +54,7 @@
 	<%= @receipt.camper2.titleize%>
 	<%= link_to @receipt.camper2_id.titleize,
 	 	:controller=>'campers',
-	 	:action=>'find',
+	 	:action=>'show',
 	 	:number=>@receipt.camper2_id,
 	 	:name=>@receipt.camper2,
 		:payment=>@receipt.payment_extra.to_s
@@ -67,7 +67,7 @@
 	<%= @receipt.camper3.titleize%>
 	<%= link_to @receipt.camper3_id.titleize,
 	 	:controller=>'campers',
-	 	:action=>'find',
+	 	:action=>'show',
 	 	:number=>@receipt.camper3_id,
 	 	:name=>@receipt.camper3,
 		:payment=>@receipt.payment_extra.to_s

@@ -1,9 +1,8 @@
 <h1>Editing Attendee</h1>
 
-<% form_tag :action => 'update', :id => @camper do %>
   <%= render :partial => 'form' %>
-  <%= submit_tag 'Update Camper' %>
-<% end %>
+
+
 
 <%= link_to 'Show', :action => 'show', :id => @camper %> |
 <%= link_to 'Back', :action => 'list' %>

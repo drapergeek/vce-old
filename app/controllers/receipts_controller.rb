@@ -29,19 +29,19 @@ class ReceiptsController < ApplicationController
     end
   end
 
-  def list_by_date
-    date = params[:date]
-    sort_init 'date'
-    sort_update
-    @receipts = Receipt.paginate_standard_receipts :conditions => [ "date LIKE ?", "%#{date}%"],  :page=>params[:page], :per_page=>20, :order=>sort_clause
-    render :action=>'index'
-  end
+#  def list_by_date
+#    date = params[:date]
+##    sort_init 'date'
+#    sort_update
+#    @receipts = Receipt.paginate_standard_receipts :conditions => [ "date LIKE ?", "%#{date}%"],  :page=>params[:page], :per_page=>20
+#    render :action=>'index'
+#  end
   
   
-  def show_by_date
-    @date = params[:date]
-    @receipts = Receipt.find_standard_receipts( :conditions => [ "date LIKE ?", "%#{params[:date]}%"])
-  end
+#  def show_by_date
+#    @date = params[:date]
+#    @receipts = Receipt.find_standard_receipts( :conditions => [ "date LIKE ?", "%#{params[:date]}%"])
+#  end
 
   def show
     @receipt = Receipt.find(params[:id])
@@ -98,42 +98,20 @@ class ReceiptsController < ApplicationController
   end
 
   def destroy
-   receipt =  Receipt.find(params[:id])
-   if receipt.unit =  Thread.current["unit"]
+    receipt =  Receipt.find(params[:id])
+    if receipt.unit =  Thread.current["unit"]
       receipt.destroy
       flash[:notice] = "Your receipt has been successfully deleted."
       redirect_to :action => 'index'
-  else
+    else
      flash[:notice]= "You cannot delete a receipt that is not in your unit"
      rediect_to :action =>'index'
-  end
-   
-  end
-  
-  
-  
-  def validate
-    color = 'red'
-    id = params[:camper_id]
-    message =''
-    if id.length > 3
-      if id =~ /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/
-         if Receipt.find_camper_ids.include?(id)
-            message = 'This camper id is already in use'
-          else
-            message = 'This camper id is not in use'
-            color='green'
-          end
-      else
-        message='The camper id format is not correct'
-        color='redd'
-      end
     end
-    @message = "<b style='color:#{color}; display:inline' >#{message}</b>"
-    render :partial=>'message'
-   
   end
   
+
+#  def validate
+
   
   private
   
