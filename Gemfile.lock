@@ -136,6 +136,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  bundler
   factory_girl
   fastercsv
   formtastic (~> 1.1.0)
