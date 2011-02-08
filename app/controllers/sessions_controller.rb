@@ -30,7 +30,6 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash[:notice] = "Logged out!"
     redirect_to :controller=>:sessions
-    
   end
 
 end

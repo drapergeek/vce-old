@@ -1,6 +1,6 @@
 <h1>Editing bus</h1>
 
-<% form_tag :action => 'update', :id => @bus do %>
+<%= form_tag :action => 'update', :id => @bus do %>
   <%= render :partial => 'form' %>
   <%= submit_tag 'Edit' %>
 <% end %>

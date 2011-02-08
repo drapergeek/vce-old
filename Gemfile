@@ -5,7 +5,7 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3-ruby', :require => 'sqlite3'
+
 gem 'will_paginate'
 gem 'omniauth'
 gem "nifty-generators", :group => :development
@@ -37,6 +37,7 @@ gem 'validates_timeliness', '~> 3.0.2'
 #   gem 'webrat'
 # end
 group :development, :test do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem "factory_girl"
   gem "annotate"
 end
