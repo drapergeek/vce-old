@@ -16,6 +16,7 @@ Vce::Application.routes.draw do
   resources  :session
   resources :receipts
   resources :campers
+  resources :buses
   match "signup", :to=>"users#new"
   match "login", :to=>"sessions#index", :as=>:login
   match "logout", :to=>"sessions#destroy", :as=>:logout

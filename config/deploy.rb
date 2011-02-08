@@ -45,7 +45,7 @@ set :sudo, "sudo -p Password:"
 =end
 
 default_run_options[:pty] = true
-
+require 'bundler/capistrano'
   set :application, "vce"
 
   # If you aren't deploying to /u/apps/#{application} on the target

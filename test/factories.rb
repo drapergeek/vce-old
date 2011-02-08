@@ -36,6 +36,12 @@ Factory.define :receipt do |r|
   r.unit_id 1
 end
 
+
+Factory.define :bus do |b|
+  b.name "12"
+  b.capacity 30
+end
+
 # == Schema Information
 #
 # Table name: receipts

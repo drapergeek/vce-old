@@ -2,11 +2,25 @@ class Bus < ActiveRecord::Base
   has_many :campers
   belongs_to :unit
   
+  validates :capacity, :presence=>true
   def self.find_standard_buses(options={})
        with_scope :find => options do 
          find(:all, :conditions=>['unit_id like ?', Thread.current["unit"].id])
      end
-   end
+  end
+  
+  
+  def current_load
+    if self.campers.count > 0
+      return self.campers.count
+    else
+      return 0
+    end
+  end
+  
+  def seats_remaining
+    capacity - current_load
+  end
 end
 
 # == Schema Information
