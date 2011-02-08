@@ -14,7 +14,7 @@ gem 'mocha'
 gem 'formtastic', '~> 1.1.0'
 gem 'fastercsv'
 gem 'validates_timeliness', '~> 3.0.2'
-gem 'mysql2'
+#gem 'mysql2'
 # Use unicorn as the web server
 
 # gem 'unicorn'

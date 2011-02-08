@@ -55,7 +55,7 @@ class CampersController < ApplicationController
       @schools = get_schools
       @buses = Bus.find_standard_buses
       @packs = Pack.find_standard_packs
-      @units = Unit.find(:all)
+      @units = Unit.all
   end
 
   def create
