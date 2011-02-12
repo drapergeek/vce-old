@@ -45,3 +45,7 @@ label{
 .pretty th .desc {
   background-image: url(/images/sort_desc.png);
 }
+
+.camper_collage_links{
+	margin-bottom: 10px;
+}

@@ -46,6 +46,9 @@
 	 	:name=>@receipt.camper1,
 		:payment=>@receipt.payment_extra.to_s
 	%>
+	<% if @receipt.camper1_collage %>
+		<strong>Purchased a collage for this camper</strong>
+	<% end %>
 </p>
 
 <% unless @receipt.camper2.blank? %>
@@ -59,6 +62,10 @@
 	 	:name=>@receipt.camper2,
 		:payment=>@receipt.payment_extra.to_s
 	%>
+	<% if @receipt.camper2_collage %>
+		<strong>Purchased a collage for this camper</strong>
+	<% end %>
+
 </p>
 
 <% unless @receipt.camper3.blank? %>
@@ -72,6 +79,9 @@
 	 	:name=>@receipt.camper3,
 		:payment=>@receipt.payment_extra.to_s
 	%>
+	<% if @receipt.camper3_collage %>
+		<strong>Purchased a collage for this camper</strong>
+	<% end %>
 </p>
 <% end %>
 <% end %>
