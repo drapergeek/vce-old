@@ -50,7 +50,7 @@ class ReceiptsController < ApplicationController
   def new
     @receipt = Receipt.new
     @states = State.find(:all)
-    @camp_price = current_user.unit.camp_price
+    @camp_price = current_user.unit.camp_price || 210.00
   end
 
   def create
