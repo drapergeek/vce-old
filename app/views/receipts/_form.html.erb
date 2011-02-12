@@ -16,7 +16,7 @@
 		<% value = @receipt.amount ||  number_to_currency(@camp_price, :format=>"%n") %>
 
 		<%= f.input :amount, :input_html=>{:value=>value}%>
-		<%= f.input :payment_method, :as=>:radio, :collection=>["Cash", "Check","Money Order"], :input_html=>{:onchange=>"change_payment_method(this.id)"} %>
+		<%= f.input :payment_method, :as=>:radio, :collection=>["Cash", "Check","Money Order"],:selected=>"Check", :input_html=>{:onchange=>"change_payment_method(this.id)"} %>
 		<%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
 	<% end %>
 	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>
@@ -24,23 +24,82 @@
 		<%= content_tag :span, :id=>"camper_1" do %>
 			<%= f.input :camper1, :label=>"Camper 1 Name" %>
 			<%= f.input :camper1_id, :label=>"Camper 1 ID Number" %>
+			<%= link_to_function "Add/Remove Collage for Camper 1", nil, :id=>"camper1_collage_link" do |page| 
+					page <<"if(document.getElementById('receipt_camper1_collage').checked){"
+						page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+						page <<"document.getElementById('receipt_amount').value = (camp_price-10);"
+						page[:receipt_camper1_collage].checked = ""
+						page[:receipt_amount].visual_effect :pulsate
+						page[:receipt_amount].visual_effect :highlight
+					page<<"}else{"
+						
+						page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+						page <<"document.getElementById('receipt_amount').value = (camp_price+10);"
+						page[:receipt_camper1_collage].checked = "checked"
+						page[:receipt_amount].visual_effect :pulsate
+						page[:receipt_amount].visual_effect :highlight
+					page<<"}"
+
+				end%>
+			<%= f.input :camper1_collage, :label=>"Camper 1 Collage", :input_html=>{:disabled=>"disabled"}%>
+
 		<% end %>
 		<%= content_tag :span, :id=>"camper_2", :style=>"display:none"  do %>
 			<%= f.input :camper2, :label=>"Camper 2 Name" %>
 			<%= f.input :camper2_id, :label=>"Camper 2 ID Number" %>
+			<%= link_to_function "Add/Remove Collage for Camper 2", nil, :id=>"camper2_collage_link" do |page| 
+					page <<"if(document.getElementById('receipt_camper2_collage').checked){"
+						page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+						page <<"document.getElementById('receipt_amount').value = (camp_price-10);"
+						page[:receipt_camper2_collage].checked = ""
+						page[:receipt_amount].visual_effect :pulsate
+						page[:receipt_amount].visual_effect :highlight
+					page<<"}else{"
+						
+						page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+						page <<"document.getElementById('receipt_amount').value = (camp_price+10);"
+						page[:receipt_camper2_collage].checked = "checked"
+						page[:receipt_amount].visual_effect :pulsate
+						page[:receipt_amount].visual_effect :highlight
+					page<<"}"
+				
+				
+				
+				end%>
+			<%= f.input :camper2_collage, :label=>"Camper 2 Collage", :input_html=>{:disabled=>"disabled"}%>
+			
 		<% end %>
 		<%= content_tag :span, :id=>"camper_3", :style=>"display:none" do %>
 			<%= f.input :camper3, :label=>"Camper 3 Name" %>
 			<%= f.input :camper3_id, :label=>"Camper 3 ID Number" %>
+			<%= link_to_function "Add/Remove Collage for Camper 3", nil, :id=>"camper3_collage_link" do |page| 
+					page <<"if(document.getElementById('receipt_camper3_collage').checked){"
+						page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+						page <<"document.getElementById('receipt_amount').value = (camp_price-10);"
+						page[:receipt_camper3_collage].checked = ""
+						page[:receipt_amount].visual_effect :pulsate
+						page[:receipt_amount].visual_effect :highlight
+					page<<"}else{"
+
+						page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+						page <<"document.getElementById('receipt_amount').value = (camp_price+10);"
+						page[:receipt_camper3_collage].checked = "checked"
+						page[:receipt_amount].visual_effect :pulsate
+						page[:receipt_amount].visual_effect :highlight
+					page<<"}"
+
+
+
+				end%>
+			<%= f.input :camper3_collage, :label=>"Camper 3 Collage", :input_html=>{:disabled=>"disabled"}%>
 		<% end %>
 		<%= content_tag :div, :id=>"camper_link_1", :class=>"add_camper_link" do %>
 			<%= link_to_function "Add another camper", nil, :id => "camper_link_1_link"  do |page|
 			    	page[:camper_2].visual_effect :blind_down
 			    	page.show :camper_link_2
 			    	page.remove :camper_link_1
-					unless @camp_price.blank?
-			    		page[:receipt_amount].value = (@camp_price*2)
-					end
+					page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+					page <<"document.getElementById('receipt_amount').value = (camp_price + #{@camp_price});"
 					page[:receipt_amount].visual_effect :pulsate
 					page[:receipt_amount].visual_effect :highlight
 			  		end %>
@@ -49,7 +108,8 @@
 		<%= link_to_function("Add another camper", nil, :id => "camper_link_1_link") do |page|
 				page[:camper_3].visual_effect :blind_down
 				page.remove :camper_link_2
-				page[:receipt_amount].value = (@camp_price*3)
+				page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
+				page <<"document.getElementById('receipt_amount').value = (camp_price + #{@camp_price});"
 				page[:receipt_amount].visual_effect :pulsate
 				page[:receipt_amount].visual_effect :highlight
 			end %>

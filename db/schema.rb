@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112150156) do
+ActiveRecord::Schema.define(:version => 20110212195947) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -124,6 +124,9 @@ ActiveRecord::Schema.define(:version => 20110112150156) do
     t.datetime "created_at"
     t.integer  "unit_id"
     t.string   "email"
+    t.boolean  "camper1_collage"
+    t.boolean  "camper2_collage"
+    t.boolean  "camper3_collage"
   end
 
   create_table "rights", :force => true do |t|

@@ -48,14 +48,7 @@
 <!--Beginning of General Info-->
 <div id="general_info_new" class="camper_section_new">
 	<h3>General Information</h3>	
-	<%  if current_user.unit.name == 'State Level' %>
-	<div id="camper_unit_form">
-		<!--This is only shown if the user making the camper is statewide-->
-		<%= c.collection_select('unit_id' , @units, 'id', 'name') %>
-	</div>
-	<% else %>
-		
-	<% end %>
+
 	
 	<div id="name_new">
 		<label for="camper_fname">First:</label>

@@ -28,12 +28,14 @@ class ApplicationController < ActionController::Base
        if @current_user
          set_thread_user
          set_thread_unit
+         return @current_user
        end
     end
   end
   
   
   def login_required
+    logger.info "The session user id is #{session[:user_id]}"
     unless current_user
       logger.info "POOP"
       reset_session

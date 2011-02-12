@@ -10,7 +10,13 @@ function change_payment_method(){
 	
 }
 
-function add_camper_link(){
-	
+
+function change_collage(){
+	if (document.getElementById("receipt_payment_method_cash").checked) {
+		Element.hide("receipt_payment_extra_input");
+	}
+	else{
+			Element.show("receipt_payment_extra_input");
+	};
 	
 }
