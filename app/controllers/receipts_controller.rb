@@ -50,7 +50,8 @@ class ReceiptsController < ApplicationController
   def new
     @receipt = Receipt.new
     @states = State.find(:all)
-    @camp_price = current_user.unit.camp_price || 210.00
+      
+    @camp_price = Unit.find(Thread.current["unit"]).camp_price || 210.00
   end
 
   def create
