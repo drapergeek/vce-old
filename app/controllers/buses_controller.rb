@@ -1,9 +1,4 @@
 class BusesController < ApplicationController
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
     
   def index
     @buses = Bus.paginate_standard_buses :per_page=>10, :page=>params[:page]

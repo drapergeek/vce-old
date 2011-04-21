@@ -11,7 +11,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :remember_token_expires_at, :datetime
     end
     
-    @user = User.new(:login=>'gdraper', :password=>'jason', :password_confirmation=>'jason', :email=>'drapersjunk@gmail.com')
+    @user = User.new(:password=>'jason', :password_confirmation=>'jason', :email=>'drapersjunk@gmail.com')
     @user.save!
   end
 

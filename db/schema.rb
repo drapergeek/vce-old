@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110212195947) do
+ActiveRecord::Schema.define(:version => 20110421152638) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -170,7 +170,6 @@ ActiveRecord::Schema.define(:version => 20110212195947) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "login"
     t.string   "email"
     t.string   "crypted_password",          :limit => 40
     t.string   "salt",                      :limit => 40

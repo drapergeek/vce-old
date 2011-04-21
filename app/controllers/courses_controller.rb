@@ -1,12 +1,5 @@
 class CoursesController < ApplicationController
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
   
-
-
   Course.content_columns.each do |column| 
 	  in_place_edit_for :course, column.name 
   end  

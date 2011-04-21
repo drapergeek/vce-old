@@ -2,11 +2,6 @@ class ExcelController < ApplicationController
   include ActionView::Helpers::NumberHelper
   layout 'application', :only=>'custom_excel'
   require 'fastercsv'
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
 
 
   def receipts_all

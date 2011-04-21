@@ -1,12 +1,5 @@
 class ExtrasController < ApplicationController
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
   
-
-
   def index
     #this is for the reports and such
     #no info needed tho...

@@ -1,18 +1,11 @@
 class ApplicationController < ActionController::Base
+  before_filter :login_required   
   protect_from_forgery
   helper_method :current_user
 
 
   private
   
-  
-  
-  def set_dev_user
-    u = User.first
-    session[:user_id] = u.id
-    #just need to call this to set the current user
-    current_user
-  end
   
   def current_user
     if defined?(@current_user)
@@ -40,7 +33,7 @@ class ApplicationController < ActionController::Base
       logger.info "POOP"
       reset_session
       flash[:error] = "You must be logged in to view this page!"
-      redirect_to :root
+      redirect_to :login
     end
   end
   

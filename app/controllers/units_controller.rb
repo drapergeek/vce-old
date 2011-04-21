@@ -1,14 +1,5 @@
 class UnitsController < ApplicationController
 
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
-  
-
-  # GET /units
-  # GET /units.xml
   def index
     @units = Unit.find(:all)
     respond_to do |format|

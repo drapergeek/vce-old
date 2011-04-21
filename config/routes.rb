@@ -13,15 +13,14 @@ Vce::Application.routes.draw do
   resources :rights
   resources :units
   resources :users
-  resources  :session
+  resources  :sessions
   resources :receipts
   resources :campers
   resources :buses
   match "signup", :to=>"users#new"
-  match "login", :to=>"sessions#index", :as=>:login
+  match "login", :to=>"sessions#new", :as=>:login
   match "logout", :to=>"sessions#destroy", :as=>:logout
-
-   root :to=>"sessions#index"
+  root :to=>"receipts#index"
 
    match ':controller(/:action(/:id(.:format)))'
 end

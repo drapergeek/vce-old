@@ -1,7 +1,5 @@
 class AnnoucementsController < ApplicationController
-  layout 'application'
-  # GET /annoucements
-  # GET /annoucements.xml
+
   def index
     @annoucements = Annoucement.find(:all)
 

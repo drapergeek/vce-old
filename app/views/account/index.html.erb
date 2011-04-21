@@ -19,7 +19,6 @@
 			<%= link_to 'Edit', {:action=>'edit',:id=>u} %>
 			<%= link_to 'Remove', {:action=>'destroy',:id=>u},
 								:confirm=>"Are you SURE you want to remove this user?" %>
-			<%= link_to 'Authorize User', {:action=>"authorize", :id=>u}, :confirm=>"Are you sure you want to authorize #{u.login}" %>
 		</li>
 	<% end %>
 </ul>

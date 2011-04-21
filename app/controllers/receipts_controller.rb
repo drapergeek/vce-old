@@ -1,10 +1,5 @@
 class ReceiptsController < ApplicationController
 
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
   helper_method :sort_column, :sort_direction
   layout "application" ,  :except => {:export_excel, :create_excel}
 

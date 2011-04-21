@@ -1,16 +1,4 @@
-class RolesController < ApplicationController
-  layout "application"
-
-  if Rails.env == "production"
-    before_filter :login_required
-  else
-    before_filter :set_dev_user
-  end
-  
-  
-  
-  # GET /roles
-  # GET /Role.xml
+class RolesController < ApplicationController 
   def index
     @roles = Role.find(:all)
 

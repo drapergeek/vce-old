@@ -73,7 +73,7 @@ function DoNav(theUrl)
 
 			<!--End Search form-->
 			
-			Welcome <%= current_user.login %>!
+			Welcome <%= current_user.email %>!
 			<%= link_to 'Logout', logout_path %> 
 		<% else %>
 			<%= link_to 'Login', login_path%>

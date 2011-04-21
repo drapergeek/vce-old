@@ -1,14 +1,4 @@
-class AccountController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
- 
-  # If you want "remember me" functionality, add this before_filter to Application Controller
-  #before_filter :login_from_cookie
-  #before_filter :login_required , :except=>[:login, :index]
-  #before_filter :authorize, :only=>[:signup, :super, :destroy, :index]
-  skip_before_filter :check_authentication, :check_authorization , :only=>[:login, :index]
-
-
-  
+class AccountController < ApplicationController 
   def index
     logger.info 'got to index'
     if current_user
@@ -20,15 +10,6 @@ class AccountController < ApplicationController
       flash[:notice] = "You must be logged in to view this page"
       redirect_to login_path
     end
-  end
-  
-  def authorize
-    @user = User.find(params[:id])
-    @user.authorize!
-    @user.unit_id = current_user.id
-    @user.save!
-    flash[:notice] = "The user #{@user.fname} #{@user.lname} has been authorized!"
-    redirect_to :action=>:index
   end
   
   def destroy
@@ -43,21 +24,6 @@ class AccountController < ApplicationController
     send_data @image.picture, :filename => "photo.jpg", :type => @image.content_type, :disposition => "inline" 
   end 
    
-  
-  def login
-    return unless request.post?
-    self.current_user = User.authenticate(params[:login], params[:password])
-    if logged_in?
-      if params[:remember_me] == "1"
-        self.current_user.remember_me
-        cookies[:auth_token] = { :value => self.current_user.remember_token , :expires => self.current_user.remember_token_expires_at }
-      end
-      redirect_back_or_default(:controller => 'receipts', :action => 'index')
-      flash[:notice] = "Log in succesful"
-    else
-      flash[:notice] = "Username or password invalid"
-    end
-  end
 
   def signup
     @user = User.new(params[:user])
@@ -67,11 +33,13 @@ class AccountController < ApplicationController
     unless @user.roles.detect{|role| role.name.downcase == "default"}
       @user.roles << Role.find_by_name("default")
     end
-    @user.save!
-    redirect_back_or_default(:controller => '/account', :action => 'index')
-    flash[:notice] = "User #{@user.fname} #{@user.lname} successfully created!"
-  rescue ActiveRecord::RecordInvalid
-    render :action => 'signup'
+    if @user.save
+      flash[:notice] = "User #{@user.fname} #{@user.lname} successfully created!"
+      redirect_to :action=>:index
+    else
+      flash[:error] = "User could not be saved"
+      render :signup
+    end
   end
   
   

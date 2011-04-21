@@ -26,9 +26,6 @@
 <p><label for="unit_d">Unit: </label><br/>
 <%= u.collection_select  'unit_id', @units, 'id' , 'name'%></p>
 
-<p><label for="login">Login</label><br/>
-<%= u.text_field  'login' %></p>
-
 
 <% for role in Role.all %>
 	<div>
