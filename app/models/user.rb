@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     user = find_by_email(email)
     if user
       logger.info "we at least found a user"
-      logger.info user.cryped_password
+      logger.info user.crypted_password
       logger.info BCrypt::Engine.hash_secret(password,user.salt)
     end
     if user && user.crypted_password == BCrypt::Engine.hash_secret(password,user.salt)
