@@ -18,9 +18,6 @@ class User < ActiveRecord::Base
   scope :authorized, where(:authorized=>true)
   scope :unauthorized, where(:authorized=>false)
 
-  def admin?
-    login=="gdraper" || login=="ddraper" || login=="bhairston" || login=="lnelson" || login=="user" || login=="draper" 
-  end
 
 
   def pictureimg=(picture_field) 
@@ -45,6 +42,9 @@ class User < ActiveRecord::Base
   
   def self.authenticate(email, password)
     user = find_by_email(email)
+    if user
+      logger.info "we at least found a user"
+    end
     if user && user.crypted_password == BCrypt::Engine.hash_secret(password,user.salt)
       user
     else
