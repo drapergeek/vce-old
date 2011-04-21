@@ -41,8 +41,6 @@ module Vce
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
-    config.logger    = Logger.new(STDOUT)
-    config.log_level = :info
+
   end
 end
