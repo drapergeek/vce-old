@@ -23,7 +23,6 @@ class ReceiptsController < ApplicationController
     else
       @receipts = Receipt.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
     end
-    authorize! :index, Receipt
   end
 
 #  def list_by_date
