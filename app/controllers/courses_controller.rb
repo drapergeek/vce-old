@@ -5,13 +5,9 @@ class CoursesController < ApplicationController
   end  
  
   def index
-    list
-    render :action => 'list'
+    @courses = Course.all  
   end
 
-  def list
-    @courses = Course.paginate_standard_courses :per_page=>5, :page => params[:page]
-  end
 
   def show
     @course = Course.find(params[:id])
