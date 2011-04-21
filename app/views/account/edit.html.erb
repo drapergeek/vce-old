@@ -27,6 +27,18 @@
 <%= u.collection_select  'unit_id', @units, 'id' , 'name'%></p>
 
 
+<p><label for="email">Email</label><br/>
+<%= u.text_field  'email'  %></p>
+
+
+<p><label for="password">Password</label><br/>
+<%= u.password_field 'password' %></p>
+
+<p><label for="password_confirmation">Confirm Password</label><br/>
+<%= u.password_field 'password_confirmation' %></p>
+
+
+
 <% for role in Role.all %>
 	<div>
 		<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
