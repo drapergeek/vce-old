@@ -5,6 +5,7 @@ class ExcelController < ApplicationController
 
 
   def receipts_all
+    authorize :excel, Camper
     @receipts = Receipt.find_standard_receipts
     logger.info "the receipt count"
     logger.info @receipts.count
@@ -69,12 +70,13 @@ class ExcelController < ApplicationController
     
   #this will give a basic listing of all campers
   def camper_list
-    
+
     
   end
 
 
   def unpaid_campers
+    authorize :unpaid_campers, Camper
     @campers = Camper.unpaid
       stream_csv do |csv|
         @header = ["First Name","Middle Name", "Last Name", "Preferred Name"]
@@ -91,6 +93,7 @@ class ExcelController < ApplicationController
   end
   
   def bus_list
+    authorize :bus_list, Bus
     @buses = Bus.find(:all)
     stream_csv do |csv|
       @buses.each do |b|
@@ -105,6 +108,7 @@ class ExcelController < ApplicationController
   end
   
   def all_camper_info
+    authorize! :all_camper_info, Camper
     @campers = Camper.standard
       stream_csv do |csv|
         @header = ["First Name","Middle Name", "Last Name", "Preferred Name"]
@@ -209,6 +213,7 @@ class ExcelController < ApplicationController
   end
 
   def bus_list
+    authorize! :bus_list, Bus
     @buses = Bus.find(:all)
     stream_csv do |csv|
       @buses.each do |b|
@@ -223,6 +228,7 @@ class ExcelController < ApplicationController
   end
 
   def campers_classes
+    authorize! :campers_class, Camper
      @campers = Camper.standard
       stream_csv do |csv|
         @header = ["First Name","Last Name", "Preferred Name"]
@@ -264,6 +270,7 @@ class ExcelController < ApplicationController
   
 
   def health_concerns
+    authorize! :health_concerns, Camper
     @campers = Camper.standard
     stream_csv do |csv|
       @header = ['Camper Name', 'Issue', 'Room Number']
@@ -288,6 +295,7 @@ class ExcelController < ApplicationController
   end
   
   def demographic_report
+    authorize! :demographic_report, Camper
     #this is a list enrolled camper demographics
     @campers = Camper.standard 
     @campers_grades = Array.new

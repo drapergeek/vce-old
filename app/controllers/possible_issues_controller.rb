@@ -1,4 +1,5 @@
 class PossibleIssuesController < ApplicationController
+  load_and_authorize_resource
   def index
     @possible_issues = PossibleIssue.all
   end

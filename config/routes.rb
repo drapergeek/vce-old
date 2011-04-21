@@ -14,7 +14,11 @@ Vce::Application.routes.draw do
   resources :units
   resources :users
   resources  :sessions
-  resources :receipts
+  resources :receipts do
+    collection do
+      get 'totals'
+    end
+  end
   resources :campers
   resources :buses
   match "signup", :to=>"users#new"

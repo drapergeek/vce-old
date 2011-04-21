@@ -1,19 +1,7 @@
-<h2>Authorized Users</h2>
-<%= link_to 'View Roles', {:controller=>'roles'} %> | 
+<h2>Users</h2>
+<%= link_to 'View Roles', {:controller=>'roles'} %>
 <ul>
-	<% @authorized_users.each do |u| %>
-		<li class="user_list">
-			<%= u.lname  + ", " + u.fname unless u.lname.nil? || u.fname.blank?%> 
-			<%= link_to 'Edit', {:action=>'edit',:id=>u} %>
-			<%= link_to 'Remove', {:action=>'destroy',:id=>u},
-								:confirm=>"Are you SURE you want to remove this user?" %>
-		</li>
-	<% end %>
-</ul>
-
-<h2>Users Awaiting Authorization</h2>
-<ul>
-	<% @unauthorized_users.each do |u| %>
+	<% @users.each do |u| %>
 		<li class="user_list">
 			<%= u.lname  + ", " + u.fname unless u.lname.nil? || u.fname.blank?%> 
 			<%= link_to 'Edit', {:action=>'edit',:id=>u} %>

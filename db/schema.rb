@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110421152638) do
+ActiveRecord::Schema.define(:version => 20110421170832) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -127,12 +127,6 @@ ActiveRecord::Schema.define(:version => 20110421152638) do
     t.boolean  "camper1_collage"
     t.boolean  "camper2_collage"
     t.boolean  "camper3_collage"
-  end
-
-  create_table "rights", :force => true do |t|
-    t.string "name"
-    t.string "controller"
-    t.string "action"
   end
 
   create_table "rights_roles", :id => false, :force => true do |t|

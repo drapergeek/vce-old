@@ -15,6 +15,7 @@ gem 'fastercsv'
 gem 'validates_timeliness', '~> 3.0.2'
 gem 'mysql2'
 gem 'bcrypt-ruby', :require=>"bcrypt"
+gem 'cancan'
 # Use unicorn as the web server
 
 # gem 'unicorn'

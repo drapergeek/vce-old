@@ -9,6 +9,7 @@ class ReceiptsController < ApplicationController
  def totals
    @receipts = Receipt.find_standard_receipts
    @receipts_dates = @receipts.group_by{|r| r.date.beginning_of_day}
+   authorize! :totals, Receipt
  end
   
   #This method returns just a list of sortable columns
@@ -22,6 +23,7 @@ class ReceiptsController < ApplicationController
     else
       @receipts = Receipt.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
     end
+    authorize! :index, Receipt
   end
 
 #  def list_by_date
@@ -40,13 +42,14 @@ class ReceiptsController < ApplicationController
 
   def show
     @receipt = Receipt.find(params[:id])
+    authorize! :show, @receipt
   end
 
   def new
     @receipt = Receipt.new
     @states = State.find(:all)
-      
     @camp_price = 210.00
+    authorize! :new, @receipt
   end
 
   def create
@@ -56,6 +59,7 @@ class ReceiptsController < ApplicationController
         @receipt.unit = current_user.unit
       end
     @receipt.user = current_user
+    authorize! :create, @receipt
     if @receipt.save
       #ReceiptMailer.deliver_receipt_confirmation(@receipt) unless @receipt.email.blank?
       flash[:notice] = 'Receipt was successfully created.'
@@ -70,11 +74,13 @@ class ReceiptsController < ApplicationController
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
     @camp_price = current_user.unit.camp_price
+    authorize! :edit, @receipt
   end
 
   def update
     prev = 0
     @receipt = Receipt.find(params[:id])
+    authorize! :update, @receipt
     @states = State.find(:all)
     @camp_price = current_user.unit.camp_price
     unless @receipt.refund.blank? || @receipt.refund.nil? || @receipt.refund==0
@@ -95,6 +101,7 @@ class ReceiptsController < ApplicationController
 
   def destroy
     receipt =  Receipt.find(params[:id])
+    authorize! :destroy, receipt
     if receipt.unit =  Thread.current["unit"]
       receipt.destroy
       flash[:notice] = "Your receipt has been successfully deleted."

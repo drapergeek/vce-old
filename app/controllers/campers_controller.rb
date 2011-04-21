@@ -1,11 +1,9 @@
 class CampersController < ApplicationController
   layout 'application', :except=>'export_excel_classes'
   helper_method :sort_column, :sort_direction
-
-
-
   
   def index
+    authorize! :index, Camper
     if params[:search]
       logger.info @campers
       @campers = Camper.search(params[:search]).paginate(:per_page=>25, :page=>params[:page])
@@ -19,6 +17,7 @@ class CampersController < ApplicationController
   end
   
   def show
+    authorize! :show, Camper
     if params[:number]
       #we're prob looking up someone
       @camper = Camper.find_by_number(params[:number])
@@ -36,6 +35,7 @@ class CampersController < ApplicationController
    end
   
   def new
+        authorize! :new, Camper
       unless params[:name].blank? || params[:number].blank?
         @names = params[:name].split(' ')
         if @names.length==2
@@ -56,6 +56,7 @@ class CampersController < ApplicationController
   end
 
   def create
+      authorize! :create, Camper
      @camper = Camper.new(params[:camper])
      unless current_user.unit == 'State Wide'
        @camper.unit = current_user.unit
@@ -74,6 +75,7 @@ class CampersController < ApplicationController
    end
   
   def edit
+    authorize! :edit, Camper
     @camper = Camper.find(params[:id])
     @states = State.find(:all)
     @schools = get_schools
@@ -84,6 +86,7 @@ class CampersController < ApplicationController
  
   
    def update
+     authorize! :update, Camper
      @camper = Camper.find(params[:id])
      if @camper.update_attributes(params[:camper])
        flash[:notice] = 'Camper was successfully updated.'
@@ -99,6 +102,7 @@ class CampersController < ApplicationController
    end
 
    def destroy
+     authorize! :destroy, Camper
      Camper.find(params[:id]).destroy
      flash[:notice] = 'The camper was deleted successfully.'
      redirect_to campers_path
@@ -109,6 +113,7 @@ class CampersController < ApplicationController
   
   #untested
   def list_by_input
+    authorize! :list_by_input, Camper
     sort_init 'created_at'
     sort_update
     @campers = Camper.find(:all, :conditions=>["#{params[:find_by]} like ?", params[:item]])
@@ -128,6 +133,7 @@ class CampersController < ApplicationController
   
   #This method allows a course to be added to the list of courses for a camper
   def add_course
+    authorize! :add_course, Camper
     @camper = Camper.find(params[:id])
     if params[:course_selection].blank?
       flash[:notice] = "You must select a course to be added to the camper"
@@ -143,6 +149,7 @@ class CampersController < ApplicationController
   #It assumes that it exists due to the fact that the x would not exist
   #For the user to click
   def remove_course
+    authorize! :remove_course, Camper
     @camper = Camper.find_by_id(params[:camper])
     @course = Course.find_by_id(params[:course])
     @camper.courses.delete(@course)

@@ -3,19 +3,20 @@ class AccountController < ApplicationController
     logger.info 'got to index'
     if current_user
       logger.info 'showing current user'
-      @unauthorized_users = User.unauthorized
-      @authorized_users = User.authorized
+      @users = User.all
     else
       logger.info 'no current user'
       flash[:notice] = "You must be logged in to view this page"
       redirect_to login_path
     end
+    authorize! :index, User
   end
   
   def destroy
     User.find(params[:id]).destroy
     flash[:notice] = "The user was successfully destroyed."
     redirect_to :action => 'index'
+    authorize! :destroy, User
   end
   
 
@@ -40,6 +41,7 @@ class AccountController < ApplicationController
       flash[:error] = "User could not be saved"
       render :signup
     end
+    authorize! :signup, User
   end
   
   
@@ -50,11 +52,13 @@ class AccountController < ApplicationController
     else
       edit_another_user(params[:id])
     end
+    authorize! :edit, User
   end
   
   def edit_another_user(id)
     @units = Unit.find(:all)
     @user = User.find_by_id(id)
+    authorize! :edit_another_user, User
   end
   
   
@@ -69,7 +73,7 @@ class AccountController < ApplicationController
        flash[:notice] = 'There was an error updating your user'
        render :action => 'edit'
      end
-    
+    authorize! :update, User
   end
   
   def logout

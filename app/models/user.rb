@@ -29,6 +29,15 @@ class User < ActiveRecord::Base
     self.picture = picture_field.read 
   end 
   
+  def role?(role)
+    roles.all.each do |r|
+      if r.name.to_sym == role
+        return true
+      end
+    end
+    false
+  end
+
   def authorize!
     self.authorized=true
     self.save!
