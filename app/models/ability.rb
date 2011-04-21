@@ -11,9 +11,9 @@ class Ability
 
     
 
-
+    can :manage, :all
     if user.role? :admin
- can :manage, :all     
+      can :manage, :all     
       
     end
   end
