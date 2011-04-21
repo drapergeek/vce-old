@@ -1,7 +1,7 @@
 class BusesController < ApplicationController
     load_and_authorize_resource
   def index
-    @buses = Bus.paginate_standard_buses :per_page=>10, :page=>params[:page]
+    @buses = Bus.all
   end
 
 
