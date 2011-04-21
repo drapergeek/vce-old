@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = "Access denied."
-    redirect_to root_url
+    redirect_to :login
   end
   
   private
@@ -37,7 +37,6 @@ class ApplicationController < ActionController::Base
   def login_required
     logger.info "The session user id is #{session[:user_id]}"
     unless current_user
-      logger.info "POOP"
       reset_session
       flash[:error] = "You must be logged in to view this page!"
       redirect_to :login
