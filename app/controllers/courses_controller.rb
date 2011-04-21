@@ -24,7 +24,7 @@ class CoursesController < ApplicationController
       end
     if @course.save
       flash[:notice] = 'Course was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to :action => 'index'
     else
       render :action => 'new'
     end
@@ -46,6 +46,6 @@ class CoursesController < ApplicationController
 
   def destroy
     Course.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to :action => 'index'
   end
 end
