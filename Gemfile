@@ -8,7 +8,6 @@ gem 'rails', '3.0.3'
 gem 'bundler'
 
 gem 'will_paginate'
-gem 'omniauth'
 gem "nifty-generators", :group => :development
 gem 'mocha'
 gem 'formtastic', '~> 1.1.0'
