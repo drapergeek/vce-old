@@ -15,12 +15,9 @@
 <!--End of Navigation-->
 <br />
 <div>
-<form action="">
-	<input type="button" value="Print This Page" message="" onClick="printpage()" />
-</form>
+	
+	<a href="javascript:window.print()">Print This Page</a> 
 </div>
-
-<h2> Receipt #<%=@receipt.id  %> </h2>
 
 <p>Date: <%= @receipt.date.strftime("%m/%d/%y") unless @receipt.date.blank? %></p>
 

@@ -59,6 +59,7 @@ class ReceiptsController < ApplicationController
         @receipt.unit = current_user.unit
       end
     @receipt.user = current_user
+    @receipt.date = Time.now
     authorize! :create, @receipt
     if @receipt.save
       #ReceiptMailer.deliver_receipt_confirmation(@receipt) unless @receipt.email.blank?
