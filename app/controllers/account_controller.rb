@@ -1,14 +1,14 @@
 class AccountController < ApplicationController 
   def index
     logger.info 'got to index'
-    if current_user
+   # if current_user
       logger.info 'showing current user'
       @users = User.all
-    else
-      logger.info 'no current user'
-      flash[:notice] = "You must be logged in to view this page"
-      redirect_to login_path
-    end
+    #else
+     # logger.info 'no current user'
+    #  flash[:notice] = "You must be logged in to view this page"
+    #  redirect_to login_path
+    #end
     authorize! :index, User
   end
   
