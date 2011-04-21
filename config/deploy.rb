@@ -84,11 +84,6 @@ require 'bundler/capistrano'
   
   
   
-  task :after_update_code, :roles => [:web, :db, :app] do
-    run "ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml"
-  end
-  
-
 
   namespace :deploy do
 
