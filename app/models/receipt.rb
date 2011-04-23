@@ -57,7 +57,7 @@ class Receipt < ActiveRecord::Base
   validates_format_of  :email, :with       => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :allow_blank=>true, :message => 'email must be valid'
   validates :amount, :postive_price=>true
   validates :refund, :requires_explanation=>true
-  validates :zip, :presence=>true, :length=>{:minimum=>5}
+  validates :zip, :presence=>true
   validates :camper1_id, :camper_id_must_be_unique=>true, :on=>:create
   validates :camper2_id, :camper_id_must_be_unique=>true, :on=>:create
   validates :camper3_id, :camper_id_must_be_unique=>true, :on=>:create
