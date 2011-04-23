@@ -151,7 +151,7 @@
 	<div id="parent_name"><%= @camper.parent_fname + " " + @camper.parent_lname%></div>
 	<div id="parent_phone">
 		<% unless @camper.phone2.blank? %>
-			 Alternate phone: <%= number_to_phone(@camper.phone2, :area_code=>true) %>
+			 Alternate phone: <%= @camper.phone2 %>
 		<% end %>
 	</div>
 </div>
