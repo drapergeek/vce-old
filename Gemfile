@@ -13,7 +13,6 @@ gem 'mocha'
 gem 'formtastic', '~> 1.1.0'
 gem 'fastercsv'
 gem 'validates_timeliness', '~> 3.0.2'
-gem 'mysql2'
 gem 'bcrypt-ruby', :require=>"bcrypt"
 gem 'cancan'
 # Use unicorn as the web server
@@ -45,4 +44,7 @@ group :development, :test do
   gem "annotate"
 end
 
+group :production do
+	gem 'mysql2'
+end
 gem "mocha", :group => :test

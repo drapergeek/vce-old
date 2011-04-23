@@ -1,4 +1,4 @@
-<% if current_user.admin? %>
+<% if can? :new, Camper %>
 	<%= link_to 'New Camper', :action=>'new' %> | 
 <% end %>
 <%= link_to 'Edit', :action => 'edit', :id => @camper %> |
