@@ -156,7 +156,7 @@
 	</div>
 </div>
 <% end %>
-<% unless @camper.emergency_name.blank? || @camper.emergency_phone.blank? %>
+<% if @camper.emergency_name & @camper.emergency_phone %>
 <div id="emergency_info">
 	<h3>Emergency Contact</h3>
 	<%= @camper.emergency_name + " " + number_to_phone(@camper.emergency_phone, :area_code=>true)%>
