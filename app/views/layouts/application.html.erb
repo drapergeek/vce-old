@@ -42,7 +42,12 @@ function DoNav(theUrl)
 
 </head>
 <body>
-	<!--THIS IS A TEST-->
+
+  <%- if RAILS_ENV == "development" -%>
+        <div id="development">
+  <%- end -%>
+
+  <!--THIS IS A TEST-->
   <div id="page_margins">
 	
     <div id="border-top">
@@ -140,5 +145,10 @@ function DoNav(theUrl)
       <div id="edge-br"></div>
     </div>
   </div>
+  <%- if RAILS_ENV == "development" -%>
+        </div>
+  <%- end -%>
+
+
 </body>
 </html>

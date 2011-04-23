@@ -62,7 +62,6 @@
     background: #fff;
     text-align: left;
   }
-
   /* (en) Clear borders for <fieldset> and <img> elements */
   /* (de) Rahmen für <fieldset> und <img> Elemente löschen */
   fieldset, img { border: 0 solid; }
