@@ -47,7 +47,7 @@ class ReceiptsController < ApplicationController
   def new
     @receipt = Receipt.new
     @states = State.find(:all)
-    @camp_price = 210.00
+    @camp_price = 215.00
     authorize! :new, @receipt
   end
 
@@ -73,7 +73,7 @@ class ReceiptsController < ApplicationController
   def edit
     @receipt = Receipt.find(params[:id])
     @states = State.find(:all)
-    @camp_price = current_user.unit.camp_price
+    @camp_price = 215.00 
     authorize! :edit, @receipt
   end
 

@@ -30,7 +30,7 @@
 
 <p>Amount Paid : <%= number_to_currency(@receipt.amount) %></p>
 
-<p>Payment Method : <%= payment_method_to_string(@receipt.payment_method) %>
+<p>Payment Method : <%= @receipt.payment_method %>
 	<%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %></p>
 	
 <p>
@@ -117,7 +117,7 @@
 
 <!--Notice of Date for Refunds-->
 
-<h3>Please note that there are absolutely NO REFUNDS AFTER June 4, 2010</h3>
+<h3>Please note that there are absolutely NO REFUNDS AFTER June 1, 201,</h3>
 
 <!--CONTACT INFORMATION-->
 

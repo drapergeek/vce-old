@@ -3,11 +3,11 @@
 		<%= f.input :fname %>
 		<%= f.input :lname %>
 		<%= f.input :address %>
-		<%= f.input :phone, :hint=>"Ex: 276-555-1234 or 2765551234 " %>
 		<%= f.input :city %>
 		<%= f.input :state, :as=>:select, :collection=>@states %>
 		<%= f.input :zip, :input_html => { :size => 8 } %>
-	<% end %>
+		<%= f.input :phone, :hint=>"Ex: 276-555-1234 or 2765551234 " %>
+  <% end %>
 	
 	<%= f.inputs "Payment Information", :id=>"payment_information" do %>
 		<%= content_tag :div, :id=>"payment_cost_notification" do  -%>

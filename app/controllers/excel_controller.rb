@@ -5,7 +5,7 @@ class ExcelController < ApplicationController
 
 
   def receipts_all
-    authorize :excel, Camper
+    authorize! :excel, Camper
     @receipts = Receipt.find_standard_receipts
     logger.info "the receipt count"
     logger.info @receipts.count

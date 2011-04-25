@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110421170832) do
+ActiveRecord::Schema.define(:version => 20110425024241) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20110421170832) do
     t.integer  "zip"
     t.string   "city"
     t.float    "amount"
-    t.integer  "payment_method"
+    t.string   "payment_method"
     t.string   "payment_extra"
     t.string   "camper1"
     t.string   "camper1_id"
