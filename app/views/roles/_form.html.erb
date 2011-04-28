@@ -1,20 +1,10 @@
-<%= error_messages_for 'role' %>
+<%= render "shared/error_messages",:target=> @role  %>
 
 <!--[form:course]-->
-<p><label for="role_name">Name:</label><br/>
-<%= text_field 'role', 'name'  %></p>
+<%= semantic_form_for @role do |f|%>
+  <%= f.inputs %>
+  <%= f.buttons %>
 
-<% controller_name = "blank" %>
-<% for right in Right.find(:all, :order=>"controller") %>
-<% if right.controller.to_s != controller_name %>
-	<% controller_name = right.controller %>
-	<strong><%= controller_name.capitalize %></strong><br />
 <% end %>
-	<div>
-		<%= check_box_tag "role[right_ids][]", right.id,  @role.rights.include?(right)%>
-		<%= right.name %>
-	</div>
-<% end %>
-
 <!--[eoform:course]-->
 

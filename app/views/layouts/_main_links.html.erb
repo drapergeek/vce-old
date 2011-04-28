@@ -1,51 +1,16 @@
  <ul>	
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "receipts",
-				:controller_action => "show_receipts_button",
-				:link_name=>"Receipts",
-				:link_action=>""
-		} -%>
+   <%=primary_link("Receipts", receipts_path, :show, Receipt, "receipts") %>
+
+   <%= primary_link "Enrollment", campers_path, :show, Camper, "campers"  %>
+
+  <%= primary_link "Courses", "/courses", :show, Course, "courses" %>  
+
+  <%= primary_link "Packs", "/packs", :show, Pack, "packs" %>  
+
+  <%= primary_link "Buses", "/buses", :show, Bus, "buses" %>  
+
+  <%= primary_link "Users", "/account", :show, User, "account" %>  
 		
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "campers",
-				:controller_action => 'show_campers_button',
-				:link_name=>"Enrollment",
-				:link_action=>""
-		} -%>
-		
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "courses",
-				:controller_action => "show_courses_button",
-				:link_name=>"Courses",
-				:link_action=>"index"
-		} -%>
-		
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "packs",
-				:controller_action => "show_packs_button",
-				:link_name=>"Packs",
-				:link_action=>""
-		} -%>
-		
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "buses",
-				:controller_action => "show_buses_button",
-				:link_name=>"Buses",
-				:link_action=>"index"
-		} -%>
-		
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "account",
-				:controller_action => "show_users_button",
-				:link_name=>"Users",
-				:link_action=>""
-		} -%>
-		
-		<%= render :partial => 'layouts/navigation_link',
-		:locals => {:controller => "extras",
-				:controller_action => "show_extras_button",
-				:link_name=>"Extras",
-				:link_action=>""
-		} -%>
+  <%= primary_link "Extras", "/extras", :report, Camper, "extras" %>
 				
  </ul>
