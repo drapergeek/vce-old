@@ -47,7 +47,6 @@ module ApplicationHelper
   
 
   def primary_link(name, path, action, model, controller_name)
-    logger.info "The action is #{action} and the model is #{model}"
     if can? action, model
       if is_current_view controller_name 
         content_tag(:li, :id=>"current") do 
