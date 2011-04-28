@@ -19,7 +19,11 @@ Vce::Application.routes.draw do
       get 'totals'
     end
   end
-  resources :campers
+  resources :campers do
+    collection do
+      get 'remove_course'
+    end
+  end
   resources :buses
   match "signup", :to=>"users#new"
   match "login", :to=>"sessions#new", :as=>:login
