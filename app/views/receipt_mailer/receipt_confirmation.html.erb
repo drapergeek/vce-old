@@ -4,9 +4,8 @@
 </div>
 <div>	
 	Received by:  Virginia Cooperative Extension <br />
-	For:  4-H Junior Camp<br / >
+	For:  4-H Camp 2012<br / >
 	Date:  <%= Time.now.strftime("%m/%d/%y %I:%M %p") %><br / >
-	Receipted by:  <%= @receipt.user.fname + @receipt.user.lname %><%= " - " + @receipt.user.title unless @receipt.user.title.nil? %>iu
 		</p>
 </div><br><br>
 <div>
@@ -19,8 +18,11 @@
 </div><br><br>
 <div>
 	<strong>Payment Information</strong><br>
-	Payment method : <%= @receipt.payment_type %> <%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %><br>
+	Payment method : <%= @receipt.payment_method %> <%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %><br>
 	Payment amount: <%= number_to_currency(@receipt.amount) %><br>
+  <% if @receipt.user %>
+  Payment taken by: <%= @receipt.user.fname + " " + @receipt.user.lname %>
+  <% end %>
 </div><br><br>
 
 <div>
@@ -30,5 +32,5 @@
 	<%= @receipt.camper3.titleize + " : " + @receipt.camper3_id  unless @receipt.camper3.blank? %><br>
 </div>
 
-<h3>Please note that there are absolutely NO REFUNDS AFTER June 4, 2010</h3>
+<h3>Please note that there are absolutely NO REFUNDS AFTER June 1, 2011</h3>
 

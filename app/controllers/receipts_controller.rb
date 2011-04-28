@@ -61,7 +61,11 @@ class ReceiptsController < ApplicationController
     @receipt.date = Time.now
     authorize! :create, @receipt
     if @receipt.save
-      #ReceiptMailer.deliver_receipt_confirmation(@receipt) unless @receipt.email.blank?
+      begin
+        ReceiptMailer.receipt_confirmation(@receipt).deliver unless @receipt.email.blank?
+      rescue
+        flash[:error] = "Unable to send an email, please print a hard copy"
+      end
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else

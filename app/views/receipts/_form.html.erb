@@ -1,7 +1,9 @@
 <%= semantic_form_for @receipt do |f| %>
-	<%= f.inputs "Payer Information", :id=>"payer_information" do  %>
+  <%= f.semantic_errors  %>
+  <%= f.inputs "Payer Information", :id=>"payer_information" do  %>
 		<%= f.input :fname %>
-		<%= f.input :lname %>
+    <%= f.input :lname %>
+    <%= f.input :email %>
 		<%= f.input :address %>
 		<%= f.input :city %>
 		<%= f.input :state, :as=>:select, :collection=>@states %>
