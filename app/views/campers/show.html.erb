@@ -225,7 +225,7 @@
 	<% @camper.courses.each do |c| %>
 		<li class="course" id = "course_<%=c.id %>">
 			<%= c.name %>
-			<%= link_to_remote '(x)', :confirm=>"Are you SURE you want to delete this course?",
+			<%= link_to '(x)', :confirm=>"Are you SURE you want to delete this course?",
 			:url => {:action => 'remove_course', :camper =>@camper.id, :course=>c.id} -%>
 		</li>
 	<% end %>
