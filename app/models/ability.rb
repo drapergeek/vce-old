@@ -21,7 +21,7 @@ class Ability
     end
 
     if user.role? :camper_entry
-      can [:edit, :create, :show], Camper
+      can [:edit, :create, :read], Camper
       can :show, Receipt
     end
   end
