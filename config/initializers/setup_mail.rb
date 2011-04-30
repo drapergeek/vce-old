@@ -1,9 +1,9 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.gmail.com",
+  :address              => "auth.smtp.vt.edu",
   :port                 => 587,
-  :domain               => "drapergeek.com",
-  :user_name            => "4hcamp@drapergeek.com",
-  :password             => "4hcampemailVT",
+  :domain               => "vt.edu",
+  :user_name            => "gdraper",
+  :password             => "c0dM@Cd@em0n1925",
   :authentication       => "plain",
   :enable_starttls_auto => true
 }
