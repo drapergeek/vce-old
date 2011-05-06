@@ -81,7 +81,7 @@
 		</div>
 	<% end %>
 	<div id="phone_show_camper">
-		Phone: <%= number_to_phone(@camper.phone1, :area_code=>true) unless @camper.phone1.blank? %>
+		Phone: <%= @camper.phone1 unless @camper.phone1.blank? %>
 	</div>
 	
 	<% if @camper.position==1 %>
