@@ -58,7 +58,18 @@
 				page[:receipt_amount].visual_effect :pulsate
 				page[:receipt_amount].visual_effect :highlight
 			end %>
-		</div>
+    </div>
+    
+		<%= link_to_function("Refund This Receipt", nil, :id => "refund_link") do |page|
+				page[:refund_boxes].visual_effect :blind_down
+				page.remove :refund_link
+			end %>
+    <div id="refund_boxes" style="display:none">
+      <%= f.input :refund, :label=>"This receipt was refunded" %>
+      <%= f.input :refund_check_number %>
+      <%= f.input :refund_amount %>
+      <%= f.input :refund_info, :label=>"Refund Explanation", :input_html=>{:rows=>5, :cols=>45} %>
+    </div>
 	<% end %>
 	<%= f.buttons %>
 <% end %>
