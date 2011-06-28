@@ -57,8 +57,8 @@ require 'bundler/capistrano'
   # If you aren't using Subversion to manage your source code, specify
   # your SCM below:
   set :scm, :git
-  set :repository, "draper@draper.homelinux.com:/home/draper/git/vce.git"
-  set :domain, "draper.homelinux.com"
+  set :repository, "draper@drapergeek.com:/home/draper/git/vce.git"
+  set :domain, "drapergeek.com"
   set :branch, "master"
   set :deploy_via, :remote_cache
   
