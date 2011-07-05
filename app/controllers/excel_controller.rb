@@ -131,6 +131,7 @@ class ExcelController < ApplicationController
         @header.push("Grade")
         @header.push("Shirt Size")
         @header.push("Bus Assignment")
+        @header.push("Pack")
         @header.push("E-mail")
         @header.push("Race")
         @header.push("Tetnus Shot")
@@ -184,6 +185,7 @@ class ExcelController < ApplicationController
           @outs.push(u.grade)
           @outs.push(u.shirt_size_text)          
           unless u.bus.blank? then @outs.push(u.bus.name) else @outs.push("") end
+          unless u.pack.blank? then @outs.push(u.pack.name) else @outs.push("") end
           @outs.push(u.email)
           @outs.push(u.race)
           @outs.push(u.last_tetnus_shot)
