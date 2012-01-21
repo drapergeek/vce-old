@@ -60,7 +60,7 @@ require 'bundler/capistrano'
   set :repository, "draper@drapergeek.com:/home/draper/git/vce.git"
   set :domain, "drapergeek.com"
   set :branch, "master"
-  set :deploy_via, :remote_cache
+ # set :deploy_via, :remote_cache
   
   
   set :ssh_options, { :paranoid=>false}
