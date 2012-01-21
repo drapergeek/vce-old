@@ -16,6 +16,8 @@ group :development, :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem "factory_girl"
   gem "annotate"
+  gem "guard-test"
+  gem "guard-cucumber"
 end
 
 group :production do

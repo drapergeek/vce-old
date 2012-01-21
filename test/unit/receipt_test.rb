@@ -7,8 +7,6 @@ class ReceiptTest < ActiveSupport::TestCase
     assert r.valid?
   end
 
-  
-  
   test "receipt amount can't be negative or nil" do
     r = Factory.build(:receipt, :amount=>nil)
     assert !r.valid?
@@ -18,7 +16,6 @@ class ReceiptTest < ActiveSupport::TestCase
     r.amount = "0.00"
     assert !r.valid?
   end
-  
   
   test "refunds require extra fields" do
     r = Factory.build(:receipt)
