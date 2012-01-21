@@ -11,7 +11,6 @@ gem 'will_paginate'
 gem "nifty-generators", :group => :development
 gem 'mocha'
 gem 'formtastic', '~> 1.1.0'
-gem 'fastercsv'
 gem 'validates_timeliness', '~> 3.0.2'
 gem 'bcrypt-ruby', :require=>"bcrypt"
 gem 'cancan'
@@ -45,6 +44,6 @@ group :development, :test do
 end
 
 group :production do
-	gem 'mysql2'
+	#gem 'mysql2'
 end
 gem "mocha", :group => :test

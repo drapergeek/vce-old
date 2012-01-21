@@ -1,7 +1,9 @@
 require 'test_helper'
 class ReceiptsControllerTest < ActionController::TestCase
   fixtures 'receipts'
-
+  setup do
+    login
+  end
   
   test "can load index with a login" do
     get :index

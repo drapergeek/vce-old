@@ -2,6 +2,10 @@ require 'test_helper'
 
 class CampersControllerTest < ActionController::TestCase
 
+  setup do
+    login
+  end
+
   test "can load the index page" do
     get :index
     assert_template "index"

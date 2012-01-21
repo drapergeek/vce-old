@@ -157,9 +157,12 @@ class Receipt < ActiveRecord::Base
 
   def payment_type
     case payment_method
-      when 1 : return "Cash"
-      when 2 : return "Check"
-      when 3 : return "MO"
+      when 1 
+        return "Cash"
+      when 2
+        return "Check"
+      when 3 
+        return "MO"
     end
   end
   

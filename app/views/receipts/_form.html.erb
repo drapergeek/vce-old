@@ -16,9 +16,8 @@
 			**The price for two campers is <%= number_to_currency(@camp_price  * 2) %>  and the price for 3 campers is <%= number_to_currency(@camp_price *3) %>**
 		<% end -%>'
 		<% value = @receipt.amount ||  number_to_currency(@camp_price, :format=>"%n") %>
-
-		<%= f.input :amount, :input_html=>{:value=>value}%>
-		<%= f.input :payment_method, :as=>:radio, :collection=>["Cash", "Check","Money Order"],:selected=>"Check", :input_html=>{:onchange=>"change_payment_method(this.id)"} %>
+		<%= f.input :amount %>
+		<%= f.input :payment_method, :as=>:radio, :collection=>["Cash", "Check","Money Order"], :input_html=>{:onchange=>"change_payment_method(this.id)"} %>
 		<%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
 	<% end %>
 	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>

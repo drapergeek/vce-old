@@ -1,7 +1,6 @@
 class ExcelController < ApplicationController
   include ActionView::Helpers::NumberHelper
   layout 'application', :only=>'custom_excel'
-  require 'fastercsv'
 
 
   def receipts_all

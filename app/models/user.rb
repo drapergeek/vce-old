@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
 
   def authorize!
     self.authorized=true
-    self.save!
+    self.save!(:validate=>false)
   end
   
   def self.authenticate(email, password)

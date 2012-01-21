@@ -1,7 +1,7 @@
 class ReceiptsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
-  layout "application" ,  :except => {:export_excel, :create_excel}
+  #layout "application" ,  :except => {:export_excel, :create_excel}
 
     
  #This is a method for showing a report of totals...
@@ -60,15 +60,20 @@ class ReceiptsController < ApplicationController
     @receipt.user = current_user
     @receipt.date = Time.now
     authorize! :create, @receipt
+    logger.info "WHAT UP RECEIPT"
+    logger.info @receipts
     if @receipt.save
       begin
-        ReceiptMailer.receipt_confirmation(@receipt).deliver unless @receipt.email.blank?
+        if Rails.env=="production"
+          ReceiptMailer.receipt_confirmation(@receipt).deliver unless @receipt.email.blank?
+        end
       rescue
         flash[:error] = "Unable to send an email, please print a hard copy"
       end
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else
+      logger.info @receipts.errors
       @states = State.find(:all)
       render :action => 'new'
     end

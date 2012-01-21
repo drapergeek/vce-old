@@ -12,8 +12,14 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   
   def login
-    u =User.create(:login=>"Spiderman", :email=>"spiderman@marvel.com")
+    unit = Unit.create(:name=>"Henry County", :camp_price=>30.00)
+    u = User.new(:email=>"spiderman@marvel.com")
+    u.unit = unit
     u.authorize!
+    u.save(:validate=>false)
+    role = Role.find_or_create_by_name("admin")
+    u.roles << role 
+    u.save(:validate=>false)
     session[:user_id] = u.id
   end
   
