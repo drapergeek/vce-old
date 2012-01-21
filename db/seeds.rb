@@ -6,5 +6,3 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 Unit.create!(:name=>"Henry County", :camp_price=>200.00)
-User.create!(:login=>"Spiderman", :email=>"spiderman@marvel_test.com", :authorized=>true, :unit_id=>1)
-User.find_by_login("Spiderman").authorize!
