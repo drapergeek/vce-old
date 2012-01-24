@@ -22,5 +22,6 @@ end
 
 group :production do
 	#gem 'mysql2'
+  gem 'pg'
 end
 gem "mocha", :group => :test
