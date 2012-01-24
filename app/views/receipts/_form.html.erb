@@ -16,7 +16,7 @@
 		<% end -%>
       <%= camp_price_explanation(@camp_price) %>
 		<%= f.input :amount %>
-		<%= f.input :payment_method, :as=>:radio, :collection=>Receipt::PAYMENT_TYPES %>
+    <%= f.input :payment_method, :as=>:radio, :collection=>Receipt::PAYMENT_TYPES ,:input_html=>{:class=>"payment_method"}%>
 		<%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
 	<% end %>
 	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>
