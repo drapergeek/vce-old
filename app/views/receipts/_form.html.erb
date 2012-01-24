@@ -14,14 +14,13 @@
 	<%= f.inputs "Payment Information", :id=>"payment_information" do %>
 		<%= content_tag :div, :id=>"payment_cost_notification" do  -%>
 			**The price for two campers is <%= number_to_currency(@camp_price  * 2) %>  and the price for 3 campers is <%= number_to_currency(@camp_price *3) %>**
-		<% end -%>'
+		<% end -%>
 		<% value = @receipt.amount ||  number_to_currency(@camp_price, :format=>"%n") %>
 		<%= f.input :amount %>
 		<%= f.input :payment_method, :as=>:radio, :collection=>["Cash", "Check","Money Order"], :input_html=>{:onchange=>"change_payment_method(this.id)"} %>
 		<%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
 	<% end %>
 	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>
-	<%= content_tag(:small, "**Camper id must start with A,B,G,S,P or T**") %>
 		<%= content_tag :span, :id=>"camper_1" do %>
 			<%= f.input :camper1, :label=>"Camper 1 Name" %>
 			<%= f.input :camper1_id, :label=>"Camper 1 ID Number" %>

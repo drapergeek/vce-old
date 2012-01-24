@@ -4,17 +4,18 @@
     <th>E-mail</th>
     <th>First</th>
     <th>Last</th>
-    <th>Roles</th>
   </tr>  
   <% @users.each do |u| %>
     <tr>
       <td><%= u.email %></td>
       <td><%= u.fname %></td>
       <td><%= u.lname %></td>
-      <td><%= u.roles.join(",") %></td>
       <td><%= link_to "Show", u %></td>
       <td><%= link_to "Edit", edit_user_path(u) %></td>
       <td><%= button_to "destroy", u,:method=>:delete, :confirm=>"Are you sure?" %></td>
     </tr>
   <% end %>
 </table>
+<% if can? :create, User %>
+<%= link_to "New User", new_user_path %>
+<% end %>

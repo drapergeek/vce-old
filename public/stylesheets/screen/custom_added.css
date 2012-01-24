@@ -54,3 +54,34 @@ label{
   background-color:blue; 
 
 }
+
+/*Formtastic Stuff for the receipt page */
+fieldset.inputs{
+  margin: 5px;
+  padding: 5px;
+  border: 3px solid #55ad12;
+  border-radius: 15px;
+}
+
+fieldset#camper_information > ol >li{
+  display:inline;
+  background-color:black;
+}
+
+
+fieldset > ol>span> li{
+  margin:5px;
+}
+
+abbr{
+  border:0; font-variant:normal;
+  color:red;
+}
+
+ol{
+  list-style-type:none;
+}
+
+ol.choices-group > li{
+  display:inline;
+}

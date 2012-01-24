@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110425024241) do
+ActiveRecord::Schema.define(:version => 20120123002319) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -127,6 +128,9 @@ ActiveRecord::Schema.define(:version => 20110425024241) do
     t.boolean  "camper1_collage"
     t.boolean  "camper2_collage"
     t.boolean  "camper3_collage"
+    t.float    "camper1_payment"
+    t.float    "camper2_payment"
+    t.float    "camper3_payment"
   end
 
   create_table "rights_roles", :id => false, :force => true do |t|
@@ -173,13 +177,18 @@ ActiveRecord::Schema.define(:version => 20110425024241) do
     t.datetime "remember_token_expires_at"
     t.string   "lname"
     t.string   "fname"
-    t.string   "content_type",                            :default => "image/png"
+    t.string   "content_type",                             :default => "image/png"
     t.binary   "picture"
     t.string   "title"
     t.integer  "unit_id"
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "authorized",                              :default => false,       :null => false
+    t.boolean  "authorized",                               :default => false,       :null => false
+    t.string   "encrypted_password",        :limit => 128
+    t.string   "confirmation_token",        :limit => 128
   end
+
+  add_index "users", ["email"], :name => "index_users_on_email"
+  add_index "users", ["remember_token"], :name => "index_users_on_remember_token"
 
 end
