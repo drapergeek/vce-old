@@ -13,61 +13,26 @@
 	
 	<%= f.inputs "Payment Information", :id=>"payment_information" do %>
 		<%= content_tag :div, :id=>"payment_cost_notification" do  -%>
-			**The price for two campers is <%= number_to_currency(@camp_price  * 2) %>  and the price for 3 campers is <%= number_to_currency(@camp_price *3) %>**
 		<% end -%>
-		<% value = @receipt.amount ||  number_to_currency(@camp_price, :format=>"%n") %>
+      <%= camp_price_explanation(@camp_price) %>
 		<%= f.input :amount %>
-		<%= f.input :payment_method, :as=>:radio, :collection=>["Cash", "Check","Money Order"], :input_html=>{:onchange=>"change_payment_method(this.id)"} %>
+		<%= f.input :payment_method, :as=>:radio, :collection=>Receipt::PAYMENT_TYPES %>
 		<%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
 	<% end %>
 	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>
-		<%= content_tag :span, :id=>"camper_1" do %>
-			<%= f.input :camper1, :label=>"Camper 1 Name" %>
-			<%= f.input :camper1_id, :label=>"Camper 1 ID Number" %>
-			<%= render :partial=>"collage_links", :locals=>{:camper=>"1", :f=>f} %>
-		<% end %>
-		<%= content_tag :span, :id=>"camper_2", :style=>"display:none"  do %>
-			<%= f.input :camper2, :label=>"Camper 2 Name" %>
-			<%= f.input :camper2_id, :label=>"Camper 2 ID Number" %>
-			<%= render :partial=>"collage_links", :locals=>{:camper=>"2", :f=>f} %>
-		<% end %>
-		<%= content_tag :span, :id=>"camper_3", :style=>"display:none" do %>
-			<%= f.input :camper3, :label=>"Camper 3 Name" %>
-			<%= f.input :camper3_id, :label=>"Camper 3 ID Number" %>
-			<%= render :partial=>"collage_links", :locals=>{:camper=>"3", :f=>f} %>
-		<% end %>
-		<%= content_tag :div, :id=>"camper_link_1", :class=>"add_camper_link" do %>
-			<%= link_to_function "Add another camper", nil, :id => "camper_link_1_link"  do |page|
-			    	page[:camper_2].visual_effect :blind_down
-			    	page.show :camper_link_2
-			    	page.remove :camper_link_1
-					page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
-					page <<"document.getElementById('receipt_amount').value = (camp_price + #{@camp_price});"
-					page[:receipt_amount].visual_effect :pulsate
-					page[:receipt_amount].visual_effect :highlight
-			  		end %>
-		<% end %>
-		<div id="camper_link_2" class="add_camper_link" <% if @receipt.camper2.blank? %>style="display:none"<% end %> >
-		<%= link_to_function("Add another camper", nil, :id => "camper_link_1_link") do |page|
-				page[:camper_3].visual_effect :blind_down
-				page.remove :camper_link_2
-				page <<"var camp_price = parseInt(document.getElementById('receipt_amount').value);"
-				page <<"document.getElementById('receipt_amount').value = (camp_price + #{@camp_price});"
-				page[:receipt_amount].visual_effect :pulsate
-				page[:receipt_amount].visual_effect :highlight
-			end %>
-    </div>
+  <% (1..3).each do |num| %>
+    <%= render :partial=>"camper", :locals=>{:camper=>num, :f=>f} %>
+  <% end %>
     
-		<%= link_to_function("Refund This Receipt", nil, :id => "refund_link") do |page|
-				page[:refund_boxes].visual_effect :blind_down
-				page.remove :refund_link
-			end %>
-    <div id="refund_boxes" style="display:none">
-      <%= f.input :refund, :label=>"This receipt was refunded" %>
-      <%= f.input :refund_check_number %>
-      <%= f.input :refund_amount %>
-      <%= f.input :refund_info, :label=>"Refund Explanation", :input_html=>{:rows=>5, :cols=>45} %>
-    </div>
 	<% end %>
+  <%= f.inputs "Refund" do %>
+  <%= link_to "Refund this Receipt", nil, :id=>"refund_link" %>
+  <div id="refund_boxes" style="display:none">
+    <%= f.input :refund, :label=>"This receipt was refunded" %>
+    <%= f.input :refund_check_number %>
+    <%= f.input :refund_amount %>
+    <%= f.input :refund_info, :label=>"Refund Explanation", :input_html=>{:rows=>5, :cols=>45} %>
+  </div>
+  <% end %>
 	<%= f.buttons %>
 <% end %>

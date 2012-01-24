@@ -15,6 +15,10 @@ module ReceiptsHelper
   def sum_amount(receipts)
      number_to_currency(receipts.to_a.sum {|r| r.amount}) 
   end
+
+  def camp_price_explanation(price)
+			"**The price for two campers is #{number_to_currency(price  * 2)} and the price for 3 campers is #{number_to_currency(price *3)}**"
+  end
   
 
   

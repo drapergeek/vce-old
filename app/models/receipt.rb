@@ -1,4 +1,5 @@
 class Receipt < ActiveRecord::Base
+  PAYMENT_TYPES = ["Check", "Cash", "Money Order"]
   belongs_to :user
   belongs_to :unit
   has_many :campers

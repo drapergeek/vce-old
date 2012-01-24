@@ -85,3 +85,7 @@ ol{
 ol.choices-group > li{
   display:inline;
 }
+
+ol > div > li{
+  display:inline;
+}

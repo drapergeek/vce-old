@@ -1,0 +1,8 @@
+<%= content_tag :div, :id=>"camper_#{camper}" do %>
+Camper <%= camper %>
+  <%= f.input "camper#{camper}", :label=>"Name" %>
+  <%= f.input "camper#{camper}_id", :label=>"ID Number" %>
+  <%= f.input "camper#{camper}_collage", :label=>"Collage?" %>
+  <%= f.input "camper#{camper}_payment", :label=>"Amount" %>
+
+<% end %>
