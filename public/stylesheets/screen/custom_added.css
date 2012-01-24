@@ -86,6 +86,13 @@ ol.choices-group > li{
   display:inline;
 }
 
+ol > li{
+  padding-bottom:5px;
+}
+
 ol > div > li{
   display:inline;
+}
+div.camper_payment{
+  padding-bottom:10px;
 }
