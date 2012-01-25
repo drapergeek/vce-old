@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   //hide or show the refund options
   $("#refund_link").click(function() {
-    $("#refund_boxes").toggle();  
+    $("#refund_boxes").slideToggle();  
     return false;
   });
 
