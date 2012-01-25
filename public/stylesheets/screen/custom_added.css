@@ -96,3 +96,7 @@ ol > div > li{
 div.camper_payment{
   padding-bottom:10px;
 }
+
+li#receipt_payment_extra_input{
+  display:none;
+}
