@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123002319) do
+ActiveRecord::Schema.define(:version => 20120125023209) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -165,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20120123002319) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "camp_price"
+    t.float    "collage_price"
   end
 
   create_table "users", :force => true do |t|

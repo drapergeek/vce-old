@@ -10,6 +10,7 @@
 		<%= f.input :zip, :input_html => { :size => 8 } %>
   <% end %>
   <input type="hidden" name="camp_price" id="camp_price" value="<%= @camp_price  %>"> 
+  <input type="hidden" name="collage_price" id="collage_price" value="<%= @collage_price  %>"> 
 	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>
     <% (1..3).each do |num| %>
       <%= render :partial=>"camper", :locals=>{:camper=>num, :f=>f} %>

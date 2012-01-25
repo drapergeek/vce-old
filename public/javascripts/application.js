@@ -39,14 +39,44 @@ $(document).ready(function() {
     }
     else{
       //We need to calculate the camp price and add it to the box at the end
-      camp_price = $("#camp_price").val();
+      camp_price = numFromString("#camp_price");
       $(payment).val(camp_price);
     };
     updateFinalPrice();
   return false;
   });
 
-  
+ 
+  //watch the collages for updates 
+  $(".camper_collage_input").change(function(){
+      //Set up all our names
+      id = $(this).attr("id");
+      camper_number = id.substring(14,15);
+      payment = "#receipt_camper" + camper_number + "_payment";
+      collage_price = numFromString("#collage_price");
+    if ($(this).is(":checked")) {
+      //need to up the payment
+       if ($(payment).val()) {
+          amount = numFromString(payment)+collage_price;
+          $(payment).val(amount);
+       }
+       else{
+         //Do not allow a collage to be added until we have a camper
+         alert("You must fill in the camper information before selecting a collage");
+         $(this).removeAttr("checked");
+       };
+    }
+    else{
+      //need to lower the payment amount
+      if ($(payment).val()) {
+        amount = numFromString(payment)-collage_price;
+        $(payment).val(amount);
+      };
+      
+    };
+    updateFinalPrice();
+  return false;
+  });
   /* End Receipts */
 
 });

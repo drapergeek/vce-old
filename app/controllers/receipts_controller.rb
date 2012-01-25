@@ -48,6 +48,7 @@ class ReceiptsController < ApplicationController
     @receipt = Receipt.new
     @states = State.find(:all)
     @camp_price = 215.00
+    @collage_price = current_user.unit.collage_price
     authorize! :new, @receipt
   end
 
