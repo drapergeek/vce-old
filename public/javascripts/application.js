@@ -9,7 +9,6 @@ $(document).ready(function() {
     return false;
   });
 
-
   //Watch for changing the payment methods
   $(".payment_method").change(function(){
     if ($(this).val()=="Cash") {
@@ -20,8 +19,6 @@ $(document).ready(function() {
     };
   return false;
   });
-
-
 
   //Watch the camper spots for change so we can update everything
   $(".camper_name_input").change(function(){
@@ -46,7 +43,6 @@ $(document).ready(function() {
   return false;
   });
 
- 
   //watch the collages for updates 
   $(".camper_collage_input").change(function(){
       //Set up all our names
