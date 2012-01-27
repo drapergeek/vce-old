@@ -24,7 +24,7 @@ class CamperTest < ActiveSupport::TestCase
     assert_equal 2, Camper.female.count
   end
   
-  test "mark as fully paid for camper without a collage" do
+  test "mark as fully paid for camper with payments" do
     c = Factory.create(:camper)
     assert !c.paid_in_full?
     r = Factory.build(:receipt)
@@ -33,6 +33,13 @@ class CamperTest < ActiveSupport::TestCase
     assert_equal r.camper1_id, c.number
     assert r.save
     c.reload
+    assert c.paid_in_full?
+  end
+
+  test "fully paid for camper without payments" do
+    c = Factory.create(:camper) 
+    assert !c.paid_in_full?
+    c.fully_paid = true
     assert c.paid_in_full?
   end
   
