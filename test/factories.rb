@@ -31,8 +31,21 @@ Factory.define :receipt do |r|
   r.payment_extra "123123"
   r.camper1 "Sarah Wayne"
   r.camper1_id "B234"
+  r.camper1_payment 20.00
+  r.camper1_collage true
   r.email "batman@dc.com"
   r.unit_id 1
+end
+
+Factory.define :all_camper_receipt, :parent=>:receipt do |r|
+  r.camper2 "Bruce Way"
+  r.camper2_id "B322"
+  r.camper2_payment 210.00
+  r.camper2_collage true
+  r.camper3 "Sarah Jane"
+  r.camper3_id "G331"
+  r.camper3_payment 210.00
+  r.camper3_collage true
 end
 
 

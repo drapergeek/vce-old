@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125023209) do
+ActiveRecord::Schema.define(:version => 20120127024331) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(:version => 20120125023209) do
     t.integer  "counselor_years"
     t.integer  "pack_id"
     t.integer  "unit_id"
+    t.boolean  "collage_purchased"
+    t.boolean  "fully_paid"
   end
 
   create_table "course_selections", :force => true do |t|
@@ -95,6 +97,14 @@ ActiveRecord::Schema.define(:version => 20120125023209) do
   create_table "packs", :force => true do |t|
     t.string  "name"
     t.integer "unit_id"
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "receipt_id"
+    t.integer  "camper_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "receipts", :force => true do |t|

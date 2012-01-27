@@ -2,16 +2,16 @@ class Receipt < ActiveRecord::Base
   PAYMENT_TYPES = ["Check", "Cash", "Money Order"]
   belongs_to :user
   belongs_to :unit
+  has_many :payments
   has_many :campers
   before_create :compact_phone
+  after_create :create_payments
+  after_create :add_collages
 
   #validations
   include ActiveModel::Validations
 
   validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id, :amount
-  validates_format_of :camper1_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create
-  validates_format_of :camper2_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create, :if=> :camper2_filled
-  validates_format_of :camper3_id, :with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/, :on => :create, :if=> :camper3_filled
   validates_format_of :phone, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :on=>:create
   validates_format_of  :email, :with       => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :allow_blank=>true, :message => 'email must be valid'
   validates :amount, :positive_price=>true
@@ -23,17 +23,6 @@ class Receipt < ActiveRecord::Base
 
   #  scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
   #  scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
-
-  HUMANIZED_ATTRIBUTES = {
-    :date => "Date Created",
-    :fname => "Payer First Name",
-    :lname => "Payer Last Name",
-    :address => "Address"
-  }
-
-  def self.human_attribute_name(attr)
-    HUMANIZED_ATTRIBUTES[attr.to_sym] || super
-  end
 
   def self.find_standard_receipts(options={})
     #can we get the current unit _id?
@@ -98,6 +87,37 @@ class Receipt < ActiveRecord::Base
       @ids.push(r.camper3_id) unless r.camper3_id.blank?
     end
     @ids
+  end
+
+  def create_payments
+   #create a payment for all three campers if there are three 
+    if camper1_id && camper1 && camper1_payment
+      c = Camper.find_or_create_by_number(:number=>camper1_id, :name=>camper1,:position=>0)
+      c.save(:validate=>false)
+      c.payments.create(:receipt=>self, :amount=>camper1_payment)
+    end 
+    if camper2_id && camper2 && camper2_payment
+      c = Camper.find_or_create_by_number(:number=>camper2_id, :name=>camper2, :position=>0)
+      c.save(:validate=>false)
+      c.payments.create(:receipt=>self, :amount=>camper2_payment)
+    end 
+    if camper3_id && camper3 && camper3_payment
+      c = Camper.find_or_create_by_number(:number=>camper3_id, :name=>camper3, :position=>0)
+      c.save(:validate=>false)
+      c.payments.create(:receipt=>self, :amount=>camper3_payment)
+    end 
+  end
+
+  def add_collages
+     if camper1_id && camper1_collage
+       c = Camper.find_by_number(camper1_id).add_collage
+     end
+     if camper2_id && camper2_collage
+       c = Camper.find_by_number(camper2_id).add_collage
+     end
+     if camper3_id && camper3_collage
+       c = Camper.find_by_number(camper3_id).add_collage
+     end
   end
 
   def camper2_filled

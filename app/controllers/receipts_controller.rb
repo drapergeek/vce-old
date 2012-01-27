@@ -74,7 +74,7 @@ class ReceiptsController < ApplicationController
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else
-      logger.info @receipts.errors
+      logger.info @receipt.errors
       @states = State.find(:all)
       render :action => 'new'
     end

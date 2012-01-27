@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  receipt_id: 1
+  camper_id: 1
+  amount: 1.5
+
+two:
+  receipt_id: 1
+  camper_id: 1
+  amount: 1.5

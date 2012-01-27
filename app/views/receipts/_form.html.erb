@@ -1,9 +1,10 @@
 <%= semantic_form_for @receipt do |f| %>
-  <%= f.semantic_errors  %>
+  <%= render "shared/error_messages", :target=>@receipt %>
   <%= f.inputs "Payer Information", :id=>"payer_information" do  %>
 		<%= f.input :fname %>
     <%= f.input :lname %>
     <%= f.input :email %>
+    <%= f.input :phone %>
 		<%= f.input :address %>
 		<%= f.input :city %>
 		<%= f.input :state, :as=>:select, :collection=>@states %>

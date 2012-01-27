@@ -5,8 +5,13 @@ class Camper < ActiveRecord::Base
   belongs_to :bus
   belongs_to :pack
   belongs_to :unit
+
   has_many :course_selections
   has_many :courses, :through=>:course_selections 
+
+  has_many :payments
+  has_many :receipts, :through=>:payments
+
   before_create :compact_phone
   before_save :create_pack_from_name
   
@@ -141,7 +146,16 @@ class Camper < ActiveRecord::Base
   end
   
   def proper_name
-    [fname, mname, lname].each{ |name| name.capitalize!}.compact.join(" ")
+    if mname
+      [fname, mname, lname].each{ |name| name.capitalize!}.compact.join(" ")
+    else
+      [fname, lname].each{ |name| name.capitalize!}.compact.join(" ")
+    end
+  end
+
+  def add_collage
+    self.collage_purchased = true
+    self.save(:validate=>false)
   end
 
   
@@ -207,6 +221,17 @@ class Camper < ActiveRecord::Base
     else
       return "N/A"
     end
+  end
+
+  def name=(input)
+    names = input.split(" ")
+    if names.length == 3
+      self.mname = names[2]
+    else
+      self.mname = "Unknown"
+    end
+    self.fname = names[0]
+    self.lname = names[1]
   end
   
   def pool_spotting_text

@@ -34,7 +34,6 @@ class ReceiptTest < ActiveSupport::TestCase
     r = Factory.build(:receipt)
     assert r.valid?
     r.save!
-    
     r2 = Factory.build(:receipt)
     assert !r2.valid?
     r2.camper1_id = "G123"
@@ -45,10 +44,29 @@ class ReceiptTest < ActiveSupport::TestCase
     assert r2.valid?
     r2.camper3_id = r.camper1_id
     assert !r2.valid?
-    
-    
-    
-    
+  end
+
+  test "receipt will create payments for new campers" do
+    r = Factory.build(:all_camper_receipt) 
+    assert r.save
+    c = Camper.find_by_number(r.camper1_id)
+    assert_not_nil c
+    assert_equal r.camper1_payment, c.payments.first.amount
+    c = Camper.find_by_number(r.camper2_id)
+    assert_not_nil c
+    assert_equal r.camper2_payment, c.payments.first.amount
+    c = Camper.find_by_number(r.camper3_id)
+    assert_not_nil c
+    assert_equal r.camper3_payment, c.payments.first.amount
+  end
+
+  test "receipt will add collages properly" do
+    r = Factory.build(:all_camper_receipt) 
+    assert r.save
+    [r.camper1_id, r.camper2_id, r.camper3_id].each do |c|
+      c = Camper.find_by_number(c)
+      assert c.collage_purchased
+    end
   end
   
 end
