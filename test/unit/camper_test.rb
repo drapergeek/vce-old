@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class CamperTest < ActiveSupport::TestCase
+
   test "can save a valid camper from the default factory" do
     c = Factory.build(:camper)
     assert c.valid?
@@ -21,6 +22,18 @@ class CamperTest < ActiveSupport::TestCase
     end
     assert_equal 2, Camper.male.count
     assert_equal 2, Camper.female.count
+  end
+  
+  test "mark as fully paid for camper without a collage" do
+    c = Factory.create(:camper)
+    assert !c.paid_in_full?
+    r = Factory.build(:receipt)
+    r.camper1_id = c.number 
+    r.camper1_payment = 220.00
+    assert_equal r.camper1_id, c.number
+    assert r.save
+    c.reload
+    assert c.paid_in_full?
   end
   
   test "inactive and active" do

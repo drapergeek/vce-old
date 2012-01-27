@@ -61,8 +61,6 @@ class ReceiptsController < ApplicationController
     @receipt.user = current_user
     @receipt.date = Time.now
     authorize! :create, @receipt
-    logger.info "WHAT UP RECEIPT"
-    logger.info @receipts
     if @receipt.save
       begin
         if Rails.env=="production"

@@ -158,6 +158,15 @@ class Camper < ActiveRecord::Base
     self.save(:validate=>false)
   end
 
+  def paid_in_full?
+    return true if fully_paid
+    amount = 210
+    if collage_purchased
+      amount += 10
+    end
+    self.payments.sum(:amount) >= amount
+  end
+
   
   def full_name
     [prefname, lname].each{ |word| word.capitalize! }.compact.join(" ")
