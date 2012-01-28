@@ -1,0 +1,364 @@
+<%= form_for @camper do |c| %>
+
+ <%= render "shared/error_messages", :target => @camper %>  
+
+
+<div id="inactive_checkbox">
+	<%= c.check_box 'inactive',:onclick => "Element.show('remove_camper')" %> <label for="refund">Click here to make this camper inactive</label>
+</div>
+
+<div id="remove_camper" <% unless @camper.inactive==true %>style="display:none" <% end %> >
+	<label for="inactive_info">Reason for not attending: </label> <br />
+	<%= c.text_area 'inactive_info' , {:rows=>5}%>
+			   
+</div>
+
+
+
+<!--Ajax stuff for choosing camper type-->
+<div id="type_of_camper">
+	<span id="camper_type">Standard Camper</span><br />
+	Click here to change the camper type:
+	<div id="standard_camper_link" style="display:none" class="attendee_type_link">
+		<%= link_to 'Camper',{ :action => 'update_camper_fields', :id => 0 }, :remote=>true %> |
+	</div> 
+	<div id="teen_camper_link" class="attendee_type_link">
+		<%= link_to 'Teen', { :action => 'update_camper_fields', :id => 1 }, :remote=>true %> |
+	</div> 
+	<div id="adult_camper_link"  class="attendee_type_link">
+		<%= link_to 'Adult',{ :action => 'update_camper_fields', :id => 3 }, :remote=>true %> 
+	</div> 
+<!--end of camper type stuff-->
+
+</div>
+
+
+<!--Random Camp info-->
+<div class="camper_section_new">
+	<div id="camper_number_new">
+		Camper ID Number: <%= c.text_field  'number', :size=>5 %><small> **Camper ID must start with A,B,G,S,P or T**</small>
+	</div>
+	<br />
+	<div id="camper_payment_number_new">
+		Payment Number(if applicable): <%= c.text_field 'payment_number', :size=>5 %>
+	</div>
+</div>
+
+<!--End of random camp info-->
+<!--Beginning of General Info-->
+<div id="general_info_new" class="camper_section_new">
+	<h3>General Information</h3>	
+
+	
+	<div id="name_new">
+		<label for="camper_fname">First:</label>
+		<%= c.text_field 'fname' , :size=>10%>
+
+		<label for="camper_mname">Middle:</label>
+		<%= c.text_field 'mname', :size=>10 %>
+	
+		<label for="camper_lname">Last:</label>
+		<%= c.text_field 'lname', :size=>10  %>
+	</div>
+
+	<div id="pref_name">
+		<label for="camper_pref_name">Preferred Name:</label>
+		<%= c.text_field 'pref_name', :size=>10  %>
+	</div>
+	<br />
+	
+
+	<div id="dob_new" >
+			<label for="camper_dob">Birth Date: </label>
+			<%=  c.date_select :dob, :order => [:month, :day, :year], :include_blank=>true, :start_year=>1920 %>
+	</div>
+
+
+	<br />
+	
+	
+	
+	<div id="address">
+		<label for="camper_address">Address:  </label>
+		<%= c.text_field 'address'  %>
+	</div>
+
+	<div id="city_state_zip">
+		<label for="camper_city">City:  </label>
+		<%= c.text_field 'city'  %>
+	
+		<label for="camper_state">State: </label>
+		<%= c.collection_select('state' , @states, 'name', 'name') %>
+	
+		<label for="camper_zip">Zip: </label>
+		<%= c.text_field  'zip' , :size=>7 %>
+	</div>
+	
+	<div id="phone">
+		<label for="camper_phone1">Phone Number:  </label>
+		<%= c.text_field 'phone1'  %>
+	</div>
+	
+	
+	<div id="gender_select_new">
+		<label for="camper_gender">Gender:</label>
+		
+		<%= c.select('gender', [ ['Male', 0], 
+										['Female', 1]] ) %>
+										
+										
+	</div>
+	
+	
+	
+	<div id="race_new">
+		<label for="camper_race">Race: </label>
+		<%= c.select('race', [ ['Black'], 
+										['White'], 
+										['Hispanic'], 
+										['American Indian'], 
+										['Asian'], 
+										['Multicutural']], {:include_blank=>true}) %>
+	</div>
+
+
+	<div id="shirt_size_new">
+		<label for="camper_shirt_size">Shirt size: </label>
+		<%= c.select('shirt_size', [ ['S', 0], 
+											['M', 1], 
+											['L', 2], 
+											['XL', 3], 
+											['XXL', 4], 
+											['XXXl', 5]], {:include_blank=>true}) %>
+	</div>
+
+	<div id="email_new">
+		<label for="camper_email">E-mail Address:  </label>
+		<%= c.text_field 'email'  %>
+	</div>
+	
+	<div id="teen_reference_new" <% unless @camper.position==1 %>style="display:none" <% end %>>
+		<label for="camper[reference]">Do we have this teens references?</label>
+		<%= c.check_box 'reference' %>
+	</div>
+	
+	<div id="teen_counselor_years_new" <% unless @camper.position==1 %>style="display:none" <% end %>>
+		<label for="camper[counselor_years]">Number of years as camp counselor?</label>
+		<%= c.text_field 'counselor_years' %>
+	</div>
+
+
+
+	
+</div><!--End of General Information-->	
+
+
+
+
+<!--Beginning of Parent Information-->
+<div id="parent_info_new" class="camper_section_new">
+	<h3>Parental Information</h3>
+	<div id="parent_name_new">
+		<label for="camper_parent_fname">First:  </label>
+		<%= c.text_field 'parent_fname'  %>
+	
+		<label for="camper_parent_lname">Last:  </label>
+		<%= c.text_field 'parent_lname'  %>
+	</div>
+	<div id="parent_phone_new">
+
+
+		<label for="camper_phone2">Alternate Phone Number:  </label>
+		<%= c.text_field 'phone2'  %>
+	</div>
+</div><!--End of Parent Info-->
+
+
+<!--Begin School Info-->
+<div id="school_info_new" class="camper_section_new">
+	<h3>School Information</h3>
+	<div ="camper_grade_new" class="school_info_new">
+		<label for="camper_grade">Grade</label>
+		<%= c.select( 'grade',
+		 [ ['3', 3], 
+			['4', 4], 
+			['5', 5],
+			['6', 6],
+			['7', 7], 
+			['8', 8],
+			['9', 9],
+			['10', 10],
+			['11', 11],
+			['12', 12],
+			], {:include_blank=>true}) %>
+	</div>
+	
+	<div id="camper_school_new" class="school_info_new">
+		<label for="camper_school">School:  </label>
+		<%= c.select('school' , @schools, {:include_blank=>true}) %>
+	</div>
+
+	<div id="camper_teacher_new" class="school_info_new">
+		<label for="camper_teacher">Teacher:  </label>
+		<%= c.text_field 'teacher'  %>
+	</div>
+</div><!--End School Info-->
+	
+
+<!--Beginning of Camp Info-->
+<div id="camp_info_new" class="camper_section_new">
+	<h3>Camp Information</h3>
+	
+	<div ="position_new" >
+		<label for="camper_position_select">Position: </label>
+		<%= c.select('position', [ ['Camper', 0], 
+										['Teen', 1], 
+										['CIT', 2], 
+										['Adult', 3]],
+						{:onchange=>''}) %>
+	</div>
+	
+	
+	<div id="roomate_choice_new">
+		Roommate Choice: <%= c.text_field 'roomate_choice'  %>
+	</div>
+	<div id="room_assignment_new">
+		Room assignment <%= c.text_field 'room_number' %>
+	</div>
+	
+	<% unless @packs.empty? %>
+	<div id="pack_assignment_new">
+		<!--please fill me in-->
+		
+		Pack Assignment: <%= c.collection_select('pack_id', @packs, 'id', 'name', {:include_blank=>"None"}) %>
+		
+		<!--
+		or create one:
+		<%= text_field :camper, :new_pack_name %>
+	-->
+	</div>
+	<% end %>
+	
+	<% unless @buses.empty? %>
+	<div id="bus_assignment_new">
+		Bus Assignment: <%= c.collection_select('bus_id' , @buses, 'id', 'name', {:include_blank=>"None"}) %>
+	</div>
+	<% end %>
+	
+	
+
+	
+	
+	<!--This is hidden unless the camper is a teen-->
+	<div id="rec_zone_new" <% unless @camper.position == 1  %>style="display:none;" <% end %>>
+
+		<label for="rec_zone">Rec Zone: </label>
+		<%= c.select('rec_zone', [1,2,3,4,5,6,7,8,9,10], {:include_blank=>true}) %>
+	</div>
+	
+	<div id="pool_spotting_new" <% unless @camper.position == 1  %>style="display:none;" <% end %>>
+
+		<label for="pool_spotting">Pool Spotting: </label>
+		<%= c.select('pool_spotting',  [ ['Rec 1 - Tue', 0], 
+										['Rec 1 - Wed', 1], 
+										['Rec 1 - Thur', 2], 
+										['Rec 2 - Tue', 3], 
+										['Rec 2 - Wed', 4], 
+										['Rec 2 - Thur', 5]], {:include_blank=>true}) %>
+	</div>
+	
+
+	
+	
+</div><!--End of Camp Info-->
+
+<!--MOVED ALL THE FOLLOWING TO A HEALTH FORM-->
+
+
+<!--Beginning of Emergency Info-->
+<div id="emergency_info_new" class="camper_section_new">
+	<h3>Emergency Contact</h3>
+	<label for="camper_emergency_name">Name:  </label>
+	<%= c.text_field 'emergency_name'  %>
+
+	<label for="camper_emergency_phone">Phone:  </label>
+	<%= c.text_field 'emergency_phone'  %>
+	
+</div><!--End of Emergency Info-->
+
+
+
+
+<!--Begin Health Info-->
+<div id="health_info_new" class="camper_section_new">
+	<h3>Health Information</h3>
+	
+	<div id="camper_physician_insurance_info_new">
+		
+		<label for="physician_insurance_info">Physician/Insurance Information?</label>
+		<%= c.check_box 'physician_insurance_info' %>
+		
+	</div>
+	
+	<div id="camper_emergency_info_new">
+		
+		<label for="emergency_info">Emergency Info?</label>
+		<%= c.check_box 'emergency_info' %>
+		
+	</div>
+	
+	<div id="camper_immunizations_current_new">
+		
+		<label for="immunizations_current">Immunizations current?</label>
+		<%= c.check_box 'immunizations_current' %>
+		
+	</div>
+	
+	<div id="camper_last_tetnus_shot_new">
+		<p>
+			<small>If this info is not available or not releveant please enter 01/01/1900</small><br />
+			<small>You are only required to collect the month and year, enter 01 for the day.</small><br />
+			<label for="camper_last_tetnus_shot">Date of last tetnus shot: </label>
+			<%= c.date_select :last_tetnus_shot, :order=>[:month, :day, :year], :include_blank=>true,  :start_year=>1985 %>
+
+		</p>
+	</div>
+
+	<div id="camper_health_concerns_new">
+		<div id="camper_health_info">
+			Please list any health concerns that we may need to be aware of, including but not limited to : medications the child may need to take.
+		</div>
+		<%= c.text_area 'health_concerns', {:rows=>5, :cols=>50} %>
+	</div>
+</div><!--End of Health Information-->
+
+<!--Begin Other Info-->
+<div id="other_info_new" class="camper_section_new">
+	<h3>Other Info</h3>
+	<div id="code_of_conduct_new">
+		<label for="code_conduct">Code of Conduct?</label>
+		<%= c.check_box 'code_of_conduct' %>
+	</div>
+	<div id="media_release_new">
+		<label for="camper_media_release">Media Release:</label>
+		<%= c.select('media_release', [ ['No', 0], ['Yes', 1], ['Parent Denied Permission', 2], ]) %>
+	</div>
+	<div id="equine_release_new">
+		<label for="camper_equine_release">Equine Release?</label>
+		<%= c.check_box 'equine_release' %>
+	</div>
+	<div id="release_authorization_new">
+		<label for="release_authorization">Pickup release authorization?</label>
+		<%= c.check_box  'release_authorization' %>
+	</div>
+	<div id="parental_signatures_new">
+		<label for="parental_signatures">Parental signauture?</label>
+		<%= c.check_box 'parental_signatures' %>
+	</div>
+</div><!--End Other Info-->
+	  <div align="center"><%= c.submit "Submit" %></div>
+
+<% end %>
+<!--END OF ALL MOVE ALL TO ANOTHER PAGE-->
+
+

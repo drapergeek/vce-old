@@ -15,7 +15,6 @@ class Camper < ActiveRecord::Base
   before_create :compact_phone
   before_save :create_pack_from_name
   
-  
   #accessors
   attr_accessor :status
   attr_accessor :new_pack_name
@@ -64,12 +63,6 @@ class Camper < ActiveRecord::Base
   validates_date :last_tetnus_shot, :allow_nil=>true
   validates :inactive_info, :must_explain=>true
 
-
-
-
-
-    
-  
   def self.find_by_full_name(first_name, last_name)
     unit = Thread.current["unit"].id
     current_year = Date.today.year
@@ -79,7 +72,6 @@ class Camper < ActiveRecord::Base
       find(:all, :conditions=>['created_at like ?', "%#{year}%"])
   end
   
-
   def create_pack_from_name
     create_pack(:name=>new_pack_name) unless new_pack_name.blank?
   end
@@ -289,8 +281,14 @@ class Camper < ActiveRecord::Base
     end
   
   
-  
-
+  US_STATES = ['AL','AK','AZ','AR','CA','CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',
+'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO',
+'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
+'WI', 'WY']
+  GRADES = [3,4,5,6,7,8,9,10,11,12]
+  SHIRT_SIZES = %w(S M L XL XXL)
+  RACES = ["Black", "White", "American Indian", "Hispanic", "Asian", "Multi-Cultural", "Other"]
 
 end
 

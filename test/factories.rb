@@ -55,6 +55,10 @@ FactoryGirl.define do
     b.capacity 30
   end
 
+  factory :school do |s|
+    s.name "RAE"
+  end
+
   factory :unit do |u|
     u.name "Henry County"
     u.camp_price 210.00

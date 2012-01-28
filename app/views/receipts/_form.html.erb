@@ -1,13 +1,13 @@
 <%= semantic_form_for @receipt do |f| %>
   <%= render "shared/error_messages", :target=>@receipt %>
   <%= f.inputs "Payer Information", :id=>"payer_information" do  %>
-		<%= f.input :fname %>
-    <%= f.input :lname %>
+  <%= f.input :fname, :label=>"First Name" %>
+  <%= f.input :lname, :label=>"Last Name" %>
     <%= f.input :email %>
     <%= f.input :phone %>
 		<%= f.input :address %>
 		<%= f.input :city %>
-		<%= f.input :state, :as=>:select, :collection=>@states %>
+		<%= f.input :state, :as=>:select, :collection=>Camper::US_STATES %>
 		<%= f.input :zip, :input_html => { :size => 8 } %>
   <% end %>
   <input type="hidden" name="camp_price" id="camp_price" value="<%= @camp_price  %>"> 
