@@ -74,8 +74,34 @@ $(document).ready(function() {
   return false;
   });
   /* End Receipts */
+ 
+  //Looks up the camper ID
+  //will alert if there is already a camper with this ID
+  $(".camper_id_input").change(function(){
+     val = $(this).val();
+     check_for_existing_camper(val, this);
+   });
 
 });
+
+function check_for_existing_camper(number, field){
+    $.ajax({
+      url:"/campers/existing_camper?number="+number,
+      dataType:"json",
+      complete:function(req){
+        if (req.status == 200 | req.status == 304) {
+          camper = $.parseJSON(req.responseText);
+          camper = camper.camper
+          response = confirm("HEY!  There is already a camper with this number registered.  The camper's name is " + camper.fname + " " + camper.lname + ".  If you're ok with this, click ok, if you think you made a mistake, please click cancel!");
+          if (response!==true) {
+            $(field).val("");
+          }
+        }
+      }
+    }); 
+   return false;
+}
+
 
 function updateFinalPrice() {
   camper1 = numFromString("#receipt_camper1_payment");

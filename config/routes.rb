@@ -22,6 +22,7 @@ Vce::Application.routes.draw do
   resources :campers do
     collection do
       get 'remove_course'
+      get 'existing_camper'
     end
   end
   resources :buses do
