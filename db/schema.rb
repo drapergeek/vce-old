@@ -210,8 +210,8 @@ ActiveRecord::Schema.define(:version => 20120129002804) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "authorized",                               :default => false,       :null => false
-    t.string   "encrypted_password",        :limit => 128
-    t.string   "confirmation_token",        :limit => 128
+    t.string   "encrypted_password"
+    t.string   "confirmation_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
