@@ -1,13 +1,8 @@
 class CoursesController < ApplicationController
   load_and_authorize_resource
-  Course.content_columns.each do |column| 
-	  in_place_edit_for :course, column.name 
-  end  
- 
   def index
     @courses = Course.all  
   end
-
 
   def show
     @course = Course.find(params[:id])
