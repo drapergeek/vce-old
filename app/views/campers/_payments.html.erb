@@ -1,0 +1,21 @@
+<h2>Payment Information</h2>
+<div id="payments">
+  <% if @camper.payments.count > 0%>
+    Total Paid: <%= number_to_currency(@camper.payments.sum(:amount)) %>
+    <table class="payments">
+      <tr>
+        <th>Date</th>
+        <th>Amount</th>
+      </tr>  
+    <% @camper.payments.each do |payment| %>
+      <tr>
+        <td><%= payment.created_at %></td>
+        <td><%= payment.amount %></td>
+        <td><%= link_to "View Receipt", payment.receipt %></td>
+      </tr>
+    <% end %>
+    </table>
+  <% else %>
+    There are no payments on file for this camper.
+  <% end %>
+</div>

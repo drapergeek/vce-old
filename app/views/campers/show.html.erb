@@ -18,7 +18,7 @@
     Age: <%= @camper.age %>
   </div>
   <div id="dob">
-    Birthdate: <%= @camper.dob.strftime("%B %d, %Y") unless @camper.dob.nil? %>
+    <%= dob(@camper) %>
   </div>
   <div id="shirt_size">
     Shirt Size: <%= @camper.shirt_size %>
@@ -102,25 +102,21 @@
     <li>Immunizations current?  <% if @camper.immunizations_current? %> Yes <% else %> No <% end %></li>
   </ul>
   <div id="last_tetnus_shot">
-    <% unless @camper.last_tetnus_shot.blank? %>
-    Date of last tetnus shot: <%= @camper.last_tetnus_shot.strftime("%B %d, %Y") %>
-    <% else %>
-    We do not have the date of the last tetnus shot for this camper
-    <% end %>
+    <%= tetnus_shot(@camper) %>
   </div>
-
 
   <p id ="health_info_text_area">
     <% if @camper.health_concerns.blank? %>
-    The camper has no listed health concerns.
+      The camper has no listed health concerns.
     <% else %>
-    <%= @camper.health_concerns %>
+      <%= @camper.health_concerns %>
     <% end %>
   </p>
 </div>
 
 <!--Course Selection List-->
 <%= render "courses" %>
+
 <div id="other_info">
   <h2>Other Information</h2>
   <ul id="other_info">
@@ -130,11 +126,12 @@
     <li> Pickup release authorization? <% if @camper.release_authorization? %> Yes <% else %> No <% end %></li>
     <li> Parental Signatures? <% if @camper.parental_signatures? %> Yes <% else %> No <% end %></li>
   </ul>
-
 </div>
-
-
 <!--End of Course Selection List-->
+
+<%= render "payments" %>
+
+<hr />
 <% if can_view_item('campers', 'destroy')  %>
 <div id="delete camper">
   <%= link_to "Delete this camper", @receipt, :confirm => 'Are you sure?', :method => :delete %>
