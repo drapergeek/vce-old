@@ -60,8 +60,8 @@ class CampersController < ApplicationController
     end
     @states = State.find(:all)
     @schools = get_schools
-    @buses = Bus.find_standard_buses
-    @packs = Pack.find_standard_packs
+    @buses = Bus.all
+    @packs = Pack.all
     @units = Unit.all
   end
 
