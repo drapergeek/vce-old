@@ -34,6 +34,16 @@ class CampersController < ApplicationController
     @courses = Course.find(:all)
   end
 
+  def find_by_number
+    @camper = Camper.find_by_number(params[:number])
+    if @camper
+      redirect_to @camper 
+    else
+      flash[:error] = "Could not find a camper with that number"
+      redirect_to campers_url
+    end
+  end
+
   def new
     authorize! :new, Camper
     unless params[:name].blank? || params[:number].blank?

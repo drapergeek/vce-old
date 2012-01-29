@@ -33,68 +33,23 @@
 <p>Payment Method : <%= @receipt.payment_method %>
 	<%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %></p>
 	
-<p>
-	Camper Paid for:  
-	<%= @receipt.camper1.titleize%>
-	<%= link_to @receipt.camper1_id.titleize,
-	 	:controller=>'campers',
-	 	:action=>'show',
-	 	:number=>@receipt.camper1_id,
-	 	:name=>@receipt.camper1,
-		:payment=>@receipt.payment_extra.to_s
-	%>
-	<% if @receipt.camper1_collage %>
-		<strong>Purchased a collage for this camper</strong>
-	<% end %>
-</p>
-
-<% unless @receipt.camper2.blank? %>
-<p>
-	2nd Camper paid for: 
-	<%= @receipt.camper2.titleize%>
-	<%= link_to @receipt.camper2_id.titleize,
-	 	:controller=>'campers',
-	 	:action=>'show',
-	 	:number=>@receipt.camper2_id,
-	 	:name=>@receipt.camper2,
-		:payment=>@receipt.payment_extra.to_s
-	%>
-	<% if @receipt.camper2_collage %>
-		<strong>Purchased a collage for this camper</strong>
-	<% end %>
-
-</p>
-
-<% unless @receipt.camper3.blank? %>
-<p>
-	3nd Camper paid for: 
-	<%= @receipt.camper3.titleize%>
-	<%= link_to @receipt.camper3_id.titleize,
-	 	:controller=>'campers',
-	 	:action=>'show',
-	 	:number=>@receipt.camper3_id,
-	 	:name=>@receipt.camper3,
-		:payment=>@receipt.payment_extra.to_s
-	%>
-	<% if @receipt.camper3_collage %>
-		<strong>Purchased a collage for this camper</strong>
-	<% end %>
-</p>
-<% end %>
-<% end %>
+<h3>Campers Paid For</h3>
+<ul>
+  <%= render :partial=>"camper_show", :locals=>{:camper_name=>@receipt.camper1.titleize, :camper_number=>@receipt.camper1_id, :collage_purchased=>@receipt.camper1_collage} %>
+  <%= render :partial=>"camper_show", :locals=>{:camper_name=>@receipt.camper2.titleize, :camper_number=>@receipt.camper2_id, :collage_purchased=>@receipt.camper2_collage} %>
+  <%= render :partial=>"camper_show", :locals=>{:camper_name=>@receipt.camper3.titleize, :camper_number=>@receipt.camper3_id, :collage_purchased=>@receipt.camper3_collage} %>
+</ul>
 
 <% if @receipt.refund %>
 <div id="refund">
-	
 	**A refund of <%= number_to_currency(@receipt.refund_amount) %> was disbursed on 
-	<%= @receipt.refund_date.strftime("%B %d, %Y") %> 
+	<%= @receipt.refund_date %> 
 	with check #<%= @receipt.refund_check_number %>.**
 	<br />
 	Refund Info:
 	<div>
 		<%= @receipt.refund_info %>
-	</di>
-	
+	</div>
 </div>
 <% end %>
 

@@ -27,6 +27,9 @@ Vce::Application.routes.draw do
       get 'remove_course'
       get 'existing_camper'
     end
+    member do
+      get 'find_by_number'
+    end
   end
   resources :buses do
     collection do
