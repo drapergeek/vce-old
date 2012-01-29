@@ -23,7 +23,7 @@ class CreateCampers < ActiveRecord::Migration
       t.column :school, :string
       t.column :teacher, :string
       t.column :grade, :int
-      t.column :shirt_size, :int
+      t.column :shirt_size, :string
     end
   end
 
