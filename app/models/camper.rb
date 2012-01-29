@@ -18,6 +18,7 @@ class Camper < ActiveRecord::Base
   #accessors
   attr_accessor :status
   attr_accessor :new_pack_name
+  delegate :name, :to=>:bus, :prefix=>true, :allow_nil=>true
   
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
@@ -163,6 +164,10 @@ class Camper < ActiveRecord::Base
   def full_name
     [prefname, lname].each{ |word| word.capitalize! }.compact.join(" ")
   end
+
+  def header
+   full_name + " " + number 
+  end
   
   def prefname
     if pref_name.blank?
@@ -174,11 +179,8 @@ class Camper < ActiveRecord::Base
   
   
   def age
-    if dob.blank?
-      return 0
-    else
-      ((Date.today.strftime('%Y%m%d').to_i - dob.strftime('%Y%m%d').to_i ) / 10000 ).to_i
-    end
+    return "No Birthday Set" if dob.blank?
+    ((Date.today.strftime('%Y%m%d').to_i - dob.strftime('%Y%m%d').to_i ) / 10000 ).to_i
   end
   
   def media_release_text
@@ -205,25 +207,6 @@ class Camper < ActiveRecord::Base
     end
   end
   
-  def shirt_size_text
-    case shirt_size
-    when 0
-      return "S"
-    when 1
-      return "M"
-    when 2
-      return "L"
-    when 3
-      return "XL"
-    when 4
-      return "XXL"
-    when 5
-      return "XXXL"
-    else
-      return "N/A"
-    end
-  end
-
   def name=(input)
     names = input.split(" ")
     if names.length == 3
@@ -289,61 +272,7 @@ class Camper < ActiveRecord::Base
   GRADES = [3,4,5,6,7,8,9,10,11,12]
   SHIRT_SIZES = %w(S M L XL XXL)
   RACES = ["Black", "White", "American Indian", "Hispanic", "Asian", "Multi-Cultural", "Other"]
+  MEDIA_RELEASE = ["No", "Yes", "Parents Denied Permission"]
 
 end
-
-# == Schema Information
-#
-# Table name: campers
-#
-#  id                       :integer         not null, primary key
-#  created_at               :datetime
-#  updated_at               :datetime
-#  fname                    :string(255)
-#  lname                    :string(255)
-#  mname                    :string(255)
-#  pref_name                :string(255)
-#  dob                      :date
-#  gender                   :integer
-#  address                  :string(255)
-#  city                     :string(255)
-#  state                    :string(255)
-#  zip                      :integer
-#  roomate_choice           :string(255)
-#  parent_lname             :string(255)
-#  parent_fname             :string(255)
-#  phone1                   :string(255)
-#  phone2                   :string(255)
-#  emergency_name           :string(255)
-#  emergency_phone          :string(255)
-#  school                   :string(255)
-#  teacher                  :string(255)
-#  grade                    :integer
-#  shirt_size               :integer
-#  number                   :string(255)
-#  position                 :integer
-#  health_concerns          :text
-#  bus_id                   :integer
-#  inactive                 :boolean
-#  inactive_info            :text
-#  email                    :string(255)
-#  race                     :string(255)
-#  last_tetnus_shot         :date
-#  code_of_conduct          :boolean
-#  media_release            :integer
-#  equine_release           :boolean
-#  rec_zone                 :integer
-#  payment_number           :string(255)
-#  reference                :boolean
-#  physician_insurance_info :boolean
-#  emergency_info           :boolean
-#  immunizations_current    :boolean
-#  release_authorization    :boolean
-#  parental_signatures      :boolean
-#  pool_spotting            :integer
-#  room_number              :string(255)
-#  counselor_years          :integer
-#  pack_id                  :integer
-#  unit_id                  :integer
-#
 

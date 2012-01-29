@@ -1,0 +1,26 @@
+<div id="course_selection_list">
+  <h2>Courses</h2>
+  <% if @camper.courses.empty? %>
+  Please add the campers choice of courses below
+  <ol id="course_list">
+    <% else %>
+    <% @camper.courses.each do |c| %>
+    <li class="course" id = "course_<%=c.id %>">
+      <%= c.name %>
+      <%= link_to '(x)', remove_course_campers_url(:camper =>@camper.id, :course=>c.id) %>
+    </li>
+    <% end %>
+  </ol>
+  <% end %>
+</div>
+<div id ="course_select_add">
+  <%= form_tag add_course_campers_path , :id=>@camper do  %>
+    <%= hidden_field_tag "id", @camper.id %>
+    <select id="course_selection" name="course_selection">
+      <% @courses.each do |c| %>
+      <option value='<%= c.id %>'><%= c.name %></option>
+      <% end %>
+    </select>
+    <%= submit_tag 'Add Course' %>
+  <% end %>
+</div>

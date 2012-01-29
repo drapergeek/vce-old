@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128232821) do
+ActiveRecord::Schema.define(:version => 20120129002804) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -51,9 +51,9 @@ ActiveRecord::Schema.define(:version => 20120128232821) do
     t.string   "school"
     t.string   "teacher"
     t.integer  "grade"
-    t.integer  "shirt_size"
+    t.string   "shirt_size"
     t.string   "number"
-    t.integer  "position"
+    t.string   "position"
     t.text     "health_concerns"
     t.integer  "bus_id"
     t.boolean  "inactive"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20120128232821) do
     t.string   "race"
     t.date     "last_tetnus_shot"
     t.boolean  "code_of_conduct"
-    t.integer  "media_release"
+    t.string   "media_release"
     t.boolean  "equine_release"
     t.integer  "rec_zone"
     t.string   "payment_number"

@@ -163,8 +163,8 @@ def remove_course
   @camper = Camper.find_by_id(params[:camper])
   @course = Course.find_by_id(params[:course])
   @camper.courses.delete(@course)
-  return if request.xhr?
-  render :nothing, :status => 200
+  flash[:notice] = "Removed course!"
+  redirect_to @camper
 end
 
 

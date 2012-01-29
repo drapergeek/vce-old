@@ -52,7 +52,7 @@
   <%= f.inputs "Paperwork" do %>
     <%= f.input :code_of_conduct %>
     <%= f.input :parental_signatures %>
-    <%= f.input :media_release %>
+    <%= f.input :media_release, :as=>:select, :collection=>Camper::MEDIA_RELEASE %>
     <%= f.input :equine_release %>
   <% end %>
   <%= f.inputs "Office Use Only" do %>

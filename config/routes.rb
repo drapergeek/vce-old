@@ -23,6 +23,7 @@ Vce::Application.routes.draw do
   end
   resources :campers do
     collection do
+      post 'add_course'
       get 'remove_course'
       get 'existing_camper'
     end
