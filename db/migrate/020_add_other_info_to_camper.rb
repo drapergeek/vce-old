@@ -4,7 +4,7 @@ class AddOtherInfoToCamper < ActiveRecord::Migration
     add_column :campers, :race, :string
     add_column :campers, :last_tetnus_shot, :date
     add_column :campers, :code_of_conduct, :boolean
-    add_column :campers, :media_release, :boolean
+    add_column :campers, :media_release, :string
     add_column :campers, :equine_release, :boolean
   end
 
