@@ -47,7 +47,7 @@ class Camper < ActiveRecord::Base
   end
   
   #normal validations
-  validates :number, :uniqueness=>true, :format=>{:with => /^(SB|SG|PG|PB|B|G|WB|WG|T|A|F)\d{3}$/}, :presence=>true
+  validates :number, :uniqueness=>true, :format=>{:with => /^(CG|CB|SG|SB|PG|PB|TG|TB|AG|AB)\d{3}$/}, :presence=>true
   validates :fname, :presence=>true
   validates :lname, :presence=>true
   validates :mname, :presence=>true
@@ -273,6 +273,6 @@ class Camper < ActiveRecord::Base
   SHIRT_SIZES = %w(S M L XL XXL)
   RACES = ["Black", "White", "American Indian", "Hispanic", "Asian", "Multi-Cultural", "Other"]
   MEDIA_RELEASE = ["No", "Yes", "Parents Denied Permission"]
-
+  POSITIONS = ["Camper", "CIT", "Teen", "ADULT"]
 end
 

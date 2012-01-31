@@ -1,6 +1,7 @@
 <%= semantic_form_for @camper do |f| %>
   <%= render "shared/error_messages", :target=>@camper %>
   <%= f.inputs  "General Information" do %>
+  <%= f.input :position, :as=>:select, :collection=>Camper::POSITIONS %>
   <%= f.input :lname, :label=>"Last Name" %>
   <%= f.input :fname, :label=>"First Name" %>
   <%= f.input :mname, :label=>"Middle Name" %>
