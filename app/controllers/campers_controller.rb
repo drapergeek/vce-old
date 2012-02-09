@@ -87,11 +87,11 @@ class CampersController < ApplicationController
   def edit
     authorize! :edit, Camper
     @camper = Camper.find(params[:id])
-    @states = State.find(:all)
+    @states = State.all
     @schools = get_schools
-    @buses = Bus.find_standard_buses
-    @packs = Pack.find_standard_packs
-    @units = Unit.find(:all)
+    @buses = Bus.all
+    @packs = Pack.all
+    @units = Unit.all
   end
 
 
