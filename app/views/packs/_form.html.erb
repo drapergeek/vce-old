@@ -1,6 +1,9 @@
+<%= semantic_form_for @pack do  |f| %>
  <%= render "shared/error_messages", :target => @pack %>  
-
-<%= f.label :name %>: 
-<%= f.text_field :name  %><br />
+  <%= f.inputs do %>
+    <%= f.input :name %>
+  <% end %>
+  <%= f.buttons %>
+<% end %>
 
 

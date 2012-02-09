@@ -1,5 +1,6 @@
 Vce::Application.routes.draw do
   resources :schools
+  resources :packs
 
   match '/auth/:provider/callback' => 'sessions#create'
   

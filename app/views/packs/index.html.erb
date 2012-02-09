@@ -1,0 +1,24 @@
+<h2>Listing packs</h2>
+
+<table>
+  <tr>
+  <% for column in Pack.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for pack in @packs %>
+  <tr class="<%= cycle("even", "odd") %>">
+  <% for column in Pack.content_columns %>
+    <td><%=h pack.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Show', :action => 'show', :id => pack %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => pack %></td>
+    <td><%= link_to "Destroy", pack, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New pack', :action => 'new' %>

@@ -1,13 +1,7 @@
 class PacksController < ApplicationController
   def index
+    @packs = Pack.all
     authorize! :index, Pack
-    list
-    render :action => 'list'
-  end
-
-  def list
-    authorize! :index, Pack
-    @packs = Pack.paginate_standard_packs :page=>params[:page], :per_page=>10
   end
 
   def show
@@ -28,7 +22,7 @@ class PacksController < ApplicationController
       end
     if @pack.save
       flash[:notice] = 'Pack was successfully created.'
-      redirect_to :action => 'list'
+      redirect_to packs_path
     else
       render :action => 'new'
     end
@@ -53,6 +47,6 @@ class PacksController < ApplicationController
   def destroy
     authorize! :destory, Pack
     Pack.find(params[:id]).destroy
-    redirect_to :action => 'list'
+    redirect_to packs_path, :notice=>"Destroyed pack"
   end
 end
