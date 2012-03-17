@@ -1,11 +1,6 @@
 <h1>Editing unit</h1>
 
-
-<% form_for  @unit, :url => { :action => 'update' } do |f| %>
-      <%= render :partial => f, :locals => { :f => f } %>
-      <%= f.submit 'update' %>
- <% end %>
-
+<%= render "form" %>
 
 <%= link_to 'Show', @unit %> |
 <%= link_to 'Back', :controller=>'units' %>

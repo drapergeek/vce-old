@@ -1,11 +1,5 @@
 <h1>Create New Unit</h1>
-
-<% form_tag :action => 'create', :id => @unit do %>
-
-  <%= render :partial => 'form' %>
-  <%= submit_tag 'Create' %>
-
-<% end %>
+<%= render "form" %>
 <%= link_to 'Show', @unit %> |
 <%= link_to 'Back', units_path %>
 

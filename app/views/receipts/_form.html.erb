@@ -1,40 +1,40 @@
 <%= semantic_form_for @receipt do |f| %>
   <%= render "shared/error_messages", :target=>@receipt %>
   <%= f.inputs "Payer Information", :id=>"payer_information" do  %>
-  <%= f.input :fname, :label=>"First Name" %>
-  <%= f.input :lname, :label=>"Last Name" %>
+    <%= f.input :fname, :label=>"First Name" %>
+    <%= f.input :lname, :label=>"Last Name" %>
     <%= f.input :email %>
     <%= f.input :phone %>
-		<%= f.input :address %>
-		<%= f.input :city %>
-		<%= f.input :state, :as=>:select, :collection=>Camper::US_STATES %>
-		<%= f.input :zip, :input_html => { :size => 8 } %>
+    <%= f.input :address %>
+    <%= f.input :city %>
+    <%= f.input :state, :as=>:select, :collection=>Camper::US_STATES %>
+    <%= f.input :zip, :input_html => { :size => 8 } %>
   <% end %>
   <input type="hidden" name="camp_price" id="camp_price" value="<%= @camp_price  %>"> 
   <input type="hidden" name="collage_price" id="collage_price" value="<%= @collage_price  %>"> 
-	<%= f.inputs "Camper Information", :id=>"camper_information"  do %>
+  <%= f.inputs "Camper Information", :id=>"camper_information"  do %>
     <% (1..3).each do |num| %>
       <%= render :partial=>"camper", :locals=>{:camper=>num, :f=>f} %>
     <% end %>
-    
-	<% end %>
-	
-	<%= f.inputs "Payment Information", :id=>"payment_information" do %>
-		<%= content_tag :div, :id=>"payment_cost_notification" do  -%>
-		<% end -%>
-      <%= camp_price_explanation(@camp_price) %>
-		<%= f.input :amount %>
-    <%= f.input :payment_method, :as=>:radio, :collection=>Receipt::PAYMENT_TYPES ,:input_html=>{:class=>"payment_method"}%>
-		<%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
-	<% end %>
-  <%= f.inputs "Refund" do %>
-  <%= link_to "Refund this Receipt", nil, :id=>"refund_link" %>
-  <div id="refund_boxes" style="display:none">
-    <%= f.input :refund, :label=>"This receipt was refunded" %>
-    <%= f.input :refund_check_number %>
-    <%= f.input :refund_amount %>
-    <%= f.input :refund_info, :label=>"Refund Explanation", :input_html=>{:rows=>5, :cols=>45} %>
-  </div>
+
   <% end %>
-	<%= f.buttons %>
+
+  <%= f.inputs "Payment Information", :id=>"payment_information" do %>
+    <%= content_tag :div, :id=>"payment_cost_notification" do  -%>
+    <% end -%>
+    <%= camp_price_explanation(@camp_price) %>
+    <%= f.input :amount %>
+    <%= f.input :payment_method, :as=>:radio, :collection=>Receipt::PAYMENT_TYPES ,:input_html=>{:class=>"payment_method"}%>
+    <%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
+  <% end %>
+  <%= f.inputs "Refund" do %>
+    <%= link_to "Refund this Receipt", nil, :id=>"refund_link" %>
+    <div id="refund_boxes" style="display:none">
+      <%= f.input :refund, :label=>"This receipt was refunded" %>
+      <%= f.input :refund_check_number %>
+      <%= f.input :refund_amount %>
+      <%= f.input :refund_info, :label=>"Refund Explanation", :input_html=>{:rows=>5, :cols=>45} %>
+    </div>
+  <% end %>
+  <%= f.buttons %>
 <% end %>

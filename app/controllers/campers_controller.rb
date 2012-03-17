@@ -124,7 +124,7 @@ class CampersController < ApplicationController
     @camper = Camper.find_by_number(params[:number])
     logger.info @camper
     if @camper
-      render :json=>@camper 
+      render :json=>@camper
     else
       render :status => 400, :json => {:status => :error, }.to_json
     end
