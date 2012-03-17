@@ -1,22 +1,22 @@
 <!--Navigation-->
 <div id="navigation">
-	<% if current_user %>
-	<% if can_view_item("receipts", "edit") %>
-		<%= link_to 'Edit', :action => 'edit', :id => @receipt %>
-	<% end %>
-	<% if can_view_item("receipts", "destroy") %>
-		 | <%= link_to "Delete", @receipt, :confirm => 'Are you sure?', :method => :delete%> |
-	<% end %>
-	<% end %>
-	<%= link_to 'Back', root_url %> |
-	<%= link_to 'Next Receipt', {:action=>'new'},:id=>'next_receipt' %>
+  <% if current_user %>
+    <% if can_view_item("receipts", "edit") %>
+      <%= link_to 'Edit', :action => 'edit', :id => @receipt %>
+    <% end %>
+    <% if can_view_item("receipts", "destroy") %>
+      | <%= link_to "Delete", @receipt, :confirm => 'Are you sure?', :method => :delete%> |
+    <% end %>
+  <% end %>
+  <%= link_to 'Back', root_url %> |
+  <%= link_to 'Next Receipt', {:action=>'new'},:id=>'next_receipt' %>
 </div>
 
 <!--End of Navigation-->
 <br />
 <div>
-	
-	<a href="javascript:window.print()">Print This Page</a> 
+
+  <a href="javascript:window.print()">Print This Page</a> 
 </div>
 
 <p>Date: <%= @receipt.date.strftime("%m/%d/%y") unless @receipt.date.blank? %></p>
@@ -25,14 +25,14 @@
 <p>Phone: <%= number_to_phone(@receipt.phone, :area_code=>true) %></p>
 
 <% unless @receipt.address_blank?%>
-<p>Address: <%= @receipt.full_address  %></p>
+  <p>Address: <%= @receipt.full_address  %></p>
 <% end %>
 
 <p>Amount Paid : <%= number_to_currency(@receipt.amount) %></p>
 
 <p>Payment Method : <%= @receipt.payment_method %>
-	<%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %></p>
-	
+  <%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %></p>
+
 <h3>Campers Paid For</h3>
 <ul>
   <%= render :partial=>"camper_show", :locals=>{:camper_name=>@receipt.camper1.titleize, :camper_number=>@receipt.camper1_id, :collage_purchased=>@receipt.camper1_collage} %>
@@ -41,32 +41,26 @@
 </ul>
 
 <% if @receipt.refund %>
-<div id="refund">
-	**A refund of <%= number_to_currency(@receipt.refund_amount) %> was disbursed on 
-	<%= @receipt.refund_date %> 
-	with check #<%= @receipt.refund_check_number %>.**
-	<br />
-	Refund Info:
-	<div>
-		<%= @receipt.refund_info %>
-	</div>
-</div>
+  <div id="refund">
+    **A refund of <%= number_to_currency(@receipt.refund_amount) %> was disbursed on 
+    <%= @receipt.refund_date %> 
+    with check #<%= @receipt.refund_check_number %>.**
+    <br />
+    Refund Info:
+    <div>
+      <%= @receipt.refund_info %>
+    </div>
+  </div>
 <% end %>
 
 <!--Created by information-->
 <div id="created_by_info">
-	<% unless @receipt.user.nil? %>
-		<p>
-			Created By: <%= @receipt.user.fname %> <%= @receipt.user.lname %>
-			<% unless @receipt.user.title.nil? %> - <%= @receipt.user.title %><% end %>
-		</p>
-		<% unless @receipt.user.picture.blank? %> 
-			<%= image_tag(url_for(:controller=>'account',
-									:action => 'image', 
-									:id => @receipt.user.id), 
-									:size=>'200x50') %> 
-		<% end %> 
-	<% end %>
+  <% unless @receipt.user.nil? %>
+    <p>
+      Created By: <%= @receipt.user.fname %> <%= @receipt.user.lname %>
+      <% unless @receipt.user.title.nil? %> - <%= @receipt.user.title %><% end %>
+    </p>
+  <% end %>
 </div>
 <!--end of created by information-->
 
@@ -77,18 +71,18 @@
 <!--CONTACT INFORMATION-->
 
 <div id="contact_info_for_vce" class="centered_div">
-	<h4 id="office_name">
-		Virginia Cooperative Extension
-	</h4>
-	<p>
-		3300 Kings Mountain Rd <br />
-		P.O Box 7 <br />
-		Collinsville, VA 24078-0007 <br />
-		(276)-634-4650
-	</p>
+  <h4 id="office_name">
+    Virginia Cooperative Extension
+  </h4>
+  <p>
+    3300 Kings Mountain Rd <br />
+    P.O Box 7 <br />
+    Collinsville, VA 24078-0007 <br />
+    (276)-634-4650
+  </p>
 
-	
-	
+
+
 </div>
 
 
