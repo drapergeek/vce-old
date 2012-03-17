@@ -195,8 +195,8 @@ ActiveRecord::Schema.define(:version => 20120129002804) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.string   "crypted_password"         
-    t.string   "salt"
+    t.string   "crypted_password",          :limit => 40
+    t.string   "salt",                      :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
@@ -210,8 +210,8 @@ ActiveRecord::Schema.define(:version => 20120129002804) do
     t.string   "provider"
     t.string   "uid"
     t.boolean  "authorized",                               :default => false,       :null => false
-    t.string   "encrypted_password"
-    t.string   "confirmation_token"
+    t.string   "encrypted_password",        :limit => 128
+    t.string   "confirmation_token",        :limit => 128
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
