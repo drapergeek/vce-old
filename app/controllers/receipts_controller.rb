@@ -1,17 +1,13 @@
 class ReceiptsController < ApplicationController
 
   helper_method :sort_column, :sort_direction
-  #layout "application" ,  :except => {:export_excel, :create_excel}
 
-    
- #This is a method for showing a report of totals...
- #mainly its a sum screen
- def totals
-   @receipts = Receipt.find_standard_receipts
-   @receipts_dates = @receipts.group_by{|r| r.date.beginning_of_day}
-   authorize! :totals, Receipt
- end
-  
+  def totals
+    @receipts = Receipt.find_standard_receipts
+    @receipts_dates = @receipts.group_by{|r| r.date.beginning_of_day}
+    authorize! :totals, Receipt
+  end
+
   #This method returns just a list of sortable columns
   def index
     if params[:search]
@@ -24,20 +20,6 @@ class ReceiptsController < ApplicationController
       @receipts = Receipt.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
     end
   end
-
-#  def list_by_date
-#    date = params[:date]
-##    sort_init 'date'
-#    sort_update
-#    @receipts = Receipt.paginate_standard_receipts :conditions => [ "date LIKE ?", "%#{date}%"],  :page=>params[:page], :per_page=>20
-#    render :action=>'index'
-#  end
-  
-  
-#  def show_by_date
-#    @date = params[:date]
-#    @receipts = Receipt.find_standard_receipts( :conditions => [ "date LIKE ?", "%#{params[:date]}%"])
-#  end
 
   def show
     @receipt = Receipt.find(params[:id])
@@ -55,9 +37,9 @@ class ReceiptsController < ApplicationController
   def create
     @camp_price = current_user.unit.camp_price
     @receipt = Receipt.new(params[:receipt])
-     unless current_user.unit == 'State Wide'
-        @receipt.unit = current_user.unit
-      end
+    unless current_user.unit == 'State Wide'
+      @receipt.unit = current_user.unit
+    end
     @receipt.user = current_user
     @receipt.date = Time.now
     authorize! :create, @receipt
@@ -115,27 +97,27 @@ class ReceiptsController < ApplicationController
       flash[:notice] = "Your receipt has been successfully deleted."
       redirect_to :action => 'index'
     else
-     flash[:notice]= "You cannot delete a receipt that is not in your unit"
-     rediect_to :action =>'index'
+      flash[:notice]= "You cannot delete a receipt that is not in your unit"
+      rediect_to :action =>'index'
     end
   end
-  
 
-#  def validate
 
-  
+  #  def validate
+
+
   private
-  
-  
+
+
   def sort_column
-     Receipt.column_names.include?(params[:sort]) ? params[:sort] : "id"
+    Receipt.column_names.include?(params[:sort]) ? params[:sort] : "id"
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
-  
 
 
-  
+
+
 end
