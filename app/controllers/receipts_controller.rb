@@ -1,5 +1,4 @@
 class ReceiptsController < ApplicationController
-
   helper_method :sort_column, :sort_direction
 
   def totals
@@ -8,7 +7,6 @@ class ReceiptsController < ApplicationController
     authorize! :totals, Receipt
   end
 
-  #This method returns just a list of sortable columns
   def index
     if params[:search]
       @receipts = Receipt.search(params[:search]).paginate(:per_page=>25, :page=>params[:page])
@@ -29,7 +27,7 @@ class ReceiptsController < ApplicationController
   def new
     @receipt = Receipt.new
     @states = State.find(:all)
-    @camp_price = 215.00
+    @camp_price = current_user.unit.camp_price
     @collage_price = current_user.unit.collage_price
     authorize! :new, @receipt
   end
@@ -47,7 +45,6 @@ class ReceiptsController < ApplicationController
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else
-      logger.info @receipt.errors
       @states = State.find(:all)
       render :action => 'new'
     end

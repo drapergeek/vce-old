@@ -28,6 +28,11 @@ class ApplicationController < ActionController::Base
        if @current_user
          set_thread_user
          set_thread_unit
+         begin
+          logger.info "Current user: " + @current_user.email
+          rescue
+          logger.info "Can't log current user email"
+         end
          return @current_user
        end
     end
@@ -35,7 +40,6 @@ class ApplicationController < ActionController::Base
   
   
   def login_required
-    logger.info "The session user id is #{session[:user_id]}"
     unless current_user
       reset_session
       flash[:error] = "You must be logged in to view this page!"
