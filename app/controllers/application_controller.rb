@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :login_required   
+  before_filter :login_required 
   protect_from_forgery
   helper_method :current_user
 

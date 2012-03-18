@@ -18,6 +18,10 @@ group :development, :test do
   gem "annotate"
   gem "guard-test"
   gem "guard-cucumber"
+  gem "cucumber-rails"
+  gem "rspec-rails"
+  gem "database_cleaner"
+  gem "email_spec"
 end
 
 group :production do

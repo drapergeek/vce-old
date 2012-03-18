@@ -45,10 +45,9 @@ class ReceiptsController < ApplicationController
     authorize! :create, @receipt
     if @receipt.save
       begin
-        if Rails.env=="production"
-          ReceiptMailer.receipt_confirmation(@receipt).deliver unless @receipt.email.blank?
-        end
-      rescue
+        ReceiptMailer.receipt_confirmation(@receipt).deliver unless @receipt.email.blank?
+      rescue Exception => e
+        logger.info e.to_s
         flash[:error] = "Unable to send an email, please print a hard copy"
       end
       flash[:notice] = 'Receipt was successfully created.'

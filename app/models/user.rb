@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :email, :case_sensitive => false
   validates_confirmation_of :password
   validates_presence_of :password, :on=>:create
+  validates :fname, :presence=>true
+  validates :lname, :presence=>true
+  validates :title, :presence=>true
   
   scope :authorized, where(:authorized=>true)
   scope :unauthorized, where(:authorized=>false)
