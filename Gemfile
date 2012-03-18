@@ -18,6 +18,7 @@ group :development, :test do
   gem "annotate"
   gem "guard-test"
   gem "guard-cucumber"
+  gem "guard-rspec"
   gem "cucumber-rails"
   gem "rspec-rails"
   gem "database_cleaner"

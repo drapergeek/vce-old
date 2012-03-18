@@ -42,7 +42,7 @@ class ExcelController < ApplicationController
         @outs.push(u.zip)
         @outs.push(number_to_phone(u.phone))
         @outs.push(u.amount)
-        @outs.push(u.payment_type)
+        @outs.push(u.payment_method)
         @outs.push(u.payment_extra)
         @outs.push(u.email)
         @outs.push(u.camper1)

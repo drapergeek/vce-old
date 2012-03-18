@@ -79,6 +79,8 @@ GEM
     guard-cucumber (0.7.4)
       cucumber (>= 0.10)
       guard (>= 0.8.3)
+    guard-rspec (0.6.0)
+      guard (>= 0.10.0)
     guard-test (0.4.3)
       guard (>= 0.4)
       test-unit (~> 2.2)
@@ -186,6 +188,7 @@ DEPENDENCIES
   factory_girl_rails
   formtastic
   guard-cucumber
+  guard-rspec
   guard-test
   jquery-rails
   launchy

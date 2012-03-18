@@ -17,15 +17,8 @@ class Receipt < ActiveRecord::Base
   validates :amount, :positive_price=>true
   validates :refund, :requires_explanation=>true
   validates :zip, :presence=>true
-  #validates :camper1_id, :unique_camper_id=>true, :on=>:create
-  #validates :camper2_id, :unique_camper_id=>true, :on=>:create
-  #validates :camper3_id, :unique_camper_id=>true, :on=>:create
-
-  #  scope :current_unit, lambda {|unit|{:conditions=>["unit_id like ?", unit]}}
-  #  scope :current_year, lambda {|year|{:conditions=>["created_at like ?", year]}}
 
   def self.find_standard_receipts(options={})
-    #can we get the current unit _id?
     with_scope :find => options do 
       year = Date.today.year
       find(:all, :conditions=>['created_at like ?',  "%#{year}%"])
@@ -38,11 +31,8 @@ class Receipt < ActiveRecord::Base
     write_attribute(:phone, phone)
   end
 
-  #This is a simple search
-  #returns results based on lname, fname,camper1-3 name or id and phone
   def self.search(search)
     if search
-      #need to find a way to combine arrays
       @group = where('lname like ?', "%#{search}%")
       @group += where('fname like ?', "%#{search}%")
       @group += where('camper1 like ?', "%#{search}%")
@@ -63,30 +53,6 @@ class Receipt < ActiveRecord::Base
     else
       scoped
     end
-
-  end
-
-  #This finds all the camper ids only...I don't know where this is used
-  def self.find_camper_ids()
-    @ids = Array.new
-    @receipts = Receipt.find(:all)
-    @receipts.each do |r|
-      @ids.push(r.camper1_id)
-      @ids.push(r.camper2_id) unless r.camper2_id.blank?
-      @ids.push(r.camper3_id) unless r.camper3_id.blank?
-    end
-    @ids
-  end
-
-  def find_camper_ids()
-    @ids = Array.new
-    @receipts = Receipt.find(:all)
-    @receipts.each do |r|
-      @ids.push(r.camper1_id)
-      @ids.push(r.camper2_id) unless r.camper2_id.blank?
-      @ids.push(r.camper3_id) unless r.camper3_id.blank?
-    end
-    @ids
   end
 
   def create_payments
@@ -105,7 +71,7 @@ class Receipt < ActiveRecord::Base
       c = Camper.find_or_create_by_number(:number=>camper3_id, :name=>camper3, :position=>0)
       c.save(:validate=>false)
       c.payments.create(:receipt=>self, :amount=>camper3_payment)
-    end 
+    end
   end
 
   def add_collages
@@ -130,11 +96,11 @@ class Receipt < ActiveRecord::Base
 
   def payment_type
     case payment_method
-    when 1 
+    when 1
       return "Cash"
     when 2
       return "Check"
-    when 3 
+    when 3
       return "MO"
     end
   end
