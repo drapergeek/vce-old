@@ -21,7 +21,7 @@
 
 <p>Date: <%= @receipt.date.strftime("%m/%d/%y") unless @receipt.date.blank? %></p>
 
-<p>Received From: <%= @receipt.full_name %></p>
+<p class="received_from">Received From: <%= @receipt.full_name %></p>
 <p>Phone: <%= number_to_phone(@receipt.phone, :area_code=>true) %></p>
 
 <% unless @receipt.address_blank?%>

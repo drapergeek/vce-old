@@ -7,3 +7,12 @@ Feature: Receipt Management
     Given I am logged in as a user
     When I go to the receipts new page
     Then I should see the receipts form
+
+  @javascript
+ Scenario:
+    Given I am logged in as a user
+    When I go to the receipts new page
+    And I fill in the required fields
+    And I submit the form
+    Then I should be redirected to the new receipt
+    And the receipted person should have been sent an e-mail

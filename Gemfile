@@ -22,6 +22,8 @@ group :development, :test do
   gem "rspec-rails"
   gem "database_cleaner"
   gem "email_spec"
+  gem "capybara-webkit"
+  gem "launchy"
 end
 
 group :production do
