@@ -44,7 +44,6 @@ class ReceiptsController < ApplicationController
     @receipt.date = Time.now
     authorize! :create, @receipt
     if @receipt.save
-      ReceiptMailer.receipt_confirmation(@receipt).deliver unless @receipt.email.blank?
       flash[:notice] = 'Receipt was successfully created.'
       redirect_to :action => 'show', :id=>@receipt
     else

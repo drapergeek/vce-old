@@ -7,6 +7,7 @@ class Receipt < ActiveRecord::Base
   before_create :compact_phone
   after_create :create_payments
   after_create :add_collages
+  after_create :send_email
 
   #validations
   #include ActiveModel::Validations
@@ -94,17 +95,6 @@ class Receipt < ActiveRecord::Base
     !camper3.blank?
   end
 
-  def payment_type
-    case payment_method
-    when 1
-      return "Cash"
-    when 2
-      return "Check"
-    when 3
-      return "MO"
-    end
-  end
-
   def full_name
     [fname.capitalize, lname.capitalize].join(' ')
   end
@@ -113,9 +103,12 @@ class Receipt < ActiveRecord::Base
     full_address = address + " " + city + ", " + state + " " + zip.to_s
   end
 
-  #this method checks to see if ANY part of the address was left out
   def address_blank?
     address.blank? || state.blank? || zip.blank? || city.blank?
+  end
+
+  def send_email
+    ReceiptMailer.receipt_confirmation(self).deliver unless self.email.blank?
   end
 
 end
