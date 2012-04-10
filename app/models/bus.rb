@@ -3,10 +3,8 @@ class Bus < ActiveRecord::Base
   belongs_to :unit
   
   validates :capacity, :presence=>true
-  def self.find_standard_buses(options={})
-       with_scope :find => options do 
-         find(:all, :conditions=>['unit_id like ?', Thread.current["unit"].id])
-     end
+  def self.find_standard_buses()
+    all
   end
   
   
