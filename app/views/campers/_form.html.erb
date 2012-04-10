@@ -2,6 +2,7 @@
   <%= render "shared/error_messages", :target=>@camper %>
   <%= f.inputs  "General Information" do %>
   <%= f.input :position, :as=>:select, :collection=>Camper::POSITIONS %>
+  <%= f.input :number %>
   <%= f.input :lname, :label=>"Last Name" %>
   <%= f.input :fname, :label=>"First Name" %>
   <%= f.input :mname, :label=>"Middle Name" %>
@@ -57,7 +58,6 @@
     <%= f.input :equine_release %>
   <% end %>
   <%= f.inputs "Office Use Only" do %>
-    <%= f.input :number %>
     <%= f.input :pack %>
     <%= f.input :bus %>
     <%= f.input :collage_purchased %>   

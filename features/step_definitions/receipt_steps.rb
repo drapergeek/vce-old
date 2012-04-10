@@ -13,6 +13,7 @@ end
 
 Then "I should see the receipts form" do
   page.should have_css("#new_receipt")
+  step "I fill in the required fields"
 end
 
 When "I fill in the required fields" do
@@ -30,13 +31,13 @@ When "I submit the form" do
   click_button("Create Receipt")
 end
 
-Then "I should be redirected to the new receipt" do
+Then "I see that the receipt was created" do
   page.should have_css ".received_from:contains('Foo Bar')"
+  #check flash?
 end
 
 Then "the receipted person should have been sent an e-mail" do
   unread_emails_for("foo@bar.com").size.should == 1
-
   unread_emails_for("foo@bar.com").select do |m|
     m.subject == "4-H Camp 2012 Receipt"
   end.size.should == 1
