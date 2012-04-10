@@ -75,11 +75,11 @@ class CampersController < ApplicationController
       flash[:notice] = 'Camper was successfully created.'
       redirect_to :action => 'show', :id=>@camper
     else
-      @states = State.find(:all)
+      @states = State.all
       @schools = get_schools
-      @buses = Bus.find_standard_buses
-      @packs = Pack.find_standard_packs
-      @units = Unit.find(:all)
+      @buses = Bus.all
+      @packs = Pack.all
+      @units = Unit.all
       render :action => 'new'
     end
   end
@@ -104,9 +104,9 @@ class CampersController < ApplicationController
     else
       @states = State.find(:all)
       @schools = get_schools
-      @buses = Bus.find_standard_buses
-      @packs = Pack.find_standard_packs
-      @units = Unit.find(:all)
+      @buses = Bus.all
+      @packs = Pack.all
+      @units = Unit.all
       render :action => 'edit'
     end
   end
