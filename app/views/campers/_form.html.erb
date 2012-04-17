@@ -22,7 +22,7 @@
   <%= f.input :teacher %>
   <% end %>
   <%= f.inputs "Other Information" do %>
-  <%= f.input :dob, :label=>"Birthdate", :as=>:date, :start_year=>Time.now.year-20 %>
+    <%= f.input :dob, :label=>"Birthdate", :as=>:date, :end_year=>Time.now.year-80 %>
   <%= f.input :roomate_choice %>
   <% end %>
   <%= f.inputs "Contact Information" do %>
@@ -40,7 +40,7 @@
     <%= f.input :guardian_email %>
   <% end %>
   <%= f.inputs "Medical Information" do %>
-    <%= f.input :last_tetnus_shot, :as=>:date %>
+    <%= f.input :last_tetnus_shot, :as=>:date, :end_year => 1990 %>
     <%= f.input :physician_insurance_info %>
     <%= f.input :emergency_info %>
     <%= f.input :immunizations_current %>

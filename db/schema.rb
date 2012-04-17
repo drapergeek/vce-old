@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20120410222422) do
     t.string   "race"
     t.date     "last_tetnus_shot"
     t.boolean  "code_of_conduct"
-    t.string   "media_release",            :default => "yes"
+    t.string   "media_release",            :default => "Yes"
     t.boolean  "equine_release"
     t.integer  "rec_zone"
     t.string   "payment_number"
