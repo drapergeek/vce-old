@@ -14,7 +14,7 @@ class SchoolsController < ApplicationController
   def create
     @school = School.new(params[:school])
     if @school.save
-      redirect_to @school, :notice => "Successfully created school."
+      redirect_to schools_path, :notice => "Successfully created school."
     else
       render :action => 'new'
     end

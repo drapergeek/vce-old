@@ -3,6 +3,7 @@ Vce::Application.routes.draw do
   resources :packs
 
   match '/auth/:provider/callback' => 'sessions#create'
+  resources :extras, only: [:index]
   resources :possible_issues do 
     collection do 
       get 'check'
