@@ -13,6 +13,7 @@ gem 'cancan'
 gem 'jquery-rails'
 
 group :development, :test do
+  gem 'pry'
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem "factory_girl_rails"
   gem "annotate"
