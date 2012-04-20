@@ -1,23 +1,17 @@
 <h2>Listing courses</h2>
 
-<table>
+<table id="courses">
   <tr>
-  <% for column in Course.content_columns %>
-    <th><%= column.human_name %></th>
-  <% end %>
+    <th>Name</th>
   </tr>
-  
 <% for course in @courses %>
   <tr class="<%= cycle("even", "odd") %>">
-  <% for column in Course.content_columns %>
-    <td><%=h course.send(column.name) %></td>
-  <% end %>
-    <td><%= link_to 'Show', :action => 'show', :id => course %></td>
-    <td><%= link_to 'Edit', :action => 'edit', :id => course %></td>
-    <td><%= link_to 'Destroy', { :action => 'destroy', :id => course }, :confirm => 'Are you sure?', :method => :post %></td>
+    <td><%= course.name %></td>
+    <td><%= link_to 'Edit', edit_course_path(course) %></td>
+    <td><%= link_to 'Destroy', course_path(course), :method=>:delete, :confirm => "Are you sure?" %></td>
   </tr>
 <% end %>
 </table>
 
 
-<%= link_to 'New course', :action => 'new' %>
+<%= link_to 'New course', new_course_path %>

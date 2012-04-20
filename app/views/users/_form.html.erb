@@ -2,15 +2,14 @@
 
 <%= semantic_form_for @user do |f| %> 
   <%= f.inputs do %>
-  <%= f.input :fname, :label=>"First Name" %>
-  <%= f.input :lname, :label=>"Last Name" %>
-  <%= f.input :title %>
-  <%= f.input :unit %>
-  <%= f.input :email, :input_html=>{:size=>40} %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
-  <%= f.input :roles, :as=>:check_boxes %>
-<% end %>
-<%= f.buttons %>
-
+    <%= f.input :fname, :label=>"First Name" %>
+    <%= f.input :lname, :label=>"Last Name" %>
+    <%= f.input :title %>
+    <%= f.input :unit %>
+    <%= f.input :email, :input_html=>{:size=>40} %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :roles, :as=>:check_boxes %>
+  <% end %>
+  <%= f.actions %>
 <% end %>

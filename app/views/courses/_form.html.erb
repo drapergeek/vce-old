@@ -1,10 +1,12 @@
-<%= render "shared/error_messages", :target => @course %>  
 <strong>When creating the CIT course, please be sure to name it EXACTLY 'CIT' with no spaces before or after.  This will ensure that all checks work properly</strong>
-<!--[form:course]-->
-<p><label for="course_name">Name</label><br/>
-<%= text_field 'course', 'name'  %></p>
+<%= semantic_form_for(@course) do |f| %>
+  <%= render "shared/error_messages", :target=>@course %>
+  <%= f.inputs do %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+  <% end %>
 
-<p><label for="course_description">Description</label><br/>
-<%= text_area 'course', 'description' , {:rows=>4, :cols=>25} %></p>
-<!--[eoform:course]-->
+  <%= f.actions %>
+
+<% end %>
 

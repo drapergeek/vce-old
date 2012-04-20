@@ -1,10 +1,6 @@
-<%= render "shared/error_messages",:target=> @role  %>
-
-<!--[form:course]-->
 <%= semantic_form_for @role do |f|%>
+<%= render "shared/error_messages",:target=> @role  %>
   <%= f.inputs %>
-  <%= f.buttons %>
-
+  <%= f.actions %>
 <% end %>
-<!--[eoform:course]-->
 

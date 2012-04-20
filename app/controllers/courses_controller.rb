@@ -4,19 +4,15 @@ class CoursesController < ApplicationController
     @courses = Course.all  
   end
 
-  def show
-    @course = Course.find(params[:id])
-  end
-
   def new
     @course = Course.new
   end
 
   def create
     @course = Course.new(params[:course])
-     unless current_user.unit == 'State Wide'
-        @course.unit = current_user.unit
-      end
+    unless current_user.unit == 'State Wide'
+       @course.unit = current_user.unit
+    end
     if @course.save
       flash[:notice] = 'Course was successfully created.'
       redirect_to :action => 'index'
