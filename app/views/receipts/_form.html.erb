@@ -27,7 +27,7 @@
     <%= f.input :payment_extra, :label=>"Check/Money Order Number", :input_html=>{:size=>10} %>	
   <% end %>
   <%= f.inputs "Refund" do %>
-    <%= link_to "Refund this Receipt", nil, :id=>"refund_link" %>
+    <%= link_to "Refund this Receipt", nil, :id=>"refund_link", :tabindex=> "1000" %>
     <div id="refund_boxes" style="display:none">
       <%= f.input :refund, :label=>"This receipt was refunded" %>
       <%= f.input :refund_check_number %>
