@@ -1,5 +1,4 @@
 class Camper < ActiveRecord::Base
-
   #associations
   belongs_to :receipt
   belongs_to :bus
@@ -8,16 +7,15 @@ class Camper < ActiveRecord::Base
 
   has_many :course_selections
   has_many :courses, :through=>:course_selections 
-
   has_many :payments
   has_many :receipts, :through=>:payments
 
   before_create :compact_phone
   before_save :create_pack_from_name
 
-  #accessors
   attr_accessor :status
   attr_accessor :new_pack_name
+
   delegate :name, :to=>:bus, :prefix=>true, :allow_nil=>true
   delegate :name, :to=>:school, :prefix=>true, :allow_nil=>true
 
@@ -35,7 +33,7 @@ class Camper < ActiveRecord::Base
   scope :standard, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1]}}
   scope :unpaid, lambda {{:conditions=>["unit_id like ? and created_at like ? and inactive not like ? and payment_number like ?", Thread.current["unit"].id, "%#{Date.today.year}%", 1, '']}}
 
-  #validations  
+  #validations
   #custom validators
   class MustExplainValidator < ActiveModel::EachValidator
     def validate_each(record, attribute, value)
