@@ -1,35 +1,35 @@
 <div>
-	<h1>Thank you for supporting your Local 4-H</h1>
-	<h2>Please use this email as your receipt and print it out for your records if necessary.</h2>
+  <h1>Thank you for supporting your Local 4-H</h1>
+  <h2>Please use this email as your receipt and print it out for your records if necessary.</h2>
 </div>
 <div>	
-	Received by:  Virginia Cooperative Extension <br />
-	For:  4-H Camp 2012<br / >
-	Date:  <%= Time.now.localtime.strftime("%m/%d/%y %I:%M %p") %><br / >
-		</p>
+  Received by:  Virginia Cooperative Extension <br />
+  For:  4-H Camp 2012<br / >
+  Date:  <%= Time.now.localtime.strftime("%m/%d/%y %I:%M %p") %><br / >
+</p>
 </div><br><br>
 <div>
-	<strong>Payer Information</strong><br>
-	<%= @receipt.full_name %><br />
-	<% unless @receipt.address_blank?%>
-	Address: <%= @receipt.full_address  %> <br>
-	<% end %>	
-	Phone: <%= number_to_phone(@receipt.phone, :area_code=>true) %><br>
+  <strong>Payer Information</strong><br>
+  <%= @receipt.full_name %><br />
+  <% unless @receipt.address_blank?%>
+    Address: <%= @receipt.full_address  %> <br>
+  <% end %>	
+  Phone: <%= number_to_phone(@receipt.phone, :area_code=>true) %><br>
 </div><br><br>
 <div>
-	<strong>Payment Information</strong><br>
-	Payment method : <%= @receipt.payment_method %> <%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %><br>
-	Payment amount: <%= number_to_currency(@receipt.amount) %><br>
+  <strong>Payment Information</strong><br>
+  Payment method : <%= @receipt.payment_method %> <%= "#" + @receipt.payment_extra.to_s unless @receipt.payment_extra.blank? %><br>
+  Payment amount: <%= number_to_currency(@receipt.amount) %><br>
   <% if @receipt.user %>
-  Payment taken by: <%= @receipt.user.fname + " " + @receipt.user.lname %>
+    Payment taken by: <%= @receipt.user.fname + " " + @receipt.user.lname %>
   <% end %>
 </div><br><br>
 
 <div>
-	<strong>Camper Information</strong><br>
-	<%= @receipt.camper1.titleize + " : " + @receipt.camper1_id %> <br>
-	<%= @receipt.camper2.titleize + " : " + @receipt.camper2_id  unless @receipt.camper2.blank? %><br>
-	<%= @receipt.camper3.titleize + " : " + @receipt.camper3_id  unless @receipt.camper3.blank? %><br>
+  <strong>Camper Information</strong><br>
+  <%= @receipt.camper1.titleize + " : " + @receipt.camper1_id %> <br>
+  <%= @receipt.camper2.titleize + " : " + @receipt.camper2_id  unless @receipt.camper2.blank? %><br>
+  <%= @receipt.camper3.titleize + " : " + @receipt.camper3_id  unless @receipt.camper3.blank? %><br>
 </div>
 
 <h3>Please note that there are absolutely NO REFUNDS AFTER June 1, 2011</h3>

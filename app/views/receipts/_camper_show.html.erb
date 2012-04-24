@@ -1,9 +1,7 @@
 <% unless camper_name.blank? %>
 <hr />
     <li>Name: <%= camper_name %> 
-    <% if collage_purchased %>
-      (collage purchased) 
-    <% end %>
+      (<%= collage_purchased %>) collages purchased
     <%= link_to "View This Camper", find_by_number_camper_url(:number=>camper_number) %>
     </li>
 <% end %>
