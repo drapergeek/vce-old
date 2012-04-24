@@ -3,13 +3,13 @@ class ChangeCollageToACount < ActiveRecord::Migration
     add_column :campers, :collage_count, :integer, :default => 0
     remove_column :campers, :collage_purchased
 
-    remove_column :receipts, :camper1_collage, :string
+    remove_column :receipts, :camper1_collage
     add_column :receipts, :camper1_collage, :integer, :default => 0
 
-    remove_column :receipts, :camper2_collage, :string
+    remove_column :receipts, :camper2_collage
     add_column :receipts, :camper2_collage, :integer, :default => 0
 
-    remove_column :receipts, :camper3_collage, :string
+    remove_column :receipts, :camper3_collage
     add_column :receipts, :camper3_collage, :integer, :default => 0
   end
 
