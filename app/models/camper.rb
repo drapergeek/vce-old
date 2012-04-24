@@ -19,6 +19,7 @@ class Camper < ActiveRecord::Base
   attr_accessor :status
   attr_accessor :new_pack_name
   delegate :name, :to=>:bus, :prefix=>true, :allow_nil=>true
+  delegate :name, :to=>:school, :prefix=>true, :allow_nil=>true
 
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
