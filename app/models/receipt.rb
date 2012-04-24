@@ -1,4 +1,5 @@
 class Receipt < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
   PAYMENT_TYPES = ["Check", "Cash", "Money Order"]
   belongs_to :user
   belongs_to :unit
@@ -89,6 +90,38 @@ class Receipt < ActiveRecord::Base
 
   def send_email
     ReceiptMailer.receipt_confirmation(self).deliver unless self.email.blank?
+  end
+
+  def formatted_phone
+    number_to_phone(phone, :area_code =>true)
+  end
+
+  comma do
+    fname
+    lname
+    address
+    city
+    state
+    zip
+    formatted_phone
+    amount
+    payment_extra
+    email
+    camper1
+    camper1_id
+    camper1_payment
+    camper1_collage
+    camper2
+    camper2_id
+    camper2_payment
+    camper2_collage
+    camper3
+    camper3_id
+    camper3_payment
+    camper3_collage
+    refund_amount
+    refund_date
+    refund_check_number
   end
 
 end

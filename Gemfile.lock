@@ -48,6 +48,7 @@ GEM
     childprocess (0.3.1)
       ffi (~> 1.0.6)
     coderay (1.0.6)
+    comma (3.0.3)
     cucumber (1.1.4)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.2)
@@ -189,6 +190,7 @@ DEPENDENCIES
   bundler
   cancan
   capybara-webkit
+  comma (~> 3.0)
   cucumber-rails
   database_cleaner
   email_spec

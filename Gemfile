@@ -11,6 +11,7 @@ gem 'validates_timeliness'
 gem 'bcrypt-ruby', :require=>"bcrypt"
 gem 'cancan'
 gem 'jquery-rails'
+gem "comma", "~> 3.0"
 
 group :development, :test do
   gem 'pry'

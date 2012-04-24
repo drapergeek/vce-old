@@ -1,84 +1,87 @@
 <%  if @receipts.blank? %>
-<h3>There are no receipts that matched your criteria</h3>
-<%= link_to 'New receipt', :action => 'new' %>
+  <h3>There are no receipts that matched your criteria</h3>
+  <%= link_to 'New receipt', :action => 'new' %>
 <% else %>
-<h2><%= @header_text || "All Receipts" %></h2>
-<!--search form-->
-<%= form_tag receipts_path , :method => 'get' do %>
-<p>
-	<%= text_field_tag :search , params[:search]%>
-	<%= submit_tag "Search", :name=>nil %>
-	<% if params[:search] %>
-		<%= link_to 'Show All', receipts_path %>
-	<% end %>
-</p>
-<% end %>  
-<!--End Search form-->
+  <h2><%= @header_text || "All Receipts" %></h2>
+  <!--search form-->
+  <%= form_tag receipts_path , :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search , params[:search]%>
+      <%= submit_tag "Search", :name=>nil %>
+      <% if params[:search] %>
+        <%= link_to 'Show All', receipts_path %>
+      <% end %>
+    </p>
+  <% end %>  
+  <!--End Search form-->
 
-<%= link_to 'New receipt', :action => 'new' %>
+  <%= link_to 'New receipt', :action => 'new' %>
 
-<br />
+  <br />
 
-<table id = "list_receipts" class="pretty">
-  <tr>
-	<th><%= sortable('date','Date') %></th>
-	<th><%= sortable('lname','Last') %></th>
-	<th><%= sortable('fname','First') %></th>
-	<th><%= sortable('camper1',  'Camper 1') %></th>
-	<th><%= sortable('camper1_id','ID') %></th>
-	<th><%= sortable('camper2', 'Camper 2') %></th>
-    <th><%= sortable('camper2_id','ID') %></th>
-    <th><%= sortable('camper3','Camper 3') %></th>
-    <th><%= sortable('camper3_id', 'ID') %></th>
-  </tr>
-  
-<% for receipt in @receipts %>
+  <table id = "list_receipts" class="pretty">
+    <tr>
+      <th><%= sortable('date','Date') %></th>
+      <th><%= sortable('lname','Last') %></th>
+      <th><%= sortable('fname','First') %></th>
+      <th><%= sortable('camper1',  'Camper 1') %></th>
+      <th><%= sortable('camper1_id','ID') %></th>
+      <th><%= sortable('camper2', 'Camper 2') %></th>
+      <th><%= sortable('camper2_id','ID') %></th>
+      <th><%= sortable('camper3','Camper 3') %></th>
+      <th><%= sortable('camper3_id', 'ID') %></th>
+    </tr>
 
-  <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
-	              onmouseout="ChangeColor(this, false);" 
-	              onclick="DoNav('/receipts/show/<%= receipt.id %>');">
-	<td class="standard_table">
-		<%= receipt.date.strftime("%m/%d/%y") unless receipt.date.blank? %>
-	</td>
-	<td class="standard_table">
-		<%= receipt.lname.capitalize %>
-	</td>
-	<td class="standard_table">
-		<%= receipt.fname.capitalize %>
-	</td>
-	<td class="standard_table">
-		<%= receipt.camper1 %>
-	</td>
-	<td class="standard_table">
-		<%= receipt.camper1_id %>
-	</td>
-	<td class="standard_table">
-		<% unless receipt.camper2.blank? %>
-			<%= receipt.camper2 %>
-		<% end %>
-	</td>
-	<td class="standard_table">
-		<% unless receipt.camper2.blank? %>
-			<%= receipt.camper2_id %>
-		<% end %>
-	</td>
-	<td class="standard_table">
-		<% unless receipt.camper3.blank? %>
-			<%= receipt.camper3 %>
-		<% end %>
-	</td>
-	<td class="standard_table">
-		<% unless receipt.camper3.blank? %>
-		<%=  receipt.camper3_id %>
-		<% end %>
-	</td>
+    <% for receipt in @receipts %>
 
-<% end %>
-</table>
+      <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
+        onmouseout="ChangeColor(this, false);" 
+        onclick="DoNav('/receipts/show/<%= receipt.id %>');">
+        <td class="standard_table">
+          <%= receipt.date.strftime("%m/%d/%y") unless receipt.date.blank? %>
+        </td>
+        <td class="standard_table">
+          <%= receipt.lname.capitalize %>
+        </td>
+        <td class="standard_table">
+          <%= receipt.fname.capitalize %>
+        </td>
+        <td class="standard_table">
+          <%= receipt.camper1 %>
+        </td>
+        <td class="standard_table">
+          <%= receipt.camper1_id %>
+        </td>
+        <td class="standard_table">
+          <% unless receipt.camper2.blank? %>
+            <%= receipt.camper2 %>
+          <% end %>
+        </td>
+        <td class="standard_table">
+          <% unless receipt.camper2.blank? %>
+            <%= receipt.camper2_id %>
+          <% end %>
+        </td>
+        <td class="standard_table">
+          <% unless receipt.camper3.blank? %>
+            <%= receipt.camper3 %>
+          <% end %>
+        </td>
+        <td class="standard_table">
+          <% unless receipt.camper3.blank? %>
+            <%=  receipt.camper3_id %>
+          <% end %>
+        </td>
 
-<% end %>
-<%= will_paginate @receipts %>
+      <% end %>
+    </table>
 
-<br />
+  <% end %>
+  <%= will_paginate @receipts %>
+
+  <br />
+  <%= link_to  receipts_path(:format => :csv) do%>
+    <%= image_tag 'excel.png', :size => "35x35" %>
+  <% end %>
 
 
