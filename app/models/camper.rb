@@ -14,12 +14,12 @@ class Camper < ActiveRecord::Base
 
   before_create :compact_phone
   before_save :create_pack_from_name
-  
+
   #accessors
   attr_accessor :status
   attr_accessor :new_pack_name
   delegate :name, :to=>:bus, :prefix=>true, :allow_nil=>true
-  
+
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
   scope :current_year, lambda {{:conditions=>["created_at like ?", "%#{Date.today.year}%"]}}
@@ -45,7 +45,7 @@ class Camper < ActiveRecord::Base
       end
     end
   end
-  
+
   #normal validations
   validates :number, :uniqueness=>true, :format=>{:with => /^(CG|CB|SG|SB|PG|PB|TG|TB|AG|AB)\d{3}$/}, :presence=>true
   validates :fname, :presence=>true
@@ -57,7 +57,7 @@ class Camper < ActiveRecord::Base
   validates :phone1, :format=>{:with=>/^\d{3}-?\d{3}-?\d{4}$/}, :allow_blank=>true
   validates :phone2, :format=>{:with=>/^\d{3}-?\d{3}-?\d{4}$/}, :allow_blank=>true
   validates :emergency_phone, :format=>{:with=>/^\d{3}-?\d{3}-?\d{4}$/}, :allow_blank=>true
-  
+
   validates :zip, :inclusion=>{:in=>10000...99999}, :numericality=>true, :presence=>true
   validates :counselor_years, :numericality=>true, :allow_nil=>true
   validates_date :dob, :allow_nil=>true
@@ -70,32 +70,39 @@ class Camper < ActiveRecord::Base
   end
 
   def self.find_all_by_year(year)
-      find(:all, :conditions=>['created_at like ?', "%#{year}%"])
+    find(:all, :conditions=>['created_at like ?', "%#{year}%"])
   end
-  
+
+  def self.create_from_receipt(receipt, number, name, collage_count, payment_amount)
+    c = Camper.find_or_create_by_number(:number=>number, :name=>name,:position=>"Camper")
+    c.save(:validate=>false)
+    c.add_collage(collage_count)
+    c.payments.create(:receipt=>receipt, :amount=>payment_amount)
+  end
+
   def create_pack_from_name
     create_pack(:name=>new_pack_name) unless new_pack_name.blank?
   end
-  
+
   def compact_phone
     unless phone1.blank?
- 	    @number = phone1.split('-')
- 	    phone1 = @number.compact.join
- 	    write_attribute(:phone1, phone1)
- 	  end
- 	  unless phone2.blank?
- 	    @number2 = phone2.split('-')
- 	    phone2 = @number2.compact.join
- 	    write_attribute(:phone2, phone2)
- 	  end
- 	  unless emergency_phone.blank?
- 	    @number3 = emergency_phone.split('-')
- 	    emergency_phone = @number3.compact.join
- 	    write_attribute(:emergency_phone, emergency_phone)
- 	  end
+      @number = phone1.split('-')
+      phone1 = @number.compact.join
+      write_attribute(:phone1, phone1)
+    end
+    unless phone2.blank?
+      @number2 = phone2.split('-')
+      phone2 = @number2.compact.join
+      write_attribute(:phone2, phone2)
+    end
+    unless emergency_phone.blank?
+      @number3 = emergency_phone.split('-')
+      emergency_phone = @number3.compact.join
+      write_attribute(:emergency_phone, emergency_phone)
+    end
   end
-  
-  
+
+
   def status
     if incomplete?
       return "Incomplete"
@@ -105,31 +112,31 @@ class Camper < ActiveRecord::Base
       return "Complete"
     end
   end
-  
+
   def incomplete?
     unless physician_insurance_info? && immunizations_current? && code_of_conduct? && media_release_returned? && parental_signatures? && emergency_info? && release_authorization?
       return true
     end
   end
-  
-  
+
+
   def bus_assigned?
     unless bus.blank?
-  		return true
-  	end
+      return true
+    end
   end
-  
-  
+
+
   def media_release_returned?
     if media_release==1 || media_release==2
       return true
     end
   end
-  
+
   def parent_info_needed
     position==0 || position==1
   end
-  
+
   def gender_text
     if gender==1
       return 'Female'
@@ -137,7 +144,7 @@ class Camper < ActiveRecord::Base
       return 'Male'
     end
   end
-  
+
   def proper_name
     if mname
       [fname, mname, lname].each{ |name| name.capitalize!}.compact.join(" ")
@@ -146,9 +153,8 @@ class Camper < ActiveRecord::Base
     end
   end
 
-  def add_collage
-    self.collage_purchased = true
-    self.save(:validate=>false)
+  def add_collage(count)
+    self.update_attribute(:collage_count, self.collage_count + count)
   end
 
   def paid_in_full?
@@ -160,15 +166,15 @@ class Camper < ActiveRecord::Base
     self.payments.sum(:amount) >= amount
   end
 
-  
+
   def full_name
     [prefname, lname].each{ |word| word.capitalize! }.compact.join(" ")
   end
 
   def header
-   full_name + " " + number 
+    full_name + " " + number 
   end
-  
+
   def prefname
     if pref_name.blank?
       fname.capitalize
@@ -176,13 +182,13 @@ class Camper < ActiveRecord::Base
       pref_name.capitalize
     end
   end
-  
-  
+
+
   def age
     return "No Birthday Set" if dob.blank?
     ((Date.today.strftime('%Y%m%d').to_i - dob.strftime('%Y%m%d').to_i ) / 10000 ).to_i
   end
-  
+
   def media_release_text
     case media_release
     when 1
@@ -193,7 +199,7 @@ class Camper < ActiveRecord::Base
       return 'No'
     end
   end
-  
+
   def position_text
     case position
     when 0
@@ -206,7 +212,7 @@ class Camper < ActiveRecord::Base
       return 'Adult'
     end
   end
-  
+
   def name=(input)
     names = input.split(" ")
     if names.length == 3
@@ -217,7 +223,7 @@ class Camper < ActiveRecord::Base
     self.fname = names[0]
     self.lname = names[1]
   end
-  
+
   def pool_spotting_text
     case pool_spotting
     when 0
@@ -236,39 +242,39 @@ class Camper < ActiveRecord::Base
       return ' '
     end   
   end
-  
 
-   def self.search(search)
-      if search
-        #need to find a way to combine arrays
-         @group = where('lname like ?', "%#{search}%")
-         @group += where('fname like ?', "%#{search}%")
-         @group += where('mname like ?', "%#{search}%")
-         @group += where('pref_name like ?', "%#{search}%")
-         @group += where('phone1 like ?', "%#{search}%")
-         @group += where('phone2 like ?', "%#{search}%")
-         @group += where('number like ?', "%#{search}%")
-         if @group.empty?
-           return scoped
-         else
-           if @group.count > 1
-             return @group.uniq
-           else
-             return @group
-           end
-        end
+
+  def self.search(search)
+    if search
+      #need to find a way to combine arrays
+      @group = where('lname like ?', "%#{search}%")
+      @group += where('fname like ?', "%#{search}%")
+      @group += where('mname like ?', "%#{search}%")
+      @group += where('pref_name like ?', "%#{search}%")
+      @group += where('phone1 like ?', "%#{search}%")
+      @group += where('phone2 like ?', "%#{search}%")
+      @group += where('number like ?', "%#{search}%")
+      if @group.empty?
+        return scoped
       else
-        scoped
+        if @group.count > 1
+          return @group.uniq
+        else
+          return @group
+        end
       end
-
+    else
+      scoped
     end
-  
-  
+
+  end
+
+
   US_STATES = ['AL','AK','AZ','AR','CA','CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',
-'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO',
-'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
-'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
-'WI', 'WY']
+    'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO',
+    'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR',
+    'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV',
+    'WI', 'WY']
   GRADES = [3,4,5,6,7,8,9,10,11,12]
   SHIRT_SIZES = %w(S M L XL XXL)
   RACES = ["Black", "White", "American Indian", "Hispanic", "Asian", "Multi-Cultural", "Other"]

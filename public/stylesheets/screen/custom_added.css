@@ -100,3 +100,13 @@ div.camper_payment{
 li#receipt_payment_extra_input{
   display:none;
 }
+.camper_id_input{
+  width: 50px;
+}
+
+.camper_collage_input{
+  width:35px;
+}
+.camper_payment_input{
+  width:75px;
+}

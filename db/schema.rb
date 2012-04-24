@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120410222422) do
+ActiveRecord::Schema.define(:version => 20120423235757) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20120410222422) do
     t.integer  "counselor_years"
     t.integer  "pack_id"
     t.integer  "unit_id"
-    t.boolean  "collage_purchased"
     t.boolean  "fully_paid"
     t.string   "mother_name"
     t.string   "mother_phone"
@@ -88,6 +87,7 @@ ActiveRecord::Schema.define(:version => 20120410222422) do
     t.string   "guardian_name"
     t.string   "guardian_phone"
     t.string   "guardian_email"
+    t.integer  "collage_count",            :default => 0
   end
 
   create_table "course_selections", :force => true do |t|
@@ -144,9 +144,9 @@ ActiveRecord::Schema.define(:version => 20120410222422) do
     t.datetime "created_at"
     t.integer  "unit_id"
     t.string   "email"
-    t.boolean  "camper1_collage"
-    t.boolean  "camper2_collage"
-    t.boolean  "camper3_collage"
+    t.integer  "camper1_collage",     :default => 0
+    t.integer  "camper2_collage",     :default => 0
+    t.integer  "camper3_collage",     :default => 0
     t.float    "camper1_payment"
     t.float    "camper2_payment"
     t.float    "camper3_payment"

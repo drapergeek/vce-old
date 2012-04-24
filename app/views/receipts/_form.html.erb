@@ -16,7 +16,6 @@
     <% (1..3).each do |num| %>
       <%= render :partial=>"camper", :locals=>{:camper=>num, :f=>f} %>
     <% end %>
-
   <% end %>
 
   <%= f.inputs "Payment Information", :id=>"payment_information" do %>

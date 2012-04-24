@@ -6,7 +6,6 @@ class Receipt < ActiveRecord::Base
   has_many :campers
   before_create :compact_phone
   after_create :create_payments
-  after_create :add_collages
   after_create :send_email
 
   #validations
@@ -57,34 +56,15 @@ class Receipt < ActiveRecord::Base
   end
 
   def create_payments
-   #create a payment for all three campers if there are three 
     if camper1_id && camper1 && camper1_payment
-      c = Camper.find_or_create_by_number(:number=>camper1_id, :name=>camper1,:position=>0)
-      c.save(:validate=>false)
-      c.payments.create(:receipt=>self, :amount=>camper1_payment)
-    end 
-    if camper2_id && camper2 && camper2_payment
-      c = Camper.find_or_create_by_number(:number=>camper2_id, :name=>camper2, :position=>0)
-      c.save(:validate=>false)
-      c.payments.create(:receipt=>self, :amount=>camper2_payment)
-    end 
-    if camper3_id && camper3 && camper3_payment
-      c = Camper.find_or_create_by_number(:number=>camper3_id, :name=>camper3, :position=>0)
-      c.save(:validate=>false)
-      c.payments.create(:receipt=>self, :amount=>camper3_payment)
+      Camper.create_from_receipt(self, camper1_id, camper1, camper1_collage, camper1_payment)
     end
-  end
-
-  def add_collages
-     if camper1_id && camper1_collage
-       c = Camper.find_by_number(camper1_id).add_collage
-     end
-     if camper2_id && camper2_collage
-       c = Camper.find_by_number(camper2_id).add_collage
-     end
-     if camper3_id && camper3_collage
-       c = Camper.find_by_number(camper3_id).add_collage
-     end
+    if camper2_id && camper2 && camper2_payment
+      Camper.create_from_receipt(self, camper2_id, camper2, camper2_collage, camper2_payment)
+    end
+    if camper3_id && camper3 && camper3_payment
+      Camper.create_from_receipt(self, camper3_id, camper3, camper3_collage, camper3_payment)
+    end
   end
 
   def camper2_filled

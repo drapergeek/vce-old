@@ -2,7 +2,6 @@
 Camper <%= camper %>
 <%= f.input "camper#{camper}", :label=>"Name", :input_html=>{:class=>"camper_name_input"} %>
   <%= f.input "camper#{camper}_id", :label=>"ID Number", :input_html=>{:class=>"camper_id_input"} %>
-  <%= f.input "camper#{camper}_collage", :label=>"Collage?", :input_html=>{:class=>"camper_collage_input"} %>
+  <%= f.input "camper#{camper}_collage", :label=>"Collages", :input_html=>{:class=>"camper_collage_input", :size=>4} %>
   <%= f.input "camper#{camper}_payment", :label=>"Amount", :input_html=>{:class=>"camper_payment_input"} %>
-
 <% end %>
