@@ -19,7 +19,7 @@ class ReceiptsController < ApplicationController
     end
     respond_to do |format|
       format.html
-      format.csv { render :csv => Receipt.all }
+      format.csv { render :csv => Receipt.all}
     end
   end
 

@@ -48,24 +48,3 @@
         <li><%= link_to 'Demographics', {:controller=>'extras', :action=>'demographics'} %></li>
       </ul>
     </div>
-    <hr />
-    <h3>Issue Management</h3>
-    <div id="issues">
-      <ul>
-        <li><%= link_to 'Show Possible Issues', {:controller=>'possible_issues'} %></li>
-        <li><%= link_to 'Show Current Issues', {:controller=>'issues'} %></li>
-      </ul>
-    </div>
-    <hr />
-    <h3>View Previous Years</h3>
-    <small>To view previous years, just enter the year you would like to view.  This will list all attendees for that year.</small>
-
-    <% form_tag :action => 'list_campers_by_year' do %>
-      <p><label for="year">Year:</label>
-        <%= text_field_tag 'year'  %></p>
-      <%= submit_tag 'List' %>
-    <% end %>
-
-
-
-
