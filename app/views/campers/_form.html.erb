@@ -17,7 +17,7 @@
   <%= f.input :shirt_size, :as=>:select, :collection=>Camper::SHIRT_SIZES %>
   <% end %>
   <%= f.inputs "School Information" do  %>
-  <%= f.input :school, :as=>:select, :collection=>School.all %>
+  <%= f.input :school, :as=>:select, :collection=>School.all.map(&:name) %>
   <%= f.input :grade, :as=>:select, :collection=>Camper::GRADES %>
   <%= f.input :teacher %>
   <% end %>
