@@ -1,33 +1,33 @@
 #announcement {
-	color: #f7fbff;
-	background-color: #51a0ff;
-	border: 7px solid #2125b5;
-	padding: 4px;
+  color: #f7fbff;
+  background-color: #51a0ff;
+  border: 7px solid #2125b5;
+  padding: 4px;
 }
 #testing{
-	
+
 }
 .stats{
-	right: 20px;
-	position: relative;
+  right: 20px;
+  position: relative;
 }
 .stat_item{
-	right: 3px;
-	list-style-type: none;
+  right: 3px;
+  list-style-type: none;
 }
 .issue{
-	background-color: #ffe3da;
-	border: 1px solid red;
-	padding: 2px 8px 2px 7px;
-	color: #406dfa;
+  background-color: #ffe3da;
+  border: 1px solid red;
+  padding: 2px 8px 2px 7px;
+  color: #406dfa;
 }
 .stat_sub_category{
-	text-decoration: underline;
+  text-decoration: underline;
 
 }
 label{
-	padding-right:8px;
-	
+  padding-right:8px;
+
 }
 
 
@@ -47,7 +47,7 @@ label{
 }
 
 .camper_collage_links{
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 #development{
@@ -109,4 +109,9 @@ li#receipt_payment_extra_input{
 }
 .camper_payment_input{
   width:75px;
+}
+
+#camper_health_concerns{
+  height: 55px;
+  width: 300px;
 }
