@@ -73,5 +73,3 @@ Then /^the total payment amount should be "([^"]*)"$/ do |amount|
   amount = amount.to_f
   page.find("#receipt_amount").value.to_f.should == amount
 end
-
-

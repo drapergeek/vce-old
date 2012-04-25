@@ -1,5 +1,4 @@
 FactoryGirl.define do
-
   sequence(:camper_number) { |n| "CB12#{n}" }
 
   factory :user do
@@ -59,7 +58,6 @@ FactoryGirl.define do
     camper3_collage true
   end
 
-
   factory :bus do
     name "12"
     capacity 30
@@ -74,5 +72,4 @@ FactoryGirl.define do
     camp_price 210.00
     collage_price 10.00
   end
-
 end
