@@ -1,5 +1,7 @@
 FactoryGirl.define do
 
+  sequence(:camper_number) { |n| "CB12#{n}" }
+
   factory :user do
     fname 'Peter'
     lname  'Parker'

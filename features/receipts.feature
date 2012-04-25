@@ -17,6 +17,18 @@ Feature: Receipt Management
     Then I see that the receipt was created
     And the receipted person should have been sent an e-mail
 
+ @javascript
+ Scenario: Payments are calculated properly
+    Given I am logged in as a user
+    When I go to the receipts new page
+    And I fill in the required fields
+    And I choose 2 collages for camper1
+    And I choose 3 collages for camper2
+    Then the total payment amount should be "470.00"
+    And I submit the form
+    Then I see that the receipt was created
+    And the receipted person should have been sent an e-mail
+
  Scenario: Creating a receipt creates campers with same information
     Given I am logged in as a user
     When I go to the receipts new page

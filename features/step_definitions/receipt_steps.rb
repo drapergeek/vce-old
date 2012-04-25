@@ -63,4 +63,15 @@ Then /^the following campers should exist:$/ do |table|
   end
 end
 
+When /^I choose (\d+) collages for camper(\d+)$/ do |collage_count, camper|
+   fill_in("receipt_camper#{camper}", :with=>"Peter Parker")
+   fill_in("receipt_camper#{camper}_id", :with=> FactoryGirl.generate(:camper_number))
+   fill_in("receipt_camper#{camper}_collage", :with=>collage_count)
+end
+
+Then /^the total payment amount should be "([^"]*)"$/ do |amount|
+  amount = amount.to_f
+  page.find("#receipt_amount").value.to_f.should == amount
+end
+
 
