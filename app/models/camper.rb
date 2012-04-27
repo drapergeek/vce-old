@@ -243,28 +243,7 @@ class Camper < ActiveRecord::Base
 
 
   def self.search(search)
-    if search
-      #need to find a way to combine arrays
-      @group = where('lname like ?', "%#{search}%")
-      @group += where('fname like ?', "%#{search}%")
-      @group += where('mname like ?', "%#{search}%")
-      @group += where('pref_name like ?', "%#{search}%")
-      @group += where('phone1 like ?', "%#{search}%")
-      @group += where('phone2 like ?', "%#{search}%")
-      @group += where('number like ?', "%#{search}%")
-      if @group.empty?
-        return scoped
-      else
-        if @group.count > 1
-          return @group.uniq
-        else
-          return @group
-        end
-      end
-    else
-      scoped
-    end
-
+    where('lname LIKE :q OR fname LIKE :q OR mname LIKE :q OR pref_name like :q OR phone1 LIKE :q OR phone2 LIKE :q OR number like :q', :q =>"%#{search}%")
   end
 
 
