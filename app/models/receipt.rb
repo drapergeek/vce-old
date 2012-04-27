@@ -77,6 +77,7 @@ class Receipt < ActiveRecord::Base
   end
 
   comma do
+    created_at 'Receipt Date'
     fname
     lname
     address
