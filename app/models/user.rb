@@ -1,6 +1,6 @@
 require 'digest/sha1'
 class User < ActiveRecord::Base
-  
+
   before_save :encrypt_password
   attr_accessor :password
   attr_accessible :email, :password, :password_confirmation
@@ -21,14 +21,6 @@ class User < ActiveRecord::Base
   scope :authorized, where(:authorized=>true)
   scope :unauthorized, where(:authorized=>false)
 
-
-
-  def pictureimg=(picture_field) 
-    return if picture_field.blank? 
-    self.content_type = picture_field.content_type.chomp 
-    self.picture = picture_field.read 
-  end 
-  
   def role?(role)
     roles.all.each do |r|
       if r.name.to_sym == role
