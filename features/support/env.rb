@@ -32,4 +32,5 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 Capybara.javascript_driver = :webkit
+World FactoryGirl::Syntax::Methods
 

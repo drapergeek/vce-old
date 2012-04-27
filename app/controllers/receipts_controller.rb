@@ -10,10 +10,6 @@ class ReceiptsController < ApplicationController
   def index
     if params[:search]
       @receipts = Receipt.search(params[:search]).paginate(:per_page=>25, :page=>params[:page])
-      if @receipts.count > 3
-        flash[:notice] = "Your search for "#{params[:search]}" did not return any results"
-        params[:search] = nil
-      end
     else
       @receipts = Receipt.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
     end

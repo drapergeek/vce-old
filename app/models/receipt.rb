@@ -33,27 +33,7 @@ class Receipt < ActiveRecord::Base
   end
 
   def self.search(search)
-    if search
-      @group = where('lname like ?', "%#{search}%")
-      @group += where('fname like ?', "%#{search}%")
-      @group += where('camper1 like ?', "%#{search}%")
-      @group += where('camper1_id like ?', "%#{search}%")
-      @group += where('camper2 like ?', "%#{search}%")
-      @group += where('camper2_id like ?', "%#{search}%")
-      @group += where('camper3 like ?', "%#{search}%")
-      @group += where('camper3_id like ?', "%#{search}%")
-      if @group.empty?
-        return scoped
-      else
-        if @group.count > 1
-          return @group.uniq
-        else
-          return @group
-        end
-      end
-    else
-      scoped
-    end
+    where('lname like :q OR fname like :q oR camper1 like :q OR camper1_id like :q OR camper2 like :q OR camper2_id like :q OR camper3 like :q OR camper3_id like :q', :q => "%#{search}%")
   end
 
   def create_payments

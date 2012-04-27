@@ -73,3 +73,26 @@ Then /^the total payment amount should be "([^"]*)"$/ do |amount|
   amount = amount.to_f
   page.find("#receipt_amount").value.to_f.should == amount
 end
+
+When /^I go to the receipts page$/ do
+  visit receipts_path
+end
+
+Given /^there are (\d+) receipts$/ do |count|
+  count.to_i.times do
+    create(:receipt)
+  end
+end
+
+Given /^there is a receipt with a first name of "([^"]*)"$/ do |name|
+  create(:receipt, :fname => name)
+end
+
+When /^I search for "([^"]*)"$/ do |search_term|
+  fill_in "search", :with => search_term
+  click_button "Search"
+end
+
+Then /^I should see a receipt with "([^"]*)" in the search results$/ do |text|
+  page.should have_css("td.standard_table", :text => text)
+end

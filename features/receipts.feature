@@ -8,8 +8,16 @@ Feature: Receipt Management
     When I go to the receipts new page
     Then I should see the receipts form
 
- @javascript
- Scenario:
+  Scenario:
+    Given I am logged in as a user
+    Given there are 5 receipts
+    Given there is a receipt with a first name of "Don"
+    When I go to the receipts page
+    And I search for "Don"
+    Then I should see a receipt with "Don" in the search results
+
+  @javascript
+  Scenario:
     Given I am logged in as a user
     When I go to the receipts new page
     And I fill in the required fields
@@ -17,8 +25,8 @@ Feature: Receipt Management
     Then I see that the receipt was created
     And the receipted person should have been sent an e-mail
 
- @javascript
- Scenario: Payments are calculated properly
+  @javascript
+  Scenario: Payments are calculated properly
     Given I am logged in as a user
     When I go to the receipts new page
     And I fill in the required fields
@@ -29,7 +37,7 @@ Feature: Receipt Management
     Then I see that the receipt was created
     And the receipted person should have been sent an e-mail
 
- Scenario: Creating a receipt creates campers with same information
+  Scenario: Creating a receipt creates campers with same information
     Given I am logged in as a user
     When I go to the receipts new page
     And I fill in the required fields
