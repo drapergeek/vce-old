@@ -32,6 +32,17 @@ class Receipt < ActiveRecord::Base
     write_attribute(:phone, phone)
   end
 
+  def self.get_duplicates
+    dups = []
+    Receipt.all.each do |receipt|
+      Receipt.all.each do |r|
+        if r.id != receipt.id && r.fname == receipt.fname && r.lname == receipt.lname
+          dups << r
+        end
+      end
+    end
+  end
+
   def self.search(search)
     where('lname like :q OR fname like :q oR camper1 like :q OR camper1_id like :q OR camper2 like :q OR camper2_id like :q OR camper3 like :q OR camper3_id like :q', :q => "%#{search}%")
   end
