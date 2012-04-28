@@ -33,11 +33,11 @@ class Receipt < ActiveRecord::Base
   end
 
   def self.get_duplicates
-    dups = []
+    dups = {}
     Receipt.all.each do |receipt|
       Receipt.all.each do |r|
         if r.id != receipt.id && r.fname == receipt.fname && r.lname == receipt.lname
-          dups << r
+          dups[r.id] << r
         end
       end
     end
