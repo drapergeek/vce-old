@@ -3,8 +3,8 @@ class Receipt < ActiveRecord::Base
   PAYMENT_TYPES = ["Check", "Cash", "Money Order"]
   belongs_to :user
   belongs_to :unit
-  has_many :payments, :dependent => :destroy
-  has_many :campers, :dependent => :nullify
+  has_many :payments
+  has_many :campers
   before_create :compact_phone
   after_create :create_payments
   after_create :send_email
