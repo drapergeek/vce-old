@@ -37,7 +37,7 @@ class Receipt < ActiveRecord::Base
     Receipt.all.each do |receipt|
       Receipt.all.each do |r|
         if r.id != receipt.id && r.fname == receipt.fname && r.lname == receipt.lname
-          dups[receipt.id] << receipt
+          dups << receipt
         end
       end
     end
