@@ -45,7 +45,7 @@ class Camper < ActiveRecord::Base
   end
 
   #normal validations
-  validates :number, :uniqueness=>true, :format=>{:with => /^(CG|CB|SG|SB|PG|PB|TG|TB|AG|AB)\d{3}$/}, :presence=>true
+  validates :number, :uniqueness=>true, :format=>{:with => /^(CWG|CWB|CG|CB|SG|SB|PG|PB|TG|TB|AG|AB)\d{3}$/}, :presence=>true
   validates :fname, :presence=>true
   validates :lname, :presence=>true
   validates :mname, :presence=>true

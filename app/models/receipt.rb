@@ -3,8 +3,8 @@ class Receipt < ActiveRecord::Base
   PAYMENT_TYPES = ["Check", "Cash", "Money Order"]
   belongs_to :user
   belongs_to :unit
-  has_many :payments
-  has_many :campers
+  has_many :payments, :dependent => :destroy
+  has_many :campers, :dependent => :nullify
   before_create :compact_phone
   after_create :create_payments
   after_create :send_email
@@ -13,11 +13,11 @@ class Receipt < ActiveRecord::Base
   #include ActiveModel::Validations
 
   validates_presence_of :lname, :fname, :payment_method, :camper1, :camper1_id, :amount
-  validates_format_of :phone, :with=>/^\d{3}-?\d{3}-?\d{4}$/, :on=>:create
+  validates_format_of :phone, :with => /^\d{3}-?\d{3}-?\d{4}$/, :on=>:create
   validates_format_of  :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :allow_blank=>true, :message => 'email must be valid'
-  validates :amount, :positive_price=>true
-  validates :refund, :requires_explanation=>true
-  validates :zip, :presence=>true
+  validates :amount, :positive_price => true
+  validates :refund, :requires_explanation => true
+  validates :zip, :presence => true
 
   def self.find_standard_receipts(options={})
     with_scope :find => options do 
