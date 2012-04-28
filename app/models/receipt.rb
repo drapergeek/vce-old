@@ -97,6 +97,7 @@ class Receipt < ActiveRecord::Base
     zip
     formatted_phone
     amount
+    payment_method
     payment_extra
     email
     camper1
