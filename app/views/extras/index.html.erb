@@ -4,47 +4,5 @@
   <ul>
     <li><%= link_to "Schools", schools_path %></li>
   </ul>
-
 </div>
 <hr />
-<h3>Excel Sheets</h3>
-<div id="Excel Sheets">
-  <h4>Campers</h4>
-  <ul id="campers_excel_sheets" class="excel_sheets">
-    <li>
-      <%= link_to 'All Camper Information',
-        {:controller=>'excel', :action=>'all_camper_info'} %>
-      </li>
-      <li>
-        <%= link_to 'All Campers with Bus, Pack, Classes and Room Assignments',
-          {:controller=>'excel', :action=>'campers_classes'} %>
-          <small>This will ONLY print actual campers, not adults/volunteers</small>
-        </li>
-        <li>
-          <%= link_to 'Health Concerns',{:controller=>'excel', :action=>'health_concerns'} %>
-        </li>
-        <li>
-          <%= link_to 'Unpaid Campers',{:controller=>'excel', :action=>'unpaid_campers'} %>
-        </li>
-        <!--
-        <li>
-          <%= link_to 'Demographics', {:controller=>'excel', :action=>'demographic_report' }%>
-        </li>
-        -->
-      </ul>
-      <h4>Buses</h4>
-      <ul id ="bus_excel_sheets" class="excel_sheets">
-        <li>
-          <%= link_to 'Bus List', {:controller=>'excel', :action=>'bus_list'} %>
-        </li>
-      </ul>
-
-    </div>
-    <hr />
-    <h3>Reports</h3>
-    <div id="reports">
-      <ul>
-        <li><%= link_to 'Receipt Report', {:controller=>'receipts', :action=>'totals'} %></li>
-        <li><%= link_to 'Demographics', {:controller=>'extras', :action=>'demographics'} %></li>
-      </ul>
-    </div>
