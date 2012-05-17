@@ -2,13 +2,13 @@
 
 <!--search form-->
 <%= form_tag campers_path, :method => 'get' do %>
-<p>
-	<%= text_field_tag :search , params[:search]%>
-	<%= submit_tag "Search", :name=>nil %>
-	<% if params[:search] %>
-		<%= link_to 'Show All', campers_path %>
-	<% end %>
-</p>
+  <p>
+    <%= text_field_tag :search , params[:search]%>
+    <%= submit_tag "Search", :name=>nil %>
+    <% if params[:search] %>
+      <%= link_to 'Show All', campers_path %>
+    <% end %>
+  </p>
 <% end %>
 
 <!--End Search form-->
@@ -16,26 +16,26 @@
 <%= link_to 'New camper', :action => 'new' %>
 
 <% unless @campers.empty? %>
-	<table class="pretty">
-	  <tr>
-		<th><%= sortable('number', 'Camper Id') %></th>
-		<th><%= sortable('lname', 'Last') %></th>
-		<th><%= sortable('fname', 'First') %></th>
-		<th><%= sortable('position', 'Position') %></th>
-		<th>Status</th>
-	  </tr>
-	<% for camper in @campers %>
-	  <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
-		              onmouseout="ChangeColor(this, false);" 
-		              onclick="DoNav('/campers/show/<%= camper.id %>');">
-		<td class="standard_table"><%= camper.number %></td>
-		<td class="standard_table"><%= camper.lname %></td>
-		<td class="standard_table"><%= camper.fname %></td>
-		<td class="standard_table"><%= camper.position %></td>
-		<td class="standard_table"><%= camper.status %></td>
-	  </tr>
-	<% end %>
-	</table>
+  <table class="pretty">
+    <tr>
+      <th><%= sortable('number', 'Camper Id') %></th>
+      <th><%= sortable('lname', 'Last') %></th>
+      <th><%= sortable('fname', 'First') %></th>
+      <th><%= sortable('position', 'Position') %></th>
+      <th>Status</th>
+    </tr>
+    <% for camper in @campers %>
+      <tr class="<%= cycle("even", "odd") %>" 	onmouseover="ChangeColor(this, true);" 
+        onmouseout="ChangeColor(this, false);" 
+        onclick="DoNav('/campers/show/<%= camper.id %>');">
+        <td class="standard_table"><%= camper.number %></td>
+        <td class="standard_table"><%= camper.lname %></td>
+        <td class="standard_table"><%= camper.fname %></td>
+        <td class="standard_table"><%= camper.position %></td>
+        <td class="standard_table"><%= camper.status %></td>
+      </tr>
+    <% end %>
+  </table>
 
 <% end %>
 <%= will_paginate @campers %>
