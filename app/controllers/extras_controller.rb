@@ -1,18 +1,18 @@
 class ExtrasController < ApplicationController
-  
+
   def index
     authorize! :reports, Camper
     #this is for the reports and such
     #no info needed tho...
   end
-  
+
   def list_campers_by_year
     authorize! :list_campers_by_year, Camper
     @campers = Camper.find_all_by_year(params[:year])
     render :action =>'camper_search'
   end
-  
-  
+
+
   def demographics
     authorize! :demographics, Camper
     #this is a list enrolled camper demographics
