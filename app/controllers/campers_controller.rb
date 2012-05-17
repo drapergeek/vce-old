@@ -14,6 +14,10 @@ class CampersController < ApplicationController
     else
       @campers = Camper.order(sort_column + " "+ sort_direction).paginate(:per_page=>25, :page=>params[:page])
     end
+    respond_to do |format|
+      format.html
+      format.csv { render :csv => Camper.all}
+    end
   end
 
   def show

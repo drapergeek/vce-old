@@ -17,6 +17,7 @@ class Camper < ActiveRecord::Base
   attr_accessor :new_pack_name
 
   delegate :name, :to=>:bus, :prefix=>true, :allow_nil=>true
+  delegate :name, :to=>:pack, :prefix=>true, :allow_nil=>true
 
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
@@ -43,6 +44,7 @@ class Camper < ActiveRecord::Base
       end
     end
   end
+
 
   #normal validations
   validates :number, :uniqueness=>true, :format=>{:with => /^(CWG|CWB|CG|CB|SG|SB|PG|PB|TG|TB|AG|AB)\d{3}$/}, :presence=>true
@@ -82,6 +84,10 @@ class Camper < ActiveRecord::Base
     create_pack(:name=>new_pack_name) unless new_pack_name.blank?
   end
 
+  def course_list
+    courses.map { |course| course.name }.join(",")
+  end
+
   def compact_phone
     unless phone1.blank?
       @number = phone1.split('-')
@@ -99,7 +105,6 @@ class Camper < ActiveRecord::Base
       write_attribute(:emergency_phone, emergency_phone)
     end
   end
-
 
   def status
     if incomplete?
@@ -245,6 +250,66 @@ class Camper < ActiveRecord::Base
   def self.search(search)
     where('lname LIKE :q OR fname LIKE :q OR mname LIKE :q OR pref_name like :q OR phone1 LIKE :q OR phone2 LIKE :q OR number like :q', :q =>"%#{search}%")
   end
+
+  comma do
+    fname
+    lname
+    mname
+    pref_name
+    dob
+    gender
+    address
+    city
+    state
+    zip
+    roomate_choice
+    parent_lname
+    parent_fname
+    phone1
+    phone2
+    emergency_name
+    emergency_phone
+    school
+    teacher
+    grade
+    shirt_size
+    number
+    position
+    health_concerns
+    bus_name
+    email
+    race
+    last_tetnus_shot
+    code_of_conduct
+    media_release
+    equine_release
+    rec_zone
+    payment_number
+    reference
+    physician_insurance_info
+    immunizations_current
+    release_authorization
+    parental_signatures
+    pool_spotting
+    room_number
+    counselor_years
+    pack_name
+    mother_name
+    mother_phone
+    mother_email
+    father_name
+    father_phone
+    father_email
+    guardian_name
+    guardian_phone
+    guardian_email
+    collage_count
+    inactive
+    inactive_info
+    course_list
+  end
+
+
 
 
   US_STATES = ['AL','AK','AZ','AR','CA','CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID',

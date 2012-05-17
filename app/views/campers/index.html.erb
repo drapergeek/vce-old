@@ -14,7 +14,6 @@
 <!--End Search form-->
 
 <%= link_to 'New camper', :action => 'new' %>
-
 <% unless @campers.empty? %>
   <table class="pretty">
     <tr>
@@ -39,4 +38,6 @@
 <% end %>
 <%= will_paginate @campers %>
 <br />
-
+  <%= link_to  campers_path(:format => :csv) do%>
+    <%= image_tag 'excel.png', :size => "35x35" %>
+  <% end %>
