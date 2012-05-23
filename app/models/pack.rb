@@ -1,6 +1,7 @@
 class Pack < ActiveRecord::Base
-  has_many :campers
   belongs_to :unit
+  has_many :rooms
+  has_many :campers, through: :rooms
   
   def self.find_standard_packs(options={})
         with_scope :find => options do 

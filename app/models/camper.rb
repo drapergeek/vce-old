@@ -2,8 +2,8 @@ class Camper < ActiveRecord::Base
   #associations
   belongs_to :receipt
   belongs_to :bus
-  belongs_to :pack
   belongs_to :unit
+  belongs_to :room
 
   has_many :course_selections
   has_many :courses, :through=>:course_selections 

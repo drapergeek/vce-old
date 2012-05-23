@@ -1,4 +1,6 @@
 Vce::Application.routes.draw do
+  resources :rooms
+
   resources :schools
   resources :packs
   resources :extras, only: [:index]

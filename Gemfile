@@ -27,6 +27,7 @@ group :development, :test do
   gem "email_spec"
   gem "capybara-webkit"
   gem "launchy"
+  gem "shoulda-matchers"
 end
 
 group :production do

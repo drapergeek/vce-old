@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120423235757) do
+ActiveRecord::Schema.define(:version => 20120522235534) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -73,9 +73,7 @@ ActiveRecord::Schema.define(:version => 20120423235757) do
     t.boolean  "release_authorization"
     t.boolean  "parental_signatures"
     t.integer  "pool_spotting"
-    t.string   "room_number"
     t.integer  "counselor_years"
-    t.integer  "pack_id"
     t.integer  "unit_id"
     t.boolean  "fully_paid"
     t.string   "mother_name"
@@ -88,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20120423235757) do
     t.string   "guardian_phone"
     t.string   "guardian_email"
     t.integer  "collage_count",            :default => 0
+    t.integer  "room_id"
   end
 
   create_table "course_selections", :force => true do |t|
@@ -164,6 +163,13 @@ ActiveRecord::Schema.define(:version => 20120423235757) do
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
     t.integer "user_id"
+  end
+
+  create_table "rooms", :force => true do |t|
+    t.string   "name"
+    t.integer  "pack_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "schools", :force => true do |t|
