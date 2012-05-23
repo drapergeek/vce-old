@@ -17,15 +17,15 @@ FactoryGirl.define do
   end
 
   factory :camper do
-    fname  "Gregory"
-    mname   "Jason"
-    lname   "Draper"
-    pref_name   "Jason"
-    gender   0
-    position   1
-    number  "B784"
-    zip "12345"
-    phone1 "540-555-5555"
+    fname        "Gregory"
+    mname        "Jason"
+    lname        "Draper"
+    pref_name    "Jason"
+    gender       0
+    position     1
+    number       " B784"
+    zip          " 12345"
+    phone1       " 540-555-5555"
   end
 
   factory :receipt do
@@ -71,5 +71,14 @@ FactoryGirl.define do
     name "Henry County"
     camp_price 210.00
     collage_price 10.00
+  end
+
+  factory :room do
+    name "MyString"
+    pack
+  end
+
+  factory :pack do
+    name "Skunks"
   end
 end

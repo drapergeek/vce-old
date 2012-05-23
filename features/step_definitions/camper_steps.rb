@@ -41,3 +41,16 @@ Then /^I should see the date should be selected as '(\d+)\/(\d+)\/(\d+)'$/ do |m
   page.find("#camper_dob_3i").value.should == day
   page.find("#camper_dob_1i").value.should == year
 end
+
+When /^I select "([^"]*)" for the room$/ do |room_name|
+  select(room_name, for:"camper_room_namer")
+end
+
+Then /^its "([^"]*)" should be "([^"]*)"$/ do |attribute, name|
+  page.should have_content("#{attribute}: #{name}")
+end
+
+Given /^a room exists with a name of "([^"]*)" and a pack name of "([^"]*)"$/ do |room_name, pack_name|
+  pack = create(:pack, name: pack_name)
+  create(:room, pack:pack, name: room_name)
+end

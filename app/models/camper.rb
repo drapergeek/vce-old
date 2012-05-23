@@ -11,13 +11,11 @@ class Camper < ActiveRecord::Base
   has_many :receipts, :through=>:payments
 
   before_create :compact_phone
-  before_save :create_pack_from_name
 
   attr_accessor :status
-  attr_accessor :new_pack_name
 
   delegate :name, :to=>:bus, :prefix=>true, :allow_nil=>true
-  delegate :name, :to=>:pack, :prefix=>true, :allow_nil=>true
+  delegate :name, :to=>:room, :prefix=>true, :allow_nil=>true
 
   #named_scopes
   scope :current_unit, lambda {|*args| where("unit_id like ?", Thread.current["unit"].id)}
@@ -80,9 +78,6 @@ class Camper < ActiveRecord::Base
     c.payments.create(:receipt=>receipt, :amount=>payment_amount)
   end
 
-  def create_pack_from_name
-    create_pack(:name=>new_pack_name) unless new_pack_name.blank?
-  end
 
   def course_list
     courses.map { |course| course.name }.join(",")
@@ -243,9 +238,16 @@ class Camper < ActiveRecord::Base
       return 'Rec 2 - Thursday'
     else
       return ' '
-    end   
+    end
   end
 
+  def pack_name
+    if room && room.pack
+      return room.pack_name
+    else
+      nil
+    end
+  end
 
   def self.search(search)
     where('lname LIKE :q OR fname LIKE :q OR mname LIKE :q OR pref_name like :q OR phone1 LIKE :q OR phone2 LIKE :q OR number like :q', :q =>"%#{search}%")

@@ -57,16 +57,10 @@
   <h2>Camp Information</h2>
   <div id="postion">Position: <%= @camper.position %></div>
   Preferred Roomate: <%= @camper.roomate_choice %><br />
-  Bus Assignment: <%= @camper.bus_name %>
+  Bus Assignment: <%= @camper.bus_name %><br />
+  Room: <%= @camper.room_name %><br />
+  Pack: <%= @camper.pack_name %><br />
   <div id="room_assignment">
-    <% if @camper.room_number.blank? %>
-    This camper has not been assigned to a room
-    <% else %>
-    Room Number: <%= @camper.room_number %>
-    <% unless @camper.pack.blank? %>
-    - <%= @camper.pack.name %>
-    <% end %>
-    <% end %>
   </div>
   <div id="rec_zone">
     Rec zone assignment: <%= if_assigned(@camper.rec_zone) %>
