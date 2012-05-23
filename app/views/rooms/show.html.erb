@@ -1,15 +1,13 @@
-<p id="notice"><%= notice %></p>
+<h1>Room <%= @room.name %></h1>
 
-<p>
-  <b>Name:</b>
-  <%= @room.name %>
-</p>
+<strong>Pack:</strong> <%= @room.pack_name %>
+<table class="rooms">
+  <tr>
+    <th>Camper Id</th>
+    <th>Last</th>
+    <th>First</th>
+    <th>Position</th>
+  </tr>
+    <%= render @room.campers %>
+</table>
 
-<p>
-  <b>Pack:</b>
-  <%= @room.pack_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>

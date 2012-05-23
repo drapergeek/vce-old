@@ -1,16 +1,10 @@
- <ul>	
-   <%=primary_link("Receipts", receipts_path, :show, Receipt, "receipts") %>
-
-   <%= primary_link "Enrollment", campers_path, :show, Camper, "campers"  %>
-
-  <%= primary_link "Courses", "/courses", :show, Course, "courses" %>  
-
-  <%= primary_link "Packs", "/packs", :show, Pack, "packs" %>  
-
-  <%= primary_link "Buses", "/buses", :show, Bus, "buses" %>  
-
-  <%= primary_link "Users", users_path, :show, User, "account" %>  
-		
+<ul>
+  <%=primary_link("Receipts", receipts_path, :show, Receipt, "receipts") %>
+  <%= primary_link "Enrollment", campers_path, :show, Camper, "campers"  %>
+  <%= primary_link "Courses", "/courses", :show, Course, "courses" %>
+  <%= primary_link "Packs", "/packs", :show, Pack, "packs" %>
+  <%= primary_link "Rooms", "/rooms", :show, Room, "rooms" %>
+  <%= primary_link "Buses", "/buses", :show, Bus, "buses" %>
+  <%= primary_link "Users", users_path, :show, User, "account" %>
   <%= primary_link "Extras", "/extras", :report, Camper, "extras" %>
-				
- </ul>
+</ul>

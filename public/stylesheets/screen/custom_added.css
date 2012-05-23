@@ -115,3 +115,7 @@ li#receipt_payment_extra_input{
   height: 55px;
   width: 300px;
 }
+
+tr.colored_row:nth-child(odd)    { background-color:#eee; }
+tr.colored_row:nth-child(even)    { background-color:#fff; }
+
