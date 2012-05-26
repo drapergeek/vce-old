@@ -293,7 +293,6 @@ class Camper < ActiveRecord::Base
     release_authorization
     parental_signatures
     pool_spotting
-    room_number
     counselor_years
     pack_name
     mother_name
@@ -309,6 +308,7 @@ class Camper < ActiveRecord::Base
     inactive
     inactive_info
     course_list
+    room_name
   end
 
 
