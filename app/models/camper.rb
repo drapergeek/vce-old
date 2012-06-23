@@ -83,6 +83,14 @@ class Camper < ActiveRecord::Base
     courses.map { |course| course.name }.join(",")
   end
 
+  (1..4).each do |number|
+    define_method("course_#{number}") do
+      if course_selections[number-1]
+        course_selections[number-1].course.name
+      end
+    end
+  end
+
   def compact_phone
     unless phone1.blank?
       @number = phone1.split('-')
@@ -307,7 +315,10 @@ class Camper < ActiveRecord::Base
     collage_count
     inactive
     inactive_info
-    course_list
+    course_1
+    course_2
+    course_3
+    course_4
     room_name
   end
 
