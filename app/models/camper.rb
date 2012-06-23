@@ -6,7 +6,7 @@ class Camper < ActiveRecord::Base
   belongs_to :room
 
   has_many :course_selections
-  has_many :courses, :through=>:course_selections 
+  has_many :courses, :through=>:course_selections
   has_many :payments
   has_many :receipts, :through=>:payments
 

@@ -4,8 +4,9 @@
   Please add the campers choice of courses below
   <ol id="course_list">
     <% else %>
-    <% @camper.courses.each do |c| %>
-    <li class="course" id = "course_<%=c.id %>">
+    <% @camper.course_selections.by_created.each do |c| %>
+      <% c = c.course %>
+    <li class="course" id = "course_<%= c.id %>">
       <%= c.name %>
       <%= link_to '(x)', remove_course_campers_url(:camper =>@camper.id, :course=>c.id) %>
     </li>
