@@ -219,25 +219,6 @@ class Camper < ActiveRecord::Base
     self.lname = names[1]
   end
 
-  def pool_spotting_text
-    case pool_spotting
-    when 0
-      return 'Rec 1 - Tuesday'
-    when 1
-      return 'Rec 1 - Wednesday'
-    when 2
-      return 'Rec 1 - Thursday'
-    when 3
-      return 'Rec 2 - Tuesday'
-    when 4
-      return 'Rec 2 - Wednesday'
-    when 5
-      return 'Rec 2 - Thursday'
-    else
-      return ' '
-    end
-  end
-
   def pack_name
     if room && room.pack
       return room.pack_name
