@@ -195,17 +195,6 @@ class Camper < ActiveRecord::Base
     ((Date.today.strftime('%Y%m%d').to_i - dob.strftime('%Y%m%d').to_i ) / 10000 ).to_i
   end
 
-  def media_release_text
-    case media_release
-    when 1
-      return 'Yes'
-    when 2
-      return 'This campers parent have denied media release ability.'
-    else
-      return 'No'
-    end
-  end
-
   def position_text
     case position
     when 0
@@ -335,5 +324,45 @@ class Camper < ActiveRecord::Base
   RACES = ["Black", "White", "American Indian", "Hispanic", "Asian", "Multi-Cultural", "Other"]
   MEDIA_RELEASE = ["No", "Yes", "Parents Denied Permission"]
   POSITIONS = ["Camper", "CIT", "Teen", "ADULT"]
+  REC_ZONES  = [
+    "Tues. 1st Fish",
+    "Tues. 2nd Fish",
+    "Tues. 1st Putt Putt",
+    "Tues. 2nd Putt Putt",
+    "Tues. 1st Board Games",
+    "Tues. 2nd Board Games",
+    "Tues. 1st Open Air",
+    "Tues. 2nd Open Air",
+    "Tues. 1st Skate Park",
+    "Tues. 2nd Skate Park",
+    "Wed. 1st Fish",
+    "Wed. 2nd Fish",
+    "Wed. 1st Putt Putt",
+    "Wed. 2nd Putt Putt",
+    "Wed. 1st Board Games",
+    "Wed. 2nd Board Games",
+    "Wed. 1st Open Air",
+    "Wed. 2nd Open Air",
+    "Wed. 1st Skate Park",
+    "Wed. 2nd Skate Park",
+    "Thurs. 1st Fish",
+    "Thurs. 2nd Fish",
+    "Thurs. 1st Putt Putt",
+    "Thurs. 2nd Putt Putt",
+    "Thurs. 1st Board Games",
+    "Thurs. 2nd Board Games",
+    "Thurs. 1st Open Air",
+    "Thurs. 2nd Open Air",
+    "Thurs. 1st Skate Park",
+    "Thurs. 2nd Skate Park"
+  ]
+  POOL_SPOTTING = [
+    "Tuesday 1st Rec",
+    "Tuesday 2nd Rec",
+    "Wed. 1st Rec",
+    "Wed. 2nd Rec",
+    "Thurs. 1st Rec",
+    "Thurs. 2nd Rec"
+  ]
 end
 

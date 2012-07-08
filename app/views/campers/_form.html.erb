@@ -48,9 +48,9 @@
     <%= f.input :health_concerns %>
   <% end %>
   <%= f.inputs "Counselors" do %>
-    <%= f.input :pool_spotting %>
+    <%= f.input :pool_spotting, :as => :select, :collection => Camper::POOL_SPOTTING %>
     <%= f.input :counselor_years %>
-    <%= f.input :rec_zone %>
+    <%= f.input :rec_zone, :as => :select, :collection => Camper::REC_ZONES %>
   <% end %>
   <%= f.inputs "Paperwork" do %>
     <%= f.input :code_of_conduct %>
