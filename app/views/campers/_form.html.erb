@@ -51,6 +51,9 @@
     <%= f.input :pool_spotting, :as => :select, :collection => Camper::POOL_SPOTTING %>
     <%= f.input :counselor_years %>
     <%= f.input :rec_zone, :as => :select, :collection => Camper::REC_ZONES %>
+    <%= f.input :mobile_phone %>
+    <%= f.input :references_returned %>
+    <%= f.input :picture %>
   <% end %>
   <%= f.inputs "Paperwork" do %>
     <%= f.input :code_of_conduct %>
