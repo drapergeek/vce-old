@@ -201,23 +201,23 @@ ActiveRecord::Schema.define(:version => 20120708160559) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+    t.string   "crypted_password"
+    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
     t.datetime "remember_token_expires_at"
     t.string   "lname"
     t.string   "fname"
-    t.string   "content_type",                             :default => "image/png"
+    t.string   "content_type",              :default => "image/png"
     t.binary   "picture"
     t.string   "title"
     t.integer  "unit_id"
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "authorized",                               :default => false,       :null => false
-    t.string   "encrypted_password",        :limit => 128
-    t.string   "confirmation_token",        :limit => 128
+    t.boolean  "authorized",                :default => false,       :null => false
+    t.string   "encrypted_password"
+    t.string   "confirmation_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

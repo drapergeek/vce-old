@@ -1,37 +1,27 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.11'
 
 gem 'bundler'
 gem 'will_paginate'
-gem "nifty-generators", :group => :development
 gem 'mocha'
 gem 'formtastic'
 gem 'validates_timeliness'
 gem 'bcrypt-ruby', :require=>"bcrypt"
 gem 'cancan'
 gem 'jquery-rails'
+gem 'pg'
 gem "comma", "~> 3.0"
 
 group :development, :test do
-  gem 'pry'
-  gem 'sqlite3-ruby', :require => 'sqlite3'
+  gem 'pry-rails'
   gem "factory_girl_rails"
-  gem "annotate"
-  gem "guard-test"
-  gem "guard-cucumber"
-  gem "guard-rspec"
   gem "cucumber-rails"
-  gem "rspec-rails"
+  gem "rspec-rails", "~> 2.12.2"
   gem "database_cleaner"
   gem "email_spec"
   gem "capybara-webkit"
   gem "launchy"
   gem "shoulda-matchers"
+  gem "mocha"
 end
-
-group :production do
-	#gem 'mysql2'
-  gem 'pg'
-end
-gem "mocha", :group => :test
