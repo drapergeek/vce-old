@@ -1,6 +1,6 @@
 Given "I am logged in as a user" do
-  user = Factory.create(:user)
-  user.roles << Factory.create(:role)
+  user = create(:user)
+  user.roles << create(:role)
   visit(new_session_path)
   fill_in("email", :with=>user.email)
   fill_in("password", :with=>user.password)
