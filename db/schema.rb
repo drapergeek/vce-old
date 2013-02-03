@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120522235534) do
+ActiveRecord::Schema.define(:version => 20120708160559) do
 
   create_table "annoucements", :force => true do |t|
     t.datetime "created_at"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(:version => 20120522235534) do
     t.boolean  "code_of_conduct"
     t.string   "media_release",            :default => "Yes"
     t.boolean  "equine_release"
-    t.integer  "rec_zone"
+    t.string   "rec_zone"
     t.string   "payment_number"
     t.boolean  "reference"
     t.boolean  "physician_insurance_info"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(:version => 20120522235534) do
     t.boolean  "immunizations_current"
     t.boolean  "release_authorization"
     t.boolean  "parental_signatures"
-    t.integer  "pool_spotting"
+    t.string   "pool_spotting"
     t.integer  "counselor_years"
     t.integer  "unit_id"
     t.boolean  "fully_paid"
