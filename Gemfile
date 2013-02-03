@@ -11,6 +11,7 @@ gem 'bcrypt-ruby', :require=>"bcrypt"
 gem 'cancan'
 gem 'jquery-rails'
 gem 'pg'
+gem 'copycopter_client'
 gem "comma", "~> 3.0"
 
 group :development, :test do
